@@ -34,8 +34,6 @@
             -->
             <winui:NavigationViewItem x:Uid="Shell_Main" helpers:NavHelper.NavigateTo="views:MainPage" />
             <winui:NavigationViewItem x:Uid="Shell_ContentGrid" helpers:NavHelper.NavigateTo="views:ContentGridPage" />
-            <winui:NavigationViewItem x:Uid="Shell_Tabbed" helpers:NavHelper.NavigateTo="views:TabbedPage" />
-            <winui:NavigationViewItem x:Uid="Shell_ImageGallery" helpers:NavHelper.NavigateTo="views:ImageGalleryPage" />
         </winui:NavigationView.MenuItems>
         <i:Interaction.Behaviors>
             <ic:EventTriggerBehavior EventName="ItemInvoked">

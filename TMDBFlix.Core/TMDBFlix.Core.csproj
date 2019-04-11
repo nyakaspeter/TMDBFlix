@@ -6,10 +6,7 @@
   </PropertyGroup>
 
    <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
-   <ItemGroup>
      <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+     <PackageReference Include="RestSharp" Version="106.6.9" />
    </ItemGroup>
 </Project>

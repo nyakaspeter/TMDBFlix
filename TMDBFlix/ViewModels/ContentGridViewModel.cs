@@ -18,12 +18,12 @@ namespace TMDBFlix.ViewModels
 
         public ICommand ItemClickCommand => _itemClickCommand ?? (_itemClickCommand = new RelayCommand<SampleOrder>(OnItemClick));
 
-        public ObservableCollection<SampleOrder> Source
+        public ObservableCollection<Movie> Source
         {
             get
             {
                 // TODO WTS: Replace this with your actual data
-                return SampleDataService.GetContentGridData();
+                return TMDBFlix.Core.Services
             }
         }
 

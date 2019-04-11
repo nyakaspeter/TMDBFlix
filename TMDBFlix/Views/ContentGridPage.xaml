@@ -23,7 +23,7 @@
             DesiredWidth="180"
             ItemHeight="160">
             <controls:AdaptiveGridView.ItemTemplate>
-                <DataTemplate x:DataType="models:SampleOrder">
+                <DataTemplate x:DataType="models:Movie">
                     <Grid
                         x:Name="itemThumbnail"
                         Padding="{StaticResource XSmallLeftTopRightBottomMargin}"
