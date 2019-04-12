@@ -7,11 +7,24 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:models="using:TMDBFlix.Core.Models"
+    xmlns:helpers="using:TMDBFlix.Helpers"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
 
-    <Grid x:Name="ContentArea">
-        <controls:AdaptiveGridView
+    <Page.Resources>
+        <helpers:ImagePathToUrlConverter x:Key="ImageUrlConverter" />
+        <helpers:ReleaseDateToYearConverter x:Key="ReleaseYearConverter" />
+    </Page.Resources>
+
+    <StackPanel VerticalAlignment="Top">
+        <TextBlock
+                                Margin="{StaticResource CategoryMargin}"
+                                HorizontalAlignment="Left"
+                                Text="Popular Movies"
+                                Style="{ThemeResource CategoryStyle}" />
+
+        <Grid x:Name="ContentArea">
+            <controls:AdaptiveGridView
             ItemsSource="{x:Bind ViewModel.Source,Mode=OneWay}"
             ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
             StretchContentForSingleRow="False"
@@ -20,26 +33,34 @@
             Padding="{StaticResource MediumLeftRightMargin}"
             animations:Connected.ListItemElementName="itemThumbnail"
             animations:Connected.ListItemKey="animationKeyContentGrid"
-            DesiredWidth="180"
-            ItemHeight="160">
-            <controls:AdaptiveGridView.ItemTemplate>
-                <DataTemplate x:DataType="models:Movie">
-                    <Grid
+            DesiredWidth="160"
+            >
+
+                <controls:AdaptiveGridView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Movie">
+                        <Grid
                         x:Name="itemThumbnail"
-                        Padding="{StaticResource XSmallLeftTopRightBottomMargin}"
+                        Padding="0"
+                        Margin="1"
                         Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <FontIcon
-                                Glyph="{x:Bind Symbol}" />
-                            <TextBlock
-                                Margin="{StaticResource XXSmallTopMargin}"
-                                HorizontalAlignment="Center"
-                                Text="{x:Bind Company}"
-                                Style="{ThemeResource BodyTextStyle}" />
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </controls:AdaptiveGridView.ItemTemplate>
-        </controls:AdaptiveGridView>
-    </Grid>
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                <Image Height="240" Stretch="UniformToFill" Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"/>
+                                <TextBlock
+                                Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                HorizontalAlignment="Left"
+                                Text="{Binding title}"
+                                Style="{ThemeResource TitleStyle}" />
+                                <TextBlock
+                                Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                HorizontalAlignment="Left"
+                                Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}"
+                                Style="{ThemeResource YearStyle}" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </controls:AdaptiveGridView.ItemTemplate>
+            </controls:AdaptiveGridView>
+        </Grid>
+    </StackPanel>
+    
 </Page>

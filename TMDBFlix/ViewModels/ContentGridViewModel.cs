@@ -23,7 +23,7 @@ namespace TMDBFlix.ViewModels
             get
             {
                 // TODO WTS: Replace this with your actual data
-                return TMDBFlix.Core.Services
+                return TMDBService.GetPopularMovies();
             }
         }
 

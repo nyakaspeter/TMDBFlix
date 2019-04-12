@@ -7,19 +7,19 @@ using TMDBFlix.Core.Models;
 
 namespace TMDBFlix.Core.Services
 {
-    class TMDBService
+    public class TMDBService
     {
         private static string key = "c82568d86ba0dafa5ecef39bee96f011";
-        private static RestClient client = new RestClient("https://api.themoviedb.org/");
+        private static RestClient client = new RestClient("https://api.themoviedb.org/3");
 
         public static ObservableCollection<Movie> GetPopularMovies()
         {
-            var request = new RestRequest("movie/popular");
+            var request = new RestRequest("/movie/popular");
             request.AddParameter("api_key", key);
 
-            var result = client.Execute<List<Movie>>(request).Data;
+            var result = client.Execute<MoviesResponse>(request).Data;
 
-            return new ObservableCollection<Movie>(result);
+            return new ObservableCollection<Movie>(result.results);
         }
     }
 }
