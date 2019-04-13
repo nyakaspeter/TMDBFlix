@@ -16,7 +16,7 @@ namespace TMDBFlix.Core.Services
         {
             var request = new RestRequest("/movie/popular");
             request.AddParameter("api_key", key);
-
+            
             var result = client.Execute<MoviesResponse>(request).Data;
 
             return new ObservableCollection<Movie>(result.results);

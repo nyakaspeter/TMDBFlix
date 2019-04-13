@@ -114,6 +114,7 @@
   <ItemGroup>
     <Compile Include="Activation\ActivationHandler.cs" />
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
+    <Compile Include="Helpers\GridScrollHelper.cs" />
     <Compile Include="Helpers\ImagePathToUrlConverter.cs" />
     <Compile Include="Helpers\ImagesNavigationHelper.cs" />
     <Compile Include="Helpers\KnownForConverter.cs" />

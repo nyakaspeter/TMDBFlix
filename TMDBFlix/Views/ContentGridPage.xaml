@@ -16,149 +16,175 @@
         <helpers:ReleaseDateToYearConverter x:Key="ReleaseYearConverter" />
         <helpers:KnownForConverter x:Key="KnownForConverter" />
     </Page.Resources>
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-    <StackPanel VerticalAlignment="Top" Margin="{StaticResource PageMargin}">
-        <TextBlock
-                                Margin="{StaticResource SmallBottomMargin}"
-                                HorizontalAlignment="Left"
-                                Text="Popular Movies"
-                                Style="{ThemeResource CategoryStyle}" />
 
-        <Grid x:Name="PopularMovies">
-            <controls:AdaptiveGridView
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            ItemsSource="{x:Bind ViewModel.PopularMovies,Mode=OneWay}"
-            ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
-            StretchContentForSingleRow="False"
-            SelectionMode="None"
-            IsItemClickEnabled="True"
+    <ScrollViewer VerticalScrollBarVisibility="Visible">
+        <StackPanel VerticalAlignment="Top" Margin="{StaticResource PageMargin}">
+            <TextBlock
+                x:Uid="PopularMovies"
+                Margin="{StaticResource CategoryMargin}"
+                HorizontalAlignment="Left"
+                Style="{ThemeResource CategoryStyle}" />
+            <Grid>
+                <Button
+                    Tag="PopularMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;"/>
+                </Button>
+                <Button
+                    Tag="PopularMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollForward" Width = "48" Height = "96" HorizontalContentAlignment="Right" VerticalAlignment ="Center" HorizontalAlignment = "Right">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;"/>
+                </Button>
+                <Grid x:Name="PopularMovies">
+                    <controls:AdaptiveGridView
+                        Margin="{StaticResource OneRowGridMargin}"
+                        ItemsSource="{x:Bind ViewModel.PopularMovies,Mode=OneWay}"
+                        ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
+                        StretchContentForSingleRow="False"
+                        SelectionMode="None"
+                        IsItemClickEnabled="True"
+                        animations:Connected.ListItemElementName="itemThumbnail"
+                        animations:Connected.ListItemKey="animationKeyContentGrid"
+                        DesiredWidth="160"
+                        ItemHeight="290"
+                        OneRowModeEnabled="True">
+                        <controls:AdaptiveGridView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Movie">
+                                <Grid
+                                    x:Name="itemThumbnail"
+                                    Margin="4,0,4,0"
+                                    Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <Image Height="240" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"/>
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding title}"
+                                        Style="{ThemeResource TitleStyle}" />
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </controls:AdaptiveGridView.ItemTemplate>
+                    </controls:AdaptiveGridView>
+                </Grid>
+            </Grid>
+
+            <TextBlock
+                x:Uid="PopularShows"
+                Margin="{StaticResource CategoryMargin}"
+                HorizontalAlignment="Left"
+                Style="{ThemeResource CategoryStyle}" />
+            <Grid>
+                <Button
+                    Tag="PopularShows" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;"/>
+                </Button>
+                <Button
+                    Tag="PopularShows" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollForward" Width = "48" Height = "96" HorizontalContentAlignment="Right" VerticalAlignment ="Center" HorizontalAlignment = "Right">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;"/>
+                </Button>
+                <Grid x:Name="PopularShows">
+                    <controls:AdaptiveGridView
+                        Margin="{StaticResource OneRowGridMargin}"
+                        ItemsSource="{x:Bind ViewModel.PopularShows,Mode=OneWay}"
+                        ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
+                        StretchContentForSingleRow="False"
+                        SelectionMode="None"
+                        IsItemClickEnabled="True"
+                        animations:Connected.ListItemElementName="itemThumbnail"
+                        animations:Connected.ListItemKey="animationKeyContentGrid"
+                        DesiredWidth="160"
+                        ItemHeight="290"
+                        OneRowModeEnabled="True">
+                        <controls:AdaptiveGridView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Show">
+                                <Grid
+                                    x:Name="itemThumbnail"
+                                    Margin="4,0,4,0"
+                                    Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <Image Height="240" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"/>
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding name}"
+                                        Style="{ThemeResource TitleStyle}" />
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding first_air_date, Converter={StaticResource ReleaseYearConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </controls:AdaptiveGridView.ItemTemplate>
+                    </controls:AdaptiveGridView>
+                </Grid>
+            </Grid>
+
+            <TextBlock
+                x:Uid="PopularPeople"
+                Margin="{StaticResource CategoryMargin}"
+                HorizontalAlignment="Left"
+                Style="{ThemeResource CategoryStyle}" />
+            <Grid>
+                <Button
+                    Tag="PopularPeople" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;"/>
+                </Button>
+                <Button
+                    Tag="PopularPeople" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollForward" Width = "48" Height = "96" HorizontalContentAlignment="Right" VerticalAlignment ="Center" HorizontalAlignment = "Right">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;"/>
+                </Button>
+                <Grid x:Name="PopularPeople">
+                    <controls:AdaptiveGridView
+                        Margin="{StaticResource OneRowGridMargin}"
+                        ItemsSource="{x:Bind ViewModel.PopularPeople,Mode=OneWay}"
+                        ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
+                        StretchContentForSingleRow="False"
+                        SelectionMode="None"
+                        IsItemClickEnabled="True"
+                        animations:Connected.ListItemElementName="itemThumbnail"
+                        animations:Connected.ListItemKey="animationKeyContentGrid"
+                        DesiredWidth="160"
+                        ItemHeight="306"
+                        OneRowModeEnabled="True">
+                        <controls:AdaptiveGridView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Person">
+                                <Grid
+                                    x:Name="itemThumbnail"
+                                    Margin="4,0,4,0"
+                                    Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <Image Height="240" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" Source="{Binding profile_path, Converter={StaticResource ImageUrlConverter}}"/>
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding name}"
+                                        Style="{ThemeResource TitleStyle}" />
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding known_for, Converter={StaticResource KnownForConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </controls:AdaptiveGridView.ItemTemplate>
+                    </controls:AdaptiveGridView>
+                </Grid>
+            </Grid>
             
-            animations:Connected.ListItemElementName="itemThumbnail"
-            animations:Connected.ListItemKey="animationKeyContentGrid"
-            DesiredWidth="160"
-                ItemHeight="291"
-                OneRowModeEnabled="True">
-
-                <controls:AdaptiveGridView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Movie">
-                        <Grid
-                        x:Name="itemThumbnail"
-                        Padding="0"
-                        Margin="1"
-                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                                <Image Height="240" Stretch="UniformToFill" Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"/>
-                                <TextBlock
-                                Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
-                                HorizontalAlignment="Left"
-                                Text="{Binding title}"
-                                Style="{ThemeResource TitleStyle}" />
-                                <TextBlock
-                                Margin="{StaticResource XXSmallLeftRightBottomMargin}"
-                                HorizontalAlignment="Left"
-                                Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}"
-                                Style="{ThemeResource YearStyle}" />
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </controls:AdaptiveGridView.ItemTemplate>
-            </controls:AdaptiveGridView>
-        </Grid>
-
-        <TextBlock
-                                Margin="{StaticResource SmallBottomMargin}"
-                                HorizontalAlignment="Left"
-                                Text="Popular Shows"
-                                Style="{ThemeResource CategoryStyle}" />
-
-        <Grid x:Name="PopularShows">
-            <controls:AdaptiveGridView
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            ItemsSource="{x:Bind ViewModel.PopularShows,Mode=OneWay}"
-            ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
-            StretchContentForSingleRow="False"
-            SelectionMode="None"
-            IsItemClickEnabled="True"
-            
-            animations:Connected.ListItemElementName="itemThumbnail"
-            animations:Connected.ListItemKey="animationKeyContentGrid"
-            DesiredWidth="160"
-                ItemHeight="291"
-                OneRowModeEnabled="True">
-
-                <controls:AdaptiveGridView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Show">
-                        <Grid
-                        x:Name="itemThumbnail"
-                        Padding="0"
-                        Margin="1"
-                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                                <Image Height="240" Stretch="UniformToFill" Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"/>
-                                <TextBlock
-                                Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
-                                HorizontalAlignment="Left"
-                                Text="{Binding name}"
-                                Style="{ThemeResource TitleStyle}" />
-                                <TextBlock
-                                Margin="{StaticResource XXSmallLeftRightBottomMargin}"
-                                HorizontalAlignment="Left"
-                                Text="{Binding first_air_date, Converter={StaticResource ReleaseYearConverter}}"
-                                Style="{ThemeResource YearStyle}" />
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </controls:AdaptiveGridView.ItemTemplate>
-            </controls:AdaptiveGridView>
-        </Grid>
-
-        <TextBlock
-                                Margin="{StaticResource SmallBottomMargin}"
-                                HorizontalAlignment="Left"
-                                Text="Popular People"
-                                Style="{ThemeResource CategoryStyle}" />
-
-        <Grid x:Name="PopularPeople">
-            <controls:AdaptiveGridView
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            ItemsSource="{x:Bind ViewModel.PopularPeople,Mode=OneWay}"
-            ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
-            StretchContentForSingleRow="False"
-            SelectionMode="None"
-            IsItemClickEnabled="True"
-            
-            animations:Connected.ListItemElementName="itemThumbnail"
-            animations:Connected.ListItemKey="animationKeyContentGrid"
-            DesiredWidth="160"
-                ItemHeight="307"
-                OneRowModeEnabled="True">
-
-                <controls:AdaptiveGridView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Person">
-                        <Grid
-                        x:Name="itemThumbnail"
-                        Padding="0"
-                        Margin="1"
-                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                                <Image Height="240" Stretch="UniformToFill" Source="{Binding profile_path, Converter={StaticResource ImageUrlConverter}}"/>
-                                <TextBlock
-                                Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
-                                HorizontalAlignment="Left"
-                                Text="{Binding name}"
-                                Style="{ThemeResource TitleStyle}" />
-                                <TextBlock
-                                Margin="{StaticResource XXSmallLeftRightBottomMargin}"
-                                HorizontalAlignment="Left"
-                                Text="{Binding known_for, Converter={StaticResource KnownForConverter}}"
-                                Style="{ThemeResource YearStyle}" />
-                                </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </controls:AdaptiveGridView.ItemTemplate>
-            </controls:AdaptiveGridView>
-        </Grid>
-    </StackPanel>
+        </StackPanel>
     </ScrollViewer>
 
 </Page>

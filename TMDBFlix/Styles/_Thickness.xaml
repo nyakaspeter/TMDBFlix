@@ -28,5 +28,8 @@
     <!--MasterDetail size margins-->
     <Thickness x:Key="DetailPageMargin">52,40,52,0</Thickness>
 
-    <Thickness x:Key="PageMargin">24,12,24,24</Thickness>
+    <Thickness x:Key="PageMargin">2,16,2,24</Thickness>
+    <Thickness x:Key="CategoryMargin">24,0,0,16</Thickness>
+    <Thickness x:Key="OneRowGridMargin">24,0,24,0</Thickness>
+
 </ResourceDictionary>
