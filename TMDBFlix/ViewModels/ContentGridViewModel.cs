@@ -18,12 +18,35 @@ namespace TMDBFlix.ViewModels
 
         public ICommand ItemClickCommand => _itemClickCommand ?? (_itemClickCommand = new RelayCommand<SampleOrder>(OnItemClick));
 
-        public ObservableCollection<Movie> Source
+        public ObservableCollection<Movie> PopularMovies
         {
             get
             {
-                // TODO WTS: Replace this with your actual data
                 return TMDBService.GetPopularMovies();
+            }
+        }
+
+        public ObservableCollection<Movie> NowPlayingMovies
+        {
+            get
+            {
+                return TMDBService.GetNowPlayingMovies();
+            }
+        }
+
+        public ObservableCollection<Show> PopularShows
+        {
+            get
+            {
+                return TMDBService.GetPopularShows();
+            }
+        }
+
+        public ObservableCollection<Person> PopularPeople
+        {
+            get
+            {
+                return TMDBService.GetPopularPeople();
             }
         }
 

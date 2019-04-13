@@ -21,5 +21,35 @@ namespace TMDBFlix.Core.Services
 
             return new ObservableCollection<Movie>(result.results);
         }
+
+        public static ObservableCollection<Movie> GetNowPlayingMovies()
+        {
+            var request = new RestRequest("/movie/now_playing");
+            request.AddParameter("api_key", key);
+
+            var result = client.Execute<MoviesResponse>(request).Data;
+
+            return new ObservableCollection<Movie>(result.results);
+        }
+
+        public static ObservableCollection<Show> GetPopularShows()
+        {
+            var request = new RestRequest("/tv/popular");
+            request.AddParameter("api_key", key);
+
+            var result = client.Execute<ShowsResponse>(request).Data;
+
+            return new ObservableCollection<Show>(result.results);
+        }
+
+        public static ObservableCollection<Person> GetPopularPeople()
+        {
+            var request = new RestRequest("/person/popular");
+            request.AddParameter("api_key", key);
+
+            var result = client.Execute<PeopleResponse>(request).Data;
+
+            return new ObservableCollection<Person>(result.results);
+        }
     }
 }

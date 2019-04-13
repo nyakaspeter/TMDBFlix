@@ -36,6 +36,7 @@
     <Style x:Key="YearStyle" TargetType="TextBlock">
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="FontSize" Value="12" />
+        <Setter Property="MaxLines" Value="2" />
         <Setter Property="Foreground" Value="{ThemeResource SystemControlPageTextBaseMediumBrush}" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
         <Setter Property="TextWrapping" Value="Wrap" />

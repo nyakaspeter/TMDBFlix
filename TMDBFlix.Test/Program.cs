@@ -71,7 +71,19 @@ namespace TMDBFlix.Test
             Console.WriteLine("Collection: " + m.belongs_to_collection);
             Console.WriteLine("Poster: " + m.poster_path);
             Console.WriteLine("Backdrop: " + m.backdrop_path);
+            
+            request = new RestRequest("/person/popular");
+            request.AddParameter("api_key", key);
 
+            var t = client.Execute<PeopleResponse>(request);
+            var d = t.Data;
+
+            foreach (var s in d.results)
+            {
+                Console.WriteLine(s.name);
+                Console.WriteLine(s.known_for);
+            }
+            
             Console.ReadKey();
         }
     }

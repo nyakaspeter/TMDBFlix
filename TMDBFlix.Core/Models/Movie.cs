@@ -32,46 +32,4 @@ namespace TMDBFlix.Core.Models
         public List<Language> spoken_languages { get; set; }
     }
 
-    public class Genre
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public override string ToString()
-        {
-            return name;
-        }
-    }
-
-    public class Company
-    {
-        public int id { get; set; }
-        public string logo_path { get; set; }
-        public string name { get; set; }
-        public string origin_country { get; set; }
-        public override string ToString()
-        {
-            return name;
-        }
-    }
-
-    public class Country
-    {
-        public string iso_3166_1 { get; set; }
-        public string name { get; set; }
-        public override string ToString()
-        {
-            return name;
-        }
-    }
-
-    public class Language
-    {
-            public string iso_639_1 { get; set; }
-            public string name { get; set; }
-        public override string ToString()
-        {
-            return name;
-        }
-    }
-
 }
