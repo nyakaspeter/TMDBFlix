@@ -113,6 +113,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activation\ActivationHandler.cs" />
+    <Compile Include="Controls\ImageLoader.xaml.cs">
+      <DependentUpon>ImageLoader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
     <Compile Include="Helpers\GridScrollHelper.cs" />
     <Compile Include="Helpers\ImagePathToUrlConverter.cs" />
@@ -129,6 +132,8 @@
     <Compile Include="Services\ThemeSelectorService.cs" />
     <Compile Include="ViewModels\ContentGridDetailViewModel.cs" />
     <Compile Include="ViewModels\ContentGridViewModel.cs" />
+    <Compile Include="ViewModels\DiscoverDetailViewModel.cs" />
+    <Compile Include="ViewModels\DiscoverViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
@@ -137,6 +142,12 @@
     </Compile>
     <Compile Include="Views\ContentGridPage.xaml.cs">
       <DependentUpon>ContentGridPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DiscoverDetailPage.xaml.cs">
+      <DependentUpon>DiscoverDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DiscoverPage.xaml.cs">
+      <DependentUpon>DiscoverPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -155,6 +166,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\ImageLoader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Image.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -184,6 +199,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ContentGridPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DiscoverDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DiscoverPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

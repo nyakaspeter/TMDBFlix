@@ -65,8 +65,8 @@ namespace TMDBFlix.Views
         {
             ScrollViewer scrollViewer = GetScrollViewer(obj);
             scrollViewer.HorizontalScrollMode = ScrollMode.Enabled;
-            if (forward) scrollViewer.ChangeView(scrollViewer.HorizontalOffset + (WindowWidth - 54), scrollViewer.VerticalOffset, null, false);
-            else scrollViewer.ChangeView(scrollViewer.HorizontalOffset - (WindowWidth - 54), scrollViewer.VerticalOffset, null, false);
+            if (forward) scrollViewer.ChangeView(scrollViewer.HorizontalOffset + (WindowWidth - 58), scrollViewer.VerticalOffset, null, false);
+            else scrollViewer.ChangeView(scrollViewer.HorizontalOffset - (WindowWidth - 58), scrollViewer.VerticalOffset, null, false);
             scrollViewer.HorizontalScrollMode = ScrollMode.Disabled;
         }
 

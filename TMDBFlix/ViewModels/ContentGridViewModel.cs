@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Microsoft.Toolkit.Uwp.UI.Animations;
@@ -17,41 +18,40 @@ namespace TMDBFlix.ViewModels
         private ICommand _itemClickCommand;
 
         public ICommand ItemClickCommand => _itemClickCommand ?? (_itemClickCommand = new RelayCommand<SampleOrder>(OnItemClick));
+        
+        public ObservableCollection<Movie> PopularMovies { get; set; }
+        public ObservableCollection<Show> PopularShows { get; set; }
+        public ObservableCollection<Person> PopularPeople { get; set; }
 
-        public ObservableCollection<Movie> PopularMovies
+        public async Task LoadData()
         {
-            get
+            var pm = await Task.Run(() => TMDBService.GetPopularMovies());
+            foreach (var v in pm)
             {
-                return TMDBService.GetPopularMovies();
+                PopularMovies.Add(v);
             }
-        }
-
-        public ObservableCollection<Movie> NowPlayingMovies
-        {
-            get
+            
+            
+            var ps = await Task.Run(() => TMDBService.GetPopularShows());
+            foreach (var v in ps)
             {
-                return TMDBService.GetNowPlayingMovies();
+                PopularShows.Add(v);
             }
-        }
-
-        public ObservableCollection<Show> PopularShows
-        {
-            get
+            
+            
+            var pp = await Task.Run(() => TMDBService.GetPopularPeople());
+            foreach (var v in pp)
             {
-                return TMDBService.GetPopularShows();
-            }
-        }
-
-        public ObservableCollection<Person> PopularPeople
-        {
-            get
-            {
-                return TMDBService.GetPopularPeople();
+                PopularPeople.Add(v);
             }
         }
 
         public ContentGridViewModel()
         {
+            PopularMovies = new ObservableCollection<Movie>();
+            PopularShows = new ObservableCollection<Show>();
+            PopularPeople = new ObservableCollection<Person>();
+            LoadData();
         }
 
         private void OnItemClick(SampleOrder clickedItem)

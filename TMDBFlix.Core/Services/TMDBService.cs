@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using TMDBFlix.Core.Models;
 
 namespace TMDBFlix.Core.Services
@@ -51,5 +52,6 @@ namespace TMDBFlix.Core.Services
 
             return new ObservableCollection<Person>(result.results);
         }
+
     }
 }

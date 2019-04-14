@@ -206,4 +206,8 @@
   <data name="PopularShows.Text" xml:space="preserve">
     <value>Popular Shows</value>
   </data>
+  <data name="Shell_Discover.Content" xml:space="preserve">
+    <value>Discover</value>
+    <comment>Navigation view item name for Discover</comment>
+  </data>
 </root>
