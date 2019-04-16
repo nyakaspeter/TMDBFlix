@@ -47,7 +47,7 @@
                     IsItemClickEnabled="True"
                     animations:Connected.ListItemElementName="itemThumbnail"
                     animations:Connected.ListItemKey="animationKeyContentGrid"
-                    DesiredWidth="160"
+                    DesiredWidth="160" 
                     ItemHeight="290"
                     OneRowModeEnabled="True">
                     <controls:AdaptiveGridView.ItemTemplate>
