@@ -228,4 +228,16 @@
   <data name="NowStreamingMovies.Text" xml:space="preserve">
     <value>Now Streaming</value>
   </data>
+  <data name="MovieResults.Text" xml:space="preserve">
+    <value>Movie Results</value>
+  </data>
+  <data name="PeopleResults.Text" xml:space="preserve">
+    <value>People Results</value>
+  </data>
+  <data name="Search.PlaceholderText" xml:space="preserve">
+    <value>Search Movies, Shows, People</value>
+  </data>
+  <data name="ShowResults.Text" xml:space="preserve">
+    <value>Show Results</value>
+  </data>
 </root>

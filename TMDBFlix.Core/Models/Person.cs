@@ -22,12 +22,4 @@ namespace TMDBFlix.Core.Models
         public string imdb_id { get; set; }
         public object homepage { get; set; }
     }
-
-    public class Performance
-    {
-        public string name { get; set; }
-        public string title { get; set; }
-        public string media_type { get; set; }
-        public int id { get; set; }
-    }
 }

@@ -29,11 +29,17 @@ namespace TMDBFlix.Views
             GetScrollViewer(PopularPeople).HorizontalScrollMode = ScrollMode.Disabled;
             GetScrollViewer(NowPlayingMovies).HorizontalScrollMode = ScrollMode.Disabled;
             GetScrollViewer(NowStreamingMovies).HorizontalScrollMode = ScrollMode.Disabled;
+            GetScrollViewer(MovieResults).HorizontalScrollMode = ScrollMode.Disabled;
+            GetScrollViewer(ShowResults).HorizontalScrollMode = ScrollMode.Disabled;
+            GetScrollViewer(PeopleResults).HorizontalScrollMode = ScrollMode.Disabled;
             GetScrollViewer(PopularMovies).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
             GetScrollViewer(PopularShows).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
             GetScrollViewer(PopularPeople).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
             GetScrollViewer(NowPlayingMovies).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
             GetScrollViewer(NowStreamingMovies).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            GetScrollViewer(MovieResults).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            GetScrollViewer(ShowResults).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            GetScrollViewer(PeopleResults).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
         }
 
         private void OnWindowSizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
@@ -86,5 +92,9 @@ namespace TMDBFlix.Views
             ScrollGrid((DependencyObject)this.FindName(btn.Tag.ToString()), false);
         }
 
+        private void Search(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            ViewModel.LoadSearchResults(args.QueryText);
+        }
     }
 }

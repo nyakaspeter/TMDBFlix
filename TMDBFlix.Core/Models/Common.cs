@@ -53,4 +53,12 @@ namespace TMDBFlix.Core.Models
             return name;
         }
     }
+
+    public class Performance
+    {
+        public string name { get; set; }
+        public string title { get; set; }
+        public string media_type { get; set; }
+        public int id { get; set; }
+    }
 }
