@@ -33,6 +33,20 @@ namespace TMDBFlix.Core.Services
             return new ObservableCollection<Movie>(result.results);
         }
 
+        public static ObservableCollection<Movie> GetNowStreamingMovies()
+        {
+            var halfyearago = DateTime.Today.AddMonths(-6);
+
+            var request = new RestRequest("/discover/movie");
+            request.AddParameter("api_key", key);
+            request.AddParameter("with_release_type", 4);
+            request.AddParameter("primary_release_date.gte", halfyearago.ToString("yyyy-MM-dd"));
+
+            var result = client.Execute<MoviesResponse>(request).Data;
+
+            return new ObservableCollection<Movie>(result.results);
+        }
+
         public static ObservableCollection<Show> GetPopularShows()
         {
             var request = new RestRequest("/tv/popular");

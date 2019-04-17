@@ -18,7 +18,7 @@
         <helpers:KnownForConverter x:Key="KnownForConverter" />
     </Page.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <ScrollViewer x:Name="Scroller" VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="{StaticResource PageMargin}">
 
             <TextBlock
@@ -47,12 +47,15 @@
                     IsItemClickEnabled="True"
                     animations:Connected.ListItemElementName="itemThumbnail"
                     animations:Connected.ListItemKey="animationKeyContentGrid"
-                    DesiredWidth="160" 
-                    ItemHeight="290"
-                    OneRowModeEnabled="True">
+                    ItemHeight="298"
+                    OneRowModeEnabled="True"
+                    >
                     <controls:AdaptiveGridView.ItemTemplate>
                         <DataTemplate x:DataType="models:Movie">
                             <Grid
+                                Margin="4"
+                                MinWidth="160"
+                                MaxWidth="160"
                                 x:Name="itemThumbnail"
                                 Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
@@ -110,14 +113,17 @@
                     IsItemClickEnabled="True"
                     animations:Connected.ListItemElementName="itemThumbnail"
                     animations:Connected.ListItemKey="animationKeyContentGrid"
-                    DesiredWidth="160"
-                    ItemHeight="290"
-                    OneRowModeEnabled="True">
+                    ItemHeight="298"
+                    OneRowModeEnabled="True"
+                    >
                     <controls:AdaptiveGridView.ItemTemplate>
                         <DataTemplate x:DataType="models:Show">
                             <Grid
-                                    x:Name="itemThumbnail"
-                                    Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                Margin="4"
+                                MinWidth="160"
+                                MaxWidth="160"
+                                x:Name="itemThumbnail"
+                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                                     <app30:ImageLoader
                                         Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
@@ -173,14 +179,17 @@
                     IsItemClickEnabled="True"
                     animations:Connected.ListItemElementName="itemThumbnail"
                     animations:Connected.ListItemKey="animationKeyContentGrid"
-                    DesiredWidth="160"
-                    ItemHeight="290"
-                    OneRowModeEnabled="True">
+                    ItemHeight="298"
+                    OneRowModeEnabled="True"
+                    >
                     <controls:AdaptiveGridView.ItemTemplate>
                         <DataTemplate x:DataType="models:Person">
                             <Grid
-                                    x:Name="itemThumbnail"
-                                    Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                Margin="4"
+                                MinWidth="160"
+                                MaxWidth="160"
+                                x:Name="itemThumbnail"
+                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                                     <app30:ImageLoader
                                         Source="{Binding profile_path, Converter={StaticResource ImageUrlConverter}}"
@@ -210,6 +219,138 @@
                 </controls:AdaptiveGridView>
             </Grid>
 
+            <TextBlock
+                    x:Uid="NowPlayingMovies"
+                    Margin="{StaticResource CategoryMargin}"
+                    HorizontalAlignment="Left"
+                    Style="{ThemeResource CategoryStyle}" />
+            <Grid x:Name="NowPlayingMovies">
+                <Button
+                    Tag="NowPlayingMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;"/>
+                </Button>
+                <Button
+                    Tag="NowPlayingMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollForward" Width = "48" Height = "96" HorizontalContentAlignment="Right" VerticalAlignment ="Center" HorizontalAlignment = "Right">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;"/>
+                </Button>
+
+                <controls:AdaptiveGridView
+                    Margin="{StaticResource OneRowGridMargin}"
+                    ItemsSource="{x:Bind ViewModel.NowPlayingMovies,Mode=OneWay}"
+                    ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
+                    StretchContentForSingleRow="True"
+                    SelectionMode="None"
+                    IsItemClickEnabled="True"
+                    animations:Connected.ListItemElementName="itemThumbnail"
+                    animations:Connected.ListItemKey="animationKeyContentGrid"
+                    ItemHeight="298"
+                    OneRowModeEnabled="True"
+                    >
+                    <controls:AdaptiveGridView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Movie">
+                            <Grid
+                                Margin="4"
+                                MinWidth="160"
+                                MaxWidth="160"
+                                x:Name="itemThumbnail"
+                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                    <app30:ImageLoader
+                                        Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                        Height="240" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <app30:ImageLoader.LoadingContent>
+                                            <ProgressRing IsActive="True" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                Width="48" Height="48" Foreground="White"/>
+                                        </app30:ImageLoader.LoadingContent>
+                                        <app30:ImageLoader.FailedContent>
+                                            <TextBlock Text="Failed" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                        </app30:ImageLoader.FailedContent>
+                                    </app30:ImageLoader>
+                                    <TextBlock
+                                        Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding title}"
+                                        Style="{ThemeResource TitleStyle}" />
+                                    <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </controls:AdaptiveGridView.ItemTemplate>
+                </controls:AdaptiveGridView>
+            </Grid>
+
+            <TextBlock
+                    x:Uid="NowStreamingMovies"
+                    Margin="{StaticResource CategoryMargin}"
+                    HorizontalAlignment="Left"
+                    Style="{ThemeResource CategoryStyle}" />
+            <Grid x:Name="NowStreamingMovies">
+                <Button
+                    Tag="NowStreamingMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;"/>
+                </Button>
+                <Button
+                    Tag="NowStreamingMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollForward" Width = "48" Height = "96" HorizontalContentAlignment="Right" VerticalAlignment ="Center" HorizontalAlignment = "Right">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;"/>
+                </Button>
+
+                <controls:AdaptiveGridView
+                    Margin="{StaticResource OneRowGridMargin}"
+                    ItemsSource="{x:Bind ViewModel.NowStreamingMovies,Mode=OneWay}"
+                    ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
+                    StretchContentForSingleRow="True"
+                    SelectionMode="None"
+                    IsItemClickEnabled="True"
+                    animations:Connected.ListItemElementName="itemThumbnail"
+                    animations:Connected.ListItemKey="animationKeyContentGrid"
+                    ItemHeight="298"
+                    OneRowModeEnabled="True"
+                    >
+                    <controls:AdaptiveGridView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Movie">
+                            <Grid
+                                Margin="4"
+                                MinWidth="160"
+                                MaxWidth="160"
+                                x:Name="itemThumbnail"
+                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                    <app30:ImageLoader
+                                        Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                        Height="240" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <app30:ImageLoader.LoadingContent>
+                                            <ProgressRing IsActive="True" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                Width="48" Height="48" Foreground="White"/>
+                                        </app30:ImageLoader.LoadingContent>
+                                        <app30:ImageLoader.FailedContent>
+                                            <TextBlock Text="Failed" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                        </app30:ImageLoader.FailedContent>
+                                    </app30:ImageLoader>
+                                    <TextBlock
+                                        Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding title}"
+                                        Style="{ThemeResource TitleStyle}" />
+                                    <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </controls:AdaptiveGridView.ItemTemplate>
+                </controls:AdaptiveGridView>
+            </Grid>
+            
         </StackPanel>
     </ScrollViewer>
 

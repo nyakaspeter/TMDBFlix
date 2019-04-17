@@ -27,9 +27,13 @@ namespace TMDBFlix.Views
             GetScrollViewer(PopularMovies).HorizontalScrollMode = ScrollMode.Disabled;
             GetScrollViewer(PopularShows).HorizontalScrollMode = ScrollMode.Disabled;
             GetScrollViewer(PopularPeople).HorizontalScrollMode = ScrollMode.Disabled;
+            GetScrollViewer(NowPlayingMovies).HorizontalScrollMode = ScrollMode.Disabled;
+            GetScrollViewer(NowStreamingMovies).HorizontalScrollMode = ScrollMode.Disabled;
             GetScrollViewer(PopularMovies).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
             GetScrollViewer(PopularShows).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
             GetScrollViewer(PopularPeople).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            GetScrollViewer(NowPlayingMovies).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            GetScrollViewer(NowStreamingMovies).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
         }
 
         private void OnWindowSizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
@@ -65,8 +69,8 @@ namespace TMDBFlix.Views
         {
             ScrollViewer scrollViewer = GetScrollViewer(obj);
             scrollViewer.HorizontalScrollMode = ScrollMode.Enabled;
-            if (forward) scrollViewer.ChangeView(scrollViewer.HorizontalOffset + (WindowWidth - 58), scrollViewer.VerticalOffset, null, false);
-            else scrollViewer.ChangeView(scrollViewer.HorizontalOffset - (WindowWidth - 58), scrollViewer.VerticalOffset, null, false);
+            if (forward) scrollViewer.ChangeView(scrollViewer.HorizontalOffset + Math.Floor((WindowWidth - 52) / 168) * 172 /*(WindowWidth - 58)*/, scrollViewer.VerticalOffset, null, false);
+            else scrollViewer.ChangeView(scrollViewer.HorizontalOffset - Math.Floor((WindowWidth - 52) / 168) * 172, scrollViewer.VerticalOffset, null, false);
             scrollViewer.HorizontalScrollMode = ScrollMode.Disabled;
         }
 

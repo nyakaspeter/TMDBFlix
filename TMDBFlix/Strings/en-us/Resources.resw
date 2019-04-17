@@ -210,4 +210,22 @@
     <value>Discover</value>
     <comment>Navigation view item name for Discover</comment>
   </data>
+  <data name="Shell_Movies.Content" xml:space="preserve">
+    <value>Movies</value>
+  </data>
+  <data name="Shell_People.Content" xml:space="preserve">
+    <value>People</value>
+  </data>
+  <data name="Shell_Popular.Content" xml:space="preserve">
+    <value>Popular</value>
+  </data>
+  <data name="Shell_Shows.Content" xml:space="preserve">
+    <value>Shows</value>
+  </data>
+  <data name="NowPlayingMovies.Text" xml:space="preserve">
+    <value>Now Playing</value>
+  </data>
+  <data name="NowStreamingMovies.Text" xml:space="preserve">
+    <value>Now Streaming</value>
+  </data>
 </root>

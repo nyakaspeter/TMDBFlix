@@ -22,27 +22,42 @@ namespace TMDBFlix.ViewModels
         public ObservableCollection<Movie> PopularMovies { get; set; }
         public ObservableCollection<Show> PopularShows { get; set; }
         public ObservableCollection<Person> PopularPeople { get; set; }
+        public ObservableCollection<Movie> NowPlayingMovies { get; set; }
+        public ObservableCollection<Movie> NowStreamingMovies { get; set; }
+
 
         public async Task LoadData()
         {
-            var pm = await Task.Run(() => TMDBService.GetPopularMovies());
-            foreach (var v in pm)
+            var popularmovies = await Task.Run(() => TMDBService.GetPopularMovies());
+            foreach (var v in popularmovies)
             {
                 PopularMovies.Add(v);
             }
             
             
-            var ps = await Task.Run(() => TMDBService.GetPopularShows());
-            foreach (var v in ps)
+            var popularshows = await Task.Run(() => TMDBService.GetPopularShows());
+            foreach (var v in popularshows)
             {
                 PopularShows.Add(v);
             }
             
             
-            var pp = await Task.Run(() => TMDBService.GetPopularPeople());
-            foreach (var v in pp)
+            var popularpeople = await Task.Run(() => TMDBService.GetPopularPeople());
+            foreach (var v in popularpeople)
             {
                 PopularPeople.Add(v);
+            }
+
+            var nowplayingmovies = await Task.Run(() => TMDBService.GetNowPlayingMovies());
+            foreach (var v in nowplayingmovies)
+            {
+                NowPlayingMovies.Add(v);
+            }
+
+            var nowstreamingmovies = await Task.Run(() => TMDBService.GetNowStreamingMovies());
+            foreach (var v in nowstreamingmovies)
+            {
+                NowStreamingMovies.Add(v);
             }
         }
 
@@ -51,6 +66,8 @@ namespace TMDBFlix.ViewModels
             PopularMovies = new ObservableCollection<Movie>();
             PopularShows = new ObservableCollection<Show>();
             PopularPeople = new ObservableCollection<Person>();
+            NowPlayingMovies = new ObservableCollection<Movie>();
+            NowStreamingMovies = new ObservableCollection<Movie>();
             LoadData();
         }
 
