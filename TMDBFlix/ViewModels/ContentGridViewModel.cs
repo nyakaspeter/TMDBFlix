@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -28,6 +29,12 @@ namespace TMDBFlix.ViewModels
         public ObservableCollection<Person> PopularPeople { get; set; }
         public ObservableCollection<Movie> NowPlayingMovies { get; set; }
         public ObservableCollection<Movie> NowStreamingMovies { get; set; }
+        public ObservableCollection<Movie> HighRatedMovies { get; set; }
+        public ObservableCollection<Movie> UpcomingMovies { get; set; }
+        public ObservableCollection<Show> OnTvShows { get; set; }
+        public ObservableCollection<Show> AiringTodayShows { get; set; }
+        public ObservableCollection<Show> HighRatedShows { get; set; }
+
 
         public async Task LoadSearchResults(string query)
         {
@@ -56,26 +63,6 @@ namespace TMDBFlix.ViewModels
 
         public async Task LoadData()
         {
-            var popularmovies = await Task.Run(() => TMDBService.GetPopularMovies());
-            foreach (var v in popularmovies)
-            {
-                PopularMovies.Add(v);
-            }
-            
-            
-            var popularshows = await Task.Run(() => TMDBService.GetPopularShows());
-            foreach (var v in popularshows)
-            {
-                PopularShows.Add(v);
-            }
-            
-            
-            var popularpeople = await Task.Run(() => TMDBService.GetPopularPeople());
-            foreach (var v in popularpeople)
-            {
-                PopularPeople.Add(v);
-            }
-
             var nowplayingmovies = await Task.Run(() => TMDBService.GetNowPlayingMovies());
             foreach (var v in nowplayingmovies)
             {
@@ -87,6 +74,56 @@ namespace TMDBFlix.ViewModels
             {
                 NowStreamingMovies.Add(v);
             }
+
+            var upcomingmovies = await Task.Run(() => TMDBService.GetUpcomingMovies());
+            foreach (var v in upcomingmovies)
+            {
+                UpcomingMovies.Add(v);
+            }
+
+            var popularmovies = await Task.Run(() => TMDBService.GetPopularMovies());
+            foreach (var v in popularmovies)
+            {
+                PopularMovies.Add(v);
+            }
+
+            var highratedmovies = await Task.Run(() => TMDBService.GetHighRatedMovies());
+            foreach (var v in highratedmovies)
+            {
+                HighRatedMovies.Add(v);
+            }
+
+            var ontvshows = await Task.Run(() => TMDBService.GetOnTvShows());
+            foreach (var v in ontvshows)
+            {
+                OnTvShows.Add(v);
+            }
+
+            var airingtodayshows = await Task.Run(() => TMDBService.GetAiringTodayShows());
+            foreach (var v in airingtodayshows)
+            {
+                AiringTodayShows.Add(v);
+            }
+
+            var popularshows = await Task.Run(() => TMDBService.GetPopularShows());
+            foreach (var v in popularshows)
+            {
+                PopularShows.Add(v);
+            }
+
+            var highratedshows = await Task.Run(() => TMDBService.GetHighRatedShows());
+            foreach (var v in highratedshows)
+            {
+                HighRatedShows.Add(v);
+            }
+
+            var popularpeople = await Task.Run(() => TMDBService.GetPopularPeople());
+            foreach (var v in popularpeople)
+            {
+                PopularPeople.Add(v);
+            }
+
+            
         }
 
         public ContentGridViewModel()
@@ -99,6 +136,12 @@ namespace TMDBFlix.ViewModels
             PopularPeople = new ObservableCollection<Person>();
             NowPlayingMovies = new ObservableCollection<Movie>();
             NowStreamingMovies = new ObservableCollection<Movie>();
+            HighRatedMovies = new ObservableCollection<Movie>();
+            HighRatedShows = new ObservableCollection<Show>();
+            UpcomingMovies = new ObservableCollection<Movie>();
+            OnTvShows = new ObservableCollection<Show>();
+            AiringTodayShows = new ObservableCollection<Show>();
+
             LoadData();
         }
 

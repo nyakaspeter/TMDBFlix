@@ -16,19 +16,100 @@
         <helpers:ImagePathToUrlConverter x:Key="ImageUrlConverter" />
         <helpers:ReleaseDateToYearConverter x:Key="ReleaseYearConverter" />
         <helpers:KnownForConverter x:Key="KnownForConverter" />
+
+        <Storyboard x:Name="FadeInPeopleResults">
+            <FadeInThemeAnimation Storyboard.TargetName="PeopleResults" />
+        </Storyboard>
+        <Storyboard x:Name="FadeOutPeopleResults">
+            <FadeOutThemeAnimation Storyboard.TargetName="PeopleResults" />
+        </Storyboard>
+        <Storyboard x:Name="FadeInMovieResults">
+            <FadeInThemeAnimation Storyboard.TargetName="MovieResults" />
+        </Storyboard>
+        <Storyboard x:Name="FadeOutMovieResults">
+            <FadeOutThemeAnimation Storyboard.TargetName="MovieResults" />
+        </Storyboard>
+        <Storyboard x:Name="FadeInShowResults">
+            <FadeInThemeAnimation Storyboard.TargetName="ShowResults" />
+        </Storyboard>
+        <Storyboard x:Name="FadeOutShowResults">
+            <FadeOutThemeAnimation Storyboard.TargetName="ShowResults" />
+        </Storyboard>
+        <Storyboard x:Name="FadeInPopularMovies">
+            <FadeInThemeAnimation Storyboard.TargetName="PopularMovies" />
+        </Storyboard>
+        <Storyboard x:Name="FadeOutPopularMovies">
+            <FadeOutThemeAnimation Storyboard.TargetName="PopularMovies" />
+        </Storyboard>
+        <Storyboard x:Name="FadeInPopularShows">
+            <FadeInThemeAnimation Storyboard.TargetName="PopularShows" />
+        </Storyboard>
+        <Storyboard x:Name="FadeOutPopularShows">
+            <FadeOutThemeAnimation Storyboard.TargetName="PopularShows" />
+        </Storyboard>
+        <Storyboard x:Name="FadeInNowPlayingMovies">
+            <FadeInThemeAnimation Storyboard.TargetName="NowPlayingMovies" />
+        </Storyboard>
+        <Storyboard x:Name="FadeOutNowPlayingMovies">
+            <FadeOutThemeAnimation Storyboard.TargetName="NowPlayingMovies" />
+        </Storyboard>
+        <Storyboard x:Name="FadeInNowStreamingMovies">
+            <FadeInThemeAnimation Storyboard.TargetName="NowStreamingMovies" />
+        </Storyboard>
+        <Storyboard x:Name="FadeOutNowStreamingMovies">
+            <FadeOutThemeAnimation Storyboard.TargetName="NowStreamingMovies" />
+        </Storyboard>
+        <Storyboard x:Name="FadeInPopularPeople">
+            <FadeInThemeAnimation Storyboard.TargetName="PopularPeople" />
+        </Storyboard>
+        <Storyboard x:Name="FadeOutPopularPeople">
+            <FadeOutThemeAnimation Storyboard.TargetName="PopularPeople" />
+        </Storyboard>
+        <Storyboard x:Name="FadeInUpcomingMovies">
+            <FadeInThemeAnimation Storyboard.TargetName="UpcomingMovies" />
+        </Storyboard>
+        <Storyboard x:Name="FadeOutUpcomingMovies">
+            <FadeOutThemeAnimation Storyboard.TargetName="UpcomingMovies" />
+        </Storyboard>
+        <Storyboard x:Name="FadeInHighRatedMovies">
+            <FadeInThemeAnimation Storyboard.TargetName="HighRatedMovies" />
+        </Storyboard>
+        <Storyboard x:Name="FadeOutHighRatedMovies">
+            <FadeOutThemeAnimation Storyboard.TargetName="HighRatedMovies" />
+        </Storyboard>
+        <Storyboard x:Name="FadeInOnTvShows">
+            <FadeInThemeAnimation Storyboard.TargetName="OnTvShows" />
+        </Storyboard>
+        <Storyboard x:Name="FadeOutOnTvShows">
+            <FadeOutThemeAnimation Storyboard.TargetName="OnTvShows" />
+        </Storyboard>
+        <Storyboard x:Name="FadeInAiringTodayShows">
+            <FadeInThemeAnimation Storyboard.TargetName="AiringTodayShows" />
+        </Storyboard>
+        <Storyboard x:Name="FadeOutAiringTodayShows">
+            <FadeOutThemeAnimation Storyboard.TargetName="AiringTodayShows" />
+        </Storyboard>
+        <Storyboard x:Name="FadeInHighRatedShows">
+            <FadeInThemeAnimation Storyboard.TargetName="HighRatedShows" />
+        </Storyboard>
+        <Storyboard x:Name="FadeOutHighRatedShows">
+            <FadeOutThemeAnimation Storyboard.TargetName="HighRatedShows" />
+        </Storyboard>
+
     </Page.Resources>
 
     <ScrollViewer x:Name="Scroller" VerticalScrollBarVisibility="Hidden">
         <StackPanel Margin="{StaticResource PageMargin}">
 
-            <AutoSuggestBox x:Uid="Search" QuerySubmitted="Search" MinWidth="400" Margin="24,16" HorizontalAlignment="Center" QueryIcon="Find"/>
+            <AutoSuggestBox x:Uid="Search" TextChanged="Search_TextChanged"  QuerySubmitted="Search_Find" MinWidth="400" Margin="24,16" HorizontalAlignment="Center" QueryIcon="Find"/>
 
+            <StackPanel x:Name="PeopleResults">
             <TextBlock
                     x:Uid="PeopleResults"
                     Margin="{StaticResource CategoryMargin}"
                     HorizontalAlignment="Left"
                     Style="{ThemeResource CategoryStyle}" />
-            <Grid x:Name="PeopleResults">
+            <Grid>
                 <Button
                     Tag="PeopleResults" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
                     Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
@@ -88,13 +169,15 @@
                     </controls:AdaptiveGridView.ItemTemplate>
                 </controls:AdaptiveGridView>
             </Grid>
-            
+            </StackPanel>
+
+            <StackPanel x:Name="MovieResults">
             <TextBlock
                     x:Uid="MovieResults"
                     Margin="{StaticResource CategoryMargin}"
                     HorizontalAlignment="Left"
                     Style="{ThemeResource CategoryStyle}" />
-            <Grid x:Name="MovieResults">
+            <Grid>
                 <Button
                     Tag="MovieResults" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
                     Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
@@ -154,13 +237,15 @@
                     </controls:AdaptiveGridView.ItemTemplate>
                 </controls:AdaptiveGridView>
             </Grid>
+            </StackPanel>
 
+            <StackPanel x:Name="ShowResults">
             <TextBlock
                     x:Uid="ShowResults"
                     Margin="{StaticResource CategoryMargin}"
                     HorizontalAlignment="Left"
                     Style="{ThemeResource CategoryStyle}" />
-            <Grid x:Name="ShowResults">
+            <Grid>
                 <Button
                     Tag="ShowResults" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
                     Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
@@ -220,13 +305,219 @@
                     </controls:AdaptiveGridView.ItemTemplate>
                 </controls:AdaptiveGridView>
             </Grid>
+            </StackPanel>
 
+            <StackPanel x:Name="NowPlayingMovies">
+                <TextBlock
+                    x:Uid="NowPlayingMovies"
+                    Margin="{StaticResource CategoryMargin}"
+                    HorizontalAlignment="Left"
+                    Style="{ThemeResource CategoryStyle}" />
+                <Grid>
+                    <Button
+                    Tag="NowPlayingMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;"/>
+                    </Button>
+                    <Button
+                    Tag="NowPlayingMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollForward" Width = "48" Height = "96" HorizontalContentAlignment="Right" VerticalAlignment ="Center" HorizontalAlignment = "Right">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;"/>
+                    </Button>
+
+                    <controls:AdaptiveGridView
+                    Margin="{StaticResource OneRowGridMargin}"
+                    ItemsSource="{x:Bind ViewModel.NowPlayingMovies,Mode=OneWay}"
+                    ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
+                    StretchContentForSingleRow="True"
+                    SelectionMode="None"
+                    IsItemClickEnabled="True"
+                    animations:Connected.ListItemElementName="itemThumbnail"
+                    animations:Connected.ListItemKey="animationKeyContentGrid"
+                    ItemHeight="298"
+                    OneRowModeEnabled="True"
+                    >
+                        <controls:AdaptiveGridView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Movie">
+                                <Grid
+                                Margin="4"
+                                MinWidth="160"
+                                MaxWidth="160"
+                                x:Name="itemThumbnail"
+                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <app30:ImageLoader
+                                        Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                        Height="240" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <app30:ImageLoader.LoadingContent>
+                                                <ProgressRing IsActive="True" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                Width="48" Height="48" Foreground="White"/>
+                                            </app30:ImageLoader.LoadingContent>
+                                            <app30:ImageLoader.FailedContent>
+                                                <TextBlock Text="Failed" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                            </app30:ImageLoader.FailedContent>
+                                        </app30:ImageLoader>
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding title}"
+                                        Style="{ThemeResource TitleStyle}" />
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </controls:AdaptiveGridView.ItemTemplate>
+                    </controls:AdaptiveGridView>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel x:Name="NowStreamingMovies">
+                <TextBlock
+                    x:Uid="NowStreamingMovies"
+                    Margin="{StaticResource CategoryMargin}"
+                    HorizontalAlignment="Left"
+                    Style="{ThemeResource CategoryStyle}" />
+                <Grid>
+                    <Button
+                    Tag="NowStreamingMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;"/>
+                    </Button>
+                    <Button
+                    Tag="NowStreamingMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollForward" Width = "48" Height = "96" HorizontalContentAlignment="Right" VerticalAlignment ="Center" HorizontalAlignment = "Right">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;"/>
+                    </Button>
+
+                    <controls:AdaptiveGridView
+                    Margin="{StaticResource OneRowGridMargin}"
+                    ItemsSource="{x:Bind ViewModel.NowStreamingMovies,Mode=OneWay}"
+                    ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
+                    StretchContentForSingleRow="True"
+                    SelectionMode="None"
+                    IsItemClickEnabled="True"
+                    animations:Connected.ListItemElementName="itemThumbnail"
+                    animations:Connected.ListItemKey="animationKeyContentGrid"
+                    ItemHeight="298"
+                    OneRowModeEnabled="True"
+                    >
+                        <controls:AdaptiveGridView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Movie">
+                                <Grid
+                                Margin="4"
+                                MinWidth="160"
+                                MaxWidth="160"
+                                x:Name="itemThumbnail"
+                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <app30:ImageLoader
+                                        Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                        Height="240" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <app30:ImageLoader.LoadingContent>
+                                                <ProgressRing IsActive="True" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                Width="48" Height="48" Foreground="White"/>
+                                            </app30:ImageLoader.LoadingContent>
+                                            <app30:ImageLoader.FailedContent>
+                                                <TextBlock Text="Failed" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                            </app30:ImageLoader.FailedContent>
+                                        </app30:ImageLoader>
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding title}"
+                                        Style="{ThemeResource TitleStyle}" />
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </controls:AdaptiveGridView.ItemTemplate>
+                    </controls:AdaptiveGridView>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel x:Name="UpcomingMovies">
+                <TextBlock
+                    x:Uid="UpcomingMovies"
+                    Margin="{StaticResource CategoryMargin}"
+                    HorizontalAlignment="Left"
+                    Style="{ThemeResource CategoryStyle}" />
+                <Grid>
+                    <Button
+                    Tag="UpcomingMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;"/>
+                    </Button>
+                    <Button
+                    Tag="UpcomingMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollForward" Width = "48" Height = "96" HorizontalContentAlignment="Right" VerticalAlignment ="Center" HorizontalAlignment = "Right">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;"/>
+                    </Button>
+
+                    <controls:AdaptiveGridView
+                    Margin="{StaticResource OneRowGridMargin}"
+                    ItemsSource="{x:Bind ViewModel.UpcomingMovies,Mode=OneWay}"
+                    ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
+                    StretchContentForSingleRow="True"
+                    SelectionMode="None"
+                    IsItemClickEnabled="True"
+                    animations:Connected.ListItemElementName="itemThumbnail"
+                    animations:Connected.ListItemKey="animationKeyContentGrid"
+                    ItemHeight="298"
+                    OneRowModeEnabled="True"
+                    >
+                        <controls:AdaptiveGridView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Movie">
+                                <Grid
+                                Margin="4"
+                                MinWidth="160"
+                                MaxWidth="160"
+                                x:Name="itemThumbnail"
+                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <app30:ImageLoader
+                                        Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                        Height="240" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <app30:ImageLoader.LoadingContent>
+                                                <ProgressRing IsActive="True" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                Width="48" Height="48" Foreground="White"/>
+                                            </app30:ImageLoader.LoadingContent>
+                                            <app30:ImageLoader.FailedContent>
+                                                <TextBlock Text="Failed" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                            </app30:ImageLoader.FailedContent>
+                                        </app30:ImageLoader>
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding title}"
+                                        Style="{ThemeResource TitleStyle}" />
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </controls:AdaptiveGridView.ItemTemplate>
+                    </controls:AdaptiveGridView>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel x:Name="PopularMovies">
             <TextBlock
                     x:Uid="PopularMovies"
                     Margin="{StaticResource CategoryMargin}"
                     HorizontalAlignment="Left"
                     Style="{ThemeResource CategoryStyle}" />
-            <Grid x:Name="PopularMovies">
+            <Grid>
                 <Button
                     Tag="PopularMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
                     Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
@@ -286,13 +577,219 @@
                     </controls:AdaptiveGridView.ItemTemplate>
                 </controls:AdaptiveGridView>
             </Grid>
+            </StackPanel>
 
+            <StackPanel x:Name="HighRatedMovies">
+                <TextBlock
+                    x:Uid="HighRatedMovies"
+                    Margin="{StaticResource CategoryMargin}"
+                    HorizontalAlignment="Left"
+                    Style="{ThemeResource CategoryStyle}" />
+                <Grid>
+                    <Button
+                    Tag="HighRatedMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;"/>
+                    </Button>
+                    <Button
+                    Tag="HighRatedMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollForward" Width = "48" Height = "96" HorizontalContentAlignment="Right" VerticalAlignment ="Center" HorizontalAlignment = "Right">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;"/>
+                    </Button>
+
+                    <controls:AdaptiveGridView
+                    Margin="{StaticResource OneRowGridMargin}"
+                    ItemsSource="{x:Bind ViewModel.HighRatedMovies,Mode=OneWay}"
+                    ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
+                    StretchContentForSingleRow="True"
+                    SelectionMode="None"
+                    IsItemClickEnabled="True"
+                    animations:Connected.ListItemElementName="itemThumbnail"
+                    animations:Connected.ListItemKey="animationKeyContentGrid"
+                    ItemHeight="298"
+                    OneRowModeEnabled="True"
+                    >
+                        <controls:AdaptiveGridView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Movie">
+                                <Grid
+                                Margin="4"
+                                MinWidth="160"
+                                MaxWidth="160"
+                                x:Name="itemThumbnail"
+                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <app30:ImageLoader
+                                        Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                        Height="240" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <app30:ImageLoader.LoadingContent>
+                                                <ProgressRing IsActive="True" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                Width="48" Height="48" Foreground="White"/>
+                                            </app30:ImageLoader.LoadingContent>
+                                            <app30:ImageLoader.FailedContent>
+                                                <TextBlock Text="Failed" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                            </app30:ImageLoader.FailedContent>
+                                        </app30:ImageLoader>
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding title}"
+                                        Style="{ThemeResource TitleStyle}" />
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </controls:AdaptiveGridView.ItemTemplate>
+                    </controls:AdaptiveGridView>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel x:Name="OnTvShows">
+                <TextBlock
+                    x:Uid="OnTvShows"
+                    Margin="{StaticResource CategoryMargin}"
+                    HorizontalAlignment="Left"
+                    Style="{ThemeResource CategoryStyle}" />
+                <Grid>
+                    <Button
+                    Tag="OnTvShows" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;"/>
+                    </Button>
+                    <Button
+                    Tag="OnTvShows" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollForward" Width = "48" Height = "96" HorizontalContentAlignment="Right" VerticalAlignment ="Center" HorizontalAlignment = "Right">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;"/>
+                    </Button>
+
+                    <controls:AdaptiveGridView
+                    Margin="{StaticResource OneRowGridMargin}"
+                    ItemsSource="{x:Bind ViewModel.OnTvShows,Mode=OneWay}"
+                    ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
+                    StretchContentForSingleRow="True"
+                    SelectionMode="None"
+                    IsItemClickEnabled="True"
+                    animations:Connected.ListItemElementName="itemThumbnail"
+                    animations:Connected.ListItemKey="animationKeyContentGrid"
+                    ItemHeight="298"
+                    OneRowModeEnabled="True"
+                    >
+                        <controls:AdaptiveGridView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Show">
+                                <Grid
+                                Margin="4"
+                                MinWidth="160"
+                                MaxWidth="160"
+                                x:Name="itemThumbnail"
+                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <app30:ImageLoader
+                                        Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                        Height="240" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <app30:ImageLoader.LoadingContent>
+                                                <ProgressRing IsActive="True" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                Width="48" Height="48" Foreground="White"/>
+                                            </app30:ImageLoader.LoadingContent>
+                                            <app30:ImageLoader.FailedContent>
+                                                <TextBlock Text="Failed" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                            </app30:ImageLoader.FailedContent>
+                                        </app30:ImageLoader>
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding name}"
+                                        Style="{ThemeResource TitleStyle}" />
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding first_air_date, Converter={StaticResource ReleaseYearConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </controls:AdaptiveGridView.ItemTemplate>
+                    </controls:AdaptiveGridView>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel x:Name="AiringTodayShows">
+                <TextBlock
+                    x:Uid="AiringTodayShows"
+                    Margin="{StaticResource CategoryMargin}"
+                    HorizontalAlignment="Left"
+                    Style="{ThemeResource CategoryStyle}" />
+                <Grid>
+                    <Button
+                    Tag="AiringTodayShows" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;"/>
+                    </Button>
+                    <Button
+                    Tag="AiringTodayShows" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollForward" Width = "48" Height = "96" HorizontalContentAlignment="Right" VerticalAlignment ="Center" HorizontalAlignment = "Right">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;"/>
+                    </Button>
+
+                    <controls:AdaptiveGridView
+                    Margin="{StaticResource OneRowGridMargin}"
+                    ItemsSource="{x:Bind ViewModel.AiringTodayShows,Mode=OneWay}"
+                    ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
+                    StretchContentForSingleRow="True"
+                    SelectionMode="None"
+                    IsItemClickEnabled="True"
+                    animations:Connected.ListItemElementName="itemThumbnail"
+                    animations:Connected.ListItemKey="animationKeyContentGrid"
+                    ItemHeight="298"
+                    OneRowModeEnabled="True"
+                    >
+                        <controls:AdaptiveGridView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Show">
+                                <Grid
+                                Margin="4"
+                                MinWidth="160"
+                                MaxWidth="160"
+                                x:Name="itemThumbnail"
+                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <app30:ImageLoader
+                                        Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                        Height="240" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <app30:ImageLoader.LoadingContent>
+                                                <ProgressRing IsActive="True" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                Width="48" Height="48" Foreground="White"/>
+                                            </app30:ImageLoader.LoadingContent>
+                                            <app30:ImageLoader.FailedContent>
+                                                <TextBlock Text="Failed" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                            </app30:ImageLoader.FailedContent>
+                                        </app30:ImageLoader>
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding name}"
+                                        Style="{ThemeResource TitleStyle}" />
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding first_air_date, Converter={StaticResource ReleaseYearConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </controls:AdaptiveGridView.ItemTemplate>
+                    </controls:AdaptiveGridView>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel x:Name="PopularShows">
             <TextBlock
                     x:Uid="PopularShows"
                     Margin="{StaticResource CategoryMargin}"
                     HorizontalAlignment="Left"
                     Style="{ThemeResource CategoryStyle}" />
-            <Grid x:Name="PopularShows">
+            <Grid>
                 <Button
                     Tag="PopularShows" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
                     Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
@@ -352,25 +849,95 @@
                     </controls:AdaptiveGridView.ItemTemplate>
                 </controls:AdaptiveGridView>
             </Grid>
+            </StackPanel>
 
-            <TextBlock
+            <StackPanel x:Name="HighRatedShows">
+                <TextBlock
+                    x:Uid="HighRatedShows"
+                    Margin="{StaticResource CategoryMargin}"
+                    HorizontalAlignment="Left"
+                    Style="{ThemeResource CategoryStyle}" />
+                <Grid>
+                    <Button
+                    Tag="HighRatedShows" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;"/>
+                    </Button>
+                    <Button
+                    Tag="HighRatedShows" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
+                    Click = "ScrollForward" Width = "48" Height = "96" HorizontalContentAlignment="Right" VerticalAlignment ="Center" HorizontalAlignment = "Right">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;"/>
+                    </Button>
+
+                    <controls:AdaptiveGridView
+                    Margin="{StaticResource OneRowGridMargin}"
+                    ItemsSource="{x:Bind ViewModel.HighRatedShows,Mode=OneWay}"
+                    ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
+                    StretchContentForSingleRow="True"
+                    SelectionMode="None"
+                    IsItemClickEnabled="True"
+                    animations:Connected.ListItemElementName="itemThumbnail"
+                    animations:Connected.ListItemKey="animationKeyContentGrid"
+                    ItemHeight="298"
+                    OneRowModeEnabled="True"
+                    >
+                        <controls:AdaptiveGridView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Show">
+                                <Grid
+                                Margin="4"
+                                MinWidth="160"
+                                MaxWidth="160"
+                                x:Name="itemThumbnail"
+                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <app30:ImageLoader
+                                        Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                        Height="240" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <app30:ImageLoader.LoadingContent>
+                                                <ProgressRing IsActive="True" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                Width="48" Height="48" Foreground="White"/>
+                                            </app30:ImageLoader.LoadingContent>
+                                            <app30:ImageLoader.FailedContent>
+                                                <TextBlock Text="Failed" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                            </app30:ImageLoader.FailedContent>
+                                        </app30:ImageLoader>
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding name}"
+                                        Style="{ThemeResource TitleStyle}" />
+                                        <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding first_air_date, Converter={StaticResource ReleaseYearConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </controls:AdaptiveGridView.ItemTemplate>
+                    </controls:AdaptiveGridView>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel x:Name="PopularPeople">
+                <TextBlock
                     x:Uid="PopularPeople"
                     Margin="{StaticResource CategoryMargin}"
                     HorizontalAlignment="Left"
                     Style="{ThemeResource CategoryStyle}" />
-            <Grid x:Name="PopularPeople">
-                <Button
+                <Grid>
+                    <Button
                     Tag="PopularPeople" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
                     Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;"/>
-                </Button>
-                <Button
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;"/>
+                    </Button>
+                    <Button
                     Tag="PopularPeople" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
                     Click = "ScrollForward" Width = "48" Height = "96" HorizontalContentAlignment="Right" VerticalAlignment ="Center" HorizontalAlignment = "Right">
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;"/>
-                </Button>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;"/>
+                    </Button>
 
-                <controls:AdaptiveGridView
+                    <controls:AdaptiveGridView
                     Margin="{StaticResource OneRowGridMargin}"
                     ItemsSource="{x:Bind ViewModel.PopularPeople,Mode=OneWay}"
                     ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
@@ -382,175 +949,44 @@
                     ItemHeight="298"
                     OneRowModeEnabled="True"
                     >
-                    <controls:AdaptiveGridView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Person">
-                            <Grid
+                        <controls:AdaptiveGridView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Person">
+                                <Grid
                                 Margin="4"
                                 MinWidth="160"
                                 MaxWidth="160"
                                 x:Name="itemThumbnail"
                                 Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                                    <app30:ImageLoader
+                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <app30:ImageLoader
                                         Source="{Binding profile_path, Converter={StaticResource ImageUrlConverter}}"
                                         Height="240" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <app30:ImageLoader.LoadingContent>
-                                            <ProgressRing IsActive="True" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                            <app30:ImageLoader.LoadingContent>
+                                                <ProgressRing IsActive="True" VerticalAlignment="Center" HorizontalAlignment="Center"
                                                 Width="48" Height="48" Foreground="White"/>
-                                        </app30:ImageLoader.LoadingContent>
-                                        <app30:ImageLoader.FailedContent>
-                                            <TextBlock Text="Failed" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                        </app30:ImageLoader.FailedContent>
-                                    </app30:ImageLoader>
-                                    <TextBlock
+                                            </app30:ImageLoader.LoadingContent>
+                                            <app30:ImageLoader.FailedContent>
+                                                <TextBlock Text="Failed" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                            </app30:ImageLoader.FailedContent>
+                                        </app30:ImageLoader>
+                                        <TextBlock
                                         Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
                                         HorizontalAlignment="Left"
                                         Text="{Binding name}"
                                         Style="{ThemeResource TitleStyle}" />
-                                    <TextBlock
+                                        <TextBlock
                                         Margin="{StaticResource XXSmallLeftRightBottomMargin}"
                                         HorizontalAlignment="Left"
                                         Text="{Binding known_for, Converter={StaticResource KnownForConverter}}"
                                         Style="{ThemeResource YearStyle}" />
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </controls:AdaptiveGridView.ItemTemplate>
-                </controls:AdaptiveGridView>
-            </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </controls:AdaptiveGridView.ItemTemplate>
+                    </controls:AdaptiveGridView>
+                </Grid>
+            </StackPanel>
 
-            <TextBlock
-                    x:Uid="NowPlayingMovies"
-                    Margin="{StaticResource CategoryMargin}"
-                    HorizontalAlignment="Left"
-                    Style="{ThemeResource CategoryStyle}" />
-            <Grid x:Name="NowPlayingMovies">
-                <Button
-                    Tag="NowPlayingMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
-                    Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;"/>
-                </Button>
-                <Button
-                    Tag="NowPlayingMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
-                    Click = "ScrollForward" Width = "48" Height = "96" HorizontalContentAlignment="Right" VerticalAlignment ="Center" HorizontalAlignment = "Right">
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;"/>
-                </Button>
-
-                <controls:AdaptiveGridView
-                    Margin="{StaticResource OneRowGridMargin}"
-                    ItemsSource="{x:Bind ViewModel.NowPlayingMovies,Mode=OneWay}"
-                    ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
-                    StretchContentForSingleRow="True"
-                    SelectionMode="None"
-                    IsItemClickEnabled="True"
-                    animations:Connected.ListItemElementName="itemThumbnail"
-                    animations:Connected.ListItemKey="animationKeyContentGrid"
-                    ItemHeight="298"
-                    OneRowModeEnabled="True"
-                    >
-                    <controls:AdaptiveGridView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Movie">
-                            <Grid
-                                Margin="4"
-                                MinWidth="160"
-                                MaxWidth="160"
-                                x:Name="itemThumbnail"
-                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                                    <app30:ImageLoader
-                                        Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
-                                        Height="240" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <app30:ImageLoader.LoadingContent>
-                                            <ProgressRing IsActive="True" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                                Width="48" Height="48" Foreground="White"/>
-                                        </app30:ImageLoader.LoadingContent>
-                                        <app30:ImageLoader.FailedContent>
-                                            <TextBlock Text="Failed" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                        </app30:ImageLoader.FailedContent>
-                                    </app30:ImageLoader>
-                                    <TextBlock
-                                        Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
-                                        HorizontalAlignment="Left"
-                                        Text="{Binding title}"
-                                        Style="{ThemeResource TitleStyle}" />
-                                    <TextBlock
-                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
-                                        HorizontalAlignment="Left"
-                                        Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}"
-                                        Style="{ThemeResource YearStyle}" />
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </controls:AdaptiveGridView.ItemTemplate>
-                </controls:AdaptiveGridView>
-            </Grid>
-
-            <TextBlock
-                    x:Uid="NowStreamingMovies"
-                    Margin="{StaticResource CategoryMargin}"
-                    HorizontalAlignment="Left"
-                    Style="{ThemeResource CategoryStyle}" />
-            <Grid x:Name="NowStreamingMovies">
-                <Button
-                    Tag="NowStreamingMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
-                    Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;"/>
-                </Button>
-                <Button
-                    Tag="NowStreamingMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
-                    Click = "ScrollForward" Width = "48" Height = "96" HorizontalContentAlignment="Right" VerticalAlignment ="Center" HorizontalAlignment = "Right">
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;"/>
-                </Button>
-
-                <controls:AdaptiveGridView
-                    Margin="{StaticResource OneRowGridMargin}"
-                    ItemsSource="{x:Bind ViewModel.NowStreamingMovies,Mode=OneWay}"
-                    ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
-                    StretchContentForSingleRow="True"
-                    SelectionMode="None"
-                    IsItemClickEnabled="True"
-                    animations:Connected.ListItemElementName="itemThumbnail"
-                    animations:Connected.ListItemKey="animationKeyContentGrid"
-                    ItemHeight="298"
-                    OneRowModeEnabled="True"
-                    >
-                    <controls:AdaptiveGridView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Movie">
-                            <Grid
-                                Margin="4"
-                                MinWidth="160"
-                                MaxWidth="160"
-                                x:Name="itemThumbnail"
-                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                                    <app30:ImageLoader
-                                        Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
-                                        Height="240" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <app30:ImageLoader.LoadingContent>
-                                            <ProgressRing IsActive="True" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                                Width="48" Height="48" Foreground="White"/>
-                                        </app30:ImageLoader.LoadingContent>
-                                        <app30:ImageLoader.FailedContent>
-                                            <TextBlock Text="Failed" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                        </app30:ImageLoader.FailedContent>
-                                    </app30:ImageLoader>
-                                    <TextBlock
-                                        Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
-                                        HorizontalAlignment="Left"
-                                        Text="{Binding title}"
-                                        Style="{ThemeResource TitleStyle}" />
-                                    <TextBlock
-                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
-                                        HorizontalAlignment="Left"
-                                        Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}"
-                                        Style="{ThemeResource YearStyle}" />
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </controls:AdaptiveGridView.ItemTemplate>
-                </controls:AdaptiveGridView>
-            </Grid>
-            
         </StackPanel>
     </ScrollViewer>
 

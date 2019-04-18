@@ -21,7 +21,9 @@ namespace TMDBFlix.Helpers
                 if (v.media_type.Equals("movie")) list += v.title + ", ";
             }
 
-            list = list.Substring(0, list.Length - 2);
+            if (list.Length >= 2) list = list.Substring(0, list.Length - 2);
+            else return "";
+
             return list;
         }
 

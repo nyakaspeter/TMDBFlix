@@ -223,7 +223,7 @@
     <value>Shows</value>
   </data>
   <data name="NowPlayingMovies.Text" xml:space="preserve">
-    <value>Now Playing</value>
+    <value>In Theatres</value>
   </data>
   <data name="NowStreamingMovies.Text" xml:space="preserve">
     <value>Now Streaming</value>
@@ -239,5 +239,20 @@
   </data>
   <data name="ShowResults.Text" xml:space="preserve">
     <value>Show Results</value>
+  </data>
+  <data name="HighRatedMovies.Text" xml:space="preserve">
+    <value>High Rated Movies</value>
+  </data>
+  <data name="UpcomingMovies.Text" xml:space="preserve">
+    <value>Upcoming Movies</value>
+  </data>
+  <data name="AiringTodayShows.Text" xml:space="preserve">
+    <value>Airing Today</value>
+  </data>
+  <data name="HighRatedShows.Text" xml:space="preserve">
+    <value>High Rated Shows</value>
+  </data>
+  <data name="OnTvShows.Text" xml:space="preserve">
+    <value>On The Air</value>
   </data>
 </root>
