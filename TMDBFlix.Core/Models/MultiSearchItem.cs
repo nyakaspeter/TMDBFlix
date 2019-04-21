@@ -25,5 +25,10 @@ namespace TMDBFlix.Core.Models
             public bool video { get; set; }
             public string profile_path { get; set; }
             public List<Performance> known_for { get; set; }
+        public override string ToString()
+        {
+            if (title == null) return name;
+            return title;
+        }
     }
 }

@@ -8,9 +8,9 @@ using TMDBFlix.Core.Models;
 
 namespace TMDBFlix.Core.Services
 {
-    public class TMDBService
+    public static class TMDBService
     {
-        private static string key = "c82568d86ba0dafa5ecef39bee96f011";
+        private static readonly string key = "c82568d86ba0dafa5ecef39bee96f011";
         private static RestClient client = new RestClient("https://api.themoviedb.org/3");
 
         public static List<MultiSearchItem> Search(string Query, int StartPage = 1, int PageCount = 2)
@@ -26,6 +26,7 @@ namespace TMDBFlix.Core.Services
                 request.AddParameter("page", page);
                 var response = client.Execute<MultiSearchResponse>(request).Data;
 
+                if(response.results != null)
                 foreach (var v in response.results)
                 {
                     results.Add(v);
@@ -34,7 +35,7 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
-        public static List<Movie> GetPopularMovies(int StartPage = 1, int PageCount = 1)
+        public static List<Movie> GetPopularMovies(int StartPage = 1, int PageCount = 2)
         {
             var request = new RestRequest("/movie/popular");
             request.AddParameter("api_key", key);
@@ -46,6 +47,7 @@ namespace TMDBFlix.Core.Services
                 request.AddParameter("page", page);
                 var response = client.Execute<MoviesResponse>(request).Data;
 
+                if(response.results != null)
                 foreach (var v in response.results)
                 {
                     results.Add(v);
@@ -56,8 +58,8 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
-        public static List<Movie> GetNowPlayingMovies(int StartPage = 1, int PageCount = 1)
-        {
+        public static List<Movie> GetNowPlayingMovies(int StartPage = 1, int PageCount = 2)
+        { 
             var request = new RestRequest("/movie/now_playing");
             request.AddParameter("api_key", key);
 
@@ -68,6 +70,7 @@ namespace TMDBFlix.Core.Services
                 request.AddParameter("page", page);
                 var response = client.Execute<MoviesResponse>(request).Data;
 
+                if(response.results != null)
                 foreach (var v in response.results)
                 {
                     results.Add(v);
@@ -91,7 +94,7 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
-        public static List<Movie> GetNowStreamingMovies(int MonthsAgo = 12, int StartPage = 1, int PageCount = 1)
+        public static List<Movie> GetNowStreamingMovies(int MonthsAgo = 12, int StartPage = 1, int PageCount = 2)
         {
             var monthsago = DateTime.Today.AddMonths(MonthsAgo * -1);
 
@@ -107,6 +110,7 @@ namespace TMDBFlix.Core.Services
                 request.AddParameter("page", page);
                 var response = client.Execute<MoviesResponse>(request).Data;
 
+                if(response.results != null)
                 foreach (var v in response.results)
                 {
                     results.Add(v);
@@ -116,7 +120,7 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
-        public static List<Show> GetPopularShows(int StartPage = 1, int PageCount = 1)
+        public static List<Show> GetPopularShows(int StartPage = 1, int PageCount = 2)
         {
             var request = new RestRequest("/tv/popular");
             request.AddParameter("api_key", key);
@@ -128,6 +132,7 @@ namespace TMDBFlix.Core.Services
                 request.AddParameter("page", page);
                 var response = client.Execute<ShowsResponse>(request).Data;
 
+                if(response.results != null)
                 foreach (var v in response.results)
                 {
                     results.Add(v);
@@ -138,7 +143,7 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
-        public static List<Person> GetPopularPeople(int StartPage = 1, int PageCount = 1)
+        public static List<Person> GetPopularPeople(int StartPage = 1, int PageCount = 2)
         {
             var request = new RestRequest("/person/popular");
             request.AddParameter("api_key", key);
@@ -150,6 +155,7 @@ namespace TMDBFlix.Core.Services
                 request.AddParameter("page", page);
                 var response = client.Execute<PeopleResponse>(request).Data;
 
+                if(response.results != null)
                 foreach (var v in response.results)
                 {
                     results.Add(v);
@@ -158,7 +164,7 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
-        public static List<Movie> GetHighRatedMovies(int MonthsAgo = 24, int StartPage = 1, int PageCount = 1)
+        public static List<Movie> GetHighRatedMovies(int MonthsAgo = 24, int StartPage = 1, int PageCount = 2)
         {
             var monthsago = DateTime.Today.AddMonths(MonthsAgo * -1);
 
@@ -175,6 +181,7 @@ namespace TMDBFlix.Core.Services
                 request.AddParameter("page", page);
                 var response = client.Execute<MoviesResponse>(request).Data;
 
+                if(response.results != null)
                 foreach (var v in response.results)
                 {
                     results.Add(v);
@@ -183,7 +190,7 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
-        public static List<Movie> GetUpcomingMovies(int InMonths = 3, int StartPage = 1, int PageCount = 1)
+        public static List<Movie> GetUpcomingMovies(int InMonths = 3, int StartPage = 1, int PageCount = 2)
         {
             var inmonths = DateTime.Today.AddMonths(InMonths);
             var tomorrow = DateTime.Today.AddDays(1);
@@ -201,6 +208,7 @@ namespace TMDBFlix.Core.Services
                 request.AddParameter("page", page);
                 var response = client.Execute<MoviesResponse>(request).Data;
 
+                if(response.results != null)
                 foreach (var v in response.results)
                 {
                     results.Add(v);
@@ -209,7 +217,7 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
-        public static List<Show> GetAiringTodayShows(int StartPage = 1, int PageCount = 1)
+        public static List<Show> GetAiringTodayShows(int StartPage = 1, int PageCount = 2)
         {
             var request = new RestRequest("/tv/airing_today");
             request.AddParameter("api_key", key);
@@ -221,6 +229,7 @@ namespace TMDBFlix.Core.Services
                 request.AddParameter("page", page);
                 var response = client.Execute<ShowsResponse>(request).Data;
 
+                if(response.results != null)
                 foreach (var v in response.results)
                 {
                     results.Add(v);
@@ -229,7 +238,7 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
-        public static List<Show> GetOnTvShows(int StartPage = 1, int PageCount = 1)
+        public static List<Show> GetOnTvShows(int StartPage = 1, int PageCount = 2)
         {
             var request = new RestRequest("/tv/on_the_air");
             request.AddParameter("api_key", key);
@@ -241,6 +250,7 @@ namespace TMDBFlix.Core.Services
                 request.AddParameter("page", page);
                 var response = client.Execute<ShowsResponse>(request).Data;
 
+                if(response.results != null)
                 foreach (var v in response.results)
                 {
                     results.Add(v);
@@ -264,7 +274,7 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
-        public static List<Show> GetHighRatedShows(int MonthsAgo = 24, int StartPage = 1, int PageCount = 1)
+        public static List<Show> GetHighRatedShows(int MonthsAgo = 24, int StartPage = 1, int PageCount = 2)
         {
             var monthsago = DateTime.Today.AddMonths(MonthsAgo * -1);
 
@@ -281,13 +291,70 @@ namespace TMDBFlix.Core.Services
                 request.AddParameter("page", page);
                 var response = client.Execute<ShowsResponse>(request).Data;
 
+                if(response.results != null)
                 foreach (var v in response.results)
                 {
                     results.Add(v);
                 }
             }
+
             return results;
         }
 
+        public static List<Show> ImagesFirst(this List<Show> list)
+        {
+            for(int i=0; i<list.Count; i++)
+            {
+                if (list[i].poster_path == null)
+                {
+                    var v = list[i];
+                    list.RemoveAt(i);
+                    list.Add(v);
+                }
+            }
+            return list;
+        }
+
+        public static List<Movie> ImagesFirst(this List<Movie> list)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].poster_path == null)
+                {
+                    var v = list[i];
+                    list.RemoveAt(i);
+                    list.Add(v);
+                }
+            }
+            return list;
+        }
+
+        public static List<Person> ImagesFirst(this List<Person> list)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].profile_path == null)
+                {
+                    var v = list[i];
+                    list.RemoveAt(i);
+                    list.Add(v);
+                }
+            }
+            return list;
+        }
+
+        public static List<MultiSearchItem> ImagesFirst(this List<MultiSearchItem> list)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].profile_path == null && list[i].poster_path == null)
+                {
+                    var v = list[i];
+                    list.RemoveAt(i);
+                    list.Add(v);
+                }
+            }
+            return list;
+        }
     }
 }

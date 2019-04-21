@@ -1,14 +1,19 @@
 ﻿using System;
-
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using TMDBFlix.Core.Models;
+using TMDBFlix.Core.Services;
 using TMDBFlix.Services;
 
 using Windows.ApplicationModel.Activation;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 
 namespace TMDBFlix
 {
     public sealed partial class App : Application
     {
+
         private Lazy<ActivationService> _activationService;
 
         private ActivationService ActivationService

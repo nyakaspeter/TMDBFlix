@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-
+using TMDBFlix.Core.Models;
+using TMDBFlix.Core.Services;
 using TMDBFlix.Helpers;
 using TMDBFlix.Services;
 using TMDBFlix.Views;
@@ -29,6 +31,20 @@ namespace TMDBFlix.ViewModels
         private ICommand _loadedCommand;
         private ICommand _itemInvokedCommand;
 
+        public ObservableCollection<int> NonStaticSection { get { return Section; } }
+        public static ObservableCollection<int> Section { set; get; }
+        public ObservableCollection<MultiSearchItem> SearchResultNames { get; set; }
+
+        public async Task LoadSearchResultNames(string query)
+        {
+            var searchresultnames = await Task.Run(() => TMDBService.Search(query));
+            SearchResultNames.Clear();
+            foreach (var v in searchresultnames)
+            {
+                SearchResultNames.Add(v);
+            }
+        }
+
         public bool IsBackEnabled
         {
             get { return _isBackEnabled; }
@@ -47,6 +63,8 @@ namespace TMDBFlix.ViewModels
 
         public ShellViewModel()
         {
+            SearchResultNames = new ObservableCollection<MultiSearchItem>();
+            Section = new ObservableCollection<int>();
         }
 
         public void Initialize(Frame frame, WinUI.NavigationView navigationView, IList<KeyboardAccelerator> keyboardAccelerators)
@@ -130,5 +148,7 @@ namespace TMDBFlix.ViewModels
             var result = NavigationService.GoBack();
             args.Handled = result;
         }
+
+
     }
 }

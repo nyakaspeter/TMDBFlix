@@ -20,9 +20,8 @@ namespace TMDBFlix.ViewModels
 
         public ICommand ItemClickCommand => _itemClickCommand ?? (_itemClickCommand = new RelayCommand<SampleOrder>(OnItemClick));
 
-        public ObservableCollection<Person> PeopleResuts { get; set; }
-        public ObservableCollection<Movie> MovieResults { get; set; }
-        public ObservableCollection<Show> ShowResults { get; set; }
+        public ObservableCollection<int> NonStaticSection { get { return Section; } }
+        public static ObservableCollection<int> Section { set; get; }
 
         public ObservableCollection<Movie> PopularMovies { get; set; }
         public ObservableCollection<Show> PopularShows { get; set; }
@@ -34,32 +33,6 @@ namespace TMDBFlix.ViewModels
         public ObservableCollection<Show> OnTvShows { get; set; }
         public ObservableCollection<Show> AiringTodayShows { get; set; }
         public ObservableCollection<Show> HighRatedShows { get; set; }
-
-
-        public async Task LoadSearchResults(string query)
-        {
-            var searchresults = await Task.Run(() => TMDBService.Search(query));
-
-            PeopleResuts.Clear();
-            MovieResults.Clear();
-            ShowResults.Clear();
-
-            foreach (var v in searchresults)
-            {
-                if(v.media_type.Equals("movie"))
-                {
-                    MovieResults.Add(new Movie() { title = v.title, poster_path = v.poster_path, release_date = v.release_date });
-                }
-                if (v.media_type.Equals("tv"))
-                {
-                    ShowResults.Add(new Show() { name = v.name, poster_path = v.poster_path, first_air_date = v.first_air_date });
-                }
-                if (v.media_type.Equals("person"))
-                {
-                    PeopleResuts.Add(new Person() { name = v.name, profile_path = v.profile_path, known_for = v.known_for });
-                }
-            }
-        }
 
         public async Task LoadData()
         {
@@ -122,15 +95,12 @@ namespace TMDBFlix.ViewModels
             {
                 PopularPeople.Add(v);
             }
-
-            
         }
 
         public ContentGridViewModel()
         {
-            PeopleResuts = new ObservableCollection<Person>();
-            MovieResults = new ObservableCollection<Movie>();
-            ShowResults = new ObservableCollection<Show>();
+            Section = new ObservableCollection<int>();
+
             PopularMovies = new ObservableCollection<Movie>();
             PopularShows = new ObservableCollection<Show>();
             PopularPeople = new ObservableCollection<Person>();

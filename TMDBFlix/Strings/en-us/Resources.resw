@@ -255,4 +255,8 @@
   <data name="OnTvShows.Text" xml:space="preserve">
     <value>On The Air</value>
   </data>
+  <data name="Shell_Search.Content" xml:space="preserve">
+    <value>Search</value>
+    <comment>Navigation view item name for Search</comment>
+  </data>
 </root>
