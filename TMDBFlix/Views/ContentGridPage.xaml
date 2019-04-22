@@ -119,6 +119,7 @@
                                 Margin="4"
                                 MinWidth="160"
                                 MaxWidth="160"
+                                MinHeight="298"
                                 x:Name="itemThumbnail"
                                 Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">

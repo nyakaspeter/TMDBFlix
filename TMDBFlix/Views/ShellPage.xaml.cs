@@ -63,7 +63,7 @@ namespace TMDBFlix.Views
             if (!sender.Text.Equals(""))
             {
                 SearchViewModel.SearchString = sender.Text;
-                if(shellFrame.CurrentSourcePageType != typeof(SearchPage))shellFrame.Navigate(typeof(SearchPage));
+                if(shellFrame.CurrentSourcePageType != typeof(SearchPage)) shellFrame.Navigate(typeof(SearchPage));
             }
         }
     }
