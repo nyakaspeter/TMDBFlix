@@ -13,7 +13,7 @@ namespace TMDBFlix.Helpers
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var path = value as string;
-            return "https://image.tmdb.org/t/p/original" + path;
+            return "https://image.tmdb.org/t/p/w500" + path;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

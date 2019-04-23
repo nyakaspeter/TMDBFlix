@@ -84,11 +84,10 @@
         <StackPanel Margin="{StaticResource PageMargin}">
 
             <StackPanel x:Name="NowPlayingMovies">
-                <TextBlock
-                    x:Uid="NowPlayingMovies"
-                    Margin="{StaticResource CategoryMargin}"
-                    HorizontalAlignment="Left"
-                    Style="{ThemeResource CategoryStyle}" />
+                <Button x:Name="NowPlayingMoviesBtn" Tapped="NowPlayingMoviesBtn_Tapped" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                    <TextBlock x:Uid="NowPlayingMovies" Style="{ThemeResource CategoryStyle}"/>
+                </Button>
+                
                 <Grid>
                     <Button
                     Tag="NowPlayingMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
@@ -144,11 +143,9 @@
             </StackPanel>
 
             <StackPanel x:Name="NowStreamingMovies">
-                <TextBlock
-                    x:Uid="NowStreamingMovies"
-                    Margin="{StaticResource CategoryMargin}"
-                    HorizontalAlignment="Left"
-                    Style="{ThemeResource CategoryStyle}" />
+                <Button x:Name="NowStreamingMoviesBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                    <TextBlock x:Uid="NowStreamingMovies" Style="{ThemeResource CategoryStyle}"/>
+                </Button>
                 <Grid>
                     <Button
                     Tag="NowStreamingMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
@@ -203,11 +200,9 @@
             </StackPanel>
 
             <StackPanel x:Name="UpcomingMovies">
-                <TextBlock
-                    x:Uid="UpcomingMovies"
-                    Margin="{StaticResource CategoryMargin}"
-                    HorizontalAlignment="Left"
-                    Style="{ThemeResource CategoryStyle}" />
+                <Button x:Name="UpcomingMoviesBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                    <TextBlock x:Uid="UpcomingMovies" Style="{ThemeResource CategoryStyle}"/>
+                </Button>
                 <Grid>
                     <Button
                     Tag="UpcomingMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
@@ -262,12 +257,10 @@
             </StackPanel>
 
             <StackPanel x:Name="PopularMovies">
-            <TextBlock
-                    x:Uid="PopularMovies"
-                    Margin="{StaticResource CategoryMargin}"
-                    HorizontalAlignment="Left"
-                    Style="{ThemeResource CategoryStyle}" />
-            <Grid>
+                <Button x:Name="PopularMoviesBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                    <TextBlock x:Uid="PopularMovies" Style="{ThemeResource CategoryStyle}"/>
+                </Button>
+                <Grid>
                 <Button
                     Tag="PopularMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
                     Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
@@ -321,11 +314,9 @@
             </StackPanel>
 
             <StackPanel x:Name="HighRatedMovies">
-                <TextBlock
-                    x:Uid="HighRatedMovies"
-                    Margin="{StaticResource CategoryMargin}"
-                    HorizontalAlignment="Left"
-                    Style="{ThemeResource CategoryStyle}" />
+                <Button x:Name="HighRatedMoviesBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                    <TextBlock x:Uid="HighRatedMovies" Style="{ThemeResource CategoryStyle}"/>
+                </Button>
                 <Grid>
                     <Button
                     Tag="HighRatedMovies" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
@@ -380,11 +371,9 @@
             </StackPanel>
 
             <StackPanel x:Name="OnTvShows">
-                <TextBlock
-                    x:Uid="OnTvShows"
-                    Margin="{StaticResource CategoryMargin}"
-                    HorizontalAlignment="Left"
-                    Style="{ThemeResource CategoryStyle}" />
+                <Button x:Name="OnTvShowsBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                    <TextBlock x:Uid="OnTvShows" Style="{ThemeResource CategoryStyle}"/>
+                </Button>
                 <Grid>
                     <Button
                     Tag="OnTvShows" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
@@ -439,11 +428,9 @@
             </StackPanel>
 
             <StackPanel x:Name="AiringTodayShows">
-                <TextBlock
-                    x:Uid="AiringTodayShows"
-                    Margin="{StaticResource CategoryMargin}"
-                    HorizontalAlignment="Left"
-                    Style="{ThemeResource CategoryStyle}" />
+                <Button x:Name="AiringTodayShowsBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                    <TextBlock x:Uid="AiringTodayShows" Style="{ThemeResource CategoryStyle}"/>
+                </Button>
                 <Grid>
                     <Button
                     Tag="AiringTodayShows" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
@@ -498,12 +485,10 @@
             </StackPanel>
 
             <StackPanel x:Name="PopularShows">
-            <TextBlock
-                    x:Uid="PopularShows"
-                    Margin="{StaticResource CategoryMargin}"
-                    HorizontalAlignment="Left"
-                    Style="{ThemeResource CategoryStyle}" />
-            <Grid>
+                <Button x:Name="PopularShowsBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                    <TextBlock x:Uid="PopularShows" Style="{ThemeResource CategoryStyle}"/>
+                </Button>
+                <Grid>
                 <Button
                     Tag="PopularShows" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
                     Click = "ScrollBackward" Width = "48" Height = "96" HorizontalContentAlignment="Left"  VerticalAlignment ="Center" HorizontalAlignment = "Left">
@@ -557,11 +542,9 @@
             </StackPanel>
 
             <StackPanel x:Name="HighRatedShows">
-                <TextBlock
-                    x:Uid="HighRatedShows"
-                    Margin="{StaticResource CategoryMargin}"
-                    HorizontalAlignment="Left"
-                    Style="{ThemeResource CategoryStyle}" />
+                <Button x:Name="HighRatedShowsBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                    <TextBlock x:Uid="HighRatedShows" Style="{ThemeResource CategoryStyle}"/>
+                </Button>
                 <Grid>
                     <Button
                     Tag="HighRatedShows" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"
@@ -616,11 +599,9 @@
             </StackPanel>
 
             <StackPanel x:Name="PopularPeople">
-                <TextBlock
-                    x:Uid="PopularPeople"
-                    Margin="{StaticResource CategoryMargin}"
-                    HorizontalAlignment="Left"
-                    Style="{ThemeResource CategoryStyle}" />
+                <Button x:Name="PopularPeopleBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                    <TextBlock x:Uid="PopularPeople" Style="{ThemeResource CategoryStyle}"/>
+                </Button>
                 <Grid>
                     <Button
                     Tag="PopularPeople" Padding ="0" Margin ="0,0,0,14" Canvas.ZIndex="1" Background="{StaticResource SystemControlTransparentBrush}"

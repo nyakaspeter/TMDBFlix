@@ -10,7 +10,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using TMDBFlix.Helpers;
 using TMDBFlix.Controls;
-using Windows.Foundation;
+using Windows.UI;
+using Point = Windows.Foundation.Point;
 
 namespace TMDBFlix.Views
 {
@@ -158,5 +159,9 @@ namespace TMDBFlix.Views
             FadeOutHighRatedShows.Begin();
         }
 
+        private void NowPlayingMoviesBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(NowPlayingMoviesGridPage));
+        }
     }
 }

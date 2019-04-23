@@ -131,6 +131,7 @@
     <Compile Include="Services\ThemeSelectorService.cs" />
     <Compile Include="ViewModels\ContentGridDetailViewModel.cs" />
     <Compile Include="ViewModels\ContentGridViewModel.cs" />
+    <Compile Include="ViewModels\NowPlayingMoviesGridViewModel.cs" />
     <Compile Include="ViewModels\SearchDetailViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
@@ -140,6 +141,9 @@
     </Compile>
     <Compile Include="Views\ContentGridPage.xaml.cs">
       <DependentUpon>ContentGridPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NowPlayingMoviesGridPage.xaml.cs">
+      <DependentUpon>NowPlayingMoviesGridPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchDetailPage.xaml.cs">
       <DependentUpon>SearchDetailPage.xaml</DependentUpon>
@@ -190,6 +194,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ContentGridPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NowPlayingMoviesGridPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

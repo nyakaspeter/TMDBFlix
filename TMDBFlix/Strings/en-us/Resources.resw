@@ -223,7 +223,7 @@
     <value>Shows</value>
   </data>
   <data name="NowPlayingMovies.Text" xml:space="preserve">
-    <value>In Theatres</value>
+    <value>In Theaters</value>
   </data>
   <data name="NowStreamingMovies.Text" xml:space="preserve">
     <value>Now Streaming</value>
@@ -258,5 +258,9 @@
   <data name="Shell_Search.Content" xml:space="preserve">
     <value>Search</value>
     <comment>Navigation view item name for Search</comment>
+  </data>
+  <data name="Shell_NowPlayingMoviesGrid.Content" xml:space="preserve">
+    <value>NowPlayingMoviesGrid</value>
+    <comment>Navigation view item name for NowPlayingMoviesGrid</comment>
   </data>
 </root>
