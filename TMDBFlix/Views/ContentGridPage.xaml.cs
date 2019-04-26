@@ -163,5 +163,50 @@ namespace TMDBFlix.Views
         {
             Frame.Navigate(typeof(NowPlayingMoviesGridPage));
         }
+
+        private void NowStreamingMoviesBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(NowStreamingMoviesGridPage));
+        }
+
+        private void UpcomingMoviesBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(UpcomingMoviesGridPage));
+        }
+
+        private void PopularMoviesBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(PopularMoviesGridPage));
+        }
+
+        private void HighRatedMoviesBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(HighRatedMoviesGridPage));
+        }
+
+        private void OnTvShowsBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(OnTvShowsGridPage));
+        }
+
+        private void AiringTodayShowsBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AiringTodayShowsGridPage));
+        }
+
+        private void PopularShowsBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(PopularShowsGridPage));
+        }
+
+        private void HighRatedShowsBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(HighRatedShowsGridPage));
+        }
+
+        private void PopularPeopleBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(PopularPeopleGridPage));
+        }
     }
 }

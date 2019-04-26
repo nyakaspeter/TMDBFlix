@@ -1,0 +1,62 @@
+﻿<custom:CustomPage
+    x:Class="TMDBFlix.Views.HighRatedMoviesGridPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:models="using:TMDBFlix.Core.Models"
+    xmlns:custom="using:TMDBFlix.Controls"
+    xmlns:helpers="using:TMDBFlix.Helpers"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+
+    <custom:CustomPage.Resources>
+        <helpers:ImagePathToUrlConverter x:Key="ImageUrlConverter" />
+        <helpers:ReleaseDateToYearConverter x:Key="ReleaseYearConverter" />
+        <helpers:KnownForConverter x:Key="KnownForConverter" />
+    </custom:CustomPage.Resources>
+
+    <ScrollViewer x:Name="Scroller">
+        <StackPanel Margin="{StaticResource PageMargin}">
+            <TextBlock x:Uid="HighRatedMovies" Margin="{StaticResource CategoryMargin}" Style="{ThemeResource CategoryStyle}"/>
+            <controls:AdaptiveGridView
+                    Margin="24,0,16,0"
+                    ItemsSource="{x:Bind ViewModel.HighRatedMovies,Mode=OneWay}"
+                    ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
+                    StretchContentForSingleRow="True"
+                    SelectionMode="None"
+                    IsItemClickEnabled="True"
+                    animations:Connected.ListItemElementName="itemThumbnail"
+                    animations:Connected.ListItemKey="animationKeyContentGrid"
+                    DesiredWidth="160"
+                    >
+                <controls:AdaptiveGridView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Movie">
+                        <Grid
+                                Margin="4"
+                                x:Name="itemThumbnail"
+                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                <Image Height="240" Stretch="UniformToFill" HorizontalAlignment="Center" Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"/>
+                                <TextBlock
+                                        Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding title}"
+                                        ToolTipService.ToolTip="{Binding title}"
+                                        Style="{ThemeResource TitleStyle}" />
+                                <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </controls:AdaptiveGridView.ItemTemplate>
+            </controls:AdaptiveGridView>
+        </StackPanel>
+    </ScrollViewer>
+
+</custom:CustomPage>

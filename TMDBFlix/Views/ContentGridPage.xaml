@@ -143,7 +143,7 @@
             </StackPanel>
 
             <StackPanel x:Name="NowStreamingMovies">
-                <Button x:Name="NowStreamingMoviesBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                <Button x:Name="NowStreamingMoviesBtn" Tapped="NowStreamingMoviesBtn_Tapped" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
                     <TextBlock x:Uid="NowStreamingMovies" Style="{ThemeResource CategoryStyle}"/>
                 </Button>
                 <Grid>
@@ -200,7 +200,7 @@
             </StackPanel>
 
             <StackPanel x:Name="UpcomingMovies">
-                <Button x:Name="UpcomingMoviesBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                <Button x:Name="UpcomingMoviesBtn" Tapped="UpcomingMoviesBtn_Tapped" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
                     <TextBlock x:Uid="UpcomingMovies" Style="{ThemeResource CategoryStyle}"/>
                 </Button>
                 <Grid>
@@ -257,7 +257,7 @@
             </StackPanel>
 
             <StackPanel x:Name="PopularMovies">
-                <Button x:Name="PopularMoviesBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                <Button x:Name="PopularMoviesBtn" Tapped="PopularMoviesBtn_Tapped" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
                     <TextBlock x:Uid="PopularMovies" Style="{ThemeResource CategoryStyle}"/>
                 </Button>
                 <Grid>
@@ -314,7 +314,7 @@
             </StackPanel>
 
             <StackPanel x:Name="HighRatedMovies">
-                <Button x:Name="HighRatedMoviesBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                <Button x:Name="HighRatedMoviesBtn" Tapped="HighRatedMoviesBtn_Tapped" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
                     <TextBlock x:Uid="HighRatedMovies" Style="{ThemeResource CategoryStyle}"/>
                 </Button>
                 <Grid>
@@ -371,7 +371,7 @@
             </StackPanel>
 
             <StackPanel x:Name="OnTvShows">
-                <Button x:Name="OnTvShowsBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                <Button x:Name="OnTvShowsBtn" Tapped="OnTvShowsBtn_Tapped" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
                     <TextBlock x:Uid="OnTvShows" Style="{ThemeResource CategoryStyle}"/>
                 </Button>
                 <Grid>
@@ -428,7 +428,7 @@
             </StackPanel>
 
             <StackPanel x:Name="AiringTodayShows">
-                <Button x:Name="AiringTodayShowsBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                <Button x:Name="AiringTodayShowsBtn" Tapped="AiringTodayShowsBtn_Tapped" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
                     <TextBlock x:Uid="AiringTodayShows" Style="{ThemeResource CategoryStyle}"/>
                 </Button>
                 <Grid>
@@ -485,7 +485,7 @@
             </StackPanel>
 
             <StackPanel x:Name="PopularShows">
-                <Button x:Name="PopularShowsBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                <Button x:Name="PopularShowsBtn" Tapped="PopularShowsBtn_Tapped" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
                     <TextBlock x:Uid="PopularShows" Style="{ThemeResource CategoryStyle}"/>
                 </Button>
                 <Grid>
@@ -542,7 +542,7 @@
             </StackPanel>
 
             <StackPanel x:Name="HighRatedShows">
-                <Button x:Name="HighRatedShowsBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                <Button x:Name="HighRatedShowsBtn" Tapped="HighRatedShowsBtn_Tapped"  Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
                     <TextBlock x:Uid="HighRatedShows" Style="{ThemeResource CategoryStyle}"/>
                 </Button>
                 <Grid>
@@ -599,7 +599,7 @@
             </StackPanel>
 
             <StackPanel x:Name="PopularPeople">
-                <Button x:Name="PopularPeopleBtn" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
+                <Button x:Name="PopularPeopleBtn" Tapped="PopularPeopleBtn_Tapped" Margin="22,-4,0,12" Padding="4" Background="{StaticResource SystemControlTransparentBrush}">
                     <TextBlock x:Uid="PopularPeople" Style="{ThemeResource CategoryStyle}"/>
                 </Button>
                 <Grid>

@@ -11,13 +11,13 @@ using TMDBFlix.Views;
 
 namespace TMDBFlix.ViewModels
 {
-    public class NowPlayingMoviesGridViewModel : Observable
+    public class PopularShowsGridViewModel : Observable
     {
         private ICommand _itemClickCommand;
 
         public ICommand ItemClickCommand => _itemClickCommand ?? (_itemClickCommand = new RelayCommand<SampleOrder>(OnItemClick));
 
-        public ObservableCollection<Movie> NowPlayingMovies { get; set; }
+        public ObservableCollection<Show> PopularShows { get; set; }
 
         private int loadedPages = 0;
 
@@ -28,19 +28,19 @@ namespace TMDBFlix.ViewModels
             if (!loading)
             {
                 loading = true;
-                var nowplayingmovies = await Task.Run(() => TMDBService.GetNowPlayingMovies(loadedPages + 1));
-                foreach (var v in nowplayingmovies)
+                var Popularshows = await Task.Run(() => TMDBService.GetPopularShows(loadedPages + 1));
+                foreach (var v in Popularshows)
                 {
-                    NowPlayingMovies.Add(v);
+                    PopularShows.Add(v);
                 }
                 loadedPages += 2;
                 loading = false;
             }
         }
 
-        public NowPlayingMoviesGridViewModel()
+        public PopularShowsGridViewModel()
         {
-            NowPlayingMovies = new ObservableCollection<Movie>();
+            PopularShows = new ObservableCollection<Show>();
             LoadData();
         }
 

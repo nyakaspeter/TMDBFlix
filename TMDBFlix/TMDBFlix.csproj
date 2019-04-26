@@ -131,6 +131,15 @@
     <Compile Include="Services\ThemeSelectorService.cs" />
     <Compile Include="ViewModels\ContentGridDetailViewModel.cs" />
     <Compile Include="ViewModels\ContentGridViewModel.cs" />
+    <Compile Include="ViewModels\HighRatedMoviesGridViewModel.cs" />
+    <Compile Include="ViewModels\AiringTodayShowsGridViewModel.cs" />
+    <Compile Include="ViewModels\HighRatedShowsGridViewModel.cs" />
+    <Compile Include="ViewModels\PopularPeopleGridViewModel.cs" />
+    <Compile Include="ViewModels\PopularShowsGridViewModel.cs" />
+    <Compile Include="ViewModels\OnTvShowsGridViewModel.cs" />
+    <Compile Include="ViewModels\PopularMoviesGridViewModel.cs" />
+    <Compile Include="ViewModels\UpcomingMoviesGridViewModel.cs" />
+    <Compile Include="ViewModels\NowStreamingMoviesGridViewModel.cs" />
     <Compile Include="ViewModels\NowPlayingMoviesGridViewModel.cs" />
     <Compile Include="ViewModels\SearchDetailViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
@@ -141,6 +150,33 @@
     </Compile>
     <Compile Include="Views\ContentGridPage.xaml.cs">
       <DependentUpon>ContentGridPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HighRatedMoviesGridPage.xaml.cs">
+      <DependentUpon>HighRatedMoviesGridPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AiringTodayShowsGridPage.xaml.cs">
+      <DependentUpon>AiringTodayShowsGridPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HighRatedShowsGridPage.xaml.cs">
+      <DependentUpon>HighRatedShowsGridPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopularPeopleGridPage.xaml.cs">
+      <DependentUpon>PopularPeopleGridPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopularShowsGridPage.xaml.cs">
+      <DependentUpon>PopularShowsGridPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OnTvShowsGridPage.xaml.cs">
+      <DependentUpon>OnTvShowsGridPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopularMoviesGridPage.xaml.cs">
+      <DependentUpon>PopularMoviesGridPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UpcomingMoviesGridPage.xaml.cs">
+      <DependentUpon>UpcomingMoviesGridPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NowStreamingMoviesGridPage.xaml.cs">
+      <DependentUpon>NowStreamingMoviesGridPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NowPlayingMoviesGridPage.xaml.cs">
       <DependentUpon>NowPlayingMoviesGridPage.xaml</DependentUpon>
@@ -194,6 +230,42 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ContentGridPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\HighRatedMoviesGridPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AiringTodayShowsGridPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\HighRatedShowsGridPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PopularPeopleGridPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PopularShowsGridPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OnTvShowsGridPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PopularMoviesGridPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UpcomingMoviesGridPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NowStreamingMoviesGridPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

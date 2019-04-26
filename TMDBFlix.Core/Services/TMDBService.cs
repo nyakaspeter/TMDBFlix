@@ -94,7 +94,7 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
-        public static List<Movie> GetNowStreamingMovies(int MonthsAgo = 12, int StartPage = 1, int PageCount = 2)
+        public static List<Movie> GetNowStreamingMovies(int StartPage = 1, int PageCount = 2, int MonthsAgo = 12)
         {
             var monthsago = DateTime.Today.AddMonths(MonthsAgo * -1);
 
@@ -164,7 +164,7 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
-        public static List<Movie> GetHighRatedMovies(int MonthsAgo = 24, int StartPage = 1, int PageCount = 2)
+        public static List<Movie> GetHighRatedMovies(int StartPage = 1, int PageCount = 2, int MonthsAgo = 24)
         {
             var monthsago = DateTime.Today.AddMonths(MonthsAgo * -1);
 
@@ -190,7 +190,7 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
-        public static List<Movie> GetUpcomingMovies(int InMonths = 3, int StartPage = 1, int PageCount = 2)
+        public static List<Movie> GetUpcomingMovies(int StartPage = 1, int PageCount = 2, int InMonths = 3)
         {
             var inmonths = DateTime.Today.AddMonths(InMonths);
             var tomorrow = DateTime.Today.AddDays(1);
@@ -274,7 +274,7 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
-        public static List<Show> GetHighRatedShows(int MonthsAgo = 24, int StartPage = 1, int PageCount = 2)
+        public static List<Show> GetHighRatedShows(int StartPage = 1, int PageCount = 2, int MonthsAgo = 24)
         {
             var monthsago = DateTime.Today.AddMonths(MonthsAgo * -1);
 
