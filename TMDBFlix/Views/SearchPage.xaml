@@ -60,7 +60,7 @@
                     <controls:AdaptiveGridView
                     Margin="{StaticResource OneRowGridMargin}"
                     ItemsSource="{x:Bind ViewModel.NonStaticMovieResults,Mode=OneWay}"
-                    ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
+                    ItemClickCommand="{x:Bind ViewModel.MovieClickCommand}"
                     StretchContentForSingleRow="True"
                     SelectionMode="None"
                     IsItemClickEnabled="True"
@@ -118,7 +118,7 @@
                     <controls:AdaptiveGridView
                     Margin="{StaticResource OneRowGridMargin}"
                     ItemsSource="{x:Bind ViewModel.NonStaticShowResults,Mode=OneWay}"
-                    ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
+                    ItemClickCommand="{x:Bind ViewModel.ShowClickCommand}"
                     StretchContentForSingleRow="True"
                     SelectionMode="None"
                     IsItemClickEnabled="True"
@@ -176,7 +176,7 @@
                     <controls:AdaptiveGridView
                     Margin="{StaticResource OneRowGridMargin}"
                     ItemsSource="{x:Bind ViewModel.NonStaticPeopleResults,Mode=OneWay}"
-                    ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
+                    ItemClickCommand="{x:Bind ViewModel.PersonClickCommand}"
                     StretchContentForSingleRow="True"
                     SelectionMode="None"
                     IsItemClickEnabled="True"

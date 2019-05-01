@@ -1,17 +1,14 @@
 ﻿Fontos:
--Kategória oldalak
--Film részletek nézet
+
 -Sorozat részletek nézet
 -Személy részletek nézet
+-Kollekció nézet
 -Ikon, logó
 
 Kevésbé fontos:
--Navigációs menü működjön másik nézetről is
--Navigációs menü villogás fix
--Kategóriák párhuzamos betöltése
+-Pivot header maradjon fent görgetéskor
 -Keresés után javaslatok ne töltődjenek be
 -Keresőmező alapból ne mutasson TextBoxot
--Képeknek placeholderek
 -Akrill felső sáv
 -Beállítások menü bővítés
 -Magyar nyelv

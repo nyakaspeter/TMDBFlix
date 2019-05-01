@@ -13,6 +13,7 @@ using TMDBFlix.Views;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 using WinUI = Microsoft.UI.Xaml.Controls;
@@ -26,13 +27,11 @@ namespace TMDBFlix.ViewModels
 
         private bool _isBackEnabled;
         private IList<KeyboardAccelerator> _keyboardAccelerators;
-        private WinUI.NavigationView _navigationView;
+        public static WinUI.NavigationView _navigationView;
         private WinUI.NavigationViewItem _selected;
         private ICommand _loadedCommand;
         private ICommand _itemInvokedCommand;
 
-        public ObservableCollection<int> NonStaticSection { get { return Section; } }
-        public static ObservableCollection<int> Section { set; get; }
         public ObservableCollection<MultiSearchItem> SearchResultNames { get; set; }
 
         public async Task LoadSearchResultNames(string query)
@@ -64,7 +63,6 @@ namespace TMDBFlix.ViewModels
         public ShellViewModel()
         {
             SearchResultNames = new ObservableCollection<MultiSearchItem>();
-            Section = new ObservableCollection<int>();
         }
 
         public void Initialize(Frame frame, WinUI.NavigationView navigationView, IList<KeyboardAccelerator> keyboardAccelerators)
@@ -98,7 +96,10 @@ namespace TMDBFlix.ViewModels
                             .OfType<WinUI.NavigationViewItem>()
                             .First(menuItem => (string)menuItem.Content == (string)args.InvokedItem);
             var pageType = item.GetValue(NavHelper.NavigateToProperty) as Type;
-            NavigationService.Navigate(pageType);
+
+            var itemIndex = _navigationView.MenuItems.IndexOf(item);
+
+            NavigationService.Navigate(pageType, null, args.RecommendedNavigationTransitionInfo);
         }
 
         private void OnBackRequested(WinUI.NavigationView sender, WinUI.NavigationViewBackRequestedEventArgs args)

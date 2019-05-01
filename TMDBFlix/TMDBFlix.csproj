@@ -114,6 +114,9 @@
   <ItemGroup>
     <Compile Include="Activation\ActivationHandler.cs" />
     <Compile Include="Controls\CustomPage.cs" />
+    <Compile Include="Helpers\MyTemplateSelector.cs" />
+    <Compile Include="Helpers\ImageToTitleConverter.cs" />
+    <Compile Include="Helpers\VideoThumbnailConverter.cs" />
     <Compile Include="Helpers\UIHelpers.cs" />
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
     <Compile Include="Helpers\GridScrollHelper.cs" />
@@ -129,57 +132,44 @@
     <Compile Include="Activation\DefaultLaunchActivationHandler.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ThemeSelectorService.cs" />
+    <Compile Include="ViewModels\ClickableViewModel.cs" />
+    <Compile Include="ViewModels\PersonDetailViewModel.cs" />
+    <Compile Include="ViewModels\MovieDetailViewModel.cs" />
     <Compile Include="ViewModels\ContentGridDetailViewModel.cs" />
     <Compile Include="ViewModels\ContentGridViewModel.cs" />
-    <Compile Include="ViewModels\HighRatedMoviesGridViewModel.cs" />
-    <Compile Include="ViewModels\AiringTodayShowsGridViewModel.cs" />
-    <Compile Include="ViewModels\HighRatedShowsGridViewModel.cs" />
-    <Compile Include="ViewModels\PopularPeopleGridViewModel.cs" />
-    <Compile Include="ViewModels\PopularShowsGridViewModel.cs" />
-    <Compile Include="ViewModels\OnTvShowsGridViewModel.cs" />
-    <Compile Include="ViewModels\PopularMoviesGridViewModel.cs" />
-    <Compile Include="ViewModels\UpcomingMoviesGridViewModel.cs" />
-    <Compile Include="ViewModels\NowStreamingMoviesGridViewModel.cs" />
-    <Compile Include="ViewModels\NowPlayingMoviesGridViewModel.cs" />
+    <Compile Include="ViewModels\PeopleGridViewModel.cs" />
+    <Compile Include="ViewModels\ShowsGridViewModel.cs" />
+    <Compile Include="ViewModels\MoviesGridViewModel.cs" />
     <Compile Include="ViewModels\SearchDetailViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="Views\ImagePage.xaml.cs">
+      <DependentUpon>ImagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PersonDetailPage.xaml.cs">
+      <DependentUpon>PersonDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WebPage.xaml.cs">
+      <DependentUpon>WebPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MovieDetailPage.xaml.cs">
+      <DependentUpon>MovieDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ContentGridDetailPage.xaml.cs">
       <DependentUpon>ContentGridDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ContentGridPage.xaml.cs">
       <DependentUpon>ContentGridPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\HighRatedMoviesGridPage.xaml.cs">
-      <DependentUpon>HighRatedMoviesGridPage.xaml</DependentUpon>
+    <Compile Include="Views\PeopleGridPage.xaml.cs">
+      <DependentUpon>PeopleGridPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AiringTodayShowsGridPage.xaml.cs">
-      <DependentUpon>AiringTodayShowsGridPage.xaml</DependentUpon>
+    <Compile Include="Views\ShowsGridPage.xaml.cs">
+      <DependentUpon>ShowsGridPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\HighRatedShowsGridPage.xaml.cs">
-      <DependentUpon>HighRatedShowsGridPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PopularPeopleGridPage.xaml.cs">
-      <DependentUpon>PopularPeopleGridPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PopularShowsGridPage.xaml.cs">
-      <DependentUpon>PopularShowsGridPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\OnTvShowsGridPage.xaml.cs">
-      <DependentUpon>OnTvShowsGridPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PopularMoviesGridPage.xaml.cs">
-      <DependentUpon>PopularMoviesGridPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UpcomingMoviesGridPage.xaml.cs">
-      <DependentUpon>UpcomingMoviesGridPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\NowStreamingMoviesGridPage.xaml.cs">
-      <DependentUpon>NowStreamingMoviesGridPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\NowPlayingMoviesGridPage.xaml.cs">
-      <DependentUpon>NowPlayingMoviesGridPage.xaml</DependentUpon>
+    <Compile Include="Views\MoviesGridPage.xaml.cs">
+      <DependentUpon>MoviesGridPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchDetailPage.xaml.cs">
       <DependentUpon>SearchDetailPage.xaml</DependentUpon>
@@ -201,6 +191,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Styles\Template.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Image.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -225,6 +219,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ImagePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PersonDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WebPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MovieDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\ContentGridDetailPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -233,43 +243,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\HighRatedMoviesGridPage.xaml">
+    <Page Include="Views\PeopleGridPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\AiringTodayShowsGridPage.xaml">
+    <Page Include="Views\ShowsGridPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\HighRatedShowsGridPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\PopularPeopleGridPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\PopularShowsGridPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\OnTvShowsGridPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\PopularMoviesGridPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\UpcomingMoviesGridPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\NowStreamingMoviesGridPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\NowPlayingMoviesGridPage.xaml">
+    <Page Include="Views\MoviesGridPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -299,6 +281,12 @@
     <Compile Include="Helpers\ResourceExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\icons8-facebook-48.png" />
+    <Content Include="Assets\icons8-imdb-64.png" />
+    <Content Include="Assets\icons8-instagram-48.png" />
+    <Content Include="Assets\icons8-internet-filled-48.png" />
+    <Content Include="Assets\icons8-twitter-48.png" />
+    <Content Include="Assets\Placeholder.jpg" />
     <Content Include="Assets\PlaceholderImage.png" />
     <Content Include="Assets\SampleData\SamplePhoto1.png" />
     <Content Include="Assets\SampleData\SamplePhoto10.png" />
@@ -336,7 +324,9 @@
       <Name>TMDBFlix.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Strings\hu\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

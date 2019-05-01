@@ -12,6 +12,8 @@ using TMDBFlix.Helpers;
 using TMDBFlix.Controls;
 using Windows.UI;
 using Point = Windows.Foundation.Point;
+using Windows.ApplicationModel.Resources;
+using Microsoft.Toolkit.Uwp.UI.Controls;
 
 namespace TMDBFlix.Views
 {
@@ -22,191 +24,139 @@ namespace TMDBFlix.Views
         public ContentGridPage()
         {
             InitializeComponent();
-
+            
             Loaded += ContentGridPage_Loaded;
-            Scroller.ViewChanged += Scroller_ViewChanged;
+            ViewModel.LoadCompleted += ViewModel_LoadCompleted;
 
-            ViewModel.PopularMovies.CollectionChanged += PopularMovies_CollectionChanged;
-            ViewModel.PopularShows.CollectionChanged += PopularShows_CollectionChanged;
-            ViewModel.NowPlayingMovies.CollectionChanged += NowPlayingMovies_CollectionChanged;
-            ViewModel.NowStreamingMovies.CollectionChanged += NowStreamingMovies_CollectionChanged;
-            ViewModel.PopularPeople.CollectionChanged += PopularPeople_CollectionChanged;
-            ViewModel.UpcomingMovies.CollectionChanged += UpcomingMovies_CollectionChanged;
-            ViewModel.HighRatedMovies.CollectionChanged += HighRatedMovies_CollectionChanged;
-            ViewModel.OnTvShows.CollectionChanged += OnTvShows_CollectionChanged;
-            ViewModel.AiringTodayShows.CollectionChanged += AiringTodayShows_CollectionChanged;
-            ViewModel.HighRatedShows.CollectionChanged += HighRatedShows_CollectionChanged;
-            ViewModel.NonStaticSection.CollectionChanged += NonStaticSection_CollectionChanged;
+            FadeOutContent.Begin();
         }
 
-        private void NonStaticSection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void ViewModel_LoadCompleted()
         {
-            if (ContentGridViewModel.Section.Count != 0) {
-                if ((int)e.NewItems[0] == 0) Scroller.ScrollToElement(NowPlayingMovies);
-                if ((int)e.NewItems[0] == 1) Scroller.ScrollToElement(OnTvShows);
-                if ((int)e.NewItems[0] == 2) Scroller.ScrollToElement(PopularPeople);
-            }
+            LoadRing.IsActive = false;
+
+            FadeInContent.Begin();
+
+            Scroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
         }
 
-        private void Scroller_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        private async void ContentGridPage_Loaded(object sender, RoutedEventArgs e)
         {
-
-            var shows = OnTvShows.TransformToVisual((UIElement)Scroller.Content);
-            var showspos = shows.TransformPoint(new Point(0, 0));
-
-            var people = PopularPeople.TransformToVisual((UIElement)Scroller.Content);
-            var peoplepos = people.TransformPoint(new Point(0, 0));
-
-            if (Scroller.VerticalOffset == Scroller.ScrollableHeight) ShellPage.SetSection(2);
-            else if (Scroller.VerticalOffset >= showspos.Y) ShellPage.SetSection(1);
-            else ShellPage.SetSection(0);
-
-        }
-
-        private void HighRatedShows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (ViewModel.HighRatedShows.Count == 0) { FadeOutHighRatedShows.Begin(); }
-            else { FadeOutHighRatedShows.Stop(); HighRatedShows.Visibility = Visibility.Visible; FadeInHighRatedShows.Begin(); }
-        }
-
-        private void AiringTodayShows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (ViewModel.AiringTodayShows.Count == 0) { FadeOutAiringTodayShows.Begin(); }
-            else { FadeOutAiringTodayShows.Stop(); AiringTodayShows.Visibility = Visibility.Visible; FadeInAiringTodayShows.Begin(); }
-        }
-
-        private void OnTvShows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (ViewModel.OnTvShows.Count == 0) { FadeOutOnTvShows.Begin(); }
-            else { FadeOutOnTvShows.Stop(); OnTvShows.Visibility = Visibility.Visible; FadeInOnTvShows.Begin(); }
-        }
-
-        private void HighRatedMovies_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (ViewModel.HighRatedMovies.Count == 0) { FadeOutHighRatedMovies.Begin(); }
-            else { FadeOutHighRatedMovies.Stop(); HighRatedMovies.Visibility = Visibility.Visible; FadeInHighRatedMovies.Begin(); }
-        }
-
-        private void UpcomingMovies_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (ViewModel.UpcomingMovies.Count == 0) { FadeOutUpcomingMovies.Begin(); }
-            else { FadeOutUpcomingMovies.Stop(); UpcomingMovies.Visibility = Visibility.Visible; FadeInUpcomingMovies.Begin(); }
-        }
-
-        private void PopularPeople_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (ViewModel.PopularPeople.Count == 0) { FadeOutPopularPeople.Begin(); }
-            else { FadeOutPopularPeople.Stop(); PopularPeople.Visibility = Visibility.Visible; FadeInPopularPeople.Begin(); }
-        }
-
-        private void NowStreamingMovies_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (ViewModel.NowStreamingMovies.Count == 0) { FadeOutNowStreamingMovies.Begin(); }
-            else { FadeOutNowStreamingMovies.Stop(); NowStreamingMovies.Visibility = Visibility.Visible; FadeInNowStreamingMovies.Begin(); }
-        }
-
-        private void NowPlayingMovies_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (ViewModel.NowPlayingMovies.Count == 0) { FadeOutNowPlayingMovies.Begin(); }
-            else { FadeOutNowPlayingMovies.Stop(); NowPlayingMovies.Visibility = Visibility.Visible; FadeInNowPlayingMovies.Begin(); }
-        }
-
-        private void PopularShows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (ViewModel.PopularShows.Count == 0) { FadeOutPopularShows.Begin(); }
-            else { FadeOutPopularShows.Stop(); PopularShows.Visibility = Visibility.Visible; FadeInPopularShows.Begin(); }
-        }
-
-        private void PopularMovies_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (ViewModel.PopularMovies.Count == 0) { FadeOutPopularMovies.Begin(); }
-            else { FadeOutPopularMovies.Stop(); PopularMovies.Visibility = Visibility.Visible; FadeInPopularMovies.Begin(); }
-        }
-
-        private void ContentGridPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            GetScrollViewer(PopularMovies).HorizontalScrollMode = ScrollMode.Disabled;
-            GetScrollViewer(PopularShows).HorizontalScrollMode = ScrollMode.Disabled;
-            GetScrollViewer(PopularPeople).HorizontalScrollMode = ScrollMode.Disabled;
-            GetScrollViewer(NowPlayingMovies).HorizontalScrollMode = ScrollMode.Disabled;
-            GetScrollViewer(NowStreamingMovies).HorizontalScrollMode = ScrollMode.Disabled;
-            GetScrollViewer(UpcomingMovies).HorizontalScrollMode = ScrollMode.Disabled;
-            GetScrollViewer(HighRatedMovies).HorizontalScrollMode = ScrollMode.Disabled;
-            GetScrollViewer(OnTvShows).HorizontalScrollMode = ScrollMode.Disabled;
-            GetScrollViewer(AiringTodayShows).HorizontalScrollMode = ScrollMode.Disabled;
-            GetScrollViewer(HighRatedShows).HorizontalScrollMode = ScrollMode.Disabled;
-
-            GetScrollViewer(PopularMovies).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            GetScrollViewer(PopularShows).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            GetScrollViewer(PopularPeople).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            GetScrollViewer(NowPlayingMovies).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            GetScrollViewer(NowStreamingMovies).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            GetScrollViewer(UpcomingMovies).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            GetScrollViewer(HighRatedMovies).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            GetScrollViewer(OnTvShows).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            GetScrollViewer(AiringTodayShows).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-            GetScrollViewer(HighRatedShows).HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
-
-            FadeOutPopularMovies.Begin();
-            FadeOutPopularShows.Begin();
-            FadeOutNowPlayingMovies.Begin();
-            FadeOutNowStreamingMovies.Begin();
-            FadeOutPopularPeople.Begin();
-            FadeOutUpcomingMovies.Begin();
-            FadeOutHighRatedMovies.Begin();
-            FadeOutOnTvShows.Begin();
-            FadeOutAiringTodayShows.Begin();
-            FadeOutHighRatedShows.Begin();
+            FixOneRowGrid(NowPlayingMoviesGrid);
+            FixOneRowGrid(NowStreamingMoviesGrid);
+            FixOneRowGrid(UpcomingMoviesGrid);
+            FixOneRowGrid(PopularMoviesGrid);
+            FixOneRowGrid(HighRatedMoviesGrid);
+            FixOneRowGrid(OnTvShowsGrid);
+            FixOneRowGrid(AiringTodayShowsGrid);
+            FixOneRowGrid(PopularShowsGrid);
+            FixOneRowGrid(HighRatedShowsGrid);
+            FixOneRowGrid(PopularPeopleGrid);
         }
 
         private void NowPlayingMoviesBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Frame.Navigate(typeof(NowPlayingMoviesGridPage));
+            Frame.Navigate(typeof(MoviesGridPage), new Dictionary<string,string>(){
+                {"listname", new ResourceLoader().GetString("NowPlayingMovies/Text") },
+                { "path", "/discover/movie"},
+                {"region","us"},
+                {"with_release_type", "3"},
+                {"primary_release_date.gte", DateTime.Today.AddMonths(-3).ToString("yyyy-MM-dd")},
+                {"primary_release_date.lte", DateTime.Today.ToString("yyyy-MM-dd")}
+            }, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void NowStreamingMoviesBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Frame.Navigate(typeof(NowStreamingMoviesGridPage));
+            Frame.Navigate(typeof(MoviesGridPage), new Dictionary<string, string>(){
+                {"listname", new ResourceLoader().GetString("NowStreamingMovies/Text") },
+                { "path", "/discover/movie"},
+                {"region","us"},
+                {"with_release_type", "4"},
+                {"primary_release_date.gte", DateTime.Today.AddMonths(-8).ToString("yyyy-MM-dd")}
+            }, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void UpcomingMoviesBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Frame.Navigate(typeof(UpcomingMoviesGridPage));
+            Frame.Navigate(typeof(MoviesGridPage), new Dictionary<string, string>(){
+                {"listname", new ResourceLoader().GetString("UpcomingMovies/Text") },
+                { "path", "/discover/movie"},
+                {"region","us" },
+                {"primary_release_date.gte", DateTime.Today.AddDays(7).ToString("yyyy-MM-dd")},
+                {"primary_release_date.lte", DateTime.Today.AddMonths(6).ToString("yyyy-MM-dd")}
+            }, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void PopularMoviesBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Frame.Navigate(typeof(PopularMoviesGridPage));
+            Frame.Navigate(typeof(MoviesGridPage), new Dictionary<string, string>(){
+                {"listname", new ResourceLoader().GetString("PopularMovies/Text") },
+                { "path", "/discover/movie"},
+                {"region","us"}
+            }, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void HighRatedMoviesBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Frame.Navigate(typeof(HighRatedMoviesGridPage));
+            Frame.Navigate(typeof(MoviesGridPage), new Dictionary<string, string>(){
+                {"listname", new ResourceLoader().GetString("HighRatedMovies/Text") },
+                { "path", "/discover/movie"},
+                {"region","us"},
+                {"sort_by","vote_average.desc" },
+                {"primary_release_date.gte", DateTime.Today.AddYears(-20).ToString("yyyy-MM-dd")},
+                {"vote_count.gte", "1000"},
+                {"vote_average.gte", "7"}
+            }, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void OnTvShowsBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Frame.Navigate(typeof(OnTvShowsGridPage));
+            Frame.Navigate(typeof(ShowsGridPage), new Dictionary<string, string>(){
+                {"listname", new ResourceLoader().GetString("OnTvShows/Text") },
+                { "path", "/discover/tv"},
+                {"air_date.gte", DateTime.Today.AddDays(-14).ToString("yyyy-MM-dd") },
+                {"air_date.lte", DateTime.Today.AddDays(7).ToString("yyyy-MM-dd") }
+            }, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void AiringTodayShowsBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Frame.Navigate(typeof(AiringTodayShowsGridPage));
+            Frame.Navigate(typeof(ShowsGridPage), new Dictionary<string, string>(){
+                {"listname", new ResourceLoader().GetString("AiringTodayShows/Text") },
+                { "path", "/discover/tv"},
+                {"air_date.gte", DateTime.Today.ToString("yyyy-MM-dd") },
+                {"air_date.lte", DateTime.Today.ToString("yyyy-MM-dd") }
+            }, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void PopularShowsBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Frame.Navigate(typeof(PopularShowsGridPage));
+            Frame.Navigate(typeof(ShowsGridPage), new Dictionary<string, string>(){
+                {"listname", new ResourceLoader().GetString("PopularShows/Text") },
+                { "path", "/discover/tv"}
+            }, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void HighRatedShowsBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Frame.Navigate(typeof(HighRatedShowsGridPage));
+            Frame.Navigate(typeof(ShowsGridPage), new Dictionary<string, string>(){
+                {"listname", new ResourceLoader().GetString("HighRatedShows/Text") },
+                { "path", "/discover/tv"},
+                {"sort_by", "vote_average.desc" },
+                {"vote_average.gte","7" },
+                {"vote_count.gte","300" }
+            }, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void PopularPeopleBtn_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Frame.Navigate(typeof(PopularPeopleGridPage));
+            Frame.Navigate(typeof(PeopleGridPage), new Dictionary<string, string>(){
+                {"listname", new ResourceLoader().GetString("PopularPeople/Text") },
+                { "path", "person/popular"}
+            }, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
+
+        
     }
 }

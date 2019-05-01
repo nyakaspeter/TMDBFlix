@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace TMDBFlix.Core.Models
 {
@@ -6,8 +8,8 @@ namespace TMDBFlix.Core.Models
     {
         public bool adult { get; set; }
         public string backdrop_path { get; set; }
-        public object belongs_to_collection { get; set; }
-        public int budget { get; set; }
+        public CollectionInfo belongs_to_collection { get; set; }
+        public long budget { get; set; }
         public string homepage { get; set; }
         public int id { get; set; }
         public string imdb_id { get; set; }
@@ -17,7 +19,7 @@ namespace TMDBFlix.Core.Models
         public float popularity { get; set; }
         public string poster_path { get; set; }
         public string release_date { get; set; }
-        public int revenue { get; set; }
+        public long revenue { get; set; }
         public int runtime { get; set; }
         public string status { get; set; }
         public string tagline { get; set; }
@@ -30,6 +32,11 @@ namespace TMDBFlix.Core.Models
         public List<Company> production_companies { get; set; }
         public List<Country> production_countries { get; set; }
         public List<Language> spoken_languages { get; set; }
+        public Credits credits { get; set; }
+        public ExternalIds external_ids { get; set; }
+        public TitlesResponse alternative_titles { get; set; }
+        public KeywordsResponse keywords { get; set; }
+        public ReleaseResponse release_dates { get; set; }
     }
 
 }

@@ -13,12 +13,6 @@ namespace TMDBFlix.Views
         
         public ShellViewModel ViewModel { get; } = new ShellViewModel();
 
-        public static void SetSection(int s)
-        {
-            ShellViewModel.Section.Clear();
-            ShellViewModel.Section.Add(s);
-        }
-
         public ShellPage()
         {
             InitializeComponent();
@@ -26,19 +20,6 @@ namespace TMDBFlix.Views
             ViewModel.Initialize(shellFrame, navigationView, KeyboardAccelerators);
 
             ViewModel.SearchResultNames.CollectionChanged += SearchResultNames_CollectionChanged;
-            ViewModel.NonStaticSection.CollectionChanged += Section_CollectionChanged;
-            navigationView.ItemInvoked += NavigationView_ItemInvoked;
-        }
-
-        private void NavigationView_ItemInvoked(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
-        {
-            ContentGridViewModel.Section.Clear();
-            ContentGridViewModel.Section.Add(navigationView.MenuItems.IndexOf(navigationView.SelectedItem));
-        }
-
-        private void Section_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if(ViewModel.NonStaticSection.Count != 0) navigationView.SelectedItem = navigationView.MenuItems[(int)e.NewItems[0]];
         }
 
         private void SearchResultNames_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

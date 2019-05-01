@@ -1,5 +1,5 @@
 ﻿<custom:CustomPage
-    x:Class="TMDBFlix.Views.OnTvShowsGridPage"
+    x:Class="TMDBFlix.Views.ShowsGridPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -18,45 +18,55 @@
         <helpers:KnownForConverter x:Key="KnownForConverter" />
     </custom:CustomPage.Resources>
 
+    <Grid>
+    <ProgressRing x:Name="LoadRing" IsActive="True" Width="60" Height="60"/>
     <ScrollViewer x:Name="Scroller">
         <StackPanel Margin="{StaticResource PageMargin}">
-            <TextBlock x:Uid="OnTvShows" Margin="{StaticResource CategoryMargin}" Style="{ThemeResource CategoryStyle}"/>
-            <controls:AdaptiveGridView
-                    Margin="24,0,16,0"
-                    ItemsSource="{x:Bind ViewModel.OnTvShows,Mode=OneWay}"
-                    ItemClickCommand="{x:Bind ViewModel.ItemClickCommand}"
-                    StretchContentForSingleRow="True"
+            <TextBlock x:Name="ListName" Margin="{StaticResource CategoryMargin}" Style="{ThemeResource CategoryStyle}"/>
+                <controls:AdaptiveGridView
+                    Margin="{StaticResource OneRowGridMargin}"
+                    ItemsSource="{x:Bind ViewModel.Shows,Mode=OneWay}"
+                    ItemClickCommand="{x:Bind ViewModel.ShowClickCommand}"
+                    StretchContentForSingleRow="False"
                     SelectionMode="None"
                     IsItemClickEnabled="True"
                     animations:Connected.ListItemElementName="itemThumbnail"
                     animations:Connected.ListItemKey="animationKeyContentGrid"
-                    DesiredWidth="160"
+                    DesiredWidth="178"
+                    ItemHeight="316"
                     >
-                <controls:AdaptiveGridView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Show">
-                        <Grid
-                                Margin="4"
+                    <controls:AdaptiveGridView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Show">
+
+                            <Grid
+                                Margin="8"
                                 x:Name="itemThumbnail"
                                 Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                                <Image Height="240" Stretch="UniformToFill" HorizontalAlignment="Center" Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"/>
-                                <TextBlock
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                    <Grid Height="250">
+                                        <Image HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}" ImageFailed="Image_ImageFailed"/>
+                                    </Grid>
+                                    <TextBlock
                                         Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
                                         HorizontalAlignment="Left"
+                                        VerticalAlignment="Bottom"
                                         Text="{Binding name}"
                                         ToolTipService.ToolTip="{Binding name}"
                                         Style="{ThemeResource TitleStyle}" />
-                                <TextBlock
+                                    <TextBlock
                                         Margin="{StaticResource XXSmallLeftRightBottomMargin}"
                                         HorizontalAlignment="Left"
+                                        VerticalAlignment="Bottom"
                                         Text="{Binding first_air_date, Converter={StaticResource ReleaseYearConverter}}"
                                         Style="{ThemeResource YearStyle}" />
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </controls:AdaptiveGridView.ItemTemplate>
-            </controls:AdaptiveGridView>
-        </StackPanel>
+                                </StackPanel>
+                            </Grid>
+
+                        </DataTemplate>
+                    </controls:AdaptiveGridView.ItemTemplate>
+                </controls:AdaptiveGridView>
+            </StackPanel>
     </ScrollViewer>
+    </Grid>
 
 </custom:CustomPage>

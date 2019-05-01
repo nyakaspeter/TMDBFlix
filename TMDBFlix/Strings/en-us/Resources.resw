@@ -125,33 +125,73 @@
     <value>TMDBFlix</value>
     <comment>Application description</comment>
   </data>
-  <data name="Shell_Main.Content" xml:space="preserve">
-    <value>Main</value>
-    <comment>Navigation view item name for Main</comment>
-  </data>
-  <data name="Shell_ContentGrid.Content" xml:space="preserve">
-    <value>ContentGrid</value>
-    <comment>Navigation view item name for ContentGrid</comment>
-  </data>
-  <data name="Tabbed_PivotItem1.Header" xml:space="preserve">
-    <value>Item 1</value>
-    <comment>First Pivot item title for Tabbed</comment>
-  </data>
-  <data name="Tabbed_PivotItem2.Header" xml:space="preserve">
-    <value>Item 2</value>
-    <comment>Second Pivot item title for Tabbed</comment>
-  </data>
-  <data name="Shell_Tabbed.Content" xml:space="preserve">
-    <value>Tabbed</value>
-    <comment>Navigation view item name for Tabbed</comment>
-  </data>
-  <data name="Shell_ImageGallery.Content" xml:space="preserve">
-    <value>ImageGallery</value>
-    <comment>Navigation view item name for ImageGallery</comment>
-  </data>
   <data name="ExceptionSettingsStorageExtensionsFileNameIsNullOrEmpty" xml:space="preserve">
     <value>File name is null or empty. Specify a valid file name</value>
     <comment>File name is null or empty to save file in settings storage extensions</comment>
+  </data>
+  <data name="ExceptionEnumToBooleanConverterValueMustBeAnEnum" xml:space="preserve">
+    <value>value must be an Enum!</value>
+    <comment>Value must be an Enum in enum to boolean converter</comment>
+  </data>
+  <data name="ExceptionEnumToBooleanConverterParameterMustBeAnEnumName" xml:space="preserve">
+    <value>parameter must be an Enum name!</value>
+    <comment>Parameter must be an Enum name in enum to boolean converter</comment>
+  </data>
+  <data name="PopularMovies.Text" xml:space="preserve">
+    <value>Popular Movies</value>
+  </data>
+  <data name="PopularPeople.Text" xml:space="preserve">
+    <value>Popular People</value>
+  </data>
+  <data name="NowPlayingMovies.Text" xml:space="preserve">
+    <value>In Theaters</value>
+  </data>
+  <data name="NowStreamingMovies.Text" xml:space="preserve">
+    <value>Now Streaming</value>
+  </data>
+  <data name="MovieResults.Text" xml:space="preserve">
+    <value>Movie Results</value>
+  </data>
+  <data name="PeopleResults.Text" xml:space="preserve">
+    <value>People Results</value>
+  </data>
+  <data name="HighRatedMovies.Text" xml:space="preserve">
+    <value>High Rated Movies</value>
+  </data>
+  <data name="AiringTodayShows.Text" xml:space="preserve">
+    <value>Airing Today</value>
+  </data>
+  <data name="HighRatedShows.Text" xml:space="preserve">
+    <value>High Rated Shows</value>
+  </data>
+  <data name="OnTvShows.Text" xml:space="preserve">
+    <value>On The Air</value>
+  </data>
+  <data name="PopularShows.Text" xml:space="preserve">
+    <value>Popular Shows</value>
+  </data>
+  <data name="Search.PlaceholderText" xml:space="preserve">
+    <value>Search Movies, Shows, People</value>
+  </data>
+  <data name="Settings_About.Text" xml:space="preserve">
+    <value>About this application</value>
+    <comment>About this application title for Settings</comment>
+  </data>
+  <data name="Settings_AboutDescription.Text" xml:space="preserve">
+    <value>Settings page placeholder text.  Your app description goes here.</value>
+    <comment>About this application description for Settings</comment>
+  </data>
+  <data name="Settings_Personalization.Text" xml:space="preserve">
+    <value>Personalization</value>
+    <comment>Personalization text for Settings</comment>
+  </data>
+  <data name="Settings_PrivacyTermsLink.Content" xml:space="preserve">
+    <value>Privacy Statement</value>
+    <comment>Privacy Statement link content for Settings</comment>
+  </data>
+  <data name="Settings_PrivacyTermsLink.NavigateUri" xml:space="preserve">
+    <value>https://YourPrivacyUrlGoesHere/</value>
+    <comment>Here is your Privacy Statement url for Settings</comment>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
     <value>Choose Theme</value>
@@ -169,46 +209,17 @@
     <value>Light</value>
     <comment>Light theme text for Settings</comment>
   </data>
-  <data name="Settings_About.Text" xml:space="preserve">
-    <value>About this application</value>
-    <comment>About this application title for Settings</comment>
-  </data>
-  <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>Settings page placeholder text.  Your app description goes here.</value>
-    <comment>About this application description for Settings</comment>
-  </data>
-  <data name="Settings_PrivacyTermsLink.Content" xml:space="preserve">
-    <value>Privacy Statement</value>
-    <comment>Privacy Statement link content for Settings</comment>
-  </data>
-  <data name="Settings_PrivacyTermsLink.NavigateUri" xml:space="preserve">
-    <value>https://YourPrivacyUrlGoesHere/</value>
-    <comment>Here is your Privacy Statement url for Settings</comment>
-  </data>
-  <data name="Settings_Personalization.Text" xml:space="preserve">
-    <value>Personalization</value>
-    <comment>Personalization text for Settings</comment>
-  </data>
-  <data name="ExceptionEnumToBooleanConverterValueMustBeAnEnum" xml:space="preserve">
-    <value>value must be an Enum!</value>
-    <comment>Value must be an Enum in enum to boolean converter</comment>
-  </data>
-  <data name="ExceptionEnumToBooleanConverterParameterMustBeAnEnumName" xml:space="preserve">
-    <value>parameter must be an Enum name!</value>
-    <comment>Parameter must be an Enum name in enum to boolean converter</comment>
-  </data>
-  <data name="PopularMovies.Text" xml:space="preserve">
-    <value>Popular Movies</value>
-  </data>
-  <data name="PopularPeople.Text" xml:space="preserve">
-    <value>Popular People</value>
-  </data>
-  <data name="PopularShows.Text" xml:space="preserve">
-    <value>Popular Shows</value>
+  <data name="Shell_ContentGrid.Content" xml:space="preserve">
+    <value>ContentGrid</value>
+    <comment>Navigation view item name for ContentGrid</comment>
   </data>
   <data name="Shell_Discover.Content" xml:space="preserve">
     <value>Discover</value>
     <comment>Navigation view item name for Discover</comment>
+  </data>
+  <data name="Shell_ImageGallery.Content" xml:space="preserve">
+    <value>ImageGallery</value>
+    <comment>Navigation view item name for ImageGallery</comment>
   </data>
   <data name="Shell_Movies.Content" xml:space="preserve">
     <value>Movies</value>
@@ -216,51 +227,133 @@
   <data name="Shell_People.Content" xml:space="preserve">
     <value>People</value>
   </data>
-  <data name="Shell_Popular.Content" xml:space="preserve">
-    <value>Popular</value>
-  </data>
-  <data name="Shell_Shows.Content" xml:space="preserve">
-    <value>Shows</value>
-  </data>
-  <data name="NowPlayingMovies.Text" xml:space="preserve">
-    <value>In Theaters</value>
-  </data>
-  <data name="NowStreamingMovies.Text" xml:space="preserve">
-    <value>Now Streaming</value>
-  </data>
-  <data name="MovieResults.Text" xml:space="preserve">
-    <value>Movie Results</value>
-  </data>
-  <data name="PeopleResults.Text" xml:space="preserve">
-    <value>People Results</value>
-  </data>
-  <data name="Search.PlaceholderText" xml:space="preserve">
-    <value>Search Movies, Shows, People</value>
-  </data>
-  <data name="ShowResults.Text" xml:space="preserve">
-    <value>Show Results</value>
-  </data>
-  <data name="HighRatedMovies.Text" xml:space="preserve">
-    <value>High Rated Movies</value>
-  </data>
-  <data name="UpcomingMovies.Text" xml:space="preserve">
-    <value>Upcoming Movies</value>
-  </data>
-  <data name="AiringTodayShows.Text" xml:space="preserve">
-    <value>Airing Today</value>
-  </data>
-  <data name="HighRatedShows.Text" xml:space="preserve">
-    <value>High Rated Shows</value>
-  </data>
-  <data name="OnTvShows.Text" xml:space="preserve">
-    <value>On The Air</value>
-  </data>
   <data name="Shell_Search.Content" xml:space="preserve">
     <value>Search</value>
     <comment>Navigation view item name for Search</comment>
   </data>
-  <data name="Shell_NowPlayingMoviesGrid.Content" xml:space="preserve">
-    <value>NowPlayingMoviesGrid</value>
-    <comment>Navigation view item name for NowPlayingMoviesGrid</comment>
+  <data name="Shell_Shows.Content" xml:space="preserve">
+    <value>Shows</value>
+  </data>
+  <data name="ShowResults.Text" xml:space="preserve">
+    <value>Show Results</value>
+  </data>
+  <data name="Tabbed_PivotItem1.Header" xml:space="preserve">
+    <value>Item 1</value>
+    <comment>First Pivot item title for Tabbed</comment>
+  </data>
+  <data name="Tabbed_PivotItem2.Header" xml:space="preserve">
+    <value>Item 2</value>
+    <comment>Second Pivot item title for Tabbed</comment>
+  </data>
+  <data name="UpcomingMovies.Text" xml:space="preserve">
+    <value>Upcoming Movies</value>
+  </data>
+  <data name="ContentDialog.CloseButtonText" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="AlternativeTitles.Text" xml:space="preserve">
+    <value>Alternative Titles</value>
+  </data>
+  <data name="Budget.Text" xml:space="preserve">
+    <value>Budget</value>
+  </data>
+  <data name="Collection.Text" xml:space="preserve">
+    <value>Collection</value>
+  </data>
+  <data name="Companies.Text" xml:space="preserve">
+    <value>Production Companies</value>
+  </data>
+  <data name="Countries.Text" xml:space="preserve">
+    <value>Production Countries</value>
+  </data>
+  <data name="Director.Text" xml:space="preserve">
+    <value>Director</value>
+  </data>
+  <data name="Genres.Text" xml:space="preserve">
+    <value>Genres</value>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>hr</value>
+  </data>
+  <data name="Keywords.Text" xml:space="preserve">
+    <value>Keywords</value>
+  </data>
+  <data name="Languages.Text" xml:space="preserve">
+    <value>Spoken Languages</value>
+  </data>
+  <data name="Minute" xml:space="preserve">
+    <value>min</value>
+  </data>
+  <data name="OriginalLanguage.Text" xml:space="preserve">
+    <value>Original Language</value>
+  </data>
+  <data name="ReleaseDate.Text" xml:space="preserve">
+    <value>Release Date</value>
+  </data>
+  <data name="Revenue.Text" xml:space="preserve">
+    <value>Revenue</value>
+  </data>
+  <data name="Status.Text" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Backdrops.Header" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="Cast.Header" xml:space="preserve">
+    <value>Cast</value>
+  </data>
+  <data name="Crew.Header" xml:space="preserve">
+    <value>Crew</value>
+  </data>
+  <data name="Overview.Text" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="Recommendations.Header" xml:space="preserve">
+    <value>Recommended</value>
+  </data>
+  <data name="Similar.Header" xml:space="preserve">
+    <value>Similar</value>
+  </data>
+  <data name="Videos.Header" xml:space="preserve">
+    <value>Videos</value>
+  </data>
+  <data name="Age.Text" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="AlsoKnownAs.Text" xml:space="preserve">
+    <value>Also known as</value>
+  </data>
+  <data name="Biography.Text" xml:space="preserve">
+    <value>Biography</value>
+  </data>
+  <data name="Birthday.Text" xml:space="preserve">
+    <value>Birthday</value>
+  </data>
+  <data name="Birthplace.Text" xml:space="preserve">
+    <value>Place of birth</value>
+  </data>
+  <data name="Deathday.Text" xml:space="preserve">
+    <value>Died on</value>
+  </data>
+  <data name="Department.Text" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="Gender.Text" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="Movies.Header" xml:space="preserve">
+    <value>Movies</value>
+  </data>
+  <data name="Shows.Header" xml:space="preserve">
+    <value>Shows</value>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>years</value>
   </data>
 </root>

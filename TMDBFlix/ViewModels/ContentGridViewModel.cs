@@ -14,114 +14,110 @@ using TMDBFlix.Views;
 
 namespace TMDBFlix.ViewModels
 {
-    public class ContentGridViewModel : Observable
+    public class ContentGridViewModel : ClickableViewModel
     {
-        private ICommand _itemClickCommand;
+        public delegate void loadCompleted();
+        public event loadCompleted LoadCompleted;
 
-        public ICommand ItemClickCommand => _itemClickCommand ?? (_itemClickCommand = new RelayCommand<SampleOrder>(OnItemClick));
+        public ObservableCollection<Movie> NowPlayingMovies { get; set; } = new ObservableCollection<Movie>();
+        public ObservableCollection<Movie> NowStreamingMovies { get; set; } = new ObservableCollection<Movie>();
+        public ObservableCollection<Movie> UpcomingMovies { get; set; } = new ObservableCollection<Movie>();
+        public ObservableCollection<Movie> PopularMovies { get; set; } = new ObservableCollection<Movie>();
+        public ObservableCollection<Movie> HighRatedMovies { get; set; } = new ObservableCollection<Movie>();
+        public ObservableCollection<Show> OnTvShows { get; set; } = new ObservableCollection<Show>();
+        public ObservableCollection<Show> AiringTodayShows { get; set; } = new ObservableCollection<Show>();
+        public ObservableCollection<Show> PopularShows { get; set; } = new ObservableCollection<Show>();
+        public ObservableCollection<Show> HighRatedShows { get; set; } = new ObservableCollection<Show>();
+        public ObservableCollection<Person> PopularPeople { get; set; } = new ObservableCollection<Person>();
 
-        public ObservableCollection<int> NonStaticSection { get { return Section; } }
-        public static ObservableCollection<int> Section { set; get; }
-
-        public ObservableCollection<Movie> PopularMovies { get; set; }
-        public ObservableCollection<Show> PopularShows { get; set; }
-        public ObservableCollection<Person> PopularPeople { get; set; }
-        public ObservableCollection<Movie> NowPlayingMovies { get; set; }
-        public ObservableCollection<Movie> NowStreamingMovies { get; set; }
-        public ObservableCollection<Movie> HighRatedMovies { get; set; }
-        public ObservableCollection<Movie> UpcomingMovies { get; set; }
-        public ObservableCollection<Show> OnTvShows { get; set; }
-        public ObservableCollection<Show> AiringTodayShows { get; set; }
-        public ObservableCollection<Show> HighRatedShows { get; set; }
-
-        public async Task LoadData()
+        async Task LoadMovieList(ObservableCollection<Movie> List, string Path, Dictionary<string,string> Query)
         {
-            var nowplayingmovies = await Task.Run(() => TMDBService.GetNowPlayingMovies());
-            foreach (var v in nowplayingmovies)
+            var results = await Task.Run(() => TMDBService.GetMovieList(Path, Query, 1, 1));
+            foreach (var v in results)
             {
-                NowPlayingMovies.Add(v);
+                List.Add(v);
             }
+        }
 
-            var nowstreamingmovies = await Task.Run(() => TMDBService.GetNowStreamingMovies());
-            foreach (var v in nowstreamingmovies)
+        async Task LoadShowList(ObservableCollection<Show> List, string Path, Dictionary<string, string> Query)
+        {
+            var results = await Task.Run(() => TMDBService.GetShowList(Path, Query, 1, 1));
+            foreach (var v in results)
             {
-                NowStreamingMovies.Add(v);
+                List.Add(v);
             }
+        }
 
-            var upcomingmovies = await Task.Run(() => TMDBService.GetUpcomingMovies());
-            foreach (var v in upcomingmovies)
+        async Task LoadPersonList(ObservableCollection<Person> List, string Path, Dictionary<string, string> Query)
+        {
+            var results = await Task.Run(() => TMDBService.GetPersonList(Path, Query, 1, 1));
+            foreach (var v in results)
             {
-                UpcomingMovies.Add(v);
+                List.Add(v);
             }
+        }
 
-            var popularmovies = await Task.Run(() => TMDBService.GetPopularMovies());
-            foreach (var v in popularmovies)
+        public async void LoadData()
+        {
+            var tasks = new List<Task>()
             {
-                PopularMovies.Add(v);
-            }
+                LoadMovieList(NowPlayingMovies, "/discover/movie", new Dictionary<string, string>()
+                {
+                    {"region","us"},
+                    {"with_release_type", "3"},
+                    {"primary_release_date.gte", DateTime.Today.AddMonths(-3).ToString("yyyy-MM-dd")},
+                    {"primary_release_date.lte", DateTime.Today.ToString("yyyy-MM-dd")}
+                }),
+                LoadMovieList(NowStreamingMovies, "/discover/movie", new Dictionary<string, string>()
+                {
+                    {"region","us"},
+                    {"with_release_type", "4"},
+                    {"primary_release_date.gte", DateTime.Today.AddMonths(-8).ToString("yyyy-MM-dd")}
+                }),
+                LoadMovieList(UpcomingMovies, "/discover/movie", new Dictionary<string, string>()
+                {
+                    {"region","us" },
+                    {"primary_release_date.gte", DateTime.Today.AddDays(7).ToString("yyyy-MM-dd")},
+                    {"primary_release_date.lte", DateTime.Today.AddMonths(6).ToString("yyyy-MM-dd")}
+                }),
+                LoadMovieList(PopularMovies, "/discover/movie", new Dictionary<string, string>()
+                {
+                    {"region","us"}
+                }),
+                LoadMovieList(HighRatedMovies, "/discover/movie", new Dictionary<string, string>()
+                {
+                    {"region","us"},
+                    {"sort_by","vote_average.desc" },
+                    {"primary_release_date.gte", DateTime.Today.AddYears(-20).ToString("yyyy-MM-dd")},
+                    {"vote_count.gte", "1000"},
+                    {"vote_average.gte", "7"}
+                }),
+                LoadShowList(OnTvShows, "/discover/tv", new Dictionary<string, string>()
+                {
+                    {"air_date.gte", DateTime.Today.AddDays(-14).ToString("yyyy-MM-dd") },
+                    {"air_date.lte", DateTime.Today.AddDays(7).ToString("yyyy-MM-dd") }
+                }),
+                LoadShowList(AiringTodayShows, "/discover/tv", new Dictionary<string, string>()
+                {
+                    {"air_date.gte", DateTime.Today.ToString("yyyy-MM-dd") },
+                    {"air_date.lte", DateTime.Today.ToString("yyyy-MM-dd") }
+                }),
+                LoadShowList(PopularShows, "/discover/tv", new Dictionary<string, string>()),
+                LoadShowList(HighRatedShows, "/discover/tv", new Dictionary<string, string>(){
+                    {"sort_by", "vote_average.desc" },
+                    {"vote_average.gte","7" },
+                    {"vote_count.gte","300" }
+                }),
+                LoadPersonList(PopularPeople, "/person/popular", new Dictionary<string, string>())
+            };
 
-            var highratedmovies = await Task.Run(() => TMDBService.GetHighRatedMovies());
-            foreach (var v in highratedmovies)
-            {
-                HighRatedMovies.Add(v);
-            }
-
-            var ontvshows = await Task.Run(() => TMDBService.GetOnTvShows());
-            foreach (var v in ontvshows)
-            {
-                OnTvShows.Add(v);
-            }
-
-            var airingtodayshows = await Task.Run(() => TMDBService.GetAiringTodayShows());
-            foreach (var v in airingtodayshows)
-            {
-                AiringTodayShows.Add(v);
-            }
-
-            var popularshows = await Task.Run(() => TMDBService.GetPopularShows());
-            foreach (var v in popularshows)
-            {
-                PopularShows.Add(v);
-            }
-
-            var highratedshows = await Task.Run(() => TMDBService.GetHighRatedShows());
-            foreach (var v in highratedshows)
-            {
-                HighRatedShows.Add(v);
-            }
-
-            var popularpeople = await Task.Run(() => TMDBService.GetPopularPeople());
-            foreach (var v in popularpeople)
-            {
-                PopularPeople.Add(v);
-            }
+            await Task.WhenAll(tasks);
+            LoadCompleted();
         }
 
         public ContentGridViewModel()
         {
-            Section = new ObservableCollection<int>();
-
-            PopularMovies = new ObservableCollection<Movie>();
-            PopularShows = new ObservableCollection<Show>();
-            PopularPeople = new ObservableCollection<Person>();
-            NowPlayingMovies = new ObservableCollection<Movie>();
-            NowStreamingMovies = new ObservableCollection<Movie>();
-            HighRatedMovies = new ObservableCollection<Movie>();
-            HighRatedShows = new ObservableCollection<Show>();
-            UpcomingMovies = new ObservableCollection<Movie>();
-            OnTvShows = new ObservableCollection<Show>();
-            AiringTodayShows = new ObservableCollection<Show>();
-
             LoadData();
-        }
-
-        private void OnItemClick(SampleOrder clickedItem)
-        {
-            if (clickedItem != null)
-            {
-                NavigationService.Frame.SetListDataItemForNextConnectedAnimation(clickedItem);
-                NavigationService.Navigate<ContentGridDetailPage>(clickedItem.OrderId);
-            }
         }
     }
 }

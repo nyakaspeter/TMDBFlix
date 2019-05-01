@@ -13,6 +13,7 @@ namespace TMDBFlix
 {
     public sealed partial class App : Application
     {
+        public static string Language = "en-US";
 
         private Lazy<ActivationService> _activationService;
 

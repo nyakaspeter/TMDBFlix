@@ -13,12 +13,8 @@ using TMDBFlix.Views;
 
 namespace TMDBFlix.ViewModels
 {
-    public class SearchViewModel : Observable
+    public class SearchViewModel : ClickableViewModel
     {
-        private ICommand _itemClickCommand;
-
-        public ICommand ItemClickCommand => _itemClickCommand ?? (_itemClickCommand = new RelayCommand<SampleOrder>(OnItemClick));
-
         public static string searchstring;
         public static string SearchString { get { return searchstring; } set { searchstring = value; LoadSearchResults(); } }
 
@@ -60,15 +56,6 @@ namespace TMDBFlix.ViewModels
             PeopleResults = new ObservableCollection<Person>();
             MovieResults = new ObservableCollection<Movie>();
             ShowResults = new ObservableCollection<Show>();
-        }
-
-        private void OnItemClick(SampleOrder clickedItem)
-        {
-            if (clickedItem != null)
-            {
-                NavigationService.Frame.SetListDataItemForNextConnectedAnimation(clickedItem);
-                NavigationService.Navigate<SearchDetailPage>(clickedItem.OrderId);
-            }
         }
     }
 }

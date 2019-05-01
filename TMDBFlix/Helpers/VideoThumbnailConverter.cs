@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,13 +8,12 @@ using Windows.UI.Xaml.Data;
 
 namespace TMDBFlix.Helpers
 {
-    class ReleaseDateToYearConverter : IValueConverter
+    class VideoThumbnailConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var date = value as string;
-            if (date is null) return "";
-            return date.Split('-')[0];
+            var key = value as string;
+            return "https://img.youtube.com/vi/" + key + "/hqdefault.jpg";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

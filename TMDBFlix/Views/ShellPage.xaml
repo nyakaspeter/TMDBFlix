@@ -32,10 +32,10 @@
             Or to use an IconElement instead of a Symbol see https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/projectTypes/navigationpane.md
             Edit String/en-US/Resources.resw: Add a menu item title for each page
             -->
-
-            <winui:NavigationViewItem x:Uid="Shell_Movies" helpers:NavHelper.NavigateTo="views:ContentGridPage"/>
-            <winui:NavigationViewItem x:Uid="Shell_Shows" helpers:NavHelper.NavigateTo="views:ContentGridPage"/>
-            <winui:NavigationViewItem x:Uid="Shell_People" helpers:NavHelper.NavigateTo="views:ContentGridPage"/>
+            <winui:NavigationViewItem x:Uid="Shell_Discover" helpers:NavHelper.NavigateTo="views:ContentGridPage"/>
+            <winui:NavigationViewItem x:Uid="Shell_Movies" helpers:NavHelper.NavigateTo="views:MoviesGridPage"/>
+            <winui:NavigationViewItem x:Uid="Shell_Shows" helpers:NavHelper.NavigateTo="views:ShowsGridPage"/>
+            <winui:NavigationViewItem x:Uid="Shell_People" helpers:NavHelper.NavigateTo="views:PeopleGridPage"/>
         </winui:NavigationView.MenuItems>
         <i:Interaction.Behaviors>
             <ic:EventTriggerBehavior EventName="ItemInvoked">

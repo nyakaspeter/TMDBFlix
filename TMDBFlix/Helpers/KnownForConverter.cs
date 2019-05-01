@@ -17,8 +17,11 @@ namespace TMDBFlix.Helpers
 
             foreach (var v in knownfor)
             {
-                if (v.media_type.Equals("tv")) list += v.name + ", ";
-                if (v.media_type.Equals("movie")) list += v.title + ", ";
+                if(v != null)
+                {
+                    if (v.media_type.Equals("tv")) list += v.name + ", ";
+                    if (v.media_type.Equals("movie")) list += v.title + ", ";
+                }
             }
 
             if (list.Length >= 2) list = list.Substring(0, list.Length - 2);
