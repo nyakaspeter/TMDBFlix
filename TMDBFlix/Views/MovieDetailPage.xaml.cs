@@ -49,8 +49,16 @@ namespace TMDBFlix.Views
                     break;
                 }
             }
-            runtime.Text = $"{ViewModel.Movie.runtime / 60} {new ResourceLoader().GetString("Hour")} {ViewModel.Movie.runtime % 60} {new ResourceLoader().GetString("Minute")}";
 
+            if(ViewModel.Movie.runtime != 0)
+            {
+                if (ViewModel.Movie.runtime > 60)
+                {
+                    runtime.Text = $"{ViewModel.Movie.runtime / 60} {new ResourceLoader().GetString("Hour")} {ViewModel.Movie.runtime % 60} {new ResourceLoader().GetString("Minute")}";
+                }
+                else runtime.Text = $"{ViewModel.Movie.runtime} {new ResourceLoader().GetString("Minute")}";
+            }
+            
             votecount.Text = "(" + ViewModel.Movie.vote_count + ")";
             voteaverage.PlaceholderValue = ViewModel.Movie.vote_average / 2;
             releasedate.Text = DateTime.Parse(ViewModel.Movie.release_date).ToString("yyyy. MM. dd.");

@@ -5,7 +5,15 @@ namespace TMDBFlix.Core.Models
     public class MultiSearchItem
     {
             public string poster_path { get; set; }
-            public int popularity { get; set; }
+        private float _popularity;
+            public float popularity {
+            get
+            {
+                if (media_type.Equals("person")) return _popularity * 2;
+                return _popularity;
+            }
+            set { _popularity = value; }
+            }
             public int id { get; set; }
             public string overview { get; set; }
             public string backdrop_path { get; set; }

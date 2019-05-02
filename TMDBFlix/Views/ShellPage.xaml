@@ -46,7 +46,7 @@
             <Frame x:Name="shellFrame"/>
         </Grid>
         <winui:NavigationView.AutoSuggestBox>
-            <AutoSuggestBox x:Name="Multisearch" x:Uid="Search" TextChanged="Search_TextChanged"  QuerySubmitted="Search_Find" MinWidth="250" QueryIcon="Find"/>
+            <AutoSuggestBox x:Name="Multisearch" x:Uid="Search" TextChanged="Search_TextChanged"  QuerySubmitted="Search_Find" SuggestionChosen="Search_SuggestionChosen" GotFocus="Multisearch_GotFocus"  MinWidth="250" QueryIcon="Find"/>
         </winui:NavigationView.AutoSuggestBox>
     </winui:NavigationView>
 </Page>

@@ -32,12 +32,17 @@ namespace TMDBFlix.ViewModels
         private ICommand _loadedCommand;
         private ICommand _itemInvokedCommand;
 
+        public static bool searched;
+        public static string searchtext;
+
         public ObservableCollection<MultiSearchItem> SearchResultNames { get; set; }
 
         public async Task LoadSearchResultNames(string query)
         {
             var searchresultnames = await Task.Run(() => TMDBService.Search(query));
             SearchResultNames.Clear();
+
+            if (searched) return;
             foreach (var v in searchresultnames)
             {
                 SearchResultNames.Add(v);

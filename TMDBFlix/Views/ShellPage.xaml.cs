@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using TMDBFlix.Core.Models;
 using TMDBFlix.ViewModels;
@@ -24,11 +25,12 @@ namespace TMDBFlix.Views
 
         private void SearchResultNames_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            Multisearch.ItemsSource = sender;
+            Multisearch.ItemsSource = ViewModel.SearchResultNames;
         }
 
         private void Search_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
+            if(!sender.Text.Equals(ShellViewModel.searchtext))ShellViewModel.searched = false;
             if (sender.Text.Equals(""))
             {
                 ViewModel.SearchResultNames.Clear();
@@ -43,8 +45,36 @@ namespace TMDBFlix.Views
         {
             if (!sender.Text.Equals(""))
             {
-                SearchViewModel.SearchString = sender.Text;
-                if(shellFrame.CurrentSourcePageType != typeof(SearchPage)) shellFrame.Navigate(typeof(SearchPage));
+                ShellViewModel.searched = true;
+                ShellViewModel.searchtext = sender.Text;
+                shellFrame.Navigate(typeof(SearchGridPage), new Dictionary<string, string>()
+                {
+                    {"query", sender.Text }
+                });
+
+                var isTabStop = Multisearch.IsTabStop;
+                Multisearch.IsTabStop = false;
+                Multisearch.IsEnabled = false;
+                Multisearch.IsEnabled = true;
+                Multisearch.IsTabStop = isTabStop;
+            }
+        }
+
+        private void Search_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            Multisearch.Text = args.SelectedItem.ToString();
+        }
+
+        private void Multisearch_GotFocus(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            ShellViewModel.searched = false;
+            if (Multisearch.Text.Equals(""))
+            {
+                ViewModel.SearchResultNames.Clear();
+            }
+            else
+            {
+                ViewModel.LoadSearchResultNames(Multisearch.Text);
             }
         }
     }

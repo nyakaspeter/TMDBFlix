@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,6 +16,27 @@ namespace TMDBFlix.Core.Services
         private static RestClient client = new RestClient("https://api.themoviedb.org/3");
         public static string language = "en";
         public static string region = "US";
+
+        public static Show GetShow(int Id)
+        {
+            var request = new RestRequest($"/tv/{Id}");
+            request.AddParameter("api_key", key);
+            request.AddParameter("language", language);
+            request.AddParameter("append_to_response", "alternative_titles,content_ratings,credits,external_ids,keywords");
+
+            var response = client.Execute<Show>(request);
+            if (response.IsSuccessful) return response.Data;
+            else if ((int)response.StatusCode == 429)
+            {
+                while ((int)response.StatusCode == 429)
+                {
+                    Thread.Sleep(3000);
+                    response = client.Execute<Show>(request);
+                }
+                return response.Data;
+            }
+            else return new Show();
+        }
 
         public static Person GetPerson(int Id)
         {
@@ -198,39 +220,199 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
-        public static List<MultiSearchItem> Search(string Query, int StartPage = 1, int PageCount = 2)
+        public static List<MultiSearchItem> Search(string Query, int StartingPage = 1, int NumberOfPages = 1)
         {
-            var request = new RestRequest("/search/multi");
-            request.AddParameter("api_key", key);
-            request.AddParameter("query", Query);
-
             var results = new List<MultiSearchItem>();
 
-            for (int page = StartPage; page < StartPage + PageCount; page++)
+            var request = new RestRequest("/search/movie");
+            request.AddParameter("api_key", key);
+            request.AddParameter("language", language);
+            request.AddParameter("query", Query);
+
+            for (int page = StartingPage; page < StartingPage + NumberOfPages; page++)
             {
                 request.AddParameter("page", page);
-                var response = client.Execute<MultiSearchResponse>(request).Data;
-
-                if(response.results != null)
-                foreach (var v in response.results)
+                var response = client.Execute<MultiSearchResponse>(request);
+                if (response.IsSuccessful)
                 {
-                    results.Add(v);
+                    response.Data.results.ForEach(x => x.media_type = "movie");
+                    results.AddRange(response.Data.results);
+                }
+                else if ((int)response.StatusCode == 429)
+                {
+                    Thread.Sleep(1000);
+                    page--;
                 }
             }
-            return results;
+
+            request = new RestRequest("/search/tv");
+            request.AddParameter("api_key", key);
+            request.AddParameter("language", language);
+            request.AddParameter("query", Query);
+
+            for (int page = StartingPage; page < StartingPage + NumberOfPages; page++)
+            {
+                request.AddParameter("page", page);
+                var response = client.Execute<MultiSearchResponse>(request);
+                if (response.IsSuccessful)
+                {
+                    response.Data.results.ForEach(x => x.media_type = "tv");
+                    results.AddRange(response.Data.results);
+                }
+                else if ((int)response.StatusCode == 429)
+                {
+                    Thread.Sleep(1000);
+                    page--;
+                }
+            }
+
+            request = new RestRequest("/search/person");
+            request.AddParameter("api_key", key);
+            request.AddParameter("language", language);
+            request.AddParameter("query", Query);
+
+            for (int page = StartingPage; page < StartingPage + NumberOfPages; page++)
+            {
+                request.AddParameter("page", page);
+                var response = client.Execute<MultiSearchResponse>(request);
+                if (response.IsSuccessful)
+                {
+                    response.Data.results.ForEach(x => x.media_type = "person");
+                    results.AddRange(response.Data.results);
+                }
+                else if ((int)response.StatusCode == 429)
+                {
+                    Thread.Sleep(1000);
+                    page--;
+                }
+            }
+
+            return results.OrderByDescending(x => x.popularity).ToList();
         }
 
         public static List<MultiSearchItem> ImagesFirst(this List<MultiSearchItem> list)
         {
-            for (int i = 0; i < list.Count; i++)
+            var noimage = new List<MultiSearchItem>();
+            foreach (var v in list)
             {
-                if (list[i].profile_path == null && list[i].poster_path == null)
-                {
-                    var v = list[i];
-                    list.RemoveAt(i);
-                    list.Add(v);
-                }
+                if (v.poster_path is null && v.profile_path is null) noimage.Add(v);
             }
+            foreach (var v in noimage)
+            {
+                list.Remove(v);
+                list.Add(v);
+            }
+            
+            return list;
+        }
+
+        public static List<Movie> ImagesFirst(this List<Movie> list)
+        {
+            var noimage = new List<Movie>();
+            foreach (var v in list)
+            {
+                if (v.poster_path is null) noimage.Add(v);
+            }
+            foreach (var v in noimage)
+            {
+                list.Remove(v);
+                list.Add(v);
+            }
+
+            return list;
+        }
+
+        public static List<Show> ImagesFirst(this List<Show> list)
+        {
+            var noimage = new List<Show>();
+            foreach (var v in list)
+            {
+                if (v.poster_path is null) noimage.Add(v);
+            }
+            foreach (var v in noimage)
+            {
+                list.Remove(v);
+                list.Add(v);
+            }
+
+            return list;
+        }
+
+        public static List<MovieCredit> ImagesFirst(this List<MovieCredit> list)
+        {
+            var noimage = new List<MovieCredit>();
+            foreach (var v in list)
+            {
+                if (v.poster_path is null) noimage.Add(v);
+            }
+            foreach (var v in noimage)
+            {
+                list.Remove(v);
+                list.Add(v);
+            }
+
+            return list;
+        }
+
+        public static List<ShowCredit> ImagesFirst(this List<ShowCredit> list)
+        {
+            var noimage = new List<ShowCredit>();
+            foreach (var v in list)
+            {
+                if (v.poster_path is null) noimage.Add(v);
+            }
+            foreach (var v in noimage)
+            {
+                list.Remove(v);
+                list.Add(v);
+            }
+
+            return list;
+        }
+
+        public static List<Person> ImagesFirst(this List<Person> list)
+        {
+            var noimage = new List<Person>();
+            foreach (var v in list)
+            {
+                if (v.profile_path is null) noimage.Add(v);
+            }
+            foreach (var v in noimage)
+            {
+                list.Remove(v);
+                list.Add(v);
+            }
+
+            return list;
+        }
+
+        public static List<MultiSearchItem> OnlyWithImages(this List<MultiSearchItem> list)
+        {
+            var noimage = new List<MultiSearchItem>();
+            foreach (var v in list)
+            {
+                if (v.poster_path is null && v.profile_path is null) noimage.Add(v);
+            }
+            foreach (var v in noimage)
+            {
+                list.Remove(v);
+            }
+
+            return list;
+        }
+
+        public static List<MultiSearchItem> OnlyWithoutImages(this List<MultiSearchItem> list)
+        {
+            var hasimage = new List<MultiSearchItem>();
+            foreach (var v in list)
+            {
+                if (!(v.poster_path is null && v.profile_path is null)) hasimage.Add(v);
+            }
+            foreach (var v in hasimage)
+            {
+                list.Remove(v);
+            }
+
             return list;
         }
     }

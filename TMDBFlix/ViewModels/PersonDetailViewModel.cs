@@ -44,8 +44,8 @@ namespace TMDBFlix.ViewModels
             var sortedMovies = distinctMovies.OrderByDescending(v => v.popularity).ToList();
             var sortedShows = distinctShows.OrderByDescending(v => v.popularity).ToList();
 
-            sortedMovies.ForEach(v => Movies.Add(v));
-            sortedShows.ForEach(v => Shows.Add(v));
+            sortedMovies.ImagesFirst().ForEach(v => Movies.Add(v));
+            sortedShows.ImagesFirst().ForEach(v => Shows.Add(v));
         }
 
         async Task LoadImages()

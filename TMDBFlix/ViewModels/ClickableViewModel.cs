@@ -27,8 +27,16 @@ namespace TMDBFlix.ViewModels
         public ICommand ImageClickCommand => _imageClickCommand ?? (_imageClickCommand = new RelayCommand<Image>(OnImageClick));
         private ICommand _genreClickCommand;
         public ICommand GenreClickCommand => _genreClickCommand ?? (_genreClickCommand = new RelayCommand<Genre>(OnGenreClick));
+        private ICommand _tvgenreClickCommand;
+        public ICommand TvGenreClickCommand => _tvgenreClickCommand ?? (_tvgenreClickCommand = new RelayCommand<Genre>(OnTvGenreClick));
         private ICommand _keywordClickCommand;
         public ICommand KeywordClickCommand => _keywordClickCommand ?? (_keywordClickCommand = new RelayCommand<Keyword>(OnKeywordClick));
+        private ICommand _tvkeywordClickCommand;
+        public ICommand TvKeywordClickCommand => _tvkeywordClickCommand ?? (_tvkeywordClickCommand = new RelayCommand<Keyword>(OnTvKeywordClick));
+        private ICommand _networkClickCommand;
+        public ICommand NetworkClickCommand => _networkClickCommand ?? (_networkClickCommand = new RelayCommand<Network>(OnNetworkClick));
+        private ICommand _searchItemClickCommand;
+        public ICommand SearchItemClickCommand => _searchItemClickCommand ?? (_searchItemClickCommand = new RelayCommand<MultiSearchItem>(OnSearchItemClick));
 
         public void OnMovieClick(Movie clickedItem)
         {
@@ -44,13 +52,32 @@ namespace TMDBFlix.ViewModels
             if (clickedItem != null)
             {
                 NavigationService.Frame.SetListDataItemForNextConnectedAnimation(clickedItem);
-                NavigationService.Navigate<MovieDetailPage>(clickedItem.id);
+                NavigationService.Navigate<ShowDetailPage>(clickedItem.id);
             }
         }
 
         public void OnPersonClick(Person clickedItem)
         {
             if (clickedItem != null)
+            {
+                NavigationService.Frame.SetListDataItemForNextConnectedAnimation(clickedItem);
+                NavigationService.Navigate<PersonDetailPage>(clickedItem.id);
+            }
+        }
+
+        public void OnSearchItemClick(MultiSearchItem clickedItem)
+        {
+            if (clickedItem.media_type.Equals("movie"))
+            {
+                NavigationService.Frame.SetListDataItemForNextConnectedAnimation(clickedItem);
+                NavigationService.Navigate<MovieDetailPage>(clickedItem.id);
+            }
+            if (clickedItem.media_type.Equals("tv"))
+            {
+                NavigationService.Frame.SetListDataItemForNextConnectedAnimation(clickedItem);
+                NavigationService.Navigate<ShowDetailPage>(clickedItem.id);
+            }
+            if (clickedItem.media_type.Equals("person"))
             {
                 NavigationService.Frame.SetListDataItemForNextConnectedAnimation(clickedItem);
                 NavigationService.Navigate<PersonDetailPage>(clickedItem.id);
@@ -88,6 +115,19 @@ namespace TMDBFlix.ViewModels
             }
         }
 
+        public void OnTvGenreClick(Genre clickedItem)
+        {
+            if (clickedItem != null)
+            {
+                NavigationService.Frame.SetListDataItemForNextConnectedAnimation(clickedItem);
+                NavigationService.Navigate<ShowsGridPage>(new Dictionary<string, string>(){
+                {"listname", clickedItem.name + " " + new ResourceLoader().GetString("Shell_Shows/Content") },
+                { "path", "/discover/tv"},
+                {"with_genres",clickedItem.id.ToString() }
+            });
+            }
+        }
+
         public void OnKeywordClick(Keyword clickedItem)
         {
             if (clickedItem != null)
@@ -97,6 +137,32 @@ namespace TMDBFlix.ViewModels
                 {"listname", clickedItem.name},
                 { "path", "/discover/movie"},
                 {"with_keywords",clickedItem.id.ToString() }
+            });
+            }
+        }
+
+        public void OnTvKeywordClick(Keyword clickedItem)
+        {
+            if (clickedItem != null)
+            {
+                NavigationService.Frame.SetListDataItemForNextConnectedAnimation(clickedItem);
+                NavigationService.Navigate<ShowsGridPage>(new Dictionary<string, string>(){
+                {"listname", clickedItem.name},
+                { "path", "/discover/tv"},
+                {"with_keywords",clickedItem.id.ToString() }
+            });
+            }
+        }
+
+        public void OnNetworkClick(Network clickedItem)
+        {
+            if (clickedItem != null)
+            {
+                NavigationService.Frame.SetListDataItemForNextConnectedAnimation(clickedItem);
+                NavigationService.Navigate<ShowsGridPage>(new Dictionary<string, string>(){
+                {"listname", clickedItem.name + " " + new ResourceLoader().GetString("Shell_Shows/Content") },
+                { "path", "/discover/tv"},
+                {"with_networks",clickedItem.id.ToString() }
             });
             }
         }

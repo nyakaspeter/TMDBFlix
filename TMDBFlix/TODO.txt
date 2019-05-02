@@ -1,15 +1,9 @@
-﻿Fontos:
-
--Sorozat részletek nézet
--Személy részletek nézet
--Kollekció nézet
--Ikon, logó
-
-Kevésbé fontos:
--Pivot header maradjon fent görgetéskor
--Keresés után javaslatok ne töltődjenek be
--Keresőmező alapból ne mutasson TextBoxot
--Akrill felső sáv
--Beállítások menü bővítés
--Magyar nyelv
--Torrent integráció
+﻿Kollekció részletek nézet
+Évad részletek nézet
+Epizód részletek nézet
+Akrill felső sáv
+Keresőmező alapból ne mutasson TextBoxot
+Pivot header maradjon fent görgetéskor
+Beállítások menü bővítés
+Magyar nyelv
+Torrent integráció

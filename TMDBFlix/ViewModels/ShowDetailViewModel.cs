@@ -10,46 +10,54 @@ using TMDBFlix.Helpers;
 
 namespace TMDBFlix.ViewModels
 {
-    public class MovieDetailViewModel : ClickableViewModel
+    public class ShowDetailViewModel : ClickableViewModel
     {
-        private Movie movie = new Movie();
+        private Show show = new Show();
 
-        public Movie Movie
+        public Show Show
         {
-            get { return movie; }
-            set { Set(ref movie, value); }
+            get { return show; }
+            set { Set(ref show, value); }
         }
 
         public int Id;
         public ObservableCollection<Video> Videos = new ObservableCollection<Video>();
         public ObservableCollection<Image> Backdrops = new ObservableCollection<Image>();
         public ObservableCollection<Image> Posters = new ObservableCollection<Image>();
-        public ObservableCollection<Movie> Recommendations = new ObservableCollection<Movie>();
-        public ObservableCollection<Movie> Similar = new ObservableCollection<Movie>();
+        public ObservableCollection<Show> Recommendations = new ObservableCollection<Show>();
+        public ObservableCollection<Show> Similar = new ObservableCollection<Show>();
         public ObservableCollection<Person> Cast = new ObservableCollection<Person>();
         public ObservableCollection<Person> Crew = new ObservableCollection<Person>();
-        public ObservableCollection<Person> Directors = new ObservableCollection<Person>();
+        public ObservableCollection<Person> Creator = new ObservableCollection<Person>();
 
         public delegate void loadCompleted();
         public event loadCompleted LoadCompleted;
 
         async Task LoadInfo()
         {
-            Movie = await Task.Run(() => TMDBService.GetMovie(Id));
-            foreach (var v in Movie.credits.cast.OrderBy(x => x.order).ToList().ImagesFirst())
+            Show = await Task.Run(() => TMDBService.GetShow(Id));
+            foreach (var v in Show.credits.cast.OrderBy(x => x.order).ToList().ImagesFirst())
             {
                 Cast.Add(v);
             }
-            foreach (var v in Movie.credits.crew.ImagesFirst())
+            foreach (var v in Show.credits.crew.ImagesFirst())
             {
                 Crew.Add(v);
-                if (v.job.Equals("Director")) Directors.Add(v);
+            }
+            foreach (var v in Show.seasons)
+            {
+                if (v.season_number == 0)
+                {
+                    Show.seasons.Add(v);
+                    Show.seasons.Remove(v);
+                    break;
+                }
             }
         }
 
         async Task LoadImages()
         {
-            var images = await Task.Run(() => TMDBService.GetImages($"/movie/{Id}/images"));
+            var images = await Task.Run(() => TMDBService.GetImages($"/tv/{Id}/images"));
             foreach (var v in images.backdrops)
             {
                 Backdrops.Add(v);
@@ -62,7 +70,7 @@ namespace TMDBFlix.ViewModels
 
         async Task LoadVideos()
         {
-            var videos = await Task.Run(() => TMDBService.GetVideos($"/movie/{Id}"));
+            var videos = await Task.Run(() => TMDBService.GetVideos($"/tv/{Id}"));
             foreach (var v in videos)
             {
                 if(v.site.Equals("YouTube"))
@@ -72,7 +80,7 @@ namespace TMDBFlix.ViewModels
 
         async Task LoadRecommendations()
         {
-            var recommendations = await Task.Run(() => TMDBService.GetMovieList($"/movie/{Id}/recommendations", new Dictionary<string, string>()));
+            var recommendations = await Task.Run(() => TMDBService.GetShowList($"/tv/{Id}/recommendations", new Dictionary<string, string>()));
             foreach (var v in recommendations.ImagesFirst())
             {
                 Recommendations.Add(v);
@@ -81,7 +89,7 @@ namespace TMDBFlix.ViewModels
 
         async Task LoadSimilar()
         {
-            var similar = await Task.Run(() => TMDBService.GetMovieList($"/movie/{Id}/similar", new Dictionary<string, string>()));
+            var similar = await Task.Run(() => TMDBService.GetShowList($"/tv/{Id}/similar", new Dictionary<string, string>()));
             foreach (var v in similar.ImagesFirst())
             {
                 Similar.Add(v);
@@ -103,7 +111,7 @@ namespace TMDBFlix.ViewModels
             LoadCompleted();
         }
 
-        public MovieDetailViewModel()
+        public ShowDetailViewModel()
         {
         }
 

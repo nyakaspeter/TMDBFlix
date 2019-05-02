@@ -356,4 +356,58 @@
   <data name="Years" xml:space="preserve">
     <value>years</value>
   </data>
+  <data name="Creator.Text" xml:space="preserve">
+    <value>Creator</value>
+  </data>
+  <data name="Episodenumber" xml:space="preserve">
+    <value>episodes</value>
+  </data>
+  <data name="FirstAirDate.Text" xml:space="preserve">
+    <value>First air date</value>
+  </data>
+  <data name="LastAirDate.Text" xml:space="preserve">
+    <value>Last air date</value>
+  </data>
+  <data name="Movie" xml:space="preserve">
+    <value>Movie</value>
+  </data>
+  <data name="Network.Text" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="OriginCountry.Text" xml:space="preserve">
+    <value>Origin country</value>
+  </data>
+  <data name="Person" xml:space="preserve">
+    <value>Person</value>
+  </data>
+  <data name="Season" xml:space="preserve">
+    <value>Season</value>
+  </data>
+  <data name="Seasonnumber" xml:space="preserve">
+    <value>seasons</value>
+  </data>
+  <data name="Seasons.Header" xml:space="preserve">
+    <value>Seasons</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Specials" xml:space="preserve">
+    <value>Specials</value>
+  </data>
+  <data name="Type.Text" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="NoResults.Text" xml:space="preserve">
+    <value>No results</value>
+  </data>
+  <data name="All.Header" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="People.Header" xml:space="preserve">
+    <value>People</value>
+  </data>
+  <data name="ShowAll.Text" xml:space="preserve">
+    <value>Show all</value>
+  </data>
 </root>
