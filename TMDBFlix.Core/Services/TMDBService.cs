@@ -30,7 +30,7 @@ namespace TMDBFlix.Core.Services
             {
                 while ((int)response.StatusCode == 429)
                 {
-                    Thread.Sleep(3000);
+                    Thread.Sleep(1000);
                     response = client.Execute<Show>(request);
                 }
                 return response.Data;
@@ -51,7 +51,7 @@ namespace TMDBFlix.Core.Services
             {
                 while ((int)response.StatusCode == 429)
                 {
-                    Thread.Sleep(3000);
+                    Thread.Sleep(1000);
                     response = client.Execute<Person>(request);
                 }
                 return response.Data;
@@ -77,7 +77,7 @@ namespace TMDBFlix.Core.Services
                 if (response.IsSuccessful) results.AddRange(response.Data.results);
                 else if ((int)response.StatusCode == 429)
                 {
-                    Thread.Sleep(3000);
+                    Thread.Sleep(1000);
                     page--;
                 }
             }
@@ -98,12 +98,32 @@ namespace TMDBFlix.Core.Services
             {
                 while ((int)response.StatusCode == 429)
                 {
-                    Thread.Sleep(3000);
+                    Thread.Sleep(1000);
                     response = client.Execute<Movie>(request);
                 }
                 return response.Data;
             }
             else return new Movie();
+        }
+
+        public static Collection GetCollection(int Id)
+        {
+            var request = new RestRequest($"/collection/{Id}");
+            request.AddParameter("api_key", key);
+            request.AddParameter("language", language);
+
+            var response = client.Execute<Collection>(request);
+            if (response.IsSuccessful) return response.Data;
+            else if ((int)response.StatusCode == 429)
+            {
+                while ((int)response.StatusCode == 429)
+                {
+                    Thread.Sleep(1000);
+                    response = client.Execute<Collection>(request);
+                }
+                return response.Data;
+            }
+            else return new Collection();
         }
 
         public static ImagesResponse GetImages(string Path)
@@ -117,7 +137,7 @@ namespace TMDBFlix.Core.Services
             {
                 while ((int)response.StatusCode == 429)
                 {
-                    Thread.Sleep(3000);
+                    Thread.Sleep(1000);
                     response = client.Execute<ImagesResponse>(request);
                 }
                 return response.Data;
@@ -141,7 +161,7 @@ namespace TMDBFlix.Core.Services
             {
                 while ((int)response.StatusCode == 429)
                 {
-                    Thread.Sleep(3000);
+                    Thread.Sleep(1000);
                     response = client.Execute<VideosResponse>(request);
                 }
                 videos = response.Data.results;
@@ -159,7 +179,7 @@ namespace TMDBFlix.Core.Services
                 {
                     while ((int)response.StatusCode == 429)
                     {
-                        Thread.Sleep(3000);
+                        Thread.Sleep(1000);
                         response = client.Execute<VideosResponse>(request);
                     }
                     videos.InsertRange(0,response.Data.results);
@@ -186,7 +206,7 @@ namespace TMDBFlix.Core.Services
                 if (response.IsSuccessful) results.AddRange(response.Data.results);
                 else if ((int)response.StatusCode == 429)
                 {
-                    Thread.Sleep(3000);
+                    Thread.Sleep(1000);
                     page--;
                 }
             }
@@ -212,7 +232,7 @@ namespace TMDBFlix.Core.Services
                 if (response.IsSuccessful) results.AddRange(response.Data.results);
                 else if ((int)response.StatusCode == 429)
                 {
-                    Thread.Sleep(3000);
+                    Thread.Sleep(1000);
                     page--;
                 }
             }

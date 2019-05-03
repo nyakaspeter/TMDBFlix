@@ -129,6 +129,16 @@ namespace TMDBFlix.Core.Models
         public string backdrop_path { get; set; }
     }
 
+    public class Collection
+    {
+            public int id { get; set; }
+            public string name { get; set; }
+            public string overview { get; set; }
+            public object poster_path { get; set; }
+            public string backdrop_path { get; set; }
+            public List<Movie> parts { get; set; }
+    }
+
     public class ReleaseDate
     {
         public string certification { get; set; }
@@ -174,7 +184,7 @@ namespace TMDBFlix.Core.Models
 
     public class ContentRating
     {
-            public string iso_3166_1 { get; set; }
-            public string rating { get; set; }
+        public string iso_3166_1 { get; set; }
+        public string rating { get; set; }
     }
 }

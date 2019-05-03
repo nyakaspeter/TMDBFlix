@@ -27,10 +27,10 @@
     </custom:CustomPage.Resources>
 
 
+        <Grid>
+            <Image x:Name="Img"/>
+        </Grid>
 
-    <Grid>
-        <Image x:Name="Img"/>
-    </Grid>
 
 
 
