@@ -64,7 +64,7 @@ namespace TMDBFlix.Core.Models
         public int episode_count { get; set; }
         public int id { get; set; }
         public string _id { get; set; }
-
+        public int showid { get; set; }
         public string name { get; set; }
         public string overview { get; set; }
         public string poster_path { get; set; }
@@ -74,9 +74,4 @@ namespace TMDBFlix.Core.Models
         public ExternalIds external_ids { get; set; }
 
     }
-
-
-    
-
-
 }

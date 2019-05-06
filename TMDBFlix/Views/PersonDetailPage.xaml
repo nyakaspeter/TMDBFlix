@@ -103,10 +103,12 @@
                     
                     <RelativePanel Margin="0,8,0,0">
                     <Grid x:Name="poster" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0,0,0,0">
-                        <FlipView x:Name="posters" Width="376" Height="564">
+                        <FlipView x:Name="posters" Width="376" Height="564" ItemsSource="{x:Bind ViewModel.Profiles}">
                             <FlipView.ItemTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" ImageFailed="Image_ImageFailed"/>
+                                <DataTemplate x:DataType="Image">
+                                    <HyperlinkButton Padding="0" Command="{Binding ElementName=CustomPage, Path=ViewModel.ImageClickCommand}" CommandParameter="{Binding}">
+                                        <Image Source="{Binding file_path, Converter={StaticResource ImageUrlConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" ImageFailed="Image_ImageFailed"/>
+                                    </HyperlinkButton>
                                 </DataTemplate>
                             </FlipView.ItemTemplate>
                         </FlipView>

@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Toolkit.Uwp.UI.Animations;
 using TMDBFlix.Controls;
 using TMDBFlix.Core.Services;
@@ -25,17 +26,33 @@ namespace TMDBFlix.Views
 
             ViewModel.LoadCompleted += ViewModel_LoadCompleted;
 
+            pivot.SelectionChanged += Pivot_SelectionChanged;
+
             FadeOutContent.Begin();
+        }
+
+        private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(pivot.SelectedItem == torrentspivot)
+            {
+                TorrentsGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                NoTorrentResults.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                TorrentsLoadRing.IsActive = true;
+                ViewModel.Torrents.Clear();
+
+                var torrents = await Task.Run(() => JackettService.SearchMovieTorrents(ViewModel.Movie.title));
+                torrents.AddRange(await Task.Run(() => JackettService.SearchMovieTorrents(ViewModel.Movie.original_title)));
+
+                TorrentsLoadRing.IsActive = false;
+                if (torrents.Count == 0) NoTorrentResults.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                else TorrentsGrid.Visibility = Windows.UI.Xaml.Visibility.Visible;
+
+                torrents.GroupBy(x => x.Title).Select(y => y.First()).ToList().OrderByDescending(x => DateTime.Parse(x.PubDate)).ToList().ForEach(x => ViewModel.Torrents.Add(x));
+            }
         }
 
         private void ViewModel_LoadCompleted()
         {
-            posters.Items.Add(new BitmapImage(new Uri("https://image.tmdb.org/t/p/w500" + ViewModel.Movie.poster_path)));
-            foreach (var v in ViewModel.Posters)
-            {
-                if (v.file_path != ViewModel.Movie.poster_path)
-                    posters.Items.Add(new BitmapImage(new Uri("https://image.tmdb.org/t/p/w500" + v.file_path)));
-            }
 
             year.Text = ViewModel.Movie.release_date.Split('-')[0];
 
@@ -109,6 +126,7 @@ namespace TMDBFlix.Views
             if (ViewModel.Backdrops.Count == 0) pivot.Items.Remove(backdropspivot);
             if (ViewModel.Recommendations.Count == 0) pivot.Items.Remove(recommendationspivot);
             if (ViewModel.Similar.Count == 0) pivot.Items.Remove(similarpivot);
+            //if (ViewModel.Torrents.Count == 0) pivot.Items.Remove(torrentspivot);
             if (ViewModel.Movie.keywords.keywords.Count == 0) keywordsinfo.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
 
             LoadRing.IsActive = false;
@@ -212,12 +230,7 @@ namespace TMDBFlix.Views
 
         private void Collection_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            /*
-            NavigationService.Navigate<MoviesGridPage>(new Dictionary<string, string>(){
-                {"listname", ViewModel.Movie.belongs_to_collection.name },
-                { "path", "/discover/movie"},
-                {"with_genres",clickedItem.id.ToString() }
-            */
+            NavigationService.Navigate<CollectionDetailPage>(ViewModel.Movie.belongs_to_collection.id);
         }
     }
 }

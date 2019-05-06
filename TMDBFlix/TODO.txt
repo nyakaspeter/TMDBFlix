@@ -1,9 +1,8 @@
-﻿Kollekció részletek nézet
-Évad részletek nézet
+﻿Évad részletek nézet
 Epizód részletek nézet
 Akrill felső sáv
 Keresőmező alapból ne mutasson TextBoxot
-Pivot header maradjon fent görgetéskor
 Beállítások menü bővítés
 Magyar nyelv
 Torrent integráció
+Pivot header maradjon fent görgetéskor

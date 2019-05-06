@@ -30,6 +30,8 @@ namespace TMDBFlix.ViewModels
         public ObservableCollection<Person> Crew = new ObservableCollection<Person>();
         public ObservableCollection<Person> Creator = new ObservableCollection<Person>();
 
+        public ImagesResponse Images = new ImagesResponse();
+
         public delegate void loadCompleted();
         public event loadCompleted LoadCompleted;
 
@@ -57,14 +59,10 @@ namespace TMDBFlix.ViewModels
 
         async Task LoadImages()
         {
-            var images = await Task.Run(() => TMDBService.GetImages($"/tv/{Id}/images"));
-            foreach (var v in images.backdrops)
+            Images = await Task.Run(() => TMDBService.GetImages($"/tv/{Id}/images"));
+            foreach (var v in Images.backdrops)
             {
                 Backdrops.Add(v);
-            }
-            foreach (var v in images.posters)
-            {
-                Posters.Add(v);
             }
         }
 
@@ -108,6 +106,18 @@ namespace TMDBFlix.ViewModels
             };
 
             await Task.WhenAll(tasks);
+
+            Posters.Add(new Image() { file_path = Show.poster_path });
+            foreach (var v in Images.posters)
+            {
+                if (!v.file_path.Equals(Show.poster_path)) Posters.Add(v);
+            }
+
+            foreach (var v in Show.seasons)
+            {
+                v.showid = Id;
+            }
+
             LoadCompleted();
         }
 

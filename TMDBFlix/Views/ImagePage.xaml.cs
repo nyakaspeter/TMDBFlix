@@ -26,6 +26,7 @@ namespace TMDBFlix.Views
             if (e.Parameter is Core.Models.Image image)
             {
                 Img.Source = new BitmapImage(new Uri("http://image.tmdb.org/t/p/original/" + image.file_path));
+                Scroller.ZoomToFactor(0.95f);
             }
         }
 
@@ -33,6 +34,5 @@ namespace TMDBFlix.Views
         {
             base.OnNavigatingFrom(e);
         }
-
     }
 }

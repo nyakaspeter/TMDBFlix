@@ -1,0 +1,206 @@
+﻿<custom:CustomPage
+    x:Name="CustomPage"
+    x:Class="TMDBFlix.Views.CollectionDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:models="using:TMDBFlix.Core.Models"
+    xmlns:custom="using:TMDBFlix.Controls"
+    xmlns:helpers="using:TMDBFlix.Helpers"
+    xmlns:mux="using:Microsoft.UI.Xaml.Controls"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+
+    <custom:CustomPage.Resources>
+        <helpers:ImagePathToUrlConverter x:Key="ImageUrlConverter" />
+        <helpers:ReleaseDateToYearConverter x:Key="ReleaseYearConverter" />
+        <helpers:KnownForConverter x:Key="KnownForConverter" />
+        <helpers:VideoThumbnailConverter x:Key="VideoThumbnailConverter"/>
+
+        <DataTemplate x:Name="CommonDataTemplate" x:Key="CommonDataTemplate" x:DataType="models:Person">
+            <StackPanel Orientation="Horizontal">
+
+                <HyperlinkButton Command="{Binding ElementName=CustomPage, Path=ViewModel.PersonClickCommand}" CommandParameter="{Binding}" Padding="0" Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}">
+                    <TextBlock Text="{Binding name}"/>
+                </HyperlinkButton>
+
+                <TextBlock x:Name="comma">
+                                                    <Run Text=",&#160;"/>
+                </TextBlock>
+            </StackPanel>
+
+
+        </DataTemplate>
+
+        <DataTemplate x:Name="LastDataTemplate" x:Key="LastDataTemplate" x:DataType="models:Person">
+            <StackPanel Orientation="Horizontal">
+                <HyperlinkButton Command="{Binding ElementName=CustomPage, Path=ViewModel.PersonClickCommand}" CommandParameter="{Binding}" Padding="0" Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}">
+                    <TextBlock Text="{Binding name}"/>
+                </HyperlinkButton>
+            </StackPanel>
+
+
+        </DataTemplate>
+
+        <Storyboard x:Name="FadeInContent">
+            <FadeInThemeAnimation Storyboard.TargetName="Content" />
+        </Storyboard>
+        <Storyboard x:Name="FadeOutContent">
+            <FadeOutThemeAnimation Storyboard.TargetName="Content" />
+        </Storyboard>
+
+        <Style TargetType="PivotHeaderItem">
+            <Setter Property="Margin" Value="4,0"/>
+        </Style>
+
+        <helpers:MyTemplateSelector x:Key="MyTemplateSelector"
+                          CommonTemplate="{StaticResource CommonDataTemplate}"
+                          LastTemplate="{StaticResource LastDataTemplate}" />
+
+    </custom:CustomPage.Resources>
+
+
+    <Grid>
+        
+
+        <ProgressRing x:Name="LoadRing" IsActive="True" Width="60" Height="60"/>
+        <ScrollViewer x:Name="Scroller" VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="Content"  Margin="8">
+
+                <TextBlock x:Name="title" HorizontalAlignment="Center" Margin="24,10,24,8" Style="{ThemeResource CategoryStyle}" FontWeight="SemiBold" Text="{x:Bind ViewModel.Collection.name, Mode=OneWay}" TextWrapping="WrapWholeWords"/>
+                <TextBlock x:Name="overview" HorizontalAlignment="Center" Margin="24,8" Text="{x:Bind ViewModel.Collection.overview, Mode=OneWay}" TextWrapping="Wrap" TextAlignment="Justify"/>
+
+                <Pivot Style="{StaticResource PivotStyle1}" x:Name="pivot" Grid.Column="1"                           
+                           Margin="0, 0, 0, 0">
+
+                    <PivotItem x:Name="partspivot" x:Uid="Parts">
+
+
+                        <controls:AdaptiveGridView Name="PartsGrid"
+                            ItemsSource="{x:Bind ViewModel.Parts,Mode=OneWay}"
+                            ItemClickCommand="{x:Bind ViewModel.MovieClickCommand}"
+                            StretchContentForSingleRow="False"
+                            SelectionMode="None"
+                            IsItemClickEnabled="True"
+                            animations:Connected.ListItemElementName="itemThumbnail"
+                            animations:Connected.ListItemKey="animationKeyContentGrid"
+                            DesiredWidth="178"
+                            ItemHeight="316"
+                            Margin="4,0"
+                            >
+                            <controls:AdaptiveGridView.ItemTemplate>
+                                <DataTemplate x:DataType="models:Movie">
+
+                                    <Grid
+                                Margin="8"
+                                x:Name="itemThumbnail"
+                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                            <Grid Height="250">
+                                                <Image HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}" ImageFailed="Image_ImageFailed"/>
+                                            </Grid>
+                                            <TextBlock
+                                        Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding title}"
+                                        ToolTipService.ToolTip="{Binding title}"
+                                        Style="{ThemeResource TitleStyle}" />
+                                            <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                                        </StackPanel>
+                                    </Grid>
+
+                                </DataTemplate>
+                            </controls:AdaptiveGridView.ItemTemplate>
+                        </controls:AdaptiveGridView>
+
+
+
+                    </PivotItem>
+
+                    <PivotItem x:Name="posterspivot" x:Uid="Posters">
+
+                        <controls:AdaptiveGridView Name="PostersGrid"
+                            ItemsSource="{x:Bind ViewModel.Posters,Mode=OneWay}"
+                            ItemClickCommand="{x:Bind ViewModel.ImageClickCommand}"
+                            StretchContentForSingleRow="False"
+                            SelectionMode="None"
+                            IsItemClickEnabled="True"
+                            animations:Connected.ListItemElementName="itemThumbnail"
+                            animations:Connected.ListItemKey="animationKeyContentGrid"
+                            DesiredWidth="210"
+                            ItemHeight="316"
+                            Margin="4,0"
+                            >
+                            <controls:AdaptiveGridView.ItemTemplate>
+                                <DataTemplate x:DataType="models:Image">
+
+                                    <Grid
+                                Margin="8"
+                                x:Name="itemThumbnail"
+                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+
+
+                                            <Image HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Source="{Binding file_path, Converter={StaticResource ImageUrlConverter}}" ImageFailed="Image_ImageFailed"/>
+
+
+                                    </Grid>
+
+                                </DataTemplate>
+                            </controls:AdaptiveGridView.ItemTemplate>
+                        </controls:AdaptiveGridView>
+
+                    </PivotItem>
+
+                    <PivotItem x:Name="backdropspivot" x:Uid="Backdrops">
+
+                        <controls:AdaptiveGridView Name="BackdropsGrid"
+                            ItemsSource="{x:Bind ViewModel.Backdrops,Mode=OneWay}"
+                            ItemClickCommand="{x:Bind ViewModel.ImageClickCommand}"
+                            StretchContentForSingleRow="False"
+                            SelectionMode="None"
+                            IsItemClickEnabled="True"
+                            animations:Connected.ListItemElementName="itemThumbnail"
+                            animations:Connected.ListItemKey="animationKeyContentGrid"
+                            DesiredWidth="474"
+                            ItemHeight="316"
+                            Margin="4,0"
+                            >
+                                    <controls:AdaptiveGridView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:Image">
+
+                                            <Grid
+                                Margin="8"
+                                x:Name="itemThumbnail"
+                                Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+
+                                                <Grid Height="300">
+                                                    <Image HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Source="{Binding file_path, Converter={StaticResource ImageUrlConverter}}" ImageFailed="Image_ImageFailed"/>
+                                                </Grid>
+
+                                            </Grid>
+
+                                        </DataTemplate>
+                                    </controls:AdaptiveGridView.ItemTemplate>
+                                </controls:AdaptiveGridView>
+
+                    </PivotItem>
+
+                    
+                </Pivot>
+
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+
+    
+
+
+</custom:CustomPage>

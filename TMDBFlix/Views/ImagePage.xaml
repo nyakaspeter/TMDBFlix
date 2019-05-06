@@ -1,4 +1,5 @@
 ﻿<custom:CustomPage
+    x:Name="CustomPage"
     x:Class="TMDBFlix.Views.ImagePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -28,7 +29,9 @@
 
 
         <Grid>
-            <Image x:Name="Img"/>
+        <ScrollViewer x:Name="Scroller" MinZoomFactor="0.95" ZoomMode="Enabled" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Image x:Name="Img" MaxWidth="{Binding ActualWidth, ElementName=CustomPage}" MaxHeight="{Binding ActualHeight, ElementName=CustomPage}"/>
+            </ScrollViewer>
         </Grid>
 
 

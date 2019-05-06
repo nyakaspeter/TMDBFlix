@@ -38,6 +38,32 @@ namespace TMDBFlix.Core.Services
             else return new Show();
         }
 
+        public static Season GetSeason(int Id, int Season)
+        {
+            var request = new RestRequest($"/tv/{Id}/season/{Season}");
+            request.AddParameter("api_key", key);
+            request.AddParameter("language", language);
+            request.AddParameter("append_to_response", "credits,external_ids");
+
+            var response = client.Execute<Season>(request);
+            if (response.IsSuccessful)
+            {
+                response.Data.showid = Id;
+                return response.Data;
+            }
+            else if ((int)response.StatusCode == 429)
+            {
+                while ((int)response.StatusCode == 429)
+                {
+                    Thread.Sleep(1000);
+                    response = client.Execute<Season>(request);
+                }
+                response.Data.showid = Id;
+                return response.Data;
+            }
+            else return new Season();
+        }
+
         public static Person GetPerson(int Id)
         {
             var request = new RestRequest($"/person/{Id}");

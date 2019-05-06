@@ -2,10 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMDBFlix.Core.Models;
+using TMDBFlix.Core.Services;
+using Windows.Storage;
 
 namespace TMDBFlix.Test
 {
@@ -13,7 +16,26 @@ namespace TMDBFlix.Test
     {
         static void Main(string[] args)
         {
+            string link = ApplicationData.Current.LocalSettings.Values["link"] as string;
+            string mode = ApplicationData.Current.LocalSettings.Values["mode"] as string;
 
+            //Console.WriteLine("asdasd");
+
+            var temp = ApplicationData.Current.TemporaryFolder;
+            var downloads = temp.CreateFolderAsync("Downloads", CreationCollisionOption.OpenIfExists);
+
+            var p = new ProcessStartInfo
+            {
+                WorkingDirectory = temp.Path,
+                FileName = "cmd",
+                RedirectStandardInput = true,
+                UseShellExecute = false,
+            };
+            var cmd = Process.Start(p);
+
+            if(mode.Equals("filelist")) cmd.StandardInput.WriteLine($"peerflix \"{link}\" -l > filelist.txt");
+            if(mode.Equals("download")) cmd.StandardInput.WriteLine($"peerflix \"{link}\" -f Downloads");
+            /*
             var key = "c82568d86ba0dafa5ecef39bee96f011";
             var client = new RestClient("https://api.themoviedb.org/3");
 
@@ -83,8 +105,7 @@ namespace TMDBFlix.Test
                 Console.WriteLine(s.name);
                 Console.WriteLine(s.known_for);
             }
-            
-            Console.ReadKey();
+            */
         }
     }
 

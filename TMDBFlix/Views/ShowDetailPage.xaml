@@ -125,10 +125,12 @@
                     
                     <RelativePanel Margin="0,8,0,0">
                     <Grid x:Name="poster" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0,0,0,0">
-                        <FlipView x:Name="posters" Width="376" Height="564">
+                        <FlipView x:Name="posters" Width="376" Height="564" ItemsSource="{x:Bind ViewModel.Posters}">
                             <FlipView.ItemTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" ImageFailed="Image_ImageFailed"/>
+                                <DataTemplate x:DataType="Image">
+                                    <HyperlinkButton Padding="0" Command="{Binding ElementName=CustomPage, Path=ViewModel.ImageClickCommand}" CommandParameter="{Binding}">
+                                        <Image Source="{Binding file_path, Converter={StaticResource ImageUrlConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" ImageFailed="Image_ImageFailed"/>
+                                    </HyperlinkButton>
                                 </DataTemplate>
                             </FlipView.ItemTemplate>
                         </FlipView>
@@ -319,7 +321,7 @@
                         <controls:AdaptiveGridView Name="SeasonsGrid"
                             
                             ItemsSource="{x:Bind ViewModel.Show.seasons,Mode=OneWay}"
-                            
+                            ItemClickCommand="{x:Bind ViewModel.SeasonClickCommand}"
                             StretchContentForSingleRow="False"
                             SelectionMode="None"
                             IsItemClickEnabled="True"
@@ -344,8 +346,8 @@
                                             <TextBlock
                                         Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
                                         HorizontalAlignment="Left"
-                                        Text="{Binding season_number, Converter={StaticResource SeasonNameConverter}}"
-                                        ToolTipService.ToolTip="{Binding season_number, Converter={StaticResource SeasonNameConverter}}"
+                                        Text="{Binding name}"
+                                        ToolTipService.ToolTip="{Binding name}"
                                         Style="{ThemeResource TitleStyle}" />
                                             <TextBlock
                                         Margin="{StaticResource XXSmallLeftRightBottomMargin}"

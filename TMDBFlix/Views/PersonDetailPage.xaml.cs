@@ -30,12 +30,6 @@ namespace TMDBFlix.Views
 
         private void ViewModel_LoadCompleted()
         {
-            posters.Items.Add(new BitmapImage(new Uri("https://image.tmdb.org/t/p/w500" + ViewModel.Person.profile_path)));
-            foreach (var v in ViewModel.Person.images.profiles)
-            {
-                if (v.file_path != ViewModel.Person.profile_path)
-                    posters.Items.Add(new BitmapImage(new Uri("https://image.tmdb.org/t/p/w500" + v.file_path)));
-            }
 
             if(ViewModel.Person.known_for_department != null)department.Text = ViewModel.Person.known_for_department;
 

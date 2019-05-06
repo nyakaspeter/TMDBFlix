@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="Page" x:Key="PageStyle">
-        <Setter Property="Background" Value="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}" />
+        <Setter Property="Background" Value="{ThemeResource SystemControlAcrylicWindowBrush}" />
     </Style>
 
     
@@ -12,6 +12,7 @@
             <ScrollContentPresenter x:Name="ScrollContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}"/>
         </Grid>
     </ControlTemplate>
+    
     <Style x:Key="PivotStyle1" TargetType="Pivot">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="0"/>
@@ -253,6 +254,60 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <Style x:Key="AutoSuggestWithoutBorder" TargetType="AutoSuggestBox">
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="TextBoxStyle" Value="{StaticResource AutoSuggestBoxTextBoxStyle}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="AutoSuggestBox">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="Orientation">
+                                <VisualState x:Name="Landscape"/>
+                                <VisualState x:Name="Portrait"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <TextBox x:Name="TextBox"
+                Style="{TemplateBinding TextBoxStyle}"
+                PlaceholderText="{TemplateBinding PlaceholderText}"
+                Header="{TemplateBinding Header}"
+                Width="{TemplateBinding Width}"
+                BorderThickness="0"
+                ScrollViewer.BringIntoViewOnFocusChange="False"
+                Canvas.ZIndex="0"
+                Margin="0"
+                DesiredCandidateWindowAlignment="BottomEdge"/>
+                        <Popup x:Name="SuggestionsPopup">
+                            <Border x:Name="SuggestionsContainer" BorderThickness="0">
+                                <Border.RenderTransform>
+                                    <TranslateTransform x:Name="UpwardTransform"/>
+                                </Border.RenderTransform>
+                                <ListView
+            x:Name="SuggestionsList"
+            Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"
+            BorderThickness="0"
+            BorderBrush="{ThemeResource SystemControlForegroundChromeHighBrush}"
+            DisplayMemberPath="{TemplateBinding DisplayMemberPath}"
+            IsItemClickEnabled="True"
+            ItemTemplate="{TemplateBinding ItemTemplate}"
+            ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+            ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
+            MaxHeight="{ThemeResource AutoSuggestListMaxHeight}"
+            Margin="{ThemeResource AutoSuggestListMargin}"
+            Padding="{ThemeResource AutoSuggestListPadding}">
+                                    <ListView.ItemContainerTransitions>
+                                        <TransitionCollection />
+                                    </ListView.ItemContainerTransitions>
+                                </ListView>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 
 </ResourceDictionary>

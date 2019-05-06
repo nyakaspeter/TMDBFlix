@@ -410,4 +410,19 @@
   <data name="ShowAll.Text" xml:space="preserve">
     <value>Show all</value>
   </data>
+  <data name="Parts.Header" xml:space="preserve">
+    <value>Parts</value>
+  </data>
+  <data name="Posters.Header" xml:space="preserve">
+    <value>Posters</value>
+  </data>
+  <data name="Torrents.Header" xml:space="preserve">
+    <value>Torrents</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>Added</value>
+  </data>
+  <data name="Episodes.Header" xml:space="preserve">
+    <value>Episodes</value>
+  </data>
 </root>

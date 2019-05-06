@@ -24,6 +24,7 @@ namespace TMDBFlix.ViewModels
         public ObservableCollection<MovieCredit> Movies = new ObservableCollection<MovieCredit>();
         public ObservableCollection<ShowCredit> Shows = new ObservableCollection<ShowCredit>();
         public ObservableCollection<Image> Images = new ObservableCollection<Image>();
+        public ObservableCollection<Image> Profiles = new ObservableCollection<Image>();
 
         public delegate void loadCompleted();
         public event loadCompleted LoadCompleted;
@@ -46,6 +47,22 @@ namespace TMDBFlix.ViewModels
 
             sortedMovies.ImagesFirst().ForEach(v => Movies.Add(v));
             sortedShows.ImagesFirst().ForEach(v => Shows.Add(v));
+
+            foreach (var v in Person.images.profiles)
+            {
+                if (v.file_path.Equals(Person.profile_path))
+                {
+                    Profiles.Add(v);
+                    break;
+                }
+            }
+            foreach (var v in Person.images.profiles)
+            {
+                if (!v.file_path.Equals(Person.profile_path))
+                {
+                    Profiles.Add(v);
+                }
+            }
         }
 
         async Task LoadImages()

@@ -6,15 +6,16 @@ using TMDBFlix.Core.Services;
 using TMDBFlix.Services;
 
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
+using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 
 namespace TMDBFlix
 {
     public sealed partial class App : Application
     {
-        public static string Language = "en-US";
-
         private Lazy<ActivationService> _activationService;
 
         private ActivationService ActivationService
@@ -36,6 +37,8 @@ namespace TMDBFlix
             {
                 await ActivationService.ActivateAsync(args);
             }
+
+            ExtendAcrylicIntoTitleBar();
         }
 
         protected override async void OnActivated(IActivatedEventArgs args)
@@ -51,6 +54,14 @@ namespace TMDBFlix
         private UIElement CreateShell()
         {
             return new Views.ShellPage();
+        }
+
+        private void ExtendAcrylicIntoTitleBar()
+        {
+            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
         }
     }
 }

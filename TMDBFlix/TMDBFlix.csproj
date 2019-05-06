@@ -120,6 +120,10 @@
   <ItemGroup>
     <Compile Include="Activation\ActivationHandler.cs" />
     <Compile Include="Controls\CustomPage.cs" />
+    <Compile Include="Helpers\TorrentLeechersConverter.cs" />
+    <Compile Include="Helpers\TorrentSeedersConverter.cs" />
+    <Compile Include="Helpers\TorrentSizeConverter.cs" />
+    <Compile Include="Helpers\TorrentAddedDateConverter.cs" />
     <Compile Include="Helpers\SearchItemImageConverter.cs" />
     <Compile Include="Helpers\SearchItemInfoConverter.cs" />
     <Compile Include="Helpers\SearchItemNameConverter.cs" />
@@ -143,7 +147,9 @@
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ThemeSelectorService.cs" />
     <Compile Include="ViewModels\ClickableViewModel.cs" />
+    <Compile Include="ViewModels\CollectionDetailViewModel.cs" />
     <Compile Include="ViewModels\SearchGridViewModel.cs" />
+    <Compile Include="ViewModels\SeasonDetailViewModel.cs" />
     <Compile Include="ViewModels\ShowDetailViewModel.cs" />
     <Compile Include="ViewModels\PersonDetailViewModel.cs" />
     <Compile Include="ViewModels\MovieDetailViewModel.cs" />
@@ -159,8 +165,14 @@
     <Compile Include="Views\ImagePage.xaml.cs">
       <DependentUpon>ImagePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CollectionDetailPage.xaml.cs">
+      <DependentUpon>CollectionDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SearchGridPage.xaml.cs">
       <DependentUpon>SearchGridPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SeasonDetailPage.xaml.cs">
+      <DependentUpon>SeasonDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShowDetailPage.xaml.cs">
       <DependentUpon>ShowDetailPage.xaml</DependentUpon>
@@ -241,7 +253,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\CollectionDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\SearchGridPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SeasonDetailPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -394,6 +414,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Strings\hu\" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsDesktop, Version=10.0.17763.0">
+      <Name>Windows Desktop Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

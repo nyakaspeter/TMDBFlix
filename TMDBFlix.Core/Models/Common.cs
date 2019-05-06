@@ -134,7 +134,7 @@ namespace TMDBFlix.Core.Models
             public int id { get; set; }
             public string name { get; set; }
             public string overview { get; set; }
-            public object poster_path { get; set; }
+            public string poster_path { get; set; }
             public string backdrop_path { get; set; }
             public List<Movie> parts { get; set; }
     }
