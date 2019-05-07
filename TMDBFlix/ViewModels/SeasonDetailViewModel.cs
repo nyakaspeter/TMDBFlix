@@ -10,6 +10,9 @@ using TMDBFlix.Helpers;
 
 namespace TMDBFlix.ViewModels
 {
+    /// <summary>
+    /// Contains season data and loading tasks
+    /// </summary>
     public class SeasonDetailViewModel : ClickableViewModel
     {
         private Season season = new Season();
@@ -60,6 +63,7 @@ namespace TMDBFlix.ViewModels
             {
                 if(v.still_path != null) Backdrops.Add(new Image() { file_path = v.still_path });
             }
+            Console.WriteLine();
         }
 
         async Task LoadImages()

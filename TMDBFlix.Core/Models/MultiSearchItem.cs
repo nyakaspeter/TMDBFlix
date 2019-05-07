@@ -2,13 +2,17 @@
 
 namespace TMDBFlix.Core.Models
 {
+    /// <summary>
+    /// Contains search item data for REST response deserialization
+    /// </summary>
     public class MultiSearchItem
     {
             public string poster_path { get; set; }
-        private float _popularity;
+            private float _popularity;
             public float popularity {
             get
             {
+                // Popularity boost for people because TMDb likes to push them back in search
                 if (media_type.Equals("person")) return _popularity * 2;
                 return _popularity;
             }

@@ -8,6 +8,9 @@ using Windows.UI.Xaml.Data;
 
 namespace TMDBFlix.Helpers
 {
+    /// <summary>
+    /// Converts torrent size to Gigabytes or Megabytes
+    /// </summary>
     class TorrentSizeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

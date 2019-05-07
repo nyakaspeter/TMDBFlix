@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
+/// <summary>
+/// Data classes for REST response deserialization
+/// </summary>
 namespace TMDBFlix.Core.Models
 {
     public class MoviesResponse

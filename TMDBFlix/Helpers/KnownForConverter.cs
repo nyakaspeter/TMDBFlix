@@ -8,6 +8,9 @@ using Windows.UI.Xaml.Data;
 
 namespace TMDBFlix.Helpers
 {
+    /// <summary>
+    /// Converts a list of performances to string
+    /// </summary>
     class KnownForConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

@@ -44,8 +44,16 @@ namespace TMDBFlix.Views
             if (ViewModel.Show.episode_run_time.Count != 0) runtime.Text = ViewModel.Show.episode_run_time[0].ToString() + " " + new ResourceLoader().GetString("Minute");
             episodes.Text = ViewModel.Season.episodes.Count + " " + new ResourceLoader().GetString("Episodenumber");
 
-            votecount.Text = "(" + ViewModel.Show.vote_count + ")";
-            voteaverage.PlaceholderValue = ViewModel.Show.vote_average / 2;
+            ViewModel.Season.episodes.ForEach(x => ViewModel.Season.vote_count += x.vote_count);
+            ViewModel.Season.episodes.ForEach(x => ViewModel.Season.vote_average += x.vote_average);
+            var notrated = 0;
+            ViewModel.Season.episodes.ForEach(x => { if (x.vote_count == 0) notrated++; });
+
+            ViewModel.Season.vote_average /= (ViewModel.Season.episodes.Count - notrated);
+
+            var vote = Math.Round((double)ViewModel.Season.vote_average / 2, 2);
+            voteaverage.PlaceholderValue = vote;
+            votecount.Text = "(" + ViewModel.Season.vote_count + ")";
 
             creator.ItemTemplateSelector = new MyTemplateSelector()
             {

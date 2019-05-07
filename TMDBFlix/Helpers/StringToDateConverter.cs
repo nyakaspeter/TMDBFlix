@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TMDBFlix.Core.Models;
 using Windows.UI.Xaml.Data;
 
 namespace TMDBFlix.Helpers
 {
     /// <summary>
-    /// Converts a search item to a string containing it's title
+    /// Converts a date string to "yyyy. MM. dd." format date string
     /// </summary>
-    class SearchItemNameConverter : IValueConverter
+    class StringToDateConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var item = value as MultiSearchItem;
-
-            if (item.media_type.Equals("movie")) return item.title;
-            else return item.name;
+            var str = value as string;
+            if (str is null) return "N/A";
+            var date = DateTime.Parse(str).ToString("yyyy. MM. dd.");
+            if (date is null) return "N/A";
+            return date;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

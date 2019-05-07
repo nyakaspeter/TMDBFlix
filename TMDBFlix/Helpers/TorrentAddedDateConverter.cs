@@ -8,6 +8,9 @@ using Windows.UI.Xaml.Data;
 
 namespace TMDBFlix.Helpers
 {
+    /// <summary>
+    /// Converts a date string to a "yyyy. MM. dd. hh:mm" format date string
+    /// </summary>
     class TorrentAddedDateConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

@@ -145,7 +145,7 @@ namespace TMDBFlix.Views
                 { "path", "/discover/tv"},
                 {"sort_by", "vote_average.desc" },
                 {"vote_average.gte","7" },
-                {"vote_count.gte","300" }
+                {"vote_count.gte","400" }
             }, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 

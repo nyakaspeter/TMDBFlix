@@ -75,10 +75,13 @@ namespace TMDBFlix.Views
                 }
                 else runtime.Text = $"{ViewModel.Movie.runtime} {new ResourceLoader().GetString("Minute")}";
             }
-            
+
+            var vote = Math.Round((double)ViewModel.Movie.vote_average / 2, 2);
+            voteaverage.PlaceholderValue = vote;
             votecount.Text = "(" + ViewModel.Movie.vote_count + ")";
-            voteaverage.PlaceholderValue = ViewModel.Movie.vote_average / 2;
-            releasedate.Text = DateTime.Parse(ViewModel.Movie.release_date).ToString("yyyy. MM. dd.");
+
+            if (!ViewModel.Movie.release_date.Equals(""))
+                releasedate.Text = DateTime.Parse(ViewModel.Movie.release_date).ToString("yyyy. MM. dd.");
 
             director.ItemTemplateSelector = new MyTemplateSelector()
             {

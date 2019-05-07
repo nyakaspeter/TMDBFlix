@@ -13,6 +13,9 @@ using Windows.ApplicationModel.Resources;
 
 namespace TMDBFlix.ViewModels
 {
+    /// <summary>
+    /// Contains show list data and loading tasks
+    /// </summary>
     public class ShowsGridViewModel : ClickableViewModel
     {
 

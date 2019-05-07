@@ -10,6 +10,9 @@ using TMDBFlix.Helpers;
 
 namespace TMDBFlix.ViewModels
 {
+    /// <summary>
+    /// Contains collection data and loading tasks
+    /// </summary>
     public class CollectionDetailViewModel : ClickableViewModel
     {
         private Collection collection = new Collection();

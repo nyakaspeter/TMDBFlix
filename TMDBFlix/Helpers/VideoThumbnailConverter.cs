@@ -8,6 +8,9 @@ using Windows.UI.Xaml.Data;
 
 namespace TMDBFlix.Helpers
 {
+    /// <summary>
+    /// Converts a YouTube video link to it's thumbnail image link
+    /// </summary>
     class VideoThumbnailConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

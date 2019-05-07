@@ -8,6 +8,9 @@ using Windows.UI.Xaml.Data;
 
 namespace TMDBFlix.Helpers
 {
+    /// <summary>
+    /// Converts TMDb image path to image link string
+    /// </summary>
     class ImagePathToUrlConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

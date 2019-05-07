@@ -7,6 +7,9 @@ using Windows.UI.Xaml.Data;
 
 namespace TMDBFlix.Helpers
 {
+    /// <summary>
+    /// Converts TMDb style release date string to a string containing the release year
+    /// </summary>
     class ReleaseDateToYearConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

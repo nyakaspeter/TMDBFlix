@@ -8,6 +8,9 @@ using Windows.UI.Xaml.Data;
 
 namespace TMDBFlix.Helpers
 {
+    /// <summary>
+    /// Converts torrent attributes to leech number
+    /// </summary>
     class TorrentLeechersConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

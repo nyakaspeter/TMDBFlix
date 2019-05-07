@@ -13,6 +13,9 @@ using Windows.ApplicationModel.Resources;
 
 namespace TMDBFlix.ViewModels
 {
+    /// <summary>
+    /// Contains movie list data and loading tasks
+    /// </summary>
     public class MoviesGridViewModel : ClickableViewModel
     {
         public ObservableCollection<Movie> Movies { get; set; } = new ObservableCollection<Movie>();

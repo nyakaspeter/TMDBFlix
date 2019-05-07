@@ -8,6 +8,9 @@ using Windows.UI.Xaml.Data;
 
 namespace TMDBFlix.Helpers
 {
+    /// <summary>
+    /// Converts torrent attributes to seed number
+    /// </summary>
     class TorrentSeedersConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

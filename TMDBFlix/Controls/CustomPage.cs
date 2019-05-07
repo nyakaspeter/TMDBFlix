@@ -20,6 +20,11 @@ namespace TMDBFlix.Controls
         public const int ONEROWGRID_TEXTHEIGHT = 35;
         public const double POSTERASPECTRATIO = 1.58;
 
+        /// <summary>
+        /// Gets the first ScrollViewer child of an element
+        /// </summary>
+        /// <param name="element">The parent element</param>
+        /// <returns></returns>
         public ScrollViewer GetScrollViewer(DependencyObject element)
         {
             if (element is ScrollViewer)
@@ -44,18 +49,33 @@ namespace TMDBFlix.Controls
             return null;
         }
 
+        /// <summary>
+        /// Scrolls forward a one row grid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void ScrollForward(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
             ScrollGrid((DependencyObject)this.FindName(btn.Tag.ToString()), true);
         }
 
+        /// <summary>
+        /// Scrolls backward a one row grid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void ScrollBackward(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
             ScrollGrid((DependencyObject)this.FindName(btn.Tag.ToString()), false);
         }
 
+        /// <summary>
+        /// Scrolls a grid one screen width
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="forward"></param>
         public void ScrollGrid(DependencyObject obj, bool forward)
         {
             ScrollViewer scrollViewer = GetScrollViewer(obj);
@@ -65,6 +85,11 @@ namespace TMDBFlix.Controls
             scrollViewer.HorizontalScrollMode = ScrollMode.Disabled;
         }
 
+        /// <summary>
+        /// Loads placeholder image if image is failed to load
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Image_ImageFailed(object sender, ExceptionRoutedEventArgs e)
         {
             Image img = sender as Image;
@@ -72,13 +97,12 @@ namespace TMDBFlix.Controls
             img.Source = fallbackImage;
         }
 
-        public void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            var grid = sender as AdaptiveGridView;
-            if (grid.ActualWidth != 0)
-                grid.ItemHeight = grid.ActualWidth / Math.Round(grid.ActualWidth / ONEROWGRID_DESIREDWIDTH) * POSTERASPECTRATIO + ONEROWGRID_TEXTHEIGHT;
-        }
-
+        /// <summary>
+        /// Fixes bugs of one row grid
+        /// </summary>
+        /// <param name="element">The one row grid</param>
+        /// <param name="width">Desired width of one grid element</param>
+        /// <param name="height">Fixed height of one grid element</param>
         public void FixOneRowGrid(DependencyObject element, double width = ONEROWGRID_DESIREDWIDTH, double height = ONEROWGRID_DESIREDWIDTH * POSTERASPECTRATIO + ONEROWGRID_TEXTHEIGHT)
         {
             if (element is AdaptiveGridView)
@@ -97,6 +121,11 @@ namespace TMDBFlix.Controls
             }
         }
 
+        /// <summary>
+        /// Sends app to full screen mode when YouTube video enters full screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         public void WebView_ContainsFullScreenElementChanged(WebView sender, object args)
         {
             var applicationView = ApplicationView.GetForCurrentView();

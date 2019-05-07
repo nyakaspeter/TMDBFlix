@@ -10,6 +10,9 @@ using TMDBFlix.Core.Models;
 
 namespace TMDBFlix.Core.Services
 {
+    /// <summary>
+    /// Static class for communicating with TMDb API
+    /// </summary>
     public static class TMDBService
     {
         private static readonly string key = "c82568d86ba0dafa5ecef39bee96f011";
@@ -17,6 +20,11 @@ namespace TMDBFlix.Core.Services
         public static string language = "en";
         public static string region = "US";
 
+        /// <summary>
+        /// Gets show data
+        /// </summary>
+        /// <param name="Id">The show's TMDb ID</param>
+        /// <returns></returns>
         public static Show GetShow(int Id)
         {
             var request = new RestRequest($"/tv/{Id}");
@@ -38,6 +46,12 @@ namespace TMDBFlix.Core.Services
             else return new Show();
         }
 
+        /// <summary>
+        /// Gets season data
+        /// </summary>
+        /// <param name="Id">The show's TMDb ID</param>
+        /// <param name="Season">Season number</param>
+        /// <returns></returns>
         public static Season GetSeason(int Id, int Season)
         {
             var request = new RestRequest($"/tv/{Id}/season/{Season}");
@@ -64,6 +78,11 @@ namespace TMDBFlix.Core.Services
             else return new Season();
         }
 
+        /// <summary>
+        /// Gets person data
+        /// </summary>
+        /// <param name="Id">The person's TMDb ID</param>
+        /// <returns></returns>
         public static Person GetPerson(int Id)
         {
             var request = new RestRequest($"/person/{Id}");
@@ -85,6 +104,14 @@ namespace TMDBFlix.Core.Services
             else return new Person();
         }
 
+        /// <summary>
+        /// Gets a movie list
+        /// </summary>
+        /// <param name="Path">TMDb API path</param>
+        /// <param name="Query">Query in key value pairs</param>
+        /// <param name="StartingPage">First page of results to download</param>
+        /// <param name="NumberOfPages">Number of pages to download</param>
+        /// <returns></returns>
         public static List<Movie> GetMovieList(string Path, Dictionary<string, string> Query, int StartingPage = 1, int NumberOfPages = 2)
         {
             var request = new RestRequest(Path);
@@ -111,6 +138,11 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
+        /// <summary>
+        /// Gets movie data
+        /// </summary>
+        /// <param name="Id">The movie's TMDb ID</param>
+        /// <returns></returns>
         public static Movie GetMovie(int Id)
         {
             var request = new RestRequest($"/movie/{Id}");
@@ -132,6 +164,11 @@ namespace TMDBFlix.Core.Services
             else return new Movie();
         }
 
+        /// <summary>
+        /// Gets collection data
+        /// </summary>
+        /// <param name="Id">The collection's TMDb ID</param>
+        /// <returns></returns>
         public static Collection GetCollection(int Id)
         {
             var request = new RestRequest($"/collection/{Id}");
@@ -152,6 +189,11 @@ namespace TMDBFlix.Core.Services
             else return new Collection();
         }
 
+        /// <summary>
+        /// Gets images from TMDb
+        /// </summary>
+        /// <param name="Path">TMDb API path</param>
+        /// <returns></returns>
         public static ImagesResponse GetImages(string Path)
         {
             var request = new RestRequest(Path);
@@ -171,6 +213,11 @@ namespace TMDBFlix.Core.Services
             else return new ImagesResponse();
         }
 
+        /// <summary>
+        /// Gets video list from TMDb
+        /// </summary>
+        /// <param name="Path">TMDb API path</param>
+        /// <returns></returns>
         public static List<Video> GetVideos(string Path)
         {
             var videos = new List<Video>();
@@ -214,6 +261,14 @@ namespace TMDBFlix.Core.Services
             return videos;
         }
 
+        /// <summary>
+        /// Gets a show list
+        /// </summary>
+        /// <param name="Path">TMDb API path</param>
+        /// <param name="Query">Query in key value pairs</param>
+        /// <param name="StartingPage">First page to download</param>
+        /// <param name="NumberOfPages">Number of pages to download</param>
+        /// <returns></returns>
         public static List<Show> GetShowList(string Path, Dictionary<string, string> Query, int StartingPage = 1, int NumberOfPages = 2)
         {
             var request = new RestRequest(Path);
@@ -240,6 +295,14 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
+        /// <summary>
+        /// Gets a person list
+        /// </summary>
+        /// <param name="Path">TMDb API path</param>
+        /// <param name="Query">Query in key value pairs</param>
+        /// <param name="StartingPage">First page to download</param>
+        /// <param name="NumberOfPages">Number of pages to download</param>
+        /// <returns></returns>
         public static List<Person> GetPersonList(string Path, Dictionary<string, string> Query, int StartingPage = 1, int NumberOfPages = 2)
         {
             var request = new RestRequest(Path);
@@ -266,6 +329,13 @@ namespace TMDBFlix.Core.Services
             return results;
         }
 
+        /// <summary>
+        /// Searches on TMDb for movies, shows and people
+        /// </summary>
+        /// <param name="Query">The query string</param>
+        /// <param name="StartingPage">First page to download</param>
+        /// <param name="NumberOfPages">Number of pages to download</param>
+        /// <returns></returns>
         public static List<MultiSearchItem> Search(string Query, int StartingPage = 1, int NumberOfPages = 1)
         {
             var results = new List<MultiSearchItem>();
@@ -336,6 +406,11 @@ namespace TMDBFlix.Core.Services
             return results.OrderByDescending(x => x.popularity).ToList();
         }
 
+        /// <summary>
+        /// Puts imageless items to the end of the list
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static List<MultiSearchItem> ImagesFirst(this List<MultiSearchItem> list)
         {
             var noimage = new List<MultiSearchItem>();
@@ -352,6 +427,11 @@ namespace TMDBFlix.Core.Services
             return list;
         }
 
+        /// <summary>
+        /// Puts imageless items to the end of the list
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static List<Movie> ImagesFirst(this List<Movie> list)
         {
             var noimage = new List<Movie>();
@@ -368,6 +448,11 @@ namespace TMDBFlix.Core.Services
             return list;
         }
 
+        /// <summary>
+        /// Puts imageless items to the end of the list
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static List<Show> ImagesFirst(this List<Show> list)
         {
             var noimage = new List<Show>();
@@ -384,6 +469,11 @@ namespace TMDBFlix.Core.Services
             return list;
         }
 
+        /// <summary>
+        /// Puts imageless items to the end of the list
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static List<MovieCredit> ImagesFirst(this List<MovieCredit> list)
         {
             var noimage = new List<MovieCredit>();
@@ -400,6 +490,11 @@ namespace TMDBFlix.Core.Services
             return list;
         }
 
+        /// <summary>
+        /// Puts imageless items to the end of the list
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static List<ShowCredit> ImagesFirst(this List<ShowCredit> list)
         {
             var noimage = new List<ShowCredit>();
@@ -416,6 +511,11 @@ namespace TMDBFlix.Core.Services
             return list;
         }
 
+        /// <summary>
+        /// Puts imageless items to the end of the list
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static List<Person> ImagesFirst(this List<Person> list)
         {
             var noimage = new List<Person>();
@@ -432,6 +532,11 @@ namespace TMDBFlix.Core.Services
             return list;
         }
 
+        /// <summary>
+        /// Removes imageless items from the list
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static List<MultiSearchItem> OnlyWithImages(this List<MultiSearchItem> list)
         {
             var noimage = new List<MultiSearchItem>();
@@ -447,6 +552,11 @@ namespace TMDBFlix.Core.Services
             return list;
         }
 
+        /// <summary>
+        /// Removes items with images from the list
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static List<MultiSearchItem> OnlyWithoutImages(this List<MultiSearchItem> list)
         {
             var hasimage = new List<MultiSearchItem>();

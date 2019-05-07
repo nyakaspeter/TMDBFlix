@@ -20,6 +20,9 @@
         <helpers:KnownForConverter x:Key="KnownForConverter" />
         <helpers:VideoThumbnailConverter x:Key="VideoThumbnailConverter"/>
         <helpers:SeasonNumberToNameConverter x:Key="SeasonNameConverter"/>
+        <helpers:VotesToStarsConverter x:Key="VotesToStarsConverter"/>
+        <helpers:EpisodeNameConverter x:Key="EpisodeNameConverter"/>
+        <helpers:StringToDateConverter x:Key="DateConverter"/>
 
         <DataTemplate x:Name="CommonDataTemplate" x:Key="CommonDataTemplate" x:DataType="models:Person">
             <StackPanel Orientation="Horizontal">
@@ -109,6 +112,7 @@
                         <Setter Target="keywordsinfo.(RelativePanel.RightOf)" Value="poster" />
                         <Setter Target="keywordsinfo.(RelativePanel.AlignBottomWith)" Value="poster" />
                         <Setter Target="keywordsinfo.(RelativePanel.Below)" Value="" />
+
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -177,8 +181,8 @@
                                 
 
                                 <StackPanel Orientation="Horizontal">
-                                    <mux:RatingControl x:Name="voteaverage" IsReadOnly="True" VerticalAlignment="Center" Margin="0,4,0,0"/>
-                                    <TextBlock x:Name="votecount" Margin="12,-2,12,0" VerticalAlignment="Center" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
+                                <mux:RatingControl x:Name="voteaverage" IsReadOnly="True" VerticalAlignment="Center" Margin="0,4,0,0"/>
+                                <TextBlock x:Name="votecount" Margin="12,-2,12,0" VerticalAlignment="Center" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
                                     <StackPanel Orientation="Horizontal" Height="36" VerticalAlignment="Center">
                                         <HyperlinkButton x:Name="imdbicon" Padding="0" Tapped="ImdbIcon_Tapped">
                                             <BitmapIcon Margin="3,0,5,0" Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}" UriSource="ms-appx:///Assets/icons8-imdb-64.png"/>
@@ -339,37 +343,62 @@
                             
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="models:Episode">
+                                    <UserControl>
+                                    <RelativePanel Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" Margin="-4,8">
 
-                                    <RelativePanel Height="212" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" Margin="-4,8">
-                                        <Grid x:Name="EpisodeStill"
-                                            RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
-                                        <Image 
-                                               Stretch="Uniform" Source="{Binding still_path, Converter={StaticResource ImageUrlConverter}}" ImageFailed="Image_ImageFailed"/>
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroup>
+                                                    <VisualState>
+                                                        <VisualState.StateTriggers>
+                                                            <!--641 is the default CompactModeThresholdWidth in NavigationView -->
+                                                            <AdaptiveTrigger MinWindowWidth="1070" />
+                                                        </VisualState.StateTriggers>
+                                                        <VisualState.Setters>
+                                                            <Setter Target="EpisodeStillImage.MaxHeight" Value="212" />
+                                                            <Setter Target="EpisodeStill.(RelativePanel.AlignVerticalCenterWithPanel)" Value="True" />
+                                                            <Setter Target="EpisodeStill.(RelativePanel.AlignHorizontalCenterWithPanel)" Value="False" />
+                                                            <Setter Target="EpisodeInfo.(RelativePanel.RightOf)" Value="EpisodeStill" />
+                                                            <Setter Target="EpisodeInfo.(RelativePanel.AlignRightWithPanel)" Value="True" />
+                                                            <Setter Target="EpisodeInfo.(RelativePanel.AlignVerticalCenterWithPanel)" Value="True" />
+                                                            <Setter Target="EpisodeInfo.(RelativePanel.Below)" Value="" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                            </VisualStateManager.VisualStateGroups>
+
+                                            <Grid x:Name="EpisodeStill"
+                                            RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0">
+                                        <Image x:Name="EpisodeStillImage"
+                                               Stretch="Uniform" MaxHeight="252" Source="{Binding still_path, Converter={StaticResource ImageUrlConverter}}" ImageFailed="Image_ImageFailed"/>
                                         </Grid>
 
-                                        <StackPanel RelativePanel.RightOf="EpisodeStill" RelativePanel.AlignVerticalCenterWithPanel="True"
-                                                    RelativePanel.AlignRightWithPanel="True"
-                                                    Margin="8">
-                                            <TextBlock
+                                        <StackPanel x:Name="EpisodeInfo" RelativePanel.Below="EpisodeStill"
+                                                    Margin="16">
+                                           
+                                                <TextBlock
+                                                    FontSize="18"
+                                                FontWeight="SemiBold"
                                         HorizontalAlignment="Left"
-                                        Text="{Binding episode_number}"/>
-                                            <TextBlock
-                                        HorizontalAlignment="Left"
-                                        Text="{Binding name}"
-                                        ToolTipService.ToolTip="{Binding name}"/>
-                                            <TextBlock
-                                        HorizontalAlignment="Left"
-                                        Text="{Binding air_date}"/>
+                                                    TextWrapping="Wrap"
+                                        Text="{Binding Converter={StaticResource EpisodeNameConverter}}"
+                                        ToolTipService.ToolTip="{Binding Converter={StaticResource EpisodeNameConverter}}"/>
+                                            
+                                            
+                                            
                                             <StackPanel Orientation="Horizontal">
-                                            <mux:RatingControl IsReadOnly="True" VerticalAlignment="Center" Margin="0,4,0,0"/>
-                                            <TextBlock Text="{Binding vote_count}" Margin="12,-2,12,0" VerticalAlignment="Center" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
+                                            <mux:RatingControl PlaceholderValue="{Binding vote_average, Converter={StaticResource VotesToStarsConverter}}" IsReadOnly="True" VerticalAlignment="Center" Margin="0,4,0,0"/>
+                                                <TextBlock Text="(" Margin="12,-2,0,0" VerticalAlignment="Center" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
+                                                <TextBlock Text="{Binding vote_count}" Margin="0,-2,0,0" VerticalAlignment="Center" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
+                                                <TextBlock Text=")" Margin="0,-2,12,0" VerticalAlignment="Center" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
+                                                <FontIcon Margin="0,0,12,0" FontFamily="Segoe MDL2 Assets" Glyph="&#xF127;" FontSize="4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
+                                                <TextBlock Text="{Binding air_date, Converter={StaticResource DateConverter}}" Margin="0,-2,12,0" VerticalAlignment="Center" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
                                             </StackPanel>
                                             <TextBlock
                                         HorizontalAlignment="Left"
-                                        Text="{Binding overview}"  TextWrapping="Wrap"/>
+                                        Text="{Binding overview}"  TextAlignment="Justify" TextWrapping="Wrap"/>
                                         </StackPanel>
                                     </RelativePanel>
-
+                                    </UserControl>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>

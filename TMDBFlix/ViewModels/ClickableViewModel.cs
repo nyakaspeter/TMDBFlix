@@ -22,6 +22,9 @@ using Windows.Storage;
 
 namespace TMDBFlix.ViewModels
 {
+    /// <summary>
+    /// Provides click commands to all clickable elements
+    /// </summary>
     public class ClickableViewModel : Observable
     {
         private ICommand _movieClickCommand;
@@ -55,6 +58,10 @@ namespace TMDBFlix.ViewModels
         private ICommand _seasonClickCommand;
         public ICommand SeasonClickCommand => _seasonClickCommand ?? (_seasonClickCommand = new RelayCommand<Season>(OnSeasonClick));
 
+        /// <summary>
+        /// Navigates to the clicked movie's detail page
+        /// </summary>
+        /// <param name="clickedItem"></param>
         public void OnMovieClick(Movie clickedItem)
         {
             if (clickedItem != null)
@@ -64,6 +71,10 @@ namespace TMDBFlix.ViewModels
             }
         }
 
+        /// <summary>
+        /// Navigates to the clicked show's detail page
+        /// </summary>
+        /// <param name="clickedItem"></param>
         public void OnShowClick(Show clickedItem)
         {
             if (clickedItem != null)
@@ -73,6 +84,10 @@ namespace TMDBFlix.ViewModels
             }
         }
 
+        /// <summary>
+        /// Navigates to the clicked season's detail page
+        /// </summary>
+        /// <param name="clickedItem"></param>
         public void OnSeasonClick(Season clickedItem)
         {
             if (clickedItem != null)
@@ -82,6 +97,10 @@ namespace TMDBFlix.ViewModels
             }
         }
 
+        /// <summary>
+        /// Navigates to the clicked person's detail page
+        /// </summary>
+        /// <param name="clickedItem"></param>
         public void OnPersonClick(Person clickedItem)
         {
             if (clickedItem != null)
@@ -91,6 +110,10 @@ namespace TMDBFlix.ViewModels
             }
         }
 
+        /// <summary>
+        /// Navigates to the clicked search item's detail page
+        /// </summary>
+        /// <param name="clickedItem"></param>
         public void OnSearchItemClick(MultiSearchItem clickedItem)
         {
             if (clickedItem.media_type.Equals("movie"))
@@ -110,6 +133,10 @@ namespace TMDBFlix.ViewModels
             }
         }
 
+        /// <summary>
+        /// Navigates to the clicked video's view page
+        /// </summary>
+        /// <param name="clickedItem"></param>
         public void OnVideoClick(Video clickedItem)
         {
             if (clickedItem != null)
@@ -119,6 +146,10 @@ namespace TMDBFlix.ViewModels
             }
         }
 
+        /// <summary>
+        /// Navigates to the clicked image's view page
+        /// </summary>
+        /// <param name="clickedItem"></param>
         public void OnImageClick(Image clickedItem)
         {
             if (clickedItem != null)
@@ -128,6 +159,10 @@ namespace TMDBFlix.ViewModels
             }
         }
 
+        /// <summary>
+        /// Navigates to the clicked genre's movie list page
+        /// </summary>
+        /// <param name="clickedItem"></param>
         public void OnGenreClick(Genre clickedItem)
         {
             if (clickedItem != null)
@@ -141,6 +176,10 @@ namespace TMDBFlix.ViewModels
             }
         }
 
+        /// <summary>
+        /// Navigates to the clicked genre's show list page
+        /// </summary>
+        /// <param name="clickedItem"></param>
         public void OnTvGenreClick(Genre clickedItem)
         {
             if (clickedItem != null)
@@ -154,6 +193,10 @@ namespace TMDBFlix.ViewModels
             }
         }
 
+        /// <summary>
+        /// Navigates to the clicked keyword's movie list page
+        /// </summary>
+        /// <param name="clickedItem"></param>
         public void OnKeywordClick(Keyword clickedItem)
         {
             if (clickedItem != null)
@@ -167,6 +210,10 @@ namespace TMDBFlix.ViewModels
             }
         }
 
+        /// <summary>
+        /// Navigates to the clicked keyword's show list page
+        /// </summary>
+        /// <param name="clickedItem"></param>
         public void OnTvKeywordClick(Keyword clickedItem)
         {
             if (clickedItem != null)
@@ -180,6 +227,10 @@ namespace TMDBFlix.ViewModels
             }
         }
 
+        /// <summary>
+        /// Navigates to the clicked network's show list page
+        /// </summary>
+        /// <param name="clickedItem"></param>
         public void OnNetworkClick(Network clickedItem)
         {
             if (clickedItem != null)
@@ -193,12 +244,20 @@ namespace TMDBFlix.ViewModels
             }
         }
 
+        /// <summary>
+        /// Opens the clicked torrent's webpage
+        /// </summary>
+        /// <param name="clickedItem"></param>
         public void OnTorrentInfoClick(Torrent clickedItem)
         {
-            
             Windows.System.Launcher.LaunchUriAsync(new Uri(clickedItem.Comments));
         }
 
+        /// <summary>
+        /// NOT IMPLEMENTED FULLY YET
+        /// Starts streaming the clicked torrent
+        /// </summary>
+        /// <param name="clickedItem"></param>
         public async void OnTorrentStreamClick(Torrent clickedItem)
         {
             if (ApiInformation.IsApiContractPresent("Windows.ApplicationModel.FullTrustAppContract", 1, 0))
@@ -247,6 +306,11 @@ namespace TMDBFlix.ViewModels
             }
         }
 
+        /// <summary>
+        /// NOT IMPLEMENTED FULLY YET
+        /// Opens the desktop extension and starts streaming torrent
+        /// </summary>
+        /// <param name="title"></param>
         public async void StartStreaming(string title)
         {
             List<string> files = new List<string>();
@@ -268,6 +332,10 @@ namespace TMDBFlix.ViewModels
             Windows.System.Launcher.LaunchFileAsync(vid);
         }
 
+        /// <summary>
+        /// Download's the clicked torrent file and opens it
+        /// </summary>
+        /// <param name="clickedItem"></param>
         public async void OnTorrentDownloadClick(Torrent clickedItem)
         {
            

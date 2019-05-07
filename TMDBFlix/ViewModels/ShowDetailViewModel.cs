@@ -10,6 +10,9 @@ using TMDBFlix.Helpers;
 
 namespace TMDBFlix.ViewModels
 {
+    /// <summary>
+    /// Contains show data and loading tasks
+    /// </summary>
     public class ShowDetailViewModel : ClickableViewModel
     {
         private Show show = new Show();

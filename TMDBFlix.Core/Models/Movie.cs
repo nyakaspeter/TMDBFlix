@@ -4,6 +4,9 @@ using System.Runtime.CompilerServices;
 
 namespace TMDBFlix.Core.Models
 {
+    /// <summary>
+    /// Contains movie data for REST response deserialization
+    /// </summary>
     public class Movie
     {
         public bool adult { get; set; }

@@ -14,6 +14,9 @@ using TMDBFlix.Views;
 
 namespace TMDBFlix.ViewModels
 {
+    /// <summary>
+    /// Contains main page data and loading tasks
+    /// </summary>
     public class ContentGridViewModel : ClickableViewModel
     {
         public delegate void loadCompleted();
@@ -106,7 +109,7 @@ namespace TMDBFlix.ViewModels
                 LoadShowList(HighRatedShows, "/discover/tv", new Dictionary<string, string>(){
                     {"sort_by", "vote_average.desc" },
                     {"vote_average.gte","7" },
-                    {"vote_count.gte","300" }
+                    {"vote_count.gte","400" }
                 }),
                 LoadPersonList(PopularPeople, "/person/popular", new Dictionary<string, string>())
             };

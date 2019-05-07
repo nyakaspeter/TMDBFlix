@@ -8,6 +8,9 @@ using Windows.UI.Xaml.Data;
 
 namespace TMDBFlix.Helpers
 {
+    /// <summary>
+    /// Converts Media to a string containing it's title
+    /// </summary>
     class ImageToTitleConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

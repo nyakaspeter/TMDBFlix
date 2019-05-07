@@ -10,6 +10,9 @@ using TMDBFlix.Helpers;
 
 namespace TMDBFlix.ViewModels
 {
+    /// <summary>
+    /// Contains person data and loading tasks
+    /// </summary>
     public class PersonDetailViewModel : ClickableViewModel
     {
         private Person person = new Person();

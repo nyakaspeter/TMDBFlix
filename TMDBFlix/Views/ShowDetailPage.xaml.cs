@@ -58,8 +58,9 @@ namespace TMDBFlix.Views
                 }
             }
 
+            var vote = Math.Round((double)ViewModel.Show.vote_average / 2, 2);
+            voteaverage.PlaceholderValue = vote;
             votecount.Text = "(" + ViewModel.Show.vote_count + ")";
-            voteaverage.PlaceholderValue = ViewModel.Show.vote_average / 2;
 
             creator.ItemTemplateSelector = new MyTemplateSelector()
             {

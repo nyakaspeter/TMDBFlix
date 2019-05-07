@@ -9,6 +9,9 @@ using Windows.UI.Xaml.Media;
 
 namespace TMDBFlix.Helpers
 {
+    /// <summary>
+    /// Data template selector for displaying last items in a list differently
+    /// </summary>
     public class MyTemplateSelector : DataTemplateSelector
     {
         public DataTemplate CommonTemplate { get; set; }

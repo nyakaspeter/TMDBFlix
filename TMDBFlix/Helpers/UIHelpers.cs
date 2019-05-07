@@ -12,6 +12,14 @@ namespace TMDBFlix.Helpers
 {
     public static class UIHelpers
     {
+        /// <summary>
+        /// Scrolls a ScrollViewer to an element
+        /// </summary>
+        /// <param name="scrollViewer">The ScrollViewer</param>
+        /// <param name="element">The element to scroll to</param>
+        /// <param name="isVerticalScrolling"></param>
+        /// <param name="smoothScrolling"></param>
+        /// <param name="zoomFactor"></param>
         public static void ScrollToElement(this ScrollViewer scrollViewer, UIElement element,
         bool isVerticalScrolling = true, bool smoothScrolling = true, float? zoomFactor = null)
         {

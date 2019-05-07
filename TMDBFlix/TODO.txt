@@ -1,5 +1,4 @@
-﻿Évad részletek nézet
-Epizód részletek nézet
+﻿Epizód részletek nézet
 Akrill felső sáv
 Keresőmező alapból ne mutasson TextBoxot
 Beállítások menü bővítés

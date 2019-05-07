@@ -425,4 +425,7 @@
   <data name="Episodes.Header" xml:space="preserve">
     <value>Episodes</value>
   </data>
+  <data name="Episode.Text" xml:space="preserve">
+    <value>Episode</value>
+  </data>
 </root>

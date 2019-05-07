@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 
+/// <summary>
+/// Data classes for REST response deserialization
+/// </summary>
 namespace TMDBFlix.Core.Models
 {
     public class Genre

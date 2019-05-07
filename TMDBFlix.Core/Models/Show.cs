@@ -2,6 +2,9 @@
 
 namespace TMDBFlix.Core.Models
 {
+    /// <summary>
+    /// Contains show data for REST response deserialization
+    /// </summary>
     public class Show
     {
         public string backdrop_path { get; set; }
@@ -50,7 +53,7 @@ namespace TMDBFlix.Core.Models
         public int season_number { get; set; }
         public int show_id { get; set; }
         public string still_path { get; set; }
-        public int vote_average { get; set; }
+        public float vote_average { get; set; }
         public int vote_count { get; set; }
         public List<Person> crew { get; set; }
         public List<Person> guest_stars { get; set; }
@@ -72,6 +75,8 @@ namespace TMDBFlix.Core.Models
         public List<Episode> episodes { get; set; }
         public Credits credits { get; set; }
         public ExternalIds external_ids { get; set; }
+        public int vote_count { get; set; }
+        public float vote_average { get; set; }
 
     }
 }

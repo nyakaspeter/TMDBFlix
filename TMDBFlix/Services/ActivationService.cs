@@ -59,7 +59,6 @@ namespace TMDBFlix.Services
 
         private async Task InitializeAsync()
         {
-            SampleDataService.Initialize("ms-appx:///Assets");
             await ThemeSelectorService.InitializeAsync();
         }
 

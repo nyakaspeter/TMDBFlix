@@ -13,6 +13,9 @@ using Windows.ApplicationModel.Resources;
 
 namespace TMDBFlix.ViewModels
 {
+    /// <summary>
+    /// Contains person list data and loading tasks
+    /// </summary>
     public class PeopleGridViewModel : ClickableViewModel
     {
         public ObservableCollection<Person> People { get; set; } = new ObservableCollection<Person>();

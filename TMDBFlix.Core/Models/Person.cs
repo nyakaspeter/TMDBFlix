@@ -2,6 +2,9 @@
 
 namespace TMDBFlix.Core.Models
 {
+    /// <summary>
+    /// Contains person data for REST response deserialization
+    /// </summary>
     public class Person
     {
 

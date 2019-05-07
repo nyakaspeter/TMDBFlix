@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 
+/// <summary>
+/// Classes for torrent data deserialization
+/// </summary>
 namespace TMDBFlix.Core.Models
 {
 

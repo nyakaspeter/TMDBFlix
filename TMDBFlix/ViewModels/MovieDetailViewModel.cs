@@ -10,6 +10,9 @@ using TMDBFlix.Helpers;
 
 namespace TMDBFlix.ViewModels
 {
+    /// <summary>
+    /// Contains movie data and loading tasks
+    /// </summary>
     public class MovieDetailViewModel : ClickableViewModel
     {
         private Movie movie = new Movie();

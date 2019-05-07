@@ -8,6 +8,9 @@ using Windows.UI.Xaml.Data;
 
 namespace TMDBFlix.Helpers
 {
+    /// <summary>
+    /// Converts a season number to season name string
+    /// </summary>
     class SeasonNumberToNameConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

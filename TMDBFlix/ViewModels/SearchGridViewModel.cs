@@ -14,6 +14,9 @@ using System.Linq;
 
 namespace TMDBFlix.ViewModels
 {
+    /// <summary>
+    /// Contains search item list data and loading tasks
+    /// </summary>
     public class SearchGridViewModel : ClickableViewModel
     {
         public ObservableCollection<MultiSearchItem> Results { get; set; } = new ObservableCollection<MultiSearchItem>();

@@ -9,6 +9,9 @@ using Windows.UI.Xaml.Data;
 
 namespace TMDBFlix.Helpers
 {
+    /// <summary>
+    /// Converts a search item to it's TMDb image link
+    /// </summary>
     class SearchItemImageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
