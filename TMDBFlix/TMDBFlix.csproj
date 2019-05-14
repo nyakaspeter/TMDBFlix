@@ -319,16 +319,6 @@
     <Content Include="Assets\icons8-twitter-48.png" />
     <Content Include="Assets\JackettLogo.png" />
     <Content Include="Assets\Placeholder.jpg" />
-    <Content Include="Assets\SampleData\SamplePhoto1.png" />
-    <Content Include="Assets\SampleData\SamplePhoto10.png" />
-    <Content Include="Assets\SampleData\SamplePhoto2.png" />
-    <Content Include="Assets\SampleData\SamplePhoto3.png" />
-    <Content Include="Assets\SampleData\SamplePhoto4.png" />
-    <Content Include="Assets\SampleData\SamplePhoto5.png" />
-    <Content Include="Assets\SampleData\SamplePhoto6.png" />
-    <Content Include="Assets\SampleData\SamplePhoto7.png" />
-    <Content Include="Assets\SampleData\SamplePhoto8.png" />
-    <Content Include="Assets\SampleData\SamplePhoto9.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-125.png" />
     <Content Include="Assets\SplashScreen.scale-150.png" />
