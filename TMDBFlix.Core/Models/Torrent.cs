@@ -9,7 +9,6 @@ using System.Xml.Serialization;
 /// </summary>
 namespace TMDBFlix.Core.Models
 {
-
     public class Enclosure
     {
         public string Url { get; set; }
@@ -39,5 +38,15 @@ namespace TMDBFlix.Core.Models
         public string Link { get; set; }
         public Enclosure Enclosure { get; set; }
         public List<Attr> Attributes { get; set; }
+    }
+
+    public class Indexer
+    {
+        public string Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Link { get; set; }
+        public string Language { get; set; }
+        public string Type { get; set; }
     }
 }

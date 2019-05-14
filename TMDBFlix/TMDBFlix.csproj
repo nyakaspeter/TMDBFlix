@@ -123,6 +123,7 @@
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
     <Compile Include="Helpers\EpisodeNameConverter.cs" />
     <Compile Include="Helpers\StringToDateConverter.cs" />
+    <Compile Include="Helpers\TorrentCategoryConverter.cs" />
     <Compile Include="Helpers\VotesToStarsConverter.cs" />
     <Compile Include="Helpers\TorrentLeechersConverter.cs" />
     <Compile Include="Helpers\TorrentSeedersConverter.cs" />
@@ -305,6 +306,7 @@
     <Compile Include="Helpers\ResourceExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\AppLogo.png" />
     <Content Include="Assets\BadgeLogo.scale-100.png" />
     <Content Include="Assets\BadgeLogo.scale-125.png" />
     <Content Include="Assets\BadgeLogo.scale-150.png" />
@@ -315,6 +317,7 @@
     <Content Include="Assets\icons8-instagram-48.png" />
     <Content Include="Assets\icons8-internet-filled-48.png" />
     <Content Include="Assets\icons8-twitter-48.png" />
+    <Content Include="Assets\JackettLogo.png" />
     <Content Include="Assets\Placeholder.jpg" />
     <Content Include="Assets\SampleData\SamplePhoto1.png" />
     <Content Include="Assets\SampleData\SamplePhoto10.png" />
@@ -366,6 +369,7 @@
     <Content Include="Assets\StoreLogo.scale-150.png" />
     <Content Include="Assets\StoreLogo.scale-200.png" />
     <Content Include="Assets\StoreLogo.scale-400.png" />
+    <Content Include="Assets\TMDBLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />

@@ -23,6 +23,7 @@
         <helpers:TorrentSizeConverter x:Key="TorrentSizeConverter"/>
         <helpers:TorrentSeedersConverter x:Key="TorrentSeedsConverter"/>
         <helpers:TorrentLeechersConverter x:Key="TorrentLeechersConverter"/>
+        <helpers:TorrentCategoryConverter x:Key="TorrentCategoryConverter"/>
 
         <DataTemplate x:Name="CommonDataTemplate" x:Key="CommonDataTemplate" x:DataType="models:Person">
             <StackPanel Orientation="Horizontal">
@@ -651,12 +652,17 @@
                                                              Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}" Margin="8,0">
                                                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE774;"/>
                                                 </HyperlinkButton>
+                                                <HyperlinkButton Command="{Binding ElementName=CustomPage, Path=ViewModel.TorrentSaveClickCommand}"
+                                                                CommandParameter="{Binding}"
+                                                             Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}" Margin="8,0">
+                                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE74E;"/>
+                                                </HyperlinkButton>
                                                 <HyperlinkButton Command="{Binding ElementName=CustomPage, Path=ViewModel.TorrentDownloadClickCommand}"
                                                                 CommandParameter="{Binding}"
                                                              Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}" Margin="8,0">
                                                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE896;"/>
                                             </HyperlinkButton>
-                                                <HyperlinkButton Visibility="Collapsed" Command="{Binding ElementName=CustomPage, Path=ViewModel.TorrentStreamClickCommand}"
+                                                <HyperlinkButton Command="{Binding ElementName=CustomPage, Path=ViewModel.TorrentStreamClickCommand}"
                                                                 CommandParameter="{Binding}"
                                                              Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}" Margin="8,0">
                                                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE768;"/>

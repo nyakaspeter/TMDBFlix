@@ -19,6 +19,8 @@ using Windows.ApplicationModel.Resources;
 using Windows.Foundation.Metadata;
 using Windows.Networking.BackgroundTransfer;
 using Windows.Storage;
+using Windows.UI.Xaml.Controls;
+using Image = TMDBFlix.Core.Models.Image;
 
 namespace TMDBFlix.ViewModels
 {
@@ -55,6 +57,8 @@ namespace TMDBFlix.ViewModels
         public ICommand TorrentInfoClickCommand => _torrentInfoClickCommand ?? (_torrentInfoClickCommand = new RelayCommand<Torrent>(OnTorrentInfoClick));
         private ICommand _torrentStreamClickCommand;
         public ICommand TorrentStreamClickCommand => _torrentStreamClickCommand ?? (_torrentStreamClickCommand = new RelayCommand<Torrent>(OnTorrentStreamClick));
+        private ICommand _torrentSaveClickCommand;
+        public ICommand TorrentSaveClickCommand => _torrentSaveClickCommand ?? (_torrentSaveClickCommand = new RelayCommand<Torrent>(OnTorrentSaveClick));
         private ICommand _seasonClickCommand;
         public ICommand SeasonClickCommand => _seasonClickCommand ?? (_seasonClickCommand = new RelayCommand<Season>(OnSeasonClick));
 
@@ -254,21 +258,67 @@ namespace TMDBFlix.ViewModels
         }
 
         /// <summary>
-        /// NOT IMPLEMENTED FULLY YET
-        /// Starts streaming the clicked torrent
+        /// Saves the clicked torrent
+        /// </summary>
+        /// <param name="clickedItem"></param>
+        public async void OnTorrentSaveClick(Torrent clickedItem)
+        {
+            if (clickedItem.Link.StartsWith("magnet:"))
+            {
+                DisplayMagnetLinkSaveError();
+            }
+            else
+            {
+                Uri address = new Uri(clickedItem.Link, UriKind.Absolute);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(address);
+                WebResponse response;
+                try
+                {
+                    response = await request.GetResponseAsync();
+
+                    Stream stream = response.GetResponseStream();
+
+                    var savePicker = new Windows.Storage.Pickers.FileSavePicker();
+                    savePicker.FileTypeChoices.Add("Torrent", new List<string>() { ".torrent" });
+                    savePicker.SuggestedFileName = String.Join("", clickedItem.Title.Split(Path.GetInvalidFileNameChars()));
+
+                    Windows.Storage.StorageFile torrentfile = await savePicker.PickSaveFileAsync();
+                    if (torrentfile != null)
+                    {
+                        await Windows.Storage.FileIO.WriteBytesAsync(torrentfile, ReadStream(stream));
+                    }
+                }
+                catch (WebException e)
+                {
+                    if (e.Message.Contains("302"))
+                    {
+                        var link = e.Response.Headers["Location"];
+                        if (link.StartsWith("magnet:"))
+                        {
+                            DisplayMagnetLinkSaveError();
+                        }
+                    }
+                }
+
+            }
+
+            
+        }
+
+        /// <summary>
+        /// Starts desktop extension to stream the clicked torrent
         /// </summary>
         /// <param name="clickedItem"></param>
         public async void OnTorrentStreamClick(Torrent clickedItem)
         {
             if (ApiInformation.IsApiContractPresent("Windows.ApplicationModel.FullTrustAppContract", 1, 0))
             {
-                ApplicationData.Current.LocalSettings.Values["mode"] = "filelist";
+                ApplicationData.Current.LocalSettings.Values["mode"] = "showFileList";
 
                 if (clickedItem.Link.StartsWith("magnet:"))
                 {
                     ApplicationData.Current.LocalSettings.Values["link"] = clickedItem.Link;
                     await FullTrustProcessLauncher.LaunchFullTrustProcessForCurrentAppAsync("Parameters");
-                    StartStreaming(clickedItem.Title);
                 }
                 else
                 {
@@ -286,7 +336,6 @@ namespace TMDBFlix.ViewModels
 
                         ApplicationData.Current.LocalSettings.Values["link"] = torrentfile.Path;
                         await FullTrustProcessLauncher.LaunchFullTrustProcessForCurrentAppAsync("Parameters");
-                        StartStreaming(clickedItem.Title);
                     }
                     catch (WebException e)
                     {
@@ -297,39 +346,11 @@ namespace TMDBFlix.ViewModels
                             {
                                 ApplicationData.Current.LocalSettings.Values["link"] = link;
                                 await FullTrustProcessLauncher.LaunchFullTrustProcessForCurrentAppAsync("Parameters");
-                                StartStreaming(clickedItem.Title);
                             }
                         }
                     }
-
                 }
             }
-        }
-
-        /// <summary>
-        /// NOT IMPLEMENTED FULLY YET
-        /// Opens the desktop extension and starts streaming torrent
-        /// </summary>
-        /// <param name="title"></param>
-        public async void StartStreaming(string title)
-        {
-            List<string> files = new List<string>();
-            string line;
-
-            System.IO.StreamReader file = new StreamReader(ApplicationData.Current.TemporaryFolder.Path + "\\filelist.txt");
-            while ((line = file.ReadLine()) != null)
-            {
-                files.Add(line.Split("35m")[1].Split('\u001b')[0]);
-            }
-            file.Close();
-            ApplicationData.Current.LocalSettings.Values["mode"] = "download";
-            FullTrustProcessLauncher.LaunchFullTrustProcessForCurrentAppAsync("Parameters");
-            Thread.Sleep(5000);
-
-            var downloads = await ApplicationData.Current.TemporaryFolder.GetFolderAsync("Downloads");
-            var folder = await downloads.GetFolderAsync(title);
-            var vid = await folder.GetFileAsync(files[0]);
-            Windows.System.Launcher.LaunchFileAsync(vid);
         }
 
         /// <summary>
@@ -353,8 +374,7 @@ namespace TMDBFlix.ViewModels
                     response = await request.GetResponseAsync();
 
                     Stream stream = response.GetResponseStream();
-                    var torrentsfolder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync("Torrents", CreationCollisionOption.OpenIfExists);
-                    StorageFile torrentfile = await torrentsfolder.CreateFileAsync(clickedItem.Title + ".torrent", CreationCollisionOption.ReplaceExisting);
+                    StorageFile torrentfile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(clickedItem.Title + ".torrent", CreationCollisionOption.ReplaceExisting);
                     await Windows.Storage.FileIO.WriteBytesAsync(torrentfile, ReadStream(stream));
                     await Windows.System.Launcher.LaunchFileAsync(torrentfile);
                 }
@@ -383,6 +403,18 @@ namespace TMDBFlix.ViewModels
                 return ms.ToArray();
             }
 
+        }
+
+        private async void DisplayMagnetLinkSaveError()
+        {
+            ContentDialog dialog = new ContentDialog
+            {
+                Title = new ResourceLoader().GetString("Error"),
+                Content = new ResourceLoader().GetString("MagnetLinkSaveError"),
+                CloseButtonText = "Ok"
+            };
+
+            ContentDialogResult result = await dialog.ShowAsync();
         }
 
     }

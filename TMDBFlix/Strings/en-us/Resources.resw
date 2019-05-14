@@ -174,7 +174,7 @@
     <value>Search Movies, Shows, People</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>About this application</value>
+    <value>About</value>
     <comment>About this application title for Settings</comment>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
@@ -194,7 +194,7 @@
     <comment>Here is your Privacy Statement url for Settings</comment>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
-    <value>Choose Theme</value>
+    <value>Theme</value>
     <comment>Choose theme text for Settings</comment>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
@@ -427,5 +427,62 @@
   </data>
   <data name="Episode.Text" xml:space="preserve">
     <value>Episode</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="MagnetLinkSaveError" xml:space="preserve">
+    <value>Magnet link can't be saved</value>
+  </data>
+  <data name="Settings_Apis.Text" xml:space="preserve">
+    <value>APIs</value>
+  </data>
+  <data name="Settings_Jackett.Text" xml:space="preserve">
+    <value>Jackett</value>
+  </data>
+  <data name="Settings_Language.Text" xml:space="preserve">
+    <value>Language &amp; Region</value>
+  </data>
+  <data name="Settings_Streaming.Text" xml:space="preserve">
+    <value>Streaming</value>
+  </data>
+  <data name="Settings_Torrents.Text" xml:space="preserve">
+    <value>Torrents</value>
+  </data>
+  <data name="AppDisplayLanguage.Text" xml:space="preserve">
+    <value>User interface language</value>
+  </data>
+  <data name="JackettApiKey.Text" xml:space="preserve">
+    <value>API Key</value>
+  </data>
+  <data name="JackettApiKeyHint.PlaceholderText" xml:space="preserve">
+    <value>Please enter your Jackett API Key</value>
+  </data>
+  <data name="JackettApiUrl.Text" xml:space="preserve">
+    <value>API URL</value>
+  </data>
+  <data name="JackettApiUrlHint.PlaceholderText" xml:space="preserve">
+    <value>Please enter your Jackett API URL</value>
+  </data>
+  <data name="TMDBLanguage.Text" xml:space="preserve">
+    <value>TMDb results language</value>
+  </data>
+  <data name="TMDBRegion.Text" xml:space="preserve">
+    <value>TMDb results region</value>
+  </data>
+  <data name="MovieTorrentCategories.Text" xml:space="preserve">
+    <value>Movie categories</value>
+  </data>
+  <data name="ShowTorrentCategories.Text" xml:space="preserve">
+    <value>Show categories</value>
+  </data>
+  <data name="StreamBiggestFile.Text" xml:space="preserve">
+    <value>Automatically stream biggest file in torrent</value>
+  </data>
+  <data name="StreamVideoPlayer.Text" xml:space="preserve">
+    <value>Video player app for streaming</value>
+  </data>
+  <data name="TorrentIndexers.Text" xml:space="preserve">
+    <value>Torrent indexers</value>
   </data>
 </root>

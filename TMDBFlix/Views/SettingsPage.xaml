@@ -12,67 +12,102 @@
         <helper:EnumToBooleanConverter x:Key="EnumToBooleanConverter" EnumType="ElementTheme" />
     </Page.Resources>
 
-    <Grid Margin="{StaticResource MediumLeftRightMargin}">
+    <ScrollViewer>
+    <Grid Margin="30,20,30,8">
         <StackPanel
             x:Name="ContentArea">
             <TextBlock
-                x:Uid="Settings_Personalization"
-                Style="{ThemeResource SubtitleTextBlockStyle}" />
-            <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
-                <TextBlock
-                    x:Uid="Settings_Theme" />
-
-                <StackPanel Margin="{StaticResource XSmallTopMargin}">
-                    <RadioButton
+                x:Uid="Settings_Language"
+                Style="{ThemeResource CategoryStyle}" />
+            <StackPanel Margin="0,12,0,0" Orientation="Vertical">
+                <TextBlock x:Uid="AppDisplayLanguage" Margin="0,0,0,8"></TextBlock>
+                <ComboBox x:Name="AppDisplayLanguage" Width="300"></ComboBox>
+            </StackPanel>
+            <StackPanel Margin="0,12,0,0" Orientation="Vertical">
+                <TextBlock x:Uid="TMDBLanguage" Margin="0,0,0,8"></TextBlock>
+                <ComboBox x:Name="TMDBLanguage" Width="300"></ComboBox>
+            </StackPanel>
+            <StackPanel Margin="0,12,0,0" Orientation="Vertical">
+                <TextBlock x:Uid="TMDBRegion" Margin="0,0,0,8"></TextBlock>
+                <ComboBox x:Name="TMDBRegion" Width="300"></ComboBox>
+            </StackPanel>
+            <TextBlock
+                x:Uid="Settings_Theme"
+                Style="{ThemeResource CategoryStyle}" Margin="0,12,0,0"/>
+            <StackPanel Margin="{StaticResource XSmallTopMargin}">
+                <RadioButton
                         x:Uid="Settings_Theme_Light"
                         GroupName="AppTheme"
                         IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}"
                         Command="{x:Bind ViewModel.SwitchThemeCommand}"
                         FontSize="15">
-                        <RadioButton.CommandParameter>
-                            <xaml:ElementTheme>Light</xaml:ElementTheme>
-                        </RadioButton.CommandParameter>
-                    </RadioButton>
-                    <RadioButton
+                    <RadioButton.CommandParameter>
+                        <xaml:ElementTheme>Light</xaml:ElementTheme>
+                    </RadioButton.CommandParameter>
+                </RadioButton>
+                <RadioButton
                         x:Uid="Settings_Theme_Dark"
                         GroupName="AppTheme"
                         IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}"
                         Command="{x:Bind ViewModel.SwitchThemeCommand}"
                         FontSize="15">
-                        <RadioButton.CommandParameter>
-                            <xaml:ElementTheme>Dark</xaml:ElementTheme>
-                        </RadioButton.CommandParameter>
-                    </RadioButton>
-                    <RadioButton
+                    <RadioButton.CommandParameter>
+                        <xaml:ElementTheme>Dark</xaml:ElementTheme>
+                    </RadioButton.CommandParameter>
+                </RadioButton>
+                <RadioButton
                         x:Uid="Settings_Theme_Default"
                         GroupName="AppTheme"
                         IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Default, Mode=OneWay}"
                         Command="{x:Bind ViewModel.SwitchThemeCommand}"
                         FontSize="15">
-                        <RadioButton.CommandParameter>
-                            <xaml:ElementTheme>Default</xaml:ElementTheme>
-                        </RadioButton.CommandParameter>
-                    </RadioButton>
-                </StackPanel>
+                    <RadioButton.CommandParameter>
+                        <xaml:ElementTheme>Default</xaml:ElementTheme>
+                    </RadioButton.CommandParameter>
+                </RadioButton>
             </StackPanel>
+            <TextBlock
+                x:Uid="Settings_Jackett"
+                Style="{ThemeResource CategoryStyle}" Margin="0,12,0,0"/>
+            <StackPanel Margin="0,12,0,0" Orientation="Vertical">
+                <TextBlock x:Uid="JackettApiUrl" Margin="0,0,0,8"></TextBlock>
+                <TextBox x:Name="JackettApiUrl" x:Uid="JackettApiUrlHint" HorizontalAlignment="Left" Width="300"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="0,12,0,0" Orientation="Vertical">
+                <TextBlock x:Uid="JackettApiKey" Margin="0,0,0,8"></TextBlock>
+                <TextBox x:Name="JackettApiKey" x:Uid="JackettApiKeyHint" HorizontalAlignment="Left" Width="300"></TextBox>
+            </StackPanel>
+            <TextBlock
+                x:Uid="Settings_Torrents"
+                Style="{ThemeResource CategoryStyle}" Margin="0,12,0,0"/>
+            <TextBlock
+                x:Uid="Settings_Streaming"
+                Style="{ThemeResource CategoryStyle}" Margin="0,12,0,0"/>
 
             <TextBlock
                 x:Uid="Settings_About"
-                Style="{ThemeResource SubtitleTextBlockStyle}" />
+                Style="{ThemeResource CategoryStyle}" Margin="0,12,0,0"/>
 
             <StackPanel Margin="{StaticResource XSmallTopMargin}">
+                <Image Margin="0,4,0,12" HorizontalAlignment="Left" Width="300" Source="ms-appx:///Assets/AppLogo.png"></Image>
                 <TextBlock
+                    HorizontalAlignment="Left"
                     Text="{x:Bind ViewModel.VersionDescription, Mode=OneWay}"
                     Style="{ThemeResource BodyTextBlockStyle}" />
-                <TextBlock
-                    x:Uid="Settings_AboutDescription"
-                    Margin="{StaticResource XSmallTopMargin}"
-                    Style="{ThemeResource BodyTextBlockStyle}" />
-
-                <HyperlinkButton
-                    x:Uid="Settings_PrivacyTermsLink"
-                    Margin="{StaticResource XSmallTopMargin}" />
+            </StackPanel>
+            
+            <TextBlock
+                x:Uid="Settings_Apis"
+                Style="{ThemeResource CategoryStyle}" Margin="0,12,0,0"/>
+            <StackPanel Orientation="Horizontal">
+                <HyperlinkButton NavigateUri="https://developers.themoviedb.org/3">
+                    <Image Margin="12" HorizontalAlignment="Left" Width="100" Source="ms-appx:///Assets/TMDBLogo.png"></Image>
+                </HyperlinkButton>
+                <HyperlinkButton NavigateUri="https://github.com/Jackett/Jackett">
+                    <Image Margin="12" HorizontalAlignment="Left" Width="100" Source="ms-appx:///Assets/JackettLogo.png"></Image>
+                </HyperlinkButton>
             </StackPanel>
         </StackPanel>
-    </Grid>    
+    </Grid>
+    </ScrollViewer>
 </Page>

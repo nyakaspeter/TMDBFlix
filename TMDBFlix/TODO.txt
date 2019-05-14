@@ -1,7 +1,19 @@
-﻿Epizód részletek nézet
-Akrill felső sáv
-Keresőmező alapból ne mutasson TextBoxot
-Beállítások menü bővítés
-Magyar nyelv
-Torrent integráció
-Pivot header maradjon fent görgetéskor
+﻿Funkcionalitás:
+	Epizód részletek nézet
+	Szűrők/rendezés mindenhova
+	Kép nagyítás görgővel
+
+Beállítások:
+	Kezelőfelület nyelve (magyar/angol)
+	Találatok nyelve
+	Jackett api elérhetőség
+	Jackett api kulcs
+	Torrent trackerek
+	Torrent kategóriák
+	Peerflix fájl lista mutatása
+	Peerflix lejátszó választás
+
+UI:
+	Akrill felső sáv
+	Keresőmező alapból ne mutasson TextBoxot
+	Pivot header maradjon fent görgetéskor

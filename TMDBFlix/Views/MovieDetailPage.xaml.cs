@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Toolkit.Uwp.UI.Animations;
 using TMDBFlix.Controls;
+using TMDBFlix.Core.Models;
 using TMDBFlix.Core.Services;
 using TMDBFlix.Helpers;
 using TMDBFlix.Services;
@@ -40,14 +42,22 @@ namespace TMDBFlix.Views
                 TorrentsLoadRing.IsActive = true;
                 ViewModel.Torrents.Clear();
 
-                var torrents = await Task.Run(() => JackettService.SearchMovieTorrents(ViewModel.Movie.title));
-                torrents.AddRange(await Task.Run(() => JackettService.SearchMovieTorrents(ViewModel.Movie.original_title)));
+                var torrents = new List<Torrent>();
+                foreach (var indexer in JackettService.Indexers)
+                {
+                    torrents.AddRange(await Task.Run(() => JackettService.SearchMovieTorrents(ViewModel.Movie.title, indexer, JackettService.MovieCategories)));
+                }
+                //torrents.AddRange(await Task.Run(() => JackettService.SearchMovieTorrents(ViewModel.Movie.original_title + " " + year.Text)));
 
                 TorrentsLoadRing.IsActive = false;
                 if (torrents.Count == 0) NoTorrentResults.Visibility = Windows.UI.Xaml.Visibility.Visible;
                 else TorrentsGrid.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
-                torrents.GroupBy(x => x.Title).Select(y => y.First()).ToList().OrderByDescending(x => DateTime.Parse(x.PubDate)).ToList().ForEach(x => ViewModel.Torrents.Add(x));
+                torrents = torrents.OrderByDescending(x => int.Parse(x.Attributes.Where(y => y.Name.Equals("seeders")).ToList()[0].Value)).ToList();
+                var betterresults = torrents.Where(x => x.Title.Contains($"{ViewModel.Movie.release_date.Split('-')[0]}")).ToList();
+                betterresults.ForEach(x => torrents.Remove(x));
+                torrents.InsertRange(0, betterresults);
+                torrents.ForEach(x => ViewModel.Torrents.Add(x));
             }
         }
 
