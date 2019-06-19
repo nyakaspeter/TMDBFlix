@@ -11,13 +11,20 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <AcrylicBrush x:Key="NavigationViewTopPaneBackground" BackgroundSource="HostBackdrop"
+                      FallbackColor="{ThemeResource SystemAltMediumHighColor}" TintColor="{ThemeResource SystemAltMediumHighColor}" TintOpacity=".8" />
+    </Page.Resources>
+
     <i:Interaction.Behaviors>
         <ic:EventTriggerBehavior EventName="Loaded">
             <ic:InvokeCommandAction Command="{x:Bind ViewModel.LoadedCommand}" />
         </ic:EventTriggerBehavior>
     </i:Interaction.Behaviors>
 
-    <winui:NavigationView
+    <Grid>
+
+        <winui:NavigationView
         x:Name="navigationView"
         IsBackButtonVisible="Visible"
         IsBackEnabled="{x:Bind ViewModel.IsBackEnabled, Mode=OneWay}"
@@ -25,6 +32,7 @@
         IsSettingsVisible="True"
         PaneDisplayMode="Top"
         Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
+        
         <winui:NavigationView.MenuItems>
             <!--
             TODO WTS: Change the symbols for each item as appropriate for your app
@@ -42,11 +50,34 @@
                 <ic:InvokeCommandAction Command="{x:Bind ViewModel.ItemInvokedCommand}" />
             </ic:EventTriggerBehavior>
         </i:Interaction.Behaviors>
+
         <Grid>
             <Frame x:Name="shellFrame"/>
         </Grid>
+
         <winui:NavigationView.AutoSuggestBox>
             <AutoSuggestBox x:Name="Multisearch" x:Uid="Search" TextChanged="Search_TextChanged"  QuerySubmitted="Search_Find" SuggestionChosen="Search_SuggestionChosen" GotFocus="Multisearch_GotFocus"  MinWidth="250" QueryIcon="Find"/>
         </winui:NavigationView.AutoSuggestBox>
     </winui:NavigationView>
+
+        <Grid VerticalAlignment="Top" x:Name="AppTitleBar" Background="Transparent" Height="35">
+            <!-- Width of the padding columns is set in LayoutMetricsChanged handler. -->
+            <!-- Using padding columns instead of Margin ensures that the background
+                 paints the area under the caption control buttons (for transparent buttons). -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="LeftPaddingColumn" Width="0"/>
+                <ColumnDefinition/>
+                <ColumnDefinition x:Name="RightPaddingColumn" Width="0"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="ms-appx:///Assets/AppLogo.png" 
+                   Grid.Column="1" HorizontalAlignment="Left" 
+                   Height="16" Margin="10,10"/>
+            <TextBlock Text="Custom Title Bar" 
+                       Grid.Column="1" 
+                       Style="{StaticResource CaptionTextBlockStyle}" 
+                       Margin="44,8,0,0"
+                       Visibility="Collapsed"/>
+        </Grid>
+        
+    </Grid>
 </Page>

@@ -28,6 +28,7 @@
     </custom:CustomPage.Resources>
 
     <Grid>
+        
         <ProgressRing x:Name="LoadRing" IsActive="True" Width="60" Height="60"/>
         <ScrollViewer x:Name="Scroller" VerticalScrollBarVisibility="Hidden">
             <StackPanel x:Name="Content" Margin="{StaticResource PageMargin}">

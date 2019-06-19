@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using TMDBFlix.Core.Models;
 using TMDBFlix.ViewModels;
-
+using Windows.ApplicationModel.Core;
+using Windows.UI;
+using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace TMDBFlix.Views
@@ -17,6 +20,9 @@ namespace TMDBFlix.Views
         public ShellPage()
         {
             InitializeComponent();
+           
+            Window.Current.SetTitleBar(AppTitleBar);
+
             DataContext = ViewModel;
             ViewModel.Initialize(shellFrame, navigationView, KeyboardAccelerators);
 
