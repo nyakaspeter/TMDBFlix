@@ -27,6 +27,7 @@ namespace TMDBFlix.Views
             ViewModel.Initialize(shellFrame, navigationView, KeyboardAccelerators);
 
             ViewModel.SearchResultNames.CollectionChanged += SearchResultNames_CollectionChanged;
+            Multisearch.Loaded += (s, e) => Multisearch.Visibility = Visibility.Collapsed;
         }
 
         private void SearchResultNames_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -82,6 +83,19 @@ namespace TMDBFlix.Views
             {
                 ViewModel.LoadSearchResultNames(Multisearch.Text);
             }
+        }
+
+        private void Searchbutton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            Searchbutton.Visibility = Visibility.Collapsed;
+            Multisearch.Visibility = Visibility.Visible;
+            Multisearch.Focus(FocusState.Programmatic);
+        }
+
+        private void Multisearch_LostFocus(object sender, RoutedEventArgs e)
+        {
+            Multisearch.Visibility = Visibility.Collapsed;
+            Searchbutton.Visibility = Visibility.Visible;
         }
     }
 }

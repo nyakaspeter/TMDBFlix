@@ -13,7 +13,7 @@
 
     <Page.Resources>
         <AcrylicBrush x:Key="NavigationViewTopPaneBackground" BackgroundSource="HostBackdrop"
-                      FallbackColor="{ThemeResource SystemAltMediumHighColor}" TintColor="{ThemeResource SystemAltMediumHighColor}" TintOpacity=".8" />
+                      FallbackColor="{ThemeResource SystemChromeMediumColor}" TintColor="{ThemeResource SystemChromeAltHighColor}" TintOpacity=".8" />
     </Page.Resources>
 
     <i:Interaction.Behaviors>
@@ -44,7 +44,15 @@
             <winui:NavigationViewItem x:Uid="Shell_Movies" helpers:NavHelper.NavigateTo="views:MoviesGridPage"/>
             <winui:NavigationViewItem x:Uid="Shell_Shows" helpers:NavHelper.NavigateTo="views:ShowsGridPage"/>
             <winui:NavigationViewItem x:Uid="Shell_People" helpers:NavHelper.NavigateTo="views:PeopleGridPage"/>
+            
         </winui:NavigationView.MenuItems>
+
+            <winui:NavigationView.PaneFooter>
+                <Button x:Name="Searchbutton" Visibility="Visible" Background="Transparent" Padding="0,11" BorderThickness="0" Tapped="Searchbutton_Tapped">
+                <FontIcon Margin="16,0" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE721;"/>
+                </Button>
+            </winui:NavigationView.PaneFooter>
+            
         <i:Interaction.Behaviors>
             <ic:EventTriggerBehavior EventName="ItemInvoked">
                 <ic:InvokeCommandAction Command="{x:Bind ViewModel.ItemInvokedCommand}" />
@@ -54,9 +62,9 @@
         <Grid>
             <Frame x:Name="shellFrame"/>
         </Grid>
-
+        
         <winui:NavigationView.AutoSuggestBox>
-            <AutoSuggestBox x:Name="Multisearch" x:Uid="Search" TextChanged="Search_TextChanged"  QuerySubmitted="Search_Find" SuggestionChosen="Search_SuggestionChosen" GotFocus="Multisearch_GotFocus"  MinWidth="250" QueryIcon="Find"/>
+            <AutoSuggestBox Margin="-10" x:Name="Multisearch" x:Uid="Search" TextChanged="Search_TextChanged"  QuerySubmitted="Search_Find" SuggestionChosen="Search_SuggestionChosen" GotFocus="Multisearch_GotFocus"  MinWidth="250" QueryIcon="Find" LostFocus="Multisearch_LostFocus"/>
         </winui:NavigationView.AutoSuggestBox>
     </winui:NavigationView>
 
