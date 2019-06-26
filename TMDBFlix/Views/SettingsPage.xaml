@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Style="{StaticResource PageStyle}"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:models="using:TMDBFlix.Core.Models"
     xmlns:helper="using:TMDBFlix.Helpers"
     xmlns:xaml="using:Windows.UI.Xaml"
     mc:Ignorable="d">
@@ -25,11 +27,11 @@
             </StackPanel>
             <StackPanel Margin="0,12,0,0" Orientation="Vertical">
                 <TextBlock x:Uid="TMDBLanguage" Margin="0,0,0,8"></TextBlock>
-                <ComboBox x:Name="TMDBLanguage" Width="300"></ComboBox>
+                <ComboBox x:Name="TMDBLanguage" ItemsSource="{x:Bind ViewModel.Languages}" SelectionChanged="TMDBLanguage_SelectionChanged" Width="300"></ComboBox>
             </StackPanel>
             <StackPanel Margin="0,12,0,0" Orientation="Vertical">
                 <TextBlock x:Uid="TMDBRegion" Margin="0,0,0,8"></TextBlock>
-                <ComboBox x:Name="TMDBRegion" Width="300"></ComboBox>
+                    <ComboBox x:Name="TMDBRegion" ItemsSource="{x:Bind ViewModel.Countries}" SelectionChanged="TMDBRegion_SelectionChanged" Width="300"></ComboBox>
             </StackPanel>
             <TextBlock
                 x:Uid="Settings_Theme"
@@ -71,18 +73,57 @@
                 Style="{ThemeResource CategoryStyle}" Margin="0,12,0,0"/>
             <StackPanel Margin="0,12,0,0" Orientation="Vertical">
                 <TextBlock x:Uid="JackettApiUrl" Margin="0,0,0,8"></TextBlock>
-                <TextBox x:Name="JackettApiUrl" x:Uid="JackettApiUrlHint" HorizontalAlignment="Left" Width="300"></TextBox>
+                <TextBox x:Name="JackettApiUrl" x:Uid="JackettApiUrlHint" TextChanged="JackettApiUrl_TextChanged" HorizontalAlignment="Left" Width="300"></TextBox>
             </StackPanel>
             <StackPanel Margin="0,12,0,0" Orientation="Vertical">
                 <TextBlock x:Uid="JackettApiKey" Margin="0,0,0,8"></TextBlock>
-                <TextBox x:Name="JackettApiKey" x:Uid="JackettApiKeyHint" HorizontalAlignment="Left" Width="300"></TextBox>
+                <TextBox x:Name="JackettApiKey" x:Uid="JackettApiKeyHint" TextChanged="JackettApiKey_TextChanged" HorizontalAlignment="Left" Width="300"></TextBox>
             </StackPanel>
             <TextBlock
                 x:Uid="Settings_Torrents"
                 Style="{ThemeResource CategoryStyle}" Margin="0,12,0,0"/>
-            <TextBlock
+                <TextBlock x:Uid="Settings_Torrents_Indexers" Margin="0,8"></TextBlock>
+                <ItemsControl x:Name="Indexer_Checkbox" ItemsSource="{x:Bind ViewModel.Indexers}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <controls:WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="models:Indexer">
+                            <CheckBox Content="{Binding Title}" IsChecked="{Binding Enabled, Mode=TwoWay}" Click="CheckBox_Click"></CheckBox>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock x:Uid="Settings_Torrents_MovieCategories" Margin="0,8"></TextBlock>
+                <ItemsControl x:Name="MovieCategories_Checkbox" ItemsSource="{x:Bind ViewModel.MovieCategories}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <controls:WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="models:Category">
+                            <CheckBox Content="{Binding Name}" IsChecked="{Binding Enabled, Mode=TwoWay}" Click="MovieCategory_CheckBox_Click"></CheckBox>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock x:Uid="Settings_Torrents_TVCategories" Margin="0,8"></TextBlock>
+                <ItemsControl x:Name="TVCategories_Checkbox" ItemsSource="{x:Bind ViewModel.TVCategories}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <controls:WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="models:Category">
+                            <CheckBox Content="{Binding Name}" IsChecked="{Binding Enabled, Mode=TwoWay}" Click="TVCategory_CheckBox_Click"></CheckBox>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock
                 x:Uid="Settings_Streaming"
-                Style="{ThemeResource CategoryStyle}" Margin="0,12,0,0"/>
+                Style="{ThemeResource CategoryStyle}" Margin="0,6,0,0"/>
 
             <TextBlock
                 x:Uid="Settings_About"

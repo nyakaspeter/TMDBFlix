@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TMDBFlix.Core.Models;
+using Windows.UI.Xaml;
 
 namespace TMDBFlix.Core.Services
 {
@@ -17,8 +18,35 @@ namespace TMDBFlix.Core.Services
     {
         private static readonly string key = "c82568d86ba0dafa5ecef39bee96f011";
         private static RestClient client = new RestClient("https://api.themoviedb.org/3");
-        public static string language = "en";
-        public static string region = "US";
+
+        public static Configurations config;
+
+        public static string language;
+        public static string Language {
+            get
+            {
+                return language;
+            }
+            set
+            {
+                language = value;
+                Windows.Storage.ApplicationData.Current.LocalSettings.Values["tmdb_langugage"] = value;
+            }
+        }
+
+        public static string region;
+        public static string Region
+        {
+            get
+            {
+                return region;
+            }
+            set
+            {
+                region = value;
+                Windows.Storage.ApplicationData.Current.LocalSettings.Values["tmdb_country"] = value;
+            }
+        }
 
         /// <summary>
         /// Gets show data
@@ -570,6 +598,99 @@ namespace TMDBFlix.Core.Services
             }
 
             return list;
+        }
+
+        public static Configurations GetConfigurations()
+        {
+
+            var request = new RestRequest("/configuration");
+            request.AddParameter("api_key", key);
+
+            var response = client.Execute<Configurations>(request);
+            if (response.IsSuccessful) return response.Data;
+            else if ((int)response.StatusCode == 429)
+            {
+                while ((int)response.StatusCode == 429)
+                {
+                    Thread.Sleep(1000);
+                    response = client.Execute<Configurations>(request);
+                }
+                return response.Data;
+            }
+            else return new Configurations();
+        }
+
+        public static List<CountryConfiguration> GetCountries()
+        {
+
+            var request = new RestRequest("/configuration/countries");
+            request.AddParameter("api_key", key);
+
+            var response = client.Execute<List<CountryConfiguration>>(request);
+            if (response.IsSuccessful) return response.Data;
+            else if ((int)response.StatusCode == 429)
+            {
+                while ((int)response.StatusCode == 429)
+                {
+                    Thread.Sleep(1000);
+                    response = client.Execute<List<CountryConfiguration>>(request);
+                }
+                return response.Data;
+            }
+            else return new List<CountryConfiguration>();
+        }
+
+        public static List<LanguageConfiguration> GetLanguages()
+        {
+
+            var request = new RestRequest("/configuration/languages");
+            request.AddParameter("api_key", key);
+
+            var response = client.Execute<List<LanguageConfiguration>>(request);
+            if (response.IsSuccessful) return response.Data;
+            else if ((int)response.StatusCode == 429)
+            {
+                while ((int)response.StatusCode == 429)
+                {
+                    Thread.Sleep(1000);
+                    response = client.Execute<List<LanguageConfiguration>>(request);
+                }
+                return response.Data;
+            }
+            else return new List<LanguageConfiguration>();
+        }
+
+        public static List<string> GetTranslations()
+        {
+
+            var request = new RestRequest("/configuration/primary_translations");
+            request.AddParameter("api_key", key);
+
+            var response = client.Execute<List<string>>(request);
+            if (response.IsSuccessful) return response.Data;
+            else if ((int)response.StatusCode == 429)
+            {
+                while ((int)response.StatusCode == 429)
+                {
+                    Thread.Sleep(1000);
+                    response = client.Execute<List<string>>(request);
+                }
+                return response.Data;
+            }
+            else return new List<string>();
+        }
+
+        public static void Init()
+        {
+            config = GetConfigurations();
+
+            Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
+            if (localSettings.Values["tmdb_langugage"] as string == null) localSettings.Values["tmdb_langugage"] = "en";
+            if (localSettings.Values["tmdb_country"] as string == null) localSettings.Values["tmdb_country"] = "US";
+
+            language = localSettings.Values["tmdb_langugage"] as string;
+            region = localSettings.Values["tmdb_country"] as string;
         }
     }
 }

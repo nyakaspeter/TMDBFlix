@@ -1,6 +1,7 @@
 ﻿using RestSharp.Deserializers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -40,7 +41,7 @@ namespace TMDBFlix.Core.Models
         public List<Attr> Attributes { get; set; }
     }
 
-    public class Indexer
+    public class Indexer : INotifyPropertyChanged
     {
         public string Id { get; set; }
         public string Title { get; set; }
@@ -48,5 +49,63 @@ namespace TMDBFlix.Core.Models
         public string Link { get; set; }
         public string Language { get; set; }
         public string Type { get; set; }
+        public List<Category> Categories { get; set; }
+        private bool enabled;
+        public bool Enabled
+        {
+            get
+            {
+                return enabled;
+            }
+            set
+            {
+                enabled = value;
+                this.NotifyPropertyChanged("Enabled");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+        }
     }
+
+    [DeserializeAs(Name = "category")]
+    public class Category : INotifyPropertyChanged
+    {
+        public Category()
+        {
+
+        }
+        public Category(string id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        private bool enabled;
+        public bool Enabled
+        {
+            get
+            {
+                return enabled;
+            }
+            set
+            {
+                enabled = value;
+                this.NotifyPropertyChanged("Enabled");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+        }
+    }
+
 }

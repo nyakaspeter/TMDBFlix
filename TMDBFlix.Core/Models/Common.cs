@@ -190,4 +190,43 @@ namespace TMDBFlix.Core.Models
         public string iso_3166_1 { get; set; }
         public string rating { get; set; }
     }
+
+    public class Configurations
+    {
+        public ImageConfigurations images { get; set; }
+        public List<string> change_keys { get; set; }
+    }
+
+    public class ImageConfigurations
+    {
+        public string base_url { get; set; }
+        public string secure_base_url { get; set; }
+        public List<string> backdrop_sizes { get; set; }
+        public List<string> logo_sizes { get; set; }
+        public List<string> poster_sizes { get; set; }
+        public List<string> profile_sizes { get; set; }
+        public List<string> still_sizes { get; set; }
+    }
+
+    public class CountryConfiguration
+    {
+        public string iso_3166_1 { get; set; }
+        public string english_name { get; set; }
+        public override string ToString()
+        {
+            return english_name;
+        }
+    }
+
+
+    public class LanguageConfiguration
+    {
+        public string iso_639_1 { get; set; }
+        public string english_name { get; set; }
+        public string name { get; set; }
+        public override string ToString()
+        {
+            return english_name;
+        }
+    }
 }

@@ -46,14 +46,14 @@ namespace TMDBFlix.Views
                 foreach (var indexer in JackettService.Indexers)
                 {
                     torrents.AddRange(await Task.Run(() => JackettService.SearchMovieTorrents(ViewModel.Movie.title, indexer, JackettService.MovieCategories)));
+                    torrents.AddRange(await Task.Run(() => JackettService.SearchMovieTorrents(ViewModel.Movie.original_title, indexer, JackettService.MovieCategories)));
                 }
-                //torrents.AddRange(await Task.Run(() => JackettService.SearchMovieTorrents(ViewModel.Movie.original_title + " " + year.Text)));
 
                 TorrentsLoadRing.IsActive = false;
                 if (torrents.Count == 0) NoTorrentResults.Visibility = Windows.UI.Xaml.Visibility.Visible;
                 else TorrentsGrid.Visibility = Windows.UI.Xaml.Visibility.Visible;
-
-                torrents = torrents.OrderByDescending(x => int.Parse(x.Attributes.Where(y => y.Name.Equals("seeders")).ToList()[0].Value)).ToList();
+                
+                torrents = torrents.OrderByDescending(x => int.Parse(x.Attributes.Where(y => y.Name.Equals("seeders")).ToList()[0].Value)).GroupBy(z => z.Title).Select(w => w.First()).ToList();
                 var betterresults = torrents.Where(x => x.Title.Contains($"{ViewModel.Movie.release_date.Split('-')[0]}")).ToList();
                 betterresults.ForEach(x => torrents.Remove(x));
                 torrents.InsertRange(0, betterresults);

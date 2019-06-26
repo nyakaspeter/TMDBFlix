@@ -1,16 +1,8 @@
-﻿using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using TMDBFlix.Core.Models;
-using TMDBFlix.Core.Services;
 using Windows.Storage;
 
 namespace TMDBFlix.Test

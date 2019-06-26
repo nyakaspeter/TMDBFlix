@@ -468,7 +468,7 @@
     <value>TMDb results language</value>
   </data>
   <data name="TMDBRegion.Text" xml:space="preserve">
-    <value>TMDb results region</value>
+    <value>TMDb results country</value>
   </data>
   <data name="MovieTorrentCategories.Text" xml:space="preserve">
     <value>Movie categories</value>
@@ -484,5 +484,14 @@
   </data>
   <data name="TorrentIndexers.Text" xml:space="preserve">
     <value>Torrent indexers</value>
+  </data>
+  <data name="Settings_Torrents_Indexers.Text" xml:space="preserve">
+    <value>Search trackers</value>
+  </data>
+  <data name="Settings_Torrents_MovieCategories.Text" xml:space="preserve">
+    <value>Movie categories</value>
+  </data>
+  <data name="Settings_Torrents_TVCategories.Text" xml:space="preserve">
+    <value>Show categories</value>
   </data>
 </root>

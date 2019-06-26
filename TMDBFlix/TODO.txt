@@ -1,21 +1,15 @@
 ﻿Funkcionalitás:
 	Epizód részletek nézet
+	Sorozat torrentek
 	Szűrők/rendezés mindenhova
 	Kép nagyítás görgővel
 
 Beállítások:
 	Kezelőfelület nyelve (magyar/angol)
-	Találatok nyelve
-	Jackett api elérhetőség
-	Jackett api kulcs
-	Torrent trackerek
-	Torrent kategóriák
 	Peerflix fájl lista mutatása
 	Peerflix lejátszó választás
 
 UI:
-	Akrill felső sáv
-	Keresőmező alapból ne mutasson TextBoxot
 	Pivot header maradjon fent görgetéskor
 
 
@@ -25,14 +19,5 @@ UI:
 /tv/{tv_id}/season/{season_number}/episode/{episode_number}/images
 /tv/{tv_id}/season/{season_number}/episode/{episode_number}/videos
 /tv/{tv_id}/season/{season_number}/episode/{episode_number}/credits
-
-----------------------------------------------
-
-/configuration
-/configuration/languages
-/configuration/countries
-/configuration/primary_translations
-
-----------------------------------------------
 
 castnál van order!!!

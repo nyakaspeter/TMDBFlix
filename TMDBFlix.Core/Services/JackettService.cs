@@ -15,20 +15,75 @@ namespace TMDBFlix.Core.Services
     /// </summary>
     public static class JackettService
     {
-        private static readonly string key = "4ix0cjg1siw9ol050f4a27ktg1vc53ei";
+        private static string url;
+        public static string Url
+        {
+            get
+            {
+                return url;
+            }
+            set
+            {
+                url = value;
+                Windows.Storage.ApplicationData.Current.LocalSettings.Values["jackett_url"] = value;
+            }
+        }
+
+        private static string key;
+        public static string Key
+        {
+            get
+            {
+                return key;
+            }
+            set
+            {
+                key = value;
+                Windows.Storage.ApplicationData.Current.LocalSettings.Values["jackett_key"] = value;
+            }
+        }
         
-        public static List<int> MovieCategories = new List<int>() { 2030, 2040 };
-        public static List<int> ShowCategories = new List<int>() { 5030, 5040 };
-        public static List<string> Indexers = new List<string>() { "ncore", "1337x" };
+        private static List<string> indexers;
+        public static List<string> Indexers
+        {
+            get { return indexers; }
+            set
+            {
+                indexers = value;
+                Windows.Storage.ApplicationData.Current.LocalSettings.Values["torrent_indexers"] = String.Join(",",indexers);
+            }
+        }
+
+        private static List<string> moviecategories;
+        public static List<string> MovieCategories
+        {
+            get { return moviecategories; }
+            set
+            {
+                moviecategories = value;
+                Windows.Storage.ApplicationData.Current.LocalSettings.Values["torrent_moviecategories"] = String.Join(",",moviecategories);
+            }
+        }
+
+        private static List<string> tvcategories;
+        public static List<string> TVCategories
+        {
+            get { return tvcategories; }
+            set
+            {
+                tvcategories = value;
+                Windows.Storage.ApplicationData.Current.LocalSettings.Values["torrent_tvcategories"] = String.Join(",", tvcategories);
+            }
+        }
 
         /// <summary>
         /// Gets a list of movie torrents
         /// </summary>
         /// <param name="query">The search query</param>
         /// <returns></returns>
-        public static List<Torrent> SearchMovieTorrents(string query, string indexer, List<int> categories)
+        public static List<Torrent> SearchMovieTorrents(string query, string indexer, List<string> categories)
         {
-            var client = new RestClient($"http://127.0.0.1:9117/torznab/{indexer}");
+            var client = new RestClient($"http://{url}/torznab/{indexer}");
             var request = new RestRequest();
             request.XmlSerializer = new RestSharp.Serializers.DotNetXmlSerializer();
             request.RequestFormat = DataFormat.Xml;
@@ -36,7 +91,7 @@ namespace TMDBFlix.Core.Services
             request.AddParameter("apikey", key);
             request.AddParameter("t", "search");
             request.AddParameter("q", query);
-            request.AddParameter("cat", String.Join(",", MovieCategories));
+            request.AddParameter("cat", String.Join(",",categories));
 
             var response = client.Execute<List<Torrent>>(request);
             if (response.IsSuccessful) return response.Data;
@@ -46,7 +101,7 @@ namespace TMDBFlix.Core.Services
 
         public static List<Indexer> GetConfiguredIndexers()
         {
-            var client = new RestClient($"http://127.0.0.1:9117/torznab/all");
+            var client = new RestClient($"http://{url}/torznab/all");
             var request = new RestRequest();
             request.XmlSerializer = new RestSharp.Serializers.DotNetXmlSerializer();
             request.RequestFormat = DataFormat.Xml;
@@ -59,6 +114,28 @@ namespace TMDBFlix.Core.Services
             if (response.IsSuccessful) return response.Data;
 
             return new List<Indexer>();
+        }
+
+        public static void Init()
+        {
+            Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
+            if (localSettings.Values["jackett_url"] as string == null) localSettings.Values["jackett_url"] = "";
+            if (localSettings.Values["jackett_key"] as string == null) localSettings.Values["jackett_key"] = "";
+            if (localSettings.Values["torrent_moviecategories"] as string == null) localSettings.Values["torrent_moviecategories"] = "2000";
+            if (localSettings.Values["torrent_tvcategories"] as string == null) localSettings.Values["torrent_tvcategories"] = "5000";
+            if (localSettings.Values["torrent_indexers"] as string == null) localSettings.Values["torrent_indexers"] = "";
+
+            url = localSettings.Values["jackett_url"] as string;
+            key = localSettings.Values["jackett_key"] as string;
+
+            var indexers_str = localSettings.Values["torrent_indexers"] as string;
+            var moviecategories_str = localSettings.Values["torrent_moviecategories"] as string;
+            var tvcategories_str = localSettings.Values["torrent_tvcategories"] as string;
+            indexers = indexers_str.Split(',').ToList();
+            moviecategories = moviecategories_str.Split(',').ToList();
+            tvcategories = tvcategories_str.Split(',').ToList();
+
         }
     }
 }
