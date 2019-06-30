@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9554E34B-7F50-402F-ABE0-840CAFEEA7A7}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>TMDBFlix.Test</RootNamespace>
-    <AssemblyName>TMDBFlix.Test</AssemblyName>
+    <RootNamespace>TMDBFlix.Desktop</RootNamespace>
+    <AssemblyName>TMDBFlix.Desktop</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

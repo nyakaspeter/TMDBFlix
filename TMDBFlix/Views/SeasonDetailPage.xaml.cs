@@ -1,5 +1,7 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Toolkit.Uwp.UI.Animations;
 using TMDBFlix.Controls;
 using TMDBFlix.Core.Models;
@@ -26,7 +28,36 @@ namespace TMDBFlix.Views
 
             ViewModel.LoadCompleted += ViewModel_LoadCompleted;
 
+            pivot.SelectionChanged += Pivot_SelectionChanged;
+
             FadeOutContent.Begin();
+        }
+
+        private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (pivot.SelectedItem == torrentspivot)
+            {
+                TorrentsGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                NoTorrentResults.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                TorrentsLoadRing.IsActive = true;
+                ViewModel.Torrents.Clear();
+
+                var torrents = new List<Torrent>();
+                foreach (var indexer in JackettService.Indexers)
+                {
+                    torrents.AddRange(await Task.Run(() => JackettService.SearchTorrents(ViewModel.Show.name + " S" + ViewModel.Season.season_number.ToString("00"), indexer, JackettService.TVCategories)));
+                    torrents.AddRange(await Task.Run(() => JackettService.SearchTorrents(ViewModel.Show.original_name + " S" + ViewModel.Season.season_number.ToString("00"), indexer, JackettService.TVCategories)));
+                    torrents.AddRange(await Task.Run(() => JackettService.SearchTorrents(ViewModel.Show.name + " season " + ViewModel.Season.season_number.ToString(), indexer, JackettService.TVCategories)));
+                    torrents.AddRange(await Task.Run(() => JackettService.SearchTorrents(ViewModel.Show.original_name + " season " + ViewModel.Season.season_number.ToString(), indexer, JackettService.TVCategories)));
+                }
+
+                TorrentsLoadRing.IsActive = false;
+                if (torrents.Count == 0) NoTorrentResults.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                else TorrentsGrid.Visibility = Windows.UI.Xaml.Visibility.Visible;
+
+                torrents = torrents.OrderByDescending(x => int.Parse(x.Attributes.Where(y => y.Name.Equals("seeders")).ToList()[0].Value)).GroupBy(z => z.Title).Select(w => w.First()).ToList();
+                torrents.ForEach(x => ViewModel.Torrents.Add(x));
+            }
         }
 
         private void ViewModel_LoadCompleted()

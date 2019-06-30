@@ -15,28 +15,31 @@
     </Page.Resources>
 
     <ScrollViewer>
-    <Grid Margin="30,20,30,8">
+    <Grid Margin="30,10,30,30">
         <StackPanel
             x:Name="ContentArea">
             <TextBlock
                 x:Uid="Settings_Language"
                 Style="{ThemeResource CategoryStyle}" />
+                <controls:WrapPanel HorizontalSpacing="24">
             <StackPanel Margin="0,12,0,0" Orientation="Vertical">
                 <TextBlock x:Uid="AppDisplayLanguage" Margin="0,0,0,8"></TextBlock>
-                <ComboBox x:Name="AppDisplayLanguage" Width="300"></ComboBox>
+                <ComboBox x:Name="AppDisplayLanguage" Width="440"></ComboBox>
             </StackPanel>
             <StackPanel Margin="0,12,0,0" Orientation="Vertical">
                 <TextBlock x:Uid="TMDBLanguage" Margin="0,0,0,8"></TextBlock>
-                <ComboBox x:Name="TMDBLanguage" ItemsSource="{x:Bind ViewModel.Languages}" SelectionChanged="TMDBLanguage_SelectionChanged" Width="300"></ComboBox>
+                <ComboBox x:Name="TMDBLanguage" ItemsSource="{x:Bind ViewModel.Languages}" SelectionChanged="TMDBLanguage_SelectionChanged" Width="440"></ComboBox>
             </StackPanel>
             <StackPanel Margin="0,12,0,0" Orientation="Vertical">
                 <TextBlock x:Uid="TMDBRegion" Margin="0,0,0,8"></TextBlock>
-                    <ComboBox x:Name="TMDBRegion" ItemsSource="{x:Bind ViewModel.Countries}" SelectionChanged="TMDBRegion_SelectionChanged" Width="300"></ComboBox>
+                    <ComboBox x:Name="TMDBRegion" ItemsSource="{x:Bind ViewModel.Countries}" SelectionChanged="TMDBRegion_SelectionChanged" Width="440"></ComboBox>
             </StackPanel>
-            <TextBlock
+                </controls:WrapPanel>
+                <TextBlock
                 x:Uid="Settings_Theme"
                 Style="{ThemeResource CategoryStyle}" Margin="0,12,0,0"/>
-            <StackPanel Margin="{StaticResource XSmallTopMargin}">
+            
+            <controls:WrapPanel Margin="{StaticResource XSmallTopMargin}">
                 <RadioButton
                         x:Uid="Settings_Theme_Light"
                         GroupName="AppTheme"
@@ -67,21 +70,21 @@
                         <xaml:ElementTheme>Default</xaml:ElementTheme>
                     </RadioButton.CommandParameter>
                 </RadioButton>
-            </StackPanel>
+            </controls:WrapPanel>
             <TextBlock
-                x:Uid="Settings_Jackett"
+                Text="Jackett"
                 Style="{ThemeResource CategoryStyle}" Margin="0,12,0,0"/>
+                <controls:WrapPanel HorizontalSpacing="24">
             <StackPanel Margin="0,12,0,0" Orientation="Vertical">
                 <TextBlock x:Uid="JackettApiUrl" Margin="0,0,0,8"></TextBlock>
-                <TextBox x:Name="JackettApiUrl" x:Uid="JackettApiUrlHint" TextChanged="JackettApiUrl_TextChanged" HorizontalAlignment="Left" Width="300"></TextBox>
+                <TextBox x:Name="JackettApiUrl" x:Uid="JackettApiUrlHint" TextChanged="JackettApiUrl_TextChanged" HorizontalAlignment="Left" Width="440"></TextBox>
             </StackPanel>
             <StackPanel Margin="0,12,0,0" Orientation="Vertical">
                 <TextBlock x:Uid="JackettApiKey" Margin="0,0,0,8"></TextBlock>
-                <TextBox x:Name="JackettApiKey" x:Uid="JackettApiKeyHint" TextChanged="JackettApiKey_TextChanged" HorizontalAlignment="Left" Width="300"></TextBox>
+                <TextBox x:Name="JackettApiKey" x:Uid="JackettApiKeyHint" TextChanged="JackettApiKey_TextChanged" HorizontalAlignment="Left" Width="440"></TextBox>
             </StackPanel>
-            <TextBlock
-                x:Uid="Settings_Torrents"
-                Style="{ThemeResource CategoryStyle}" Margin="0,12,0,0"/>
+                </controls:WrapPanel>
+                
                 <TextBlock x:Uid="Settings_Torrents_Indexers" Margin="0,8"></TextBlock>
                 <ItemsControl x:Name="Indexer_Checkbox" ItemsSource="{x:Bind ViewModel.Indexers}">
                     <ItemsControl.ItemsPanel>
@@ -122,33 +125,56 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 <TextBlock
-                x:Uid="Settings_Streaming"
-                Style="{ThemeResource CategoryStyle}" Margin="0,6,0,0"/>
+                Text="Peerflix"
+                Style="{ThemeResource CategoryStyle}" Margin="0,8,0,0"/>
+                <controls:WrapPanel HorizontalSpacing="24" Margin="0,0,0,8">
+                <StackPanel Orientation="Vertical" Margin="0,8,0,0">
+                        <TextBlock x:Uid="Settings_Streaming_FilePath" Margin="0,0,0,8"></TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="StreamingFilePath" x:Uid="Settings_Streaming_FilePathBox" TextChanged="StreamingFilePath_TextChanged" HorizontalAlignment="Left" Width="396"></TextBox>
+                        <Button Width="40" Margin="4,0,0,0" Tapped="Folderpicker_Tapped">
+                                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE712;"/>
+                            </Button>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Margin="0,8,0,0" Orientation="Vertical">
+                    <TextBlock x:Uid="Settings_Streaming_Autoplay" Margin="0,0,0,8"></TextBlock>
+                    <ComboBox x:Name="Settings_Streaming_AutoplayBox" Width="440" SelectionChanged="Autoplay_SelectionChanged">
+                        <ComboBoxItem x:Name="Settings_Streaming_NoAutoPlay" x:Uid="Settings_Streaming_NoAutoPlay"></ComboBoxItem>
+                        <ComboBoxItem x:Name="Settings_Streaming_Autoplay_VLC" Content="VLC Media Player" ></ComboBoxItem>
+                        <ComboBoxItem x:Name="Settings_Streaming_Autoplay_MPCHC" Content="MPC-HC"></ComboBoxItem>
+                        <ComboBoxItem x:Name="Settings_Streaming_Autoplay_PotPlayer" Content="PotPlayer"></ComboBoxItem>
+                        </ComboBox>
+                </StackPanel>
+                </controls:WrapPanel>
+                <controls:WrapPanel HorizontalSpacing="28">
+                <CheckBox x:Name="StreamingShowFileList" x:Uid="Settings_Streaming_ShowFileList" Checked="StreamingShowFileList_Checked" Unchecked="StreamingShowFileList_Unchecked"></CheckBox>
+                <CheckBox x:Name="StreamingKeepFiles" x:Uid="Settings_Streaming_KeepFiles" Checked="StreamingKeepFiles_Checked" Unchecked="StreamingKeepFiles_Unchecked"></CheckBox>
+                </controls:WrapPanel>
 
-            <TextBlock
+                <TextBlock
                 x:Uid="Settings_About"
                 Style="{ThemeResource CategoryStyle}" Margin="0,12,0,0"/>
 
-            <StackPanel Margin="{StaticResource XSmallTopMargin}">
-                <Image Margin="0,4,0,12" HorizontalAlignment="Left" Width="300" Source="ms-appx:///Assets/AppLogo.png"></Image>
+                <controls:WrapPanel HorizontalSpacing="35">
+                    <HyperlinkButton NavigateUri="https://github.com/nyakaspeter/TMDBFlix">
+                        <Image Margin="0,12" HorizontalAlignment="Left" Width="200" Source="ms-appx:///Assets/AppLogo.png"></Image>
+                    </HyperlinkButton>
+                    <HyperlinkButton NavigateUri="https://developers.themoviedb.org/3">
+                    <Image Margin="0,12" HorizontalAlignment="Left" Width="45" Source="ms-appx:///Assets/TMDBLogo.png"></Image>
+                </HyperlinkButton>
+                <HyperlinkButton NavigateUri="https://github.com/Jackett/Jackett">
+                    <Image Margin="0,12" HorizontalAlignment="Left" Width="45" Source="ms-appx:///Assets/JackettLogo.png"></Image>
+                </HyperlinkButton>
+                    <HyperlinkButton NavigateUri="https://github.com/mafintosh/peerflix">
+                    <Image Margin="0,12" HorizontalAlignment="Left" Width="45" Source="ms-appx:///Assets/Peerflix.png"></Image>
+                </HyperlinkButton>
+                </controls:WrapPanel>
                 <TextBlock
                     HorizontalAlignment="Left"
                     Text="{x:Bind ViewModel.VersionDescription, Mode=OneWay}"
                     Style="{ThemeResource BodyTextBlockStyle}" />
             </StackPanel>
-            
-            <TextBlock
-                x:Uid="Settings_Apis"
-                Style="{ThemeResource CategoryStyle}" Margin="0,12,0,0"/>
-            <StackPanel Orientation="Horizontal">
-                <HyperlinkButton NavigateUri="https://developers.themoviedb.org/3">
-                    <Image Margin="12" HorizontalAlignment="Left" Width="100" Source="ms-appx:///Assets/TMDBLogo.png"></Image>
-                </HyperlinkButton>
-                <HyperlinkButton NavigateUri="https://github.com/Jackett/Jackett">
-                    <Image Margin="12" HorizontalAlignment="Left" Width="100" Source="ms-appx:///Assets/JackettLogo.png"></Image>
-                </HyperlinkButton>
-            </StackPanel>
-        </StackPanel>
     </Grid>
     </ScrollViewer>
 </Page>

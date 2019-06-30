@@ -1,13 +1,10 @@
 ﻿Funkcionalitás:
 	Epizód részletek nézet
-	Sorozat torrentek
 	Szűrők/rendezés mindenhova
 	Kép nagyítás görgővel
 
 Beállítások:
 	Kezelőfelület nyelve (magyar/angol)
-	Peerflix fájl lista mutatása
-	Peerflix lejátszó választás
 
 UI:
 	Pivot header maradjon fent görgetéskor

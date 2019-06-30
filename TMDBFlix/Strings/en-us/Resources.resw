@@ -494,4 +494,22 @@
   <data name="Settings_Torrents_TVCategories.Text" xml:space="preserve">
     <value>Show categories</value>
   </data>
+  <data name="Settings_Streaming_Autoplay.Text" xml:space="preserve">
+    <value>Autoplay with</value>
+  </data>
+  <data name="Settings_Streaming_FilePath.Text" xml:space="preserve">
+    <value>Streaming file path</value>
+  </data>
+  <data name="Settings_Streaming_FilePathBox.PlaceholderText" xml:space="preserve">
+    <value>Select folder for streamed files</value>
+  </data>
+  <data name="Settings_Streaming_KeepFiles.Content" xml:space="preserve">
+    <value>Keep files after streaming</value>
+  </data>
+  <data name="Settings_Streaming_NoAutoPlay.Content" xml:space="preserve">
+    <value>Don't autoplay</value>
+  </data>
+  <data name="Settings_Streaming_ShowFileList.Content" xml:space="preserve">
+    <value>Show file list before streaming</value>
+  </data>
 </root>

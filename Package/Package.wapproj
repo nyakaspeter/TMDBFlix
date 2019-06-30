@@ -87,7 +87,7 @@
     <Content Include="Images\Wide310x150Logo.scale-400.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TMDBFlix.Test\TMDBFlix.Test.csproj" />
+    <ProjectReference Include="..\TMDBFlix.Test\TMDBFlix.Desktop.csproj" />
     <ProjectReference Include="..\TMDBFlix\TMDBFlix.csproj" />
   </ItemGroup>
   <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />

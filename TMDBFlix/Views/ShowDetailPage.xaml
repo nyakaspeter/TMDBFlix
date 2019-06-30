@@ -20,6 +20,11 @@
         <helpers:KnownForConverter x:Key="KnownForConverter" />
         <helpers:VideoThumbnailConverter x:Key="VideoThumbnailConverter"/>
         <helpers:SeasonNumberToNameConverter x:Key="SeasonNameConverter"/>
+        <helpers:TorrentAddedDateConverter x:Key="TorrentAddedDateConverter"/>
+        <helpers:TorrentSizeConverter x:Key="TorrentSizeConverter"/>
+        <helpers:TorrentSeedersConverter x:Key="TorrentSeedsConverter"/>
+        <helpers:TorrentLeechersConverter x:Key="TorrentLeechersConverter"/>
+        <helpers:TorrentCategoryConverter x:Key="TorrentCategoryConverter"/>
 
         <DataTemplate x:Name="CommonDataTemplate" x:Key="CommonDataTemplate" x:DataType="models:Person">
             <StackPanel Orientation="Horizontal">
@@ -639,6 +644,103 @@
                                     </controls:AdaptiveGridView.ItemTemplate>
                                 </controls:AdaptiveGridView>
 
+
+                    </PivotItem>
+
+                    <PivotItem x:Name="torrentspivot" x:Uid="Torrents">
+
+                        <Grid>
+
+                            <ProgressRing x:Name="TorrentsLoadRing" IsActive="True" Width="60" Height="60" Margin="0,80,0,80"/>
+                            <TextBlock x:Name="NoTorrentResults" x:Uid="NoResults" Margin="0,100,0,100" HorizontalAlignment="Center"/>
+
+                            <ListView Name="TorrentsGrid"
+                            ItemsSource="{x:Bind ViewModel.Torrents,Mode=OneWay}"
+                            SelectionMode="None"
+                            IsItemClickEnabled="True"
+                            >
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:Torrent">
+
+                                        <RelativePanel Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" Margin="-4,4">
+                                            <StackPanel RelativePanel.AlignLeftWithPanel="True" HorizontalAlignment="Left" VerticalAlignment="Top" RelativePanel.LeftOf="TorrentButtons">
+
+                                                <TextBlock
+                                        Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                        TextWrapping="NoWrap"
+                                        Text="{Binding Title}"
+                                        ToolTipService.ToolTip="{Binding Title}"
+                                        Style="{ThemeResource TitleStyle}" />
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        Text="{Binding Jackettindexer}"
+                                        Style="{ThemeResource YearStyle}" />
+                                                    <FontIcon Margin="2,0,2,2" FontFamily="Segoe MDL2 Assets" Glyph="&#xF127;"
+                                                              FontSize="2"
+                                                              Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                                    <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        Text="{Binding PubDate, Converter={StaticResource TorrentAddedDateConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                                                    <FontIcon Margin="2,0,2,2" FontFamily="Segoe MDL2 Assets" Glyph="&#xF127;"
+                                                              FontSize="2"
+                                                              Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                                    <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        Text="{Binding Attributes, Converter={StaticResource TorrentSeedsConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                                                    <FontIcon Margin="2,0,2,2" FontFamily="Segoe MDL2 Assets" Glyph="&#xF127;"
+                                                              FontSize="2"
+                                                              Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                                    <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        Text="{Binding Attributes, Converter={StaticResource TorrentLeechersConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                                                    <FontIcon Margin="2,0,2,2" FontFamily="Segoe MDL2 Assets" Glyph="&#xF127;"
+                                                              FontSize="2"
+                                                              Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                                    <TextBlock
+                                        Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                        Text="{Binding Size, Converter={StaticResource TorrentSizeConverter}}"
+                                        Style="{ThemeResource YearStyle}" />
+                                                </StackPanel>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" x:Name="TorrentButtons" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
+                                                <HyperlinkButton Command="{Binding ElementName=CustomPage, Path=ViewModel.TorrentInfoClickCommand}"
+                                                                CommandParameter="{Binding}"
+                                                             Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}" Margin="8,0">
+                                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE774;"/>
+                                                </HyperlinkButton>
+                                                <HyperlinkButton Command="{Binding ElementName=CustomPage, Path=ViewModel.TorrentSaveClickCommand}"
+                                                                CommandParameter="{Binding}"
+                                                             Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}" Margin="8,0">
+                                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE74E;"/>
+                                                </HyperlinkButton>
+                                                <HyperlinkButton Command="{Binding ElementName=CustomPage, Path=ViewModel.TorrentDownloadClickCommand}"
+                                                                CommandParameter="{Binding}"
+                                                             Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}" Margin="8,0">
+                                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE896;"/>
+                                                </HyperlinkButton>
+                                                <HyperlinkButton Command="{Binding ElementName=CustomPage, Path=ViewModel.TorrentStreamClickCommand}"
+                                                                CommandParameter="{Binding}"
+                                                             Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}" Margin="8,0">
+                                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE768;"/>
+                                                </HyperlinkButton>
+                                            </StackPanel>
+                                        </RelativePanel>
+
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Grid>
 
                     </PivotItem>
                 </Pivot>

@@ -45,8 +45,8 @@ namespace TMDBFlix.Views
                 var torrents = new List<Torrent>();
                 foreach (var indexer in JackettService.Indexers)
                 {
-                    torrents.AddRange(await Task.Run(() => JackettService.SearchMovieTorrents(ViewModel.Movie.title, indexer, JackettService.MovieCategories)));
-                    torrents.AddRange(await Task.Run(() => JackettService.SearchMovieTorrents(ViewModel.Movie.original_title, indexer, JackettService.MovieCategories)));
+                    torrents.AddRange(await Task.Run(() => JackettService.SearchTorrents(ViewModel.Movie.title, indexer, JackettService.MovieCategories)));
+                    torrents.AddRange(await Task.Run(() => JackettService.SearchTorrents(ViewModel.Movie.original_title, indexer, JackettService.MovieCategories)));
                 }
 
                 TorrentsLoadRing.IsActive = false;

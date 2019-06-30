@@ -42,6 +42,8 @@ namespace TMDBFlix.ViewModels
         public ObservableCollection<Person> Crew = new ObservableCollection<Person>();
         public ObservableCollection<Person> Creator = new ObservableCollection<Person>();
 
+        public ObservableCollection<Torrent> Torrents = new ObservableCollection<Torrent>();
+
         public ImagesResponse Images = new ImagesResponse();
 
         public delegate void loadCompleted();

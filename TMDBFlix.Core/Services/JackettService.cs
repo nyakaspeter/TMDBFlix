@@ -77,11 +77,11 @@ namespace TMDBFlix.Core.Services
         }
 
         /// <summary>
-        /// Gets a list of movie torrents
+        /// Gets a list of torrents
         /// </summary>
         /// <param name="query">The search query</param>
         /// <returns></returns>
-        public static List<Torrent> SearchMovieTorrents(string query, string indexer, List<string> categories)
+        public static List<Torrent> SearchTorrents(string query, string indexer, List<string> categories)
         {
             var client = new RestClient($"http://{url}/torznab/{indexer}");
             var request = new RestRequest();

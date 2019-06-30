@@ -1,20 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Windows.Storage;
 
-namespace TMDBFlix.Test
+namespace TMDBFlix.Desktop
 {
     class Program
     {
         static Process cmd;
-        static DirectoryInfo downloads;
-        static string link;
-        static string mode;
-        static bool downloadStarted = false;
+        static DirectoryInfo folder;
 
+        static bool showfiles = true;
+        static bool keepfiles = true;
+        static string folderpath;
+        static string autoplay;
+
+        static string link;
+
+        static bool downloadStarted = false;
         static bool exitSystem = false;
 
         [DllImport("User32.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
@@ -39,17 +47,42 @@ namespace TMDBFlix.Test
 
         private static bool Handler(CtrlType sig)
         {
-            if (downloadStarted)
+            keepfiles = (bool)ApplicationData.Current.LocalSettings.Values["keepfiles"];
+
+            if (!keepfiles)
             {
-                Console.Clear();
-                Console.WriteLine("Deleting temporary files...");
+                if (downloadStarted)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Deleting temporary files...");
 
-                //do your cleanup here
-                downloads.Delete(true);
+                    //do your cleanup here
+                    var subfolders = new List<DirectoryInfo>();
+                    var subfolderpaths = Directory.GetDirectories(folder.FullName);
 
-                //Console.WriteLine("Cleanup complete");
+                    if(subfolderpaths.Length == 0)
+                    {
+                        var files = new List<FileInfo>();
+                        var filepaths = Directory.GetFiles(folder.FullName);
 
-                Thread.Sleep(1000);
+                        foreach (var f in filepaths)
+                        {
+                            files.Add(new FileInfo(f));
+                        }
+                        files = files.OrderByDescending(x => x.CreationTimeUtc).ToList();
+                        files[0].Delete();
+                    }
+                    foreach (var f in subfolderpaths)
+                    {
+                        subfolders.Add(new DirectoryInfo(f));
+                    }
+                    subfolders = subfolders.OrderByDescending(x => x.CreationTimeUtc).ToList();
+                    subfolders[0].Delete(true);
+
+                    //Console.WriteLine("Cleanup complete");
+
+                    Thread.Sleep(1000);
+                }
             }
 
             //allow main to run off
@@ -81,10 +114,15 @@ namespace TMDBFlix.Test
 
         public void Start()
         {
-            downloads = Directory.CreateDirectory(Path.GetTempPath() + "\\flix");
+            showfiles = (bool) ApplicationData.Current.LocalSettings.Values["showfiles"];
+            keepfiles = (bool) ApplicationData.Current.LocalSettings.Values["keepfiles"];
+            folderpath = ApplicationData.Current.LocalSettings.Values["folderpath"] as string;
+            autoplay = ApplicationData.Current.LocalSettings.Values["autoplay"] as string;
             link = ApplicationData.Current.LocalSettings.Values["link"] as string;
-            mode = ApplicationData.Current.LocalSettings.Values["mode"] as string;
 
+            if (folderpath != null && !folderpath.Equals("")) folder = Directory.CreateDirectory(folderpath);
+            else folder = Directory.CreateDirectory(Path.GetTempPath() + "\\TMDBFlix");
+            
             var p = new ProcessStartInfo
             {
                 FileName = "cmd",
@@ -96,20 +134,78 @@ namespace TMDBFlix.Test
             cmd.StandardInput.WriteLine($"prompt $g & cls");
 
             var filenumber = "";
-            if (mode.Equals("showFileList"))
+            if (showfiles)
             {
                 cmd.StandardInput.WriteLine($"cls & peerflix \"{link}\" -l");
-                Console.WriteLine(link);
                 filenumber = "-i " + Console.ReadLine();
             }
 
             downloadStarted = true;
+            
+            switch (autoplay)
+            {
+                case "-":
+                    cmd.StandardInput.WriteLine($"cls & peerflix \"{link}\" {filenumber} -f {folder.FullName}");
+                    break;
+                case "vlc":
+                    cmd.StandardInput.WriteLine($"cls & peerflix \"{link}\" {filenumber} -f {folder.FullName} --vlc");
+                    break;
+                case "mpc-hc":
+                    cmd.StandardInput.WriteLine($"cls & peerflix \"{link}\" {filenumber} -f {folder.FullName} --mpchc");
+                    break;
+                case "potplayer":
+                    cmd.StandardInput.WriteLine($"cls & peerflix \"{link}\" {filenumber} -f {folder.FullName} --potplayer");
+                    break;
+                default:
+                    cmd.StandardInput.WriteLine($"cls & peerflix \"{link}\" {filenumber} -f {folder.FullName}");
+                    break;
+            }
 
             IntPtr handle = Process.GetCurrentProcess().MainWindowHandle;
-            ShowWindow(handle, 6);
+            if (!autoplay.Equals("-"))
+            {
+                ShowWindow(handle, 7);
 
-            cmd.StandardInput.WriteLine($"cls & peerflix \"{link}\" {filenumber} -f {downloads.FullName} --mpchc");
-            Console.WriteLine(link);
+                BackgroundWorker bw = new BackgroundWorker();
+                bw.DoWork += new DoWorkEventHandler(
+                delegate (object o, DoWorkEventArgs args)
+                {
+                    BackgroundWorker b = o as BackgroundWorker;
+                    Thread.Sleep(5000);
+
+                    switch (autoplay)
+                    {
+                        case "vlc":
+                            while (Process.GetProcesses().Any(x => x.ProcessName.Contains("vlc")))
+                            {
+                                Thread.Sleep(1000);
+                            }
+                            break;
+                        case "mpc-hc":
+                            while (Process.GetProcesses().Any(x => x.ProcessName.Contains("mpc-hc")))
+                            {
+                                Thread.Sleep(1000);
+                            }
+                            break;
+                        case "potplayer":
+                            while (Process.GetProcesses().Any(x => x.ProcessName.Contains("PotPlayer")))
+                            {
+                                Thread.Sleep(1000);
+                            }
+                            break;
+                    }
+
+                });
+
+                bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(
+                delegate (object o, RunWorkerCompletedEventArgs args)
+                {
+                    ShowWindow(handle, 9);
+                });
+
+                bw.RunWorkerAsync();
+            }
+            
         }
     }
 

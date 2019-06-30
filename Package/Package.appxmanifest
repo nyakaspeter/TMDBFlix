@@ -21,7 +21,7 @@
         <uap:SplashScreen Image="Images\SplashScreen.png" BackgroundColor="#212121" />
       </uap:VisualElements>
       <Extensions>
-        <desktop:Extension xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10" Category="windows.fullTrustProcess" Executable="TMDBFlix.Test/TMDBFlix.Test.exe">
+        <desktop:Extension xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10" Category="windows.fullTrustProcess" Executable="TMDBFlix.Desktop/TMDBFlix.Desktop.exe">
           <desktop:FullTrustProcess>
             <desktop:ParameterGroup GroupId="Background" Parameters="/background" />
             <desktop:ParameterGroup GroupId="WPF" Parameters="/wpf" />
