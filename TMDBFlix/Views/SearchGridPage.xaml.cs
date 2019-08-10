@@ -69,9 +69,9 @@ namespace TMDBFlix.Views
             //ViewModel.LoadData();
         }
 
-        private void Scroller_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        private async void Scroller_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
-            if (Scroller.VerticalOffset == Scroller.ScrollableHeight) ViewModel.LoadData();
+            if (Scroller.VerticalOffset == Scroller.ScrollableHeight) await ViewModel.LoadData();
         }
 
         private void ShowAll_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)

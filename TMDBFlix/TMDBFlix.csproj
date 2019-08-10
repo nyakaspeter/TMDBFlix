@@ -122,6 +122,8 @@
     <Compile Include="Controls\CustomPage.cs" />
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
     <Compile Include="Helpers\EpisodeNameConverter.cs" />
+    <Compile Include="Helpers\IntToVotesStringConverter.cs" />
+    <Compile Include="Helpers\FloatToOneDecimalStringConverter.cs" />
     <Compile Include="Helpers\StringToDateConverter.cs" />
     <Compile Include="Helpers\TorrentCategoryConverter.cs" />
     <Compile Include="Helpers\VotesToStarsConverter.cs" />

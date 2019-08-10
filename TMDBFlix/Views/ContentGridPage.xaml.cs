@@ -40,7 +40,7 @@ namespace TMDBFlix.Views
             Scroller.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
         }
 
-        private async void ContentGridPage_Loaded(object sender, RoutedEventArgs e)
+        private void ContentGridPage_Loaded(object sender, RoutedEventArgs e)
         {
             FixOneRowGrid(NowPlayingMoviesGrid);
             FixOneRowGrid(NowStreamingMoviesGrid);

@@ -252,9 +252,9 @@ namespace TMDBFlix.ViewModels
         /// Opens the clicked torrent's webpage
         /// </summary>
         /// <param name="clickedItem"></param>
-        public void OnTorrentInfoClick(Torrent clickedItem)
+        public async void OnTorrentInfoClick(Torrent clickedItem)
         {
-            Windows.System.Launcher.LaunchUriAsync(new Uri(clickedItem.Comments));
+            await Windows.System.Launcher.LaunchUriAsync(new Uri(clickedItem.Comments));
         }
 
         /// <summary>

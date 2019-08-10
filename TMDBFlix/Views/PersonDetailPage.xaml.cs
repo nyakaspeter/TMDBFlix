@@ -86,32 +86,32 @@ namespace TMDBFlix.Views
             }
         }
 
-        private void ImdbIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void ImdbIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Windows.System.Launcher.LaunchUriAsync(new Uri("https://imdb.com/name/" + ViewModel.Person.imdb_id));
+            await Windows.System.Launcher.LaunchUriAsync(new Uri("https://imdb.com/name/" + ViewModel.Person.imdb_id));
         }
 
-        private void FacebookIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void FacebookIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Windows.System.Launcher.LaunchUriAsync(new Uri("https://www.facebook.com/" + ViewModel.Person.external_ids.facebook_id));
+            await Windows.System.Launcher.LaunchUriAsync(new Uri("https://www.facebook.com/" + ViewModel.Person.external_ids.facebook_id));
         }
 
-        private void InstagramIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void InstagramIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Windows.System.Launcher.LaunchUriAsync(new Uri("https://www.instagram.com/" + ViewModel.Person.external_ids.instagram_id));
+            await Windows.System.Launcher.LaunchUriAsync(new Uri("https://www.instagram.com/" + ViewModel.Person.external_ids.instagram_id));
         }
 
-        private void TwitterIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void TwitterIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Windows.System.Launcher.LaunchUriAsync(new Uri("https://twitter.com/" + ViewModel.Person.external_ids.twitter_id));
+            await Windows.System.Launcher.LaunchUriAsync(new Uri("https://twitter.com/" + ViewModel.Person.external_ids.twitter_id));
         }
 
-        private void HomepageIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void HomepageIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Windows.System.Launcher.LaunchUriAsync(new Uri(ViewModel.Person.homepage));
+            await Windows.System.Launcher.LaunchUriAsync(new Uri(ViewModel.Person.homepage));
         }
 
-        private void Title_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void Title_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             contentdialogtext.Text = "";
             foreach (var v in ViewModel.Person.also_known_as)
@@ -119,14 +119,14 @@ namespace TMDBFlix.Views
                 contentdialogtext.Text += v + "\n";
             }
             contentdialog.Title = new ResourceLoader().GetString("AlsoKnownAs/Text");
-            contentdialog.ShowAsync();
+            await contentdialog.ShowAsync();
         }
 
-        private void Overview_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void Overview_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             contentdialogtext.Text = ViewModel.Person.biography;
             contentdialog.Title = new ResourceLoader().GetString("Biography/Text");
-            contentdialog.ShowAsync();
+            await contentdialog.ShowAsync();
         }
 
         private void Languages_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)

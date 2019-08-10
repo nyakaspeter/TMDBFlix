@@ -1,24 +1,40 @@
-﻿<Application
-    x:Class="TMDBFlix.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:muxm="using:Microsoft.UI.Xaml.Media"
-    >
+﻿<Application x:Class="TMDBFlix.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:helpers="using:TMDBFlix.Helpers"
+             xmlns:muxm="using:Microsoft.UI.Xaml.Media">
 
     <Application.Resources>
         <ResourceDictionary>
+            <helpers:ImagePathToUrlConverter x:Key="ImageUrlConverter" />
+            <helpers:ReleaseDateToYearConverter x:Key="ReleaseYearConverter" />
+            <helpers:KnownForConverter x:Key="KnownForConverter" />
+            <helpers:VideoThumbnailConverter x:Key="VideoThumbnailConverter" />
+            <helpers:SeasonNumberToNameConverter x:Key="SeasonNameConverter" />
+            <helpers:TorrentAddedDateConverter x:Key="TorrentAddedDateConverter" />
+            <helpers:TorrentSizeConverter x:Key="TorrentSizeConverter" />
+            <helpers:TorrentSeedersConverter x:Key="TorrentSeedsConverter" />
+            <helpers:TorrentLeechersConverter x:Key="TorrentLeechersConverter" />
+            <helpers:TorrentCategoryConverter x:Key="TorrentCategoryConverter" />
+            <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" EnumType="ElementTheme" />
+            <helpers:VotesToStarsConverter x:Key="VotesToStarsConverter" />
+            <helpers:EpisodeNameConverter x:Key="EpisodeNameConverter" />
+            <helpers:StringToDateConverter x:Key="DateConverter" />
+            <helpers:SearchItemImageConverter x:Key="ItemImageConverter" />
+            <helpers:SearchItemNameConverter x:Key="ItemNameConverter" />
+            <helpers:SearchItemInfoConverter x:Key="ItemInfoConverter" />
+            <helpers:ImageToTitleConverter x:Key="ImageTitleConverter" />
+            <helpers:FloatToOneDecimalStringConverter x:Key="FloatToOneDecimalStringConverter" />
+            <helpers:IntToVotesStringConverter x:Key="IntToVotesStringConverter" />
+
             <ResourceDictionary.MergedDictionaries>
-                <XamlControlsResources  xmlns="using:Microsoft.UI.Xaml.Controls"/>
-                <ResourceDictionary Source="/Styles/_Colors.xaml"/>
-                <ResourceDictionary Source="/Styles/_FontSizes.xaml"/>
-                <ResourceDictionary Source="/Styles/_Thickness.xaml"/>
-
-                <ResourceDictionary Source="/Styles/TextBlock.xaml"/>
-                <ResourceDictionary Source="/Styles/Image.xaml"/>
-                <ResourceDictionary Source="/Styles/Page.xaml"/>
-
-                
-                
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <ResourceDictionary Source="/Styles/_Colors.xaml" />
+                <ResourceDictionary Source="/Styles/_FontSizes.xaml" />
+                <ResourceDictionary Source="/Styles/_Thickness.xaml" />
+                <ResourceDictionary Source="/Styles/TextBlock.xaml" />
+                <ResourceDictionary Source="/Styles/Image.xaml" />
+                <ResourceDictionary Source="/Styles/Page.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

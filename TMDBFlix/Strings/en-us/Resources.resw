@@ -512,4 +512,7 @@
   <data name="Settings_Streaming_ShowFileList.Content" xml:space="preserve">
     <value>Show file list before streaming</value>
   </data>
+  <data name="Votes" xml:space="preserve">
+    <value>votes</value>
+  </data>
 </root>

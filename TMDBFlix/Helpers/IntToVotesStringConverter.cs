@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,17 +10,14 @@ using Windows.UI.Xaml.Data;
 namespace TMDBFlix.Helpers
 {
     /// <summary>
-    /// Converts torrent size to Gigabytes or Megabytes
+    /// Converts TMDb image path to image link string
     /// </summary>
-    class TorrentSizeConverter : IValueConverter
+    class IntToVotesStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var val = value as string;
-            var bytes = double.Parse(val);
-            var megabytes = bytes / 1024 / 1024;
-            if (megabytes > 1024) return String.Format("{0:0.##} GB", megabytes/1024);
-            else return String.Format("{0:0.##} MB", megabytes);
+            var i = (int)value;
+            return $"{i} {new ResourceLoader().GetString("Votes")}";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

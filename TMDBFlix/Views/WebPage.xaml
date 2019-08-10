@@ -1,35 +1,16 @@
-﻿<custom:CustomPage
-    x:Class="TMDBFlix.Views.WebPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:models="using:TMDBFlix.Core.Models"
-    xmlns:custom="using:TMDBFlix.Controls"
-    xmlns:helpers="using:TMDBFlix.Helpers"
-    Style="{StaticResource PageStyle}"
-    mc:Ignorable="d">
+﻿<custom:CustomPage x:Class="TMDBFlix.Views.WebPage"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+                   xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+                   xmlns:custom="using:TMDBFlix.Controls"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:helpers="using:TMDBFlix.Helpers"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:models="using:TMDBFlix.Core.Models"
+                   Style="{StaticResource PageStyle}"
+                   mc:Ignorable="d">
 
-    <custom:CustomPage.Resources>
-        <helpers:ImagePathToUrlConverter x:Key="ImageUrlConverter" />
-        <helpers:ReleaseDateToYearConverter x:Key="ReleaseYearConverter" />
-        <helpers:KnownForConverter x:Key="KnownForConverter" />
-        <helpers:VideoThumbnailConverter x:Key="VideoThumbnailConverter"/>
-
-        <Storyboard x:Name="FadeInContent">
-            <FadeInThemeAnimation Storyboard.TargetName="Content" />
-        </Storyboard>
-        <Storyboard x:Name="FadeOutContent">
-            <FadeOutThemeAnimation Storyboard.TargetName="Content" />
-        </Storyboard>
-    </custom:CustomPage.Resources>
-
-
-
-    <WebView x:Name="WebView"/>
-
-
+    <WebView x:Name="WebView" />
 
 </custom:CustomPage>

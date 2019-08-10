@@ -35,7 +35,7 @@ namespace TMDBFlix.Views
             Multisearch.ItemsSource = ViewModel.SearchResultNames;
         }
 
-        private void Search_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        private async void Search_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             if(!sender.Text.Equals(ShellViewModel.searchtext))ShellViewModel.searched = false;
             if (sender.Text.Equals(""))
@@ -44,7 +44,7 @@ namespace TMDBFlix.Views
             }
             else
             {
-                ViewModel.LoadSearchResultNames(sender.Text);
+                await ViewModel.LoadSearchResultNames(sender.Text);
             }
         }
 
@@ -72,7 +72,7 @@ namespace TMDBFlix.Views
             Multisearch.Text = args.SelectedItem.ToString();
         }
 
-        private void Multisearch_GotFocus(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void Multisearch_GotFocus(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             ShellViewModel.searched = false;
             if (Multisearch.Text.Equals(""))
@@ -81,7 +81,7 @@ namespace TMDBFlix.Views
             }
             else
             {
-                ViewModel.LoadSearchResultNames(Multisearch.Text);
+                await ViewModel.LoadSearchResultNames(Multisearch.Text);
             }
         }
 

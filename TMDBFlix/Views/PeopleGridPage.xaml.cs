@@ -30,7 +30,7 @@ namespace TMDBFlix.Views
             if (Scroller.ScrollableHeight == 0) await ViewModel.LoadData();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.Parameter != null)
             {
@@ -41,12 +41,12 @@ namespace TMDBFlix.Views
 
             ListName.Text = ViewModel.ListName;
 
-            ViewModel.LoadData();
+            await ViewModel.LoadData();
         }
 
-        private void Scroller_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        private async void Scroller_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
-            if (Scroller.VerticalOffset == Scroller.ScrollableHeight) ViewModel.LoadData();
+            if (Scroller.VerticalOffset == Scroller.ScrollableHeight) await ViewModel.LoadData();
         }
     }
 }

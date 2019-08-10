@@ -88,7 +88,8 @@ namespace TMDBFlix.Views
 
             var vote = Math.Round((double)ViewModel.Movie.vote_average / 2, 2);
             voteaverage.PlaceholderValue = vote;
-            votecount.Text = "(" + ViewModel.Movie.vote_count + ")";
+            votecount.Text = $"{ViewModel.Movie.vote_average:0.0}";
+            ToolTipService.SetToolTip(votecount, new ToolTip() { Content = $"{ViewModel.Movie.vote_count} {new ResourceLoader().GetString("Votes")}" });
 
             if (!ViewModel.Movie.release_date.Equals(""))
                 releasedate.Text = DateTime.Parse(ViewModel.Movie.release_date).ToString("yyyy. MM. dd.");
@@ -165,32 +166,32 @@ namespace TMDBFlix.Views
             }
         }
 
-        private void ImdbIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void ImdbIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Windows.System.Launcher.LaunchUriAsync(new Uri("https://imdb.com/title/" + ViewModel.Movie.imdb_id));
+            await Windows.System.Launcher.LaunchUriAsync(new Uri("https://imdb.com/title/" + ViewModel.Movie.imdb_id));
         }
 
-        private void FacebookIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void FacebookIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Windows.System.Launcher.LaunchUriAsync(new Uri("https://www.facebook.com/" + ViewModel.Movie.external_ids.facebook_id));
+            await Windows.System.Launcher.LaunchUriAsync(new Uri("https://www.facebook.com/" + ViewModel.Movie.external_ids.facebook_id));
         }
 
-        private void InstagramIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void InstagramIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Windows.System.Launcher.LaunchUriAsync(new Uri("https://www.instagram.com/" + ViewModel.Movie.external_ids.instagram_id));
+            await Windows.System.Launcher.LaunchUriAsync(new Uri("https://www.instagram.com/" + ViewModel.Movie.external_ids.instagram_id));
         }
 
-        private void TwitterIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void TwitterIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Windows.System.Launcher.LaunchUriAsync(new Uri("https://twitter.com/" + ViewModel.Movie.external_ids.twitter_id));
+            await Windows.System.Launcher.LaunchUriAsync(new Uri("https://twitter.com/" + ViewModel.Movie.external_ids.twitter_id));
         }
 
-        private void HomepageIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void HomepageIcon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Windows.System.Launcher.LaunchUriAsync(new Uri(ViewModel.Movie.homepage));
+            await Windows.System.Launcher.LaunchUriAsync(new Uri(ViewModel.Movie.homepage));
         }
 
-        private void Title_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void Title_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             contentdialogtext.Text = "";
             foreach (var v in ViewModel.Movie.alternative_titles.titles)
@@ -198,17 +199,17 @@ namespace TMDBFlix.Views
                 contentdialogtext.Text += v.title + "\n";
             }
             contentdialog.Title = new ResourceLoader().GetString("AlternativeTitles/Text");
-            contentdialog.ShowAsync();
+            await contentdialog.ShowAsync();
         }
 
-        private void Overview_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void Overview_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             contentdialogtext.Text = ViewModel.Movie.tagline + "\n\n" + ViewModel.Movie.overview;
             contentdialog.Title = new ResourceLoader().GetString("Overview/Text");
-            contentdialog.ShowAsync();
+            await contentdialog.ShowAsync();
         }
 
-        private void Languages_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void Languages_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             contentdialogtext.Text = "";
             foreach (var v in ViewModel.Movie.spoken_languages)
@@ -216,10 +217,10 @@ namespace TMDBFlix.Views
                 contentdialogtext.Text += v.name + "\n";
             }
             contentdialog.Title = new ResourceLoader().GetString("Languages/Text");
-            contentdialog.ShowAsync();
+            await contentdialog.ShowAsync();
         }
 
-        private void Companies_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void Companies_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             contentdialogtext.Text = "";
             foreach (var v in ViewModel.Movie.production_companies)
@@ -227,10 +228,10 @@ namespace TMDBFlix.Views
                 contentdialogtext.Text += v.name + "\n";
             }
             contentdialog.Title = new ResourceLoader().GetString("Companies/Text");
-            contentdialog.ShowAsync();
+            await contentdialog.ShowAsync();
         }
 
-        private void Countries_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void Countries_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             contentdialogtext.Text = "";
             foreach (var v in ViewModel.Movie.production_countries)
@@ -238,7 +239,7 @@ namespace TMDBFlix.Views
                 contentdialogtext.Text += v.name + "\n";
             }
             contentdialog.Title = new ResourceLoader().GetString("Countries/Text");
-            contentdialog.ShowAsync();
+            await contentdialog.ShowAsync();
         }
 
         private void Collection_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
