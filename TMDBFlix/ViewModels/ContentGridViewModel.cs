@@ -66,30 +66,30 @@ namespace TMDBFlix.ViewModels
             {
                 LoadMovieList(NowPlayingMovies, "/discover/movie", new Dictionary<string, string>()
                 {
-                    {"region","us"},
+                    {"region","US"},
                     {"with_release_type", "3"},
                     {"primary_release_date.gte", DateTime.Today.AddMonths(-3).ToString("yyyy-MM-dd")},
                     {"primary_release_date.lte", DateTime.Today.ToString("yyyy-MM-dd")}
                 }),
                 LoadMovieList(NowStreamingMovies, "/discover/movie", new Dictionary<string, string>()
                 {
-                    {"region","us"},
+                    {"region","US"},
                     {"with_release_type", "4"},
                     {"primary_release_date.gte", DateTime.Today.AddMonths(-8).ToString("yyyy-MM-dd")}
                 }),
                 LoadMovieList(UpcomingMovies, "/discover/movie", new Dictionary<string, string>()
                 {
-                    {"region","us" },
+                    {"region","US" },
                     {"primary_release_date.gte", DateTime.Today.AddDays(7).ToString("yyyy-MM-dd")},
                     {"primary_release_date.lte", DateTime.Today.AddMonths(6).ToString("yyyy-MM-dd")}
                 }),
                 LoadMovieList(PopularMovies, "/discover/movie", new Dictionary<string, string>()
                 {
-                    {"region","us"}
+                    {"region","US"}
                 }),
                 LoadMovieList(HighRatedMovies, "/discover/movie", new Dictionary<string, string>()
                 {
-                    {"region","us"},
+                    {"region","US"},
                     {"sort_by","vote_average.desc" },
                     {"primary_release_date.gte", DateTime.Today.AddYears(-20).ToString("yyyy-MM-dd")},
                     {"vote_count.gte", "1000"},
