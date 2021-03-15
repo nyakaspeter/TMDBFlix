@@ -6,10 +6,9 @@ using System.Windows.Input;
 
 using Microsoft.Toolkit.Uwp.UI.Animations;
 
-using TMDBFlix.Core.Models;
-using TMDBFlix.Core.Services;
-using TMDBFlix.Helpers;
+using TMDBFlix.Models;
 using TMDBFlix.Services;
+using TMDBFlix.Helpers;
 using TMDBFlix.Views;
 
 namespace TMDBFlix.ViewModels

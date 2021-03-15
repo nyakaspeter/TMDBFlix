@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TMDBFlix.Core.Models;
-using TMDBFlix.Core.Services;
+using TMDBFlix.Models;
+using TMDBFlix.Services;
 using TMDBFlix.ViewModels;
 
 using Windows.UI.Xaml.Controls;

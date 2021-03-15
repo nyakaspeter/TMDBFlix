@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using TMDBFlix.Core.Models;
-using TMDBFlix.Core.Services;
 using TMDBFlix.Services;
 
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
-using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media;
 
 namespace TMDBFlix
 {

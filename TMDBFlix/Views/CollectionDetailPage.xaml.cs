@@ -2,9 +2,8 @@
 
 using Microsoft.Toolkit.Uwp.UI.Animations;
 using TMDBFlix.Controls;
-using TMDBFlix.Core.Services;
-using TMDBFlix.Helpers;
 using TMDBFlix.Services;
+using TMDBFlix.Helpers;
 using TMDBFlix.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Controls;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 
-namespace TMDBFlix.Core.Helpers
+namespace TMDBFlix.Helpers
 {
     public static class Singleton<T>
         where T : new()

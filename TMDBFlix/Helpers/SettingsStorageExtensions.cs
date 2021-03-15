@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
-using TMDBFlix.Core.Helpers;
+using TMDBFlix.Helpers;
 
 using Windows.Storage;
 using Windows.Storage.Streams;

@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using TMDBFlix.Core.Models;
+using TMDBFlix.Models;
 using TMDBFlix.Helpers;
 using TMDBFlix.Services;
 using TMDBFlix.Views;
@@ -20,7 +20,7 @@ using Windows.Foundation.Metadata;
 using Windows.Networking.BackgroundTransfer;
 using Windows.Storage;
 using Windows.UI.Xaml.Controls;
-using Image = TMDBFlix.Core.Models.Image;
+using Image = TMDBFlix.Models.Image;
 
 namespace TMDBFlix.ViewModels
 {

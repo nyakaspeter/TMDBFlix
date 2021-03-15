@@ -5,10 +5,10 @@ using TMDBFlix.ViewModels;
 
 using Windows.UI.Xaml.Controls;
 using System.Collections.Generic;
-using TMDBFlix.Core.Models;
+using TMDBFlix.Models;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Navigation;
-using TMDBFlix.Core.Services;
+using TMDBFlix.Services;
 
 namespace TMDBFlix.Views
 {

@@ -15,7 +15,7 @@ namespace TMDBFlix.Helpers
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var val = value as List<TMDBFlix.Core.Models.Attr>;
+            var val = value as List<TMDBFlix.Models.Attr>;
             foreach (var v in val)
             {
                 if (v.Name.Equals("category") && v.Value.Length >= 2)

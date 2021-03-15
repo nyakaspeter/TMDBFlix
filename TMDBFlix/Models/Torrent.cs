@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 /// <summary>
 /// Classes for torrent data deserialization
 /// </summary>
-namespace TMDBFlix.Core.Models
+namespace TMDBFlix.Models
 {
     public class Enclosure
     {

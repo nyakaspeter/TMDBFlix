@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using TMDBFlix.Core.Models;
+using TMDBFlix.Models;
 
-namespace TMDBFlix.Core.Services
+namespace TMDBFlix.Services
 {
     /// <summary>
     /// Static class for communicating with Jackett API
@@ -83,37 +83,49 @@ namespace TMDBFlix.Core.Services
         /// <returns></returns>
         public static List<Torrent> SearchTorrents(string query, string indexer, List<string> categories)
         {
-            var client = new RestClient($"http://{url}/torznab/{indexer}");
-            var request = new RestRequest();
-            request.XmlSerializer = new RestSharp.Serializers.DotNetXmlSerializer();
-            request.RequestFormat = DataFormat.Xml;
+            try
+            {
+                var client = new RestClient($"http://{url}/torznab/{indexer}");
+                var request = new RestRequest();
+                request.XmlSerializer = new RestSharp.Serializers.DotNetXmlSerializer();
+                request.RequestFormat = DataFormat.Xml;
 
-            request.AddParameter("apikey", key);
-            request.AddParameter("t", "search");
-            request.AddParameter("q", query);
-            request.AddParameter("cat", String.Join(",",categories));
+                request.AddParameter("apikey", key);
+                request.AddParameter("t", "search");
+                request.AddParameter("q", query);
+                request.AddParameter("cat", String.Join(",", categories));
 
-            var response = client.Execute<List<Torrent>>(request);
-            if (response.IsSuccessful) return response.Data;
-            
-            return new List<Torrent>();
+                var response = client.Execute<List<Torrent>>(request);
+                if (response.IsSuccessful) return response.Data;
+                else return new List<Torrent>();
+            }
+            catch (Exception)
+            {
+                return new List<Torrent>();
+            }
         }
 
         public static List<Indexer> GetConfiguredIndexers()
         {
-            var client = new RestClient($"http://{url}/torznab/all");
-            var request = new RestRequest();
-            request.XmlSerializer = new RestSharp.Serializers.DotNetXmlSerializer();
-            request.RequestFormat = DataFormat.Xml;
+            try
+            {
+                var client = new RestClient($"http://{url}/torznab/all");
+                var request = new RestRequest();
+                request.XmlSerializer = new RestSharp.Serializers.DotNetXmlSerializer();
+                request.RequestFormat = DataFormat.Xml;
 
-            request.AddParameter("apikey", key);
-            request.AddParameter("t", "indexers");
-            request.AddParameter("configured", "true");
+                request.AddParameter("apikey", key);
+                request.AddParameter("t", "indexers");
+                request.AddParameter("configured", "true");
 
-            var response = client.Execute<List<Indexer>>(request);
-            if (response.IsSuccessful) return response.Data;
-
-            return new List<Indexer>();
+                var response = client.Execute<List<Indexer>>(request);
+                if (response.IsSuccessful) return response.Data;
+                else return new List<Indexer>();
+                } 
+            catch (Exception) 
+            {
+                return new List<Indexer>();
+            }
         }
 
         public static void Init()
@@ -135,7 +147,6 @@ namespace TMDBFlix.Core.Services
             indexers = indexers_str.Split(',').ToList();
             moviecategories = moviecategories_str.Split(',').ToList();
             tvcategories = tvcategories_str.Split(',').ToList();
-
         }
     }
 }

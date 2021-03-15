@@ -15,7 +15,7 @@ namespace TMDBFlix.Helpers
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var val = value as List<TMDBFlix.Core.Models.Attr>;
+            var val = value as List<TMDBFlix.Models.Attr>;
             int peers = 0;
             int seeds = 0;
             foreach (var v in val)

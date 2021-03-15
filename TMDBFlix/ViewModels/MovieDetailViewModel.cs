@@ -4,8 +4,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using TMDBFlix.Core.Models;
-using TMDBFlix.Core.Services;
+using TMDBFlix.Models;
+using TMDBFlix.Services;
 using TMDBFlix.Helpers;
 
 namespace TMDBFlix.ViewModels

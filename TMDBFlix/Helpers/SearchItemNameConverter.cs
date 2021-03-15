@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TMDBFlix.Core.Models;
+using TMDBFlix.Models;
 using Windows.UI.Xaml.Data;
 
 namespace TMDBFlix.Helpers

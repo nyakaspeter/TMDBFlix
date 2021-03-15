@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using TMDBFlix.Core.Models;
+using TMDBFlix.Models;
 using TMDBFlix.ViewModels;
 using Windows.ApplicationModel.Core;
 using Windows.UI;

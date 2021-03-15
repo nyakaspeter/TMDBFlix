@@ -2,15 +2,9 @@
 
 using Microsoft.Toolkit.Uwp.UI.Animations;
 using TMDBFlix.Controls;
-using TMDBFlix.Core.Services;
-using TMDBFlix.Helpers;
 using TMDBFlix.Services;
 using TMDBFlix.ViewModels;
 using Windows.ApplicationModel.Resources;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 namespace TMDBFlix.Views

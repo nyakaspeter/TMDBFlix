@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using TMDBFlix.Core.Models;
+using TMDBFlix.Models;
 using Windows.UI.Xaml;
 
-namespace TMDBFlix.Core.Services
+namespace TMDBFlix.Services
 {
     /// <summary>
     /// Static class for communicating with TMDb API

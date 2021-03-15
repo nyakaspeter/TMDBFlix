@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TMDBFlix.Core.Models
+namespace TMDBFlix.Models
 {
     /// <summary>
     /// Contains show data for REST response deserialization

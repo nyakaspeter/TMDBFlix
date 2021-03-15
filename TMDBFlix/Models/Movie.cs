@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace TMDBFlix.Core.Models
+namespace TMDBFlix.Models
 {
     /// <summary>
     /// Contains movie data for REST response deserialization

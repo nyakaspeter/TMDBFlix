@@ -2,7 +2,7 @@
 
 using Microsoft.Toolkit.Uwp.UI.Animations;
 using TMDBFlix.Controls;
-using TMDBFlix.Core.Models;
+using TMDBFlix.Models;
 using TMDBFlix.Services;
 using TMDBFlix.ViewModels;
 
@@ -23,7 +23,7 @@ namespace TMDBFlix.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (e.Parameter is Core.Models.Image image)
+            if (e.Parameter is Models.Image image)
             {
                 Img.Source = new BitmapImage(new Uri("http://image.tmdb.org/t/p/original/" + image.file_path));
                 Scroller.ZoomToFactor(0.95f);

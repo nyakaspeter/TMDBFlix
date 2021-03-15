@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TMDBFlix.Core.Models
+namespace TMDBFlix.Models
 {
     /// <summary>
     /// Contains person data for REST response deserialization

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 
-namespace TMDBFlix.Core.Helpers
+namespace TMDBFlix.Helpers
 {
     public static class Json
     {

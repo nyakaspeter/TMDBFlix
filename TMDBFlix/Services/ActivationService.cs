@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using TMDBFlix.Activation;
-using TMDBFlix.Core.Services;
+using TMDBFlix.Services;
 
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;

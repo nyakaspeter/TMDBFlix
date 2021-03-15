@@ -7,7 +7,7 @@
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                    xmlns:helpers="using:TMDBFlix.Helpers"
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                   xmlns:models="using:TMDBFlix.Core.Models"
+                   xmlns:models="using:TMDBFlix.Models"
                    xmlns:mux="using:Microsoft.UI.Xaml.Controls"
                    x:Name="CustomPage"
                    Style="{StaticResource PageStyle}"

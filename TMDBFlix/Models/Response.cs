@@ -5,7 +5,7 @@ using System.Text;
 /// <summary>
 /// Data classes for REST response deserialization
 /// </summary>
-namespace TMDBFlix.Core.Models
+namespace TMDBFlix.Models
 {
     public class MoviesResponse
     {

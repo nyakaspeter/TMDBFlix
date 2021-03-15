@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using TMDBFlix.Core.Models;
-using TMDBFlix.Core.Services;
-using TMDBFlix.Helpers;
+using TMDBFlix.Models;
 using TMDBFlix.Services;
+using TMDBFlix.Helpers;
 
 using Windows.ApplicationModel;
 using Windows.UI.Xaml;
