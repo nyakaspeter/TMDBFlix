@@ -1,17 +1,18 @@
-﻿<custom:CustomPage x:Class="TMDBFlix.Views.PersonDetailPage"
-                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                   xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-                   xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-                   xmlns:custom="using:TMDBFlix.Controls"
-                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                   xmlns:helpers="using:TMDBFlix.Helpers"
-                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                   xmlns:models="using:TMDBFlix.Models"
-                   xmlns:mux="using:Microsoft.UI.Xaml.Controls"
-                   x:Name="CustomPage"
-                   Style="{StaticResource PageStyle}"
-                   mc:Ignorable="d">
+﻿<custom:CustomPage
+    x:Class="TMDBFlix.Views.PersonDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:custom="using:TMDBFlix.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helpers="using:TMDBFlix.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:TMDBFlix.Models"
+    xmlns:mux="using:Microsoft.UI.Xaml.Controls"
+    x:Name="CustomPage"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
 
     <custom:CustomPage.Resources>
 
@@ -22,15 +23,17 @@
             <FadeOutThemeAnimation Storyboard.TargetName="PageContent" />
         </Storyboard>
 
-        <DataTemplate x:Key="CommonDataTemplate"
-                      x:Name="CommonDataTemplate"
-                      x:DataType="models:Person">
+        <DataTemplate
+            x:Key="CommonDataTemplate"
+            x:Name="CommonDataTemplate"
+            x:DataType="models:Person">
             <StackPanel Orientation="Horizontal">
 
-                <HyperlinkButton Padding="0"
-                                 Command="{Binding ElementName=CustomPage, Path=ViewModel.PersonClickCommand}"
-                                 CommandParameter="{Binding}"
-                                 Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}">
+                <HyperlinkButton
+                    Padding="0"
+                    Command="{Binding ElementName=CustomPage, Path=ViewModel.PersonClickCommand}"
+                    CommandParameter="{Binding}"
+                    Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}">
                     <TextBlock Text="{Binding name}" />
                 </HyperlinkButton>
 
@@ -42,14 +45,16 @@
 
         </DataTemplate>
 
-        <DataTemplate x:Key="LastDataTemplate"
-                      x:Name="LastDataTemplate"
-                      x:DataType="models:Person">
+        <DataTemplate
+            x:Key="LastDataTemplate"
+            x:Name="LastDataTemplate"
+            x:DataType="models:Person">
             <StackPanel Orientation="Horizontal">
-                <HyperlinkButton Padding="0"
-                                 Command="{Binding ElementName=CustomPage, Path=ViewModel.PersonClickCommand}"
-                                 CommandParameter="{Binding}"
-                                 Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}">
+                <HyperlinkButton
+                    Padding="0"
+                    Command="{Binding ElementName=CustomPage, Path=ViewModel.PersonClickCommand}"
+                    CommandParameter="{Binding}"
+                    Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}">
                     <TextBlock Text="{Binding name}" />
                 </HyperlinkButton>
             </StackPanel>
@@ -61,18 +66,20 @@
             <Setter Property="Margin" Value="4,0" />
         </Style>
 
-        <helpers:MyTemplateSelector x:Key="MyTemplateSelector"
-                                    CommonTemplate="{StaticResource CommonDataTemplate}"
-                                    LastTemplate="{StaticResource LastDataTemplate}" />
+        <helpers:MyTemplateSelector
+            x:Key="MyTemplateSelector"
+            CommonTemplate="{StaticResource CommonDataTemplate}"
+            LastTemplate="{StaticResource LastDataTemplate}" />
 
     </custom:CustomPage.Resources>
 
 
     <Grid>
-        <ProgressRing x:Name="LoadRing"
-                      Width="60"
-                      Height="60"
-                      IsActive="True" />
+        <ProgressRing
+            x:Name="LoadRing"
+            Width="60"
+            Height="60"
+            IsActive="True" />
         <ScrollViewer x:Name="Scroller" VerticalScrollBarVisibility="Auto">
             <StackPanel x:Name="PageContent" Margin="{StaticResource PageMargin}">
 
@@ -82,24 +89,28 @@
 
 
                 <RelativePanel Margin="0,8,0,0">
-                    <Grid x:Name="poster"
-                          Margin="0,0,0,0"
-                          RelativePanel.AlignHorizontalCenterWithPanel="True"
-                          RelativePanel.AlignTopWithPanel="True">
-                        <FlipView x:Name="posters"
-                                  Width="376"
-                                  Height="564"
-                                  ItemsSource="{x:Bind ViewModel.Profiles}">
+                    <Grid
+                        x:Name="poster"
+                        Margin="0,0,0,0"
+                        RelativePanel.AlignHorizontalCenterWithPanel="True"
+                        RelativePanel.AlignTopWithPanel="True">
+                        <FlipView
+                            x:Name="posters"
+                            Width="376"
+                            Height="564"
+                            ItemsSource="{x:Bind ViewModel.Profiles}">
                             <FlipView.ItemTemplate>
                                 <DataTemplate x:DataType="Image">
-                                    <HyperlinkButton Padding="0"
-                                                     Command="{Binding ElementName=CustomPage, Path=ViewModel.ImageClickCommand}"
-                                                     CommandParameter="{Binding}">
-                                        <Image HorizontalAlignment="Center"
-                                               VerticalAlignment="Center"
-                                               ImageFailed="Image_ImageFailed"
-                                               Source="{Binding file_path, Converter={StaticResource ImageUrlConverter}}"
-                                               Stretch="UniformToFill" />
+                                    <HyperlinkButton
+                                        Padding="0"
+                                        Command="{Binding ElementName=CustomPage, Path=ViewModel.ImageClickCommand}"
+                                        CommandParameter="{Binding}">
+                                        <Image
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            ImageFailed="Image_ImageFailed"
+                                            Source="{Binding file_path, Converter={StaticResource ImageUrlConverter}}"
+                                            Stretch="UniformToFill" />
                                     </HyperlinkButton>
                                 </DataTemplate>
                             </FlipView.ItemTemplate>
@@ -107,60 +118,74 @@
                     </Grid>
 
 
-                    <StackPanel x:Name="upperinfo"
-                                Margin="24,12,24,0"
-                                RelativePanel.Below="poster">
+                    <StackPanel
+                        x:Name="upperinfo"
+                        Margin="24,12,24,0"
+                        RelativePanel.Below="poster">
                         <StackPanel>
-                            <HyperlinkButton Padding="0"
-                                             Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
-                                             Tapped="Title_Tapped">
-                                <TextBlock x:Name="name"
-                                           Margin="0"
-                                           FontSize="30"
-                                           FontWeight="SemiBold"
-                                           Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
-                                           Text="{x:Bind ViewModel.Person.name, Mode=OneWay}"
-                                           TextWrapping="WrapWholeWords" />
+                            <HyperlinkButton
+                                Padding="0"
+                                Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
+                                Tapped="Title_Tapped">
+                                <TextBlock
+                                    x:Name="name"
+                                    Margin="0"
+                                    FontSize="30"
+                                    FontWeight="SemiBold"
+                                    Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
+                                    Text="{x:Bind ViewModel.Person.name, Mode=OneWay}"
+                                    TextWrapping="WrapWholeWords" />
                             </HyperlinkButton>
 
                             <StackPanel Orientation="Horizontal">
-                                <StackPanel Height="36"
-                                            VerticalAlignment="Center"
-                                            Orientation="Horizontal">
-                                    <HyperlinkButton x:Name="imdbicon"
-                                                     Padding="0"
-                                                     Tapped="ImdbIcon_Tapped">
-                                        <BitmapIcon Margin="3,0,5,0"
-                                                    Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}"
-                                                    UriSource="ms-appx:///Assets/icons8-imdb-64.png" />
+                                <StackPanel
+                                    Height="36"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                                    <HyperlinkButton
+                                        x:Name="imdbicon"
+                                        Padding="0"
+                                        Tapped="ImdbIcon_Tapped">
+                                        <BitmapIcon
+                                            Margin="3,0,5,0"
+                                            Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}"
+                                            UriSource="ms-appx:///Assets/icons8-imdb-64.png" />
                                     </HyperlinkButton>
-                                    <HyperlinkButton x:Name="facebookicon"
-                                                     Padding="0"
-                                                     Tapped="FacebookIcon_Tapped">
-                                        <BitmapIcon Margin="3,5"
-                                                    Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}"
-                                                    UriSource="ms-appx:///Assets/icons8-facebook-48.png" />
+                                    <HyperlinkButton
+                                        x:Name="facebookicon"
+                                        Padding="0"
+                                        Tapped="FacebookIcon_Tapped">
+                                        <BitmapIcon
+                                            Margin="3,5"
+                                            Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}"
+                                            UriSource="ms-appx:///Assets/icons8-facebook-48.png" />
                                     </HyperlinkButton>
-                                    <HyperlinkButton x:Name="twittericon"
-                                                     Padding="0"
-                                                     Tapped="TwitterIcon_Tapped">
-                                        <BitmapIcon Margin="3,5"
-                                                    Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}"
-                                                    UriSource="ms-appx:///Assets/icons8-twitter-48.png" />
+                                    <HyperlinkButton
+                                        x:Name="twittericon"
+                                        Padding="0"
+                                        Tapped="TwitterIcon_Tapped">
+                                        <BitmapIcon
+                                            Margin="3,5"
+                                            Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}"
+                                            UriSource="ms-appx:///Assets/icons8-twitter-48.png" />
                                     </HyperlinkButton>
-                                    <HyperlinkButton x:Name="instagramicon"
-                                                     Padding="0"
-                                                     Tapped="InstagramIcon_Tapped">
-                                        <BitmapIcon Margin="3,5"
-                                                    Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}"
-                                                    UriSource="ms-appx:///Assets/icons8-instagram-48.png" />
+                                    <HyperlinkButton
+                                        x:Name="instagramicon"
+                                        Padding="0"
+                                        Tapped="InstagramIcon_Tapped">
+                                        <BitmapIcon
+                                            Margin="3,5"
+                                            Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}"
+                                            UriSource="ms-appx:///Assets/icons8-instagram-48.png" />
                                     </HyperlinkButton>
-                                    <HyperlinkButton x:Name="homepageicon"
-                                                     Padding="0"
-                                                     Tapped="HomepageIcon_Tapped">
-                                        <BitmapIcon Margin="3,7"
-                                                    Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}"
-                                                    UriSource="ms-appx:///Assets/icons8-internet-filled-48.png" />
+                                    <HyperlinkButton
+                                        x:Name="homepageicon"
+                                        Padding="0"
+                                        Tapped="HomepageIcon_Tapped">
+                                        <BitmapIcon
+                                            Margin="3,7"
+                                            Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}"
+                                            UriSource="ms-appx:///Assets/icons8-internet-filled-48.png" />
                                     </HyperlinkButton>
                                 </StackPanel>
                             </StackPanel>
@@ -168,96 +193,114 @@
 
                     </StackPanel>
 
-                    <StackPanel x:Name="middleinfo"
-                                Margin="24,4"
-                                VerticalAlignment="Center"
-                                RelativePanel.Below="upperinfo">
+                    <StackPanel
+                        x:Name="middleinfo"
+                        Margin="24,4"
+                        VerticalAlignment="Center"
+                        RelativePanel.Below="upperinfo">
 
-                        <HyperlinkButton Padding="0"
-                                         Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}"
-                                         Tapped="Overview_Tapped">
-                            <TextBlock x:Name="biography"
-                                       Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
-                                       MaxLines="16"
-                                       Text="{x:Bind ViewModel.Person.biography, Mode=OneWay}"
-                                       TextAlignment="Justify"
-                                       TextWrapping="Wrap" />
+                        <HyperlinkButton
+                            Padding="0"
+                            Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}"
+                            Tapped="Overview_Tapped">
+                            <TextBlock
+                                x:Name="biography"
+                                Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
+                                MaxLines="16"
+                                Text="{x:Bind ViewModel.Person.biography, Mode=OneWay}"
+                                TextAlignment="Justify"
+                                TextWrapping="Wrap" />
                         </HyperlinkButton>
                     </StackPanel>
 
-                    <controls:WrapPanel x:Name="bottominfo"
-                                        Margin="24,12"
-                                        HorizontalSpacing="8"
-                                        RelativePanel.Below="middleinfo"
-                                        VerticalSpacing="24">
+                    <controls:WrapPanel
+                        x:Name="bottominfo"
+                        Margin="24,12"
+                        HorizontalSpacing="8"
+                        RelativePanel.Below="middleinfo"
+                        VerticalSpacing="24">
 
                         <StackPanel Width="200">
-                            <TextBlock x:Uid="Department"
-                                       FontWeight="SemiBold"
-                                       Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <TextBlock x:Name="department"
-                                       MaxLines="2"
-                                       Text="N/A"
-                                       TextWrapping="Wrap" />
+                            <TextBlock
+                                x:Uid="Department"
+                                FontWeight="SemiBold"
+                                Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
+                            <TextBlock
+                                x:Name="department"
+                                MaxLines="2"
+                                Text="N/A"
+                                TextWrapping="Wrap" />
                         </StackPanel>
 
                         <StackPanel Width="200">
-                            <TextBlock x:Uid="Gender"
-                                       FontWeight="SemiBold"
-                                       Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <TextBlock x:Name="gender"
-                                       MaxLines="2"
-                                       Text="N/A"
-                                       TextWrapping="Wrap" />
+                            <TextBlock
+                                x:Uid="Gender"
+                                FontWeight="SemiBold"
+                                Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
+                            <TextBlock
+                                x:Name="gender"
+                                MaxLines="2"
+                                Text="N/A"
+                                TextWrapping="Wrap" />
                         </StackPanel>
 
                         <StackPanel x:Name="ageinfo" Width="200">
-                            <TextBlock x:Uid="Age"
-                                       FontWeight="SemiBold"
-                                       Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <TextBlock x:Name="age"
-                                       MaxLines="2"
-                                       Text="N/A"
-                                       TextWrapping="Wrap" />
+                            <TextBlock
+                                x:Uid="Age"
+                                FontWeight="SemiBold"
+                                Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
+                            <TextBlock
+                                x:Name="age"
+                                MaxLines="2"
+                                Text="N/A"
+                                TextWrapping="Wrap" />
                         </StackPanel>
 
                         <StackPanel Width="200">
-                            <TextBlock x:Uid="Birthday"
-                                       FontWeight="SemiBold"
-                                       Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <TextBlock x:Name="birthday"
-                                       MaxLines="2"
-                                       Text="N/A"
-                                       TextWrapping="Wrap" />
+                            <TextBlock
+                                x:Uid="Birthday"
+                                FontWeight="SemiBold"
+                                Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
+                            <TextBlock
+                                x:Name="birthday"
+                                MaxLines="2"
+                                Text="N/A"
+                                TextWrapping="Wrap" />
                         </StackPanel>
 
-                        <StackPanel x:Name="deathdayinfo"
-                                    Width="200"
-                                    Visibility="Collapsed">
-                            <TextBlock x:Uid="Deathday"
-                                       FontWeight="SemiBold"
-                                       Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <TextBlock x:Name="deathday"
-                                       MaxLines="2"
-                                       Text="N/A"
-                                       TextWrapping="Wrap" />
+                        <StackPanel
+                            x:Name="deathdayinfo"
+                            Width="200"
+                            Visibility="Collapsed">
+                            <TextBlock
+                                x:Uid="Deathday"
+                                FontWeight="SemiBold"
+                                Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
+                            <TextBlock
+                                x:Name="deathday"
+                                MaxLines="2"
+                                Text="N/A"
+                                TextWrapping="Wrap" />
                         </StackPanel>
 
                         <StackPanel Width="200">
-                            <TextBlock x:Uid="Birthplace"
-                                       FontWeight="SemiBold"
-                                       Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <TextBlock x:Name="birthplace"
-                                       MaxLines="2"
-                                       Text="N/A"
-                                       TextWrapping="Wrap" />
+                            <TextBlock
+                                x:Uid="Birthplace"
+                                FontWeight="SemiBold"
+                                Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
+                            <TextBlock
+                                x:Name="birthplace"
+                                MaxLines="2"
+                                Text="N/A"
+                                TextWrapping="Wrap" />
                         </StackPanel>
 
                     </controls:WrapPanel>
 
-                    <StackPanel x:Name="keywordsinfo"
-                                Margin="24,0"
-                                RelativePanel.Below="bottominfo" />
+                    <StackPanel
+                        x:Name="keywordsinfo"
+                        Margin="24,0"
+                        RelativePanel.Below="bottominfo" />
 
                 </RelativePanel>
 
@@ -269,55 +312,62 @@
 
 
                 <ContentDialog x:Name="contentdialog" x:Uid="ContentDialog">
-                    <TextBlock x:Name="contentdialogtext"
-                               TextAlignment="Justify"
-                               TextWrapping="Wrap" />
+                    <TextBlock
+                        x:Name="contentdialogtext"
+                        TextAlignment="Justify"
+                        TextWrapping="Wrap" />
                 </ContentDialog>
 
 
 
-                <Pivot x:Name="pivot"
-                       Grid.Column="1"
-                       Margin="0,0,0,0"
-                       Style="{StaticResource PivotStyle1}">
+                <Pivot
+                    x:Name="pivot"
+                    Grid.Column="1"
+                    Margin="0,0,0,0"
+                    Style="{StaticResource PivotStyle1}">
 
                     <PivotItem x:Name="moviespivot" x:Uid="Movies">
 
 
-                        <controls:AdaptiveGridView Name="MoviesGrid"
-                                                   Margin="4,0"
-                                                   animations:Connected.ListItemElementName="itemThumbnail"
-                                                   animations:Connected.ListItemKey="animationKeyContentGrid"
-                                                   DesiredWidth="178"
-                                                   IsItemClickEnabled="True"
-                                                   ItemClickCommand="{x:Bind ViewModel.MovieClickCommand}"
-                                                   ItemHeight="316"
-                                                   ItemsSource="{x:Bind ViewModel.Movies, Mode=OneWay}"
-                                                   SelectionMode="None"
-                                                   StretchContentForSingleRow="False">
+                        <controls:AdaptiveGridView
+                            Name="MoviesGrid"
+                            Margin="4,0"
+                            animations:Connected.ListItemElementName="itemThumbnail"
+                            animations:Connected.ListItemKey="animationKeyContentGrid"
+                            DesiredWidth="178"
+                            IsItemClickEnabled="True"
+                            ItemClickCommand="{x:Bind ViewModel.MovieClickCommand}"
+                            ItemHeight="316"
+                            ItemsSource="{x:Bind ViewModel.Movies, Mode=OneWay}"
+                            SelectionMode="None"
+                            StretchContentForSingleRow="False">
                             <controls:AdaptiveGridView.ItemTemplate>
                                 <DataTemplate x:DataType="models:MovieCredit">
 
-                                    <Grid x:Name="itemThumbnail"
-                                          Margin="8"
-                                          Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <Grid
+                                        x:Name="itemThumbnail"
+                                        Margin="8"
+                                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                                             <Grid Height="250">
-                                                <Image HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"
-                                                       ImageFailed="Image_ImageFailed"
-                                                       Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
-                                                       Stretch="UniformToFill" />
+                                                <Image
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    ImageFailed="Image_ImageFailed"
+                                                    Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                                    Stretch="UniformToFill" />
                                             </Grid>
-                                            <TextBlock Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource TitleStyle}"
-                                                       Text="{Binding title}"
-                                                       ToolTipService.ToolTip="{Binding title}" />
-                                            <TextBlock Margin="{StaticResource XXSmallLeftRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource YearStyle}"
-                                                       Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource TitleStyle}"
+                                                Text="{Binding title}"
+                                                ToolTipService.ToolTip="{Binding title}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource YearStyle}"
+                                                Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}" />
                                         </StackPanel>
                                     </Grid>
 
@@ -331,40 +381,45 @@
 
                     <PivotItem x:Name="showspivot" x:Uid="Shows">
 
-                        <controls:AdaptiveGridView Name="ShowsGrid"
-                                                   Margin="4,0"
-                                                   animations:Connected.ListItemElementName="itemThumbnail"
-                                                   animations:Connected.ListItemKey="animationKeyContentGrid"
-                                                   DesiredWidth="178"
-                                                   IsItemClickEnabled="True"
-                                                   ItemClickCommand="{x:Bind ViewModel.ShowClickCommand}"
-                                                   ItemHeight="316"
-                                                   ItemsSource="{x:Bind ViewModel.Shows, Mode=OneWay}"
-                                                   SelectionMode="None"
-                                                   StretchContentForSingleRow="False">
+                        <controls:AdaptiveGridView
+                            Name="ShowsGrid"
+                            Margin="4,0"
+                            animations:Connected.ListItemElementName="itemThumbnail"
+                            animations:Connected.ListItemKey="animationKeyContentGrid"
+                            DesiredWidth="178"
+                            IsItemClickEnabled="True"
+                            ItemClickCommand="{x:Bind ViewModel.ShowClickCommand}"
+                            ItemHeight="316"
+                            ItemsSource="{x:Bind ViewModel.Shows, Mode=OneWay}"
+                            SelectionMode="None"
+                            StretchContentForSingleRow="False">
                             <controls:AdaptiveGridView.ItemTemplate>
                                 <DataTemplate x:DataType="models:ShowCredit">
 
-                                    <Grid x:Name="itemThumbnail"
-                                          Margin="8"
-                                          Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <Grid
+                                        x:Name="itemThumbnail"
+                                        Margin="8"
+                                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                                             <Grid Height="250">
-                                                <Image HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"
-                                                       ImageFailed="Image_ImageFailed"
-                                                       Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
-                                                       Stretch="UniformToFill" />
+                                                <Image
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    ImageFailed="Image_ImageFailed"
+                                                    Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                                    Stretch="UniformToFill" />
                                             </Grid>
-                                            <TextBlock Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource TitleStyle}"
-                                                       Text="{Binding name}"
-                                                       ToolTipService.ToolTip="{Binding name}" />
-                                            <TextBlock Margin="{StaticResource XXSmallLeftRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource YearStyle}"
-                                                       Text="{Binding first_air_date, Converter={StaticResource ReleaseYearConverter}}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource TitleStyle}"
+                                                Text="{Binding name}"
+                                                ToolTipService.ToolTip="{Binding name}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource YearStyle}"
+                                                Text="{Binding first_air_date, Converter={StaticResource ReleaseYearConverter}}" />
                                         </StackPanel>
                                     </Grid>
 
@@ -377,31 +432,34 @@
 
                     <PivotItem x:Name="imagespivot" x:Uid="Backdrops">
 
-                        <controls:AdaptiveGridView Name="ImagesGrid"
-                                                   Margin="4,0"
-                                                   animations:Connected.ListItemElementName="itemThumbnail"
-                                                   animations:Connected.ListItemKey="animationKeyContentGrid"
-                                                   DesiredWidth="474"
-                                                   IsItemClickEnabled="True"
-                                                   ItemClickCommand="{x:Bind ViewModel.ImageClickCommand}"
-                                                   ItemHeight="316"
-                                                   ItemsSource="{x:Bind ViewModel.Images, Mode=OneWay}"
-                                                   SelectionMode="None"
-                                                   StretchContentForSingleRow="False">
+                        <controls:AdaptiveGridView
+                            Name="ImagesGrid"
+                            Margin="4,0"
+                            animations:Connected.ListItemElementName="itemThumbnail"
+                            animations:Connected.ListItemKey="animationKeyContentGrid"
+                            DesiredWidth="474"
+                            IsItemClickEnabled="True"
+                            ItemClickCommand="{x:Bind ViewModel.ImageClickCommand}"
+                            ItemHeight="316"
+                            ItemsSource="{x:Bind ViewModel.Images, Mode=OneWay}"
+                            SelectionMode="None"
+                            StretchContentForSingleRow="False">
                             <controls:AdaptiveGridView.ItemTemplate>
                                 <DataTemplate x:DataType="models:Image">
 
-                                    <Grid x:Name="itemThumbnail"
-                                          Margin="8"
-                                          Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <Grid
+                                        x:Name="itemThumbnail"
+                                        Margin="8"
+                                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
 
                                         <Grid Height="300">
-                                            <Image HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center"
-                                                   ImageFailed="Image_ImageFailed"
-                                                   Source="{Binding file_path, Converter={StaticResource ImageUrlConverter}}"
-                                                   Stretch="UniformToFill"
-                                                   ToolTipService.ToolTip="{Binding media, Converter={StaticResource ImageTitleConverter}}" />
+                                            <Image
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                ImageFailed="Image_ImageFailed"
+                                                Source="{Binding file_path, Converter={StaticResource ImageUrlConverter}}"
+                                                Stretch="UniformToFill"
+                                                ToolTipService.ToolTip="{Binding media, Converter={StaticResource ImageTitleConverter}}" />
                                         </Grid>
 
                                     </Grid>

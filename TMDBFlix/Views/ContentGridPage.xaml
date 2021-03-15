@@ -1,16 +1,17 @@
-﻿<custom:CustomPage x:Class="TMDBFlix.Views.ContentGridPage"
-                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                   xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-                   xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-                   xmlns:custom="using:TMDBFlix.Controls"
-                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                   xmlns:helpers="using:TMDBFlix.Helpers"
-                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                   xmlns:models="using:TMDBFlix.Models"
-                   NavigationCacheMode="Disabled"
-                   Style="{StaticResource PageStyle}"
-                   mc:Ignorable="d">
+﻿<custom:CustomPage
+    x:Class="TMDBFlix.Views.ContentGridPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:custom="using:TMDBFlix.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helpers="using:TMDBFlix.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:TMDBFlix.Models"
+    NavigationCacheMode="Disabled"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
 
     <custom:CustomPage.Resources>
         <Storyboard x:Name="FadeInContent">
@@ -23,84 +24,93 @@
 
     <Grid>
 
-        <ProgressRing x:Name="LoadRing"
-                      Width="60"
-                      Height="60"
-                      IsActive="True" />
+        <ProgressRing
+            x:Name="LoadRing"
+            Width="60"
+            Height="60"
+            IsActive="True" />
         <ScrollViewer x:Name="Scroller" VerticalScrollBarVisibility="Hidden">
             <StackPanel x:Name="PageContent" Margin="{StaticResource PageMargin}">
                 <StackPanel x:Name="NowPlayingMovies">
-                    <HyperlinkButton x:Name="NowPlayingMoviesBtn"
-                                     Margin="22,-4,0,12"
-                                     Padding="4"
-                                     Background="{StaticResource SystemControlTransparentBrush}"
-                                     Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
-                                     Tapped="NowPlayingMoviesBtn_Tapped">
+                    <HyperlinkButton
+                        x:Name="NowPlayingMoviesBtn"
+                        Margin="22,-4,0,12"
+                        Padding="4"
+                        Background="{StaticResource SystemControlTransparentBrush}"
+                        Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
+                        Tapped="NowPlayingMoviesBtn_Tapped">
                         <TextBlock x:Uid="NowPlayingMovies" Style="{ThemeResource CategoryStyle}" />
                     </HyperlinkButton>
 
                     <Grid>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="4,0,0,14"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Left"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="NowPlayingMovies"
-                                Tapped="ScrollBackward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="4,0,0,14"
+                            Padding="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Left"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="NowPlayingMovies"
+                            Tapped="ScrollBackward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;" />
                         </Button>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="0,0,8,14"
-                                Padding="0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Right"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="NowPlayingMovies"
-                                Tapped="ScrollForward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="0,0,8,14"
+                            Padding="0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Right"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="NowPlayingMovies"
+                            Tapped="ScrollForward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;" />
                         </Button>
 
-                        <controls:AdaptiveGridView Name="NowPlayingMoviesGrid"
-                                                   Margin="{StaticResource OneRowGridMargin}"
-                                                   animations:Connected.ListItemElementName="itemThumbnail"
-                                                   animations:Connected.ListItemKey="animationKeyContentGrid"
-                                                   IsItemClickEnabled="True"
-                                                   ItemClickCommand="{x:Bind ViewModel.MovieClickCommand}"
-                                                   ItemHeight="0"
-                                                   ItemsSource="{x:Bind ViewModel.NowPlayingMovies, Mode=OneWay}"
-                                                   OneRowModeEnabled="True"
-                                                   SelectionMode="None"
-                                                   StretchContentForSingleRow="True">
+                        <controls:AdaptiveGridView
+                            Name="NowPlayingMoviesGrid"
+                            Margin="{StaticResource OneRowGridMargin}"
+                            animations:Connected.ListItemElementName="itemThumbnail"
+                            animations:Connected.ListItemKey="animationKeyContentGrid"
+                            IsItemClickEnabled="True"
+                            ItemClickCommand="{x:Bind ViewModel.MovieClickCommand}"
+                            ItemHeight="0"
+                            ItemsSource="{x:Bind ViewModel.NowPlayingMovies, Mode=OneWay}"
+                            OneRowModeEnabled="True"
+                            SelectionMode="None"
+                            StretchContentForSingleRow="True">
                             <controls:AdaptiveGridView.ItemTemplate>
                                 <DataTemplate x:DataType="models:Movie">
 
-                                    <Grid x:Name="itemThumbnail"
-                                          Margin="8"
-                                          Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <Grid
+                                        x:Name="itemThumbnail"
+                                        Margin="8"
+                                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                                             <Grid Height="250">
-                                                <Image HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"
-                                                       ImageFailed="Image_ImageFailed"
-                                                       Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
-                                                       Stretch="UniformToFill" />
+                                                <Image
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    ImageFailed="Image_ImageFailed"
+                                                    Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                                    Stretch="UniformToFill" />
                                             </Grid>
-                                            <TextBlock Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource TitleStyle}"
-                                                       Text="{Binding title}"
-                                                       ToolTipService.ToolTip="{Binding title}" />
-                                            <TextBlock Margin="{StaticResource XXSmallLeftRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource YearStyle}"
-                                                       Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource TitleStyle}"
+                                                Text="{Binding title}"
+                                                ToolTipService.ToolTip="{Binding title}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource YearStyle}"
+                                                Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}" />
                                         </StackPanel>
                                     </Grid>
 
@@ -111,77 +121,85 @@
                 </StackPanel>
 
                 <StackPanel x:Name="NowStreamingMovies">
-                    <HyperlinkButton x:Name="NowStreamingMoviesBtn"
-                                     Margin="22,-4,0,12"
-                                     Padding="4"
-                                     Background="{StaticResource SystemControlTransparentBrush}"
-                                     Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
-                                     Tapped="NowStreamingMoviesBtn_Tapped">
+                    <HyperlinkButton
+                        x:Name="NowStreamingMoviesBtn"
+                        Margin="22,-4,0,12"
+                        Padding="4"
+                        Background="{StaticResource SystemControlTransparentBrush}"
+                        Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
+                        Tapped="NowStreamingMoviesBtn_Tapped">
                         <TextBlock x:Uid="NowStreamingMovies" Style="{ThemeResource CategoryStyle}" />
                     </HyperlinkButton>
 
                     <Grid>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="4,0,0,14"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Left"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="NowStreamingMovies"
-                                Tapped="ScrollBackward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="4,0,0,14"
+                            Padding="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Left"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="NowStreamingMovies"
+                            Tapped="ScrollBackward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;" />
                         </Button>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="0,0,8,14"
-                                Padding="0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Right"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="NowStreamingMovies"
-                                Tapped="ScrollForward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="0,0,8,14"
+                            Padding="0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Right"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="NowStreamingMovies"
+                            Tapped="ScrollForward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;" />
                         </Button>
 
-                        <controls:AdaptiveGridView Name="NowStreamingMoviesGrid"
-                                                   Margin="{StaticResource OneRowGridMargin}"
-                                                   animations:Connected.ListItemElementName="itemThumbnail"
-                                                   animations:Connected.ListItemKey="animationKeyContentGrid"
-                                                   IsItemClickEnabled="True"
-                                                   ItemClickCommand="{x:Bind ViewModel.MovieClickCommand}"
-                                                   ItemHeight="0"
-                                                   ItemsSource="{x:Bind ViewModel.NowStreamingMovies, Mode=OneWay}"
-                                                   OneRowModeEnabled="True"
-                                                   SelectionMode="None"
-                                                   StretchContentForSingleRow="True">
+                        <controls:AdaptiveGridView
+                            Name="NowStreamingMoviesGrid"
+                            Margin="{StaticResource OneRowGridMargin}"
+                            animations:Connected.ListItemElementName="itemThumbnail"
+                            animations:Connected.ListItemKey="animationKeyContentGrid"
+                            IsItemClickEnabled="True"
+                            ItemClickCommand="{x:Bind ViewModel.MovieClickCommand}"
+                            ItemHeight="0"
+                            ItemsSource="{x:Bind ViewModel.NowStreamingMovies, Mode=OneWay}"
+                            OneRowModeEnabled="True"
+                            SelectionMode="None"
+                            StretchContentForSingleRow="True">
                             <controls:AdaptiveGridView.ItemTemplate>
                                 <DataTemplate x:DataType="models:Movie">
 
-                                    <Grid x:Name="itemThumbnail"
-                                          Margin="8"
-                                          Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <Grid
+                                        x:Name="itemThumbnail"
+                                        Margin="8"
+                                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                                             <Grid Height="250">
-                                                <Image HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"
-                                                       ImageFailed="Image_ImageFailed"
-                                                       Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
-                                                       Stretch="UniformToFill" />
+                                                <Image
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    ImageFailed="Image_ImageFailed"
+                                                    Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                                    Stretch="UniformToFill" />
                                             </Grid>
-                                            <TextBlock Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource TitleStyle}"
-                                                       Text="{Binding title}"
-                                                       ToolTipService.ToolTip="{Binding title}" />
-                                            <TextBlock Margin="{StaticResource XXSmallLeftRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource YearStyle}"
-                                                       Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource TitleStyle}"
+                                                Text="{Binding title}"
+                                                ToolTipService.ToolTip="{Binding title}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource YearStyle}"
+                                                Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}" />
                                         </StackPanel>
                                     </Grid>
 
@@ -192,77 +210,85 @@
                 </StackPanel>
 
                 <StackPanel x:Name="UpcomingMovies">
-                    <HyperlinkButton x:Name="UpcomingMoviesBtn"
-                                     Margin="22,-4,0,12"
-                                     Padding="4"
-                                     Background="{StaticResource SystemControlTransparentBrush}"
-                                     Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
-                                     Tapped="UpcomingMoviesBtn_Tapped">
+                    <HyperlinkButton
+                        x:Name="UpcomingMoviesBtn"
+                        Margin="22,-4,0,12"
+                        Padding="4"
+                        Background="{StaticResource SystemControlTransparentBrush}"
+                        Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
+                        Tapped="UpcomingMoviesBtn_Tapped">
                         <TextBlock x:Uid="UpcomingMovies" Style="{ThemeResource CategoryStyle}" />
                     </HyperlinkButton>
 
                     <Grid>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="4,0,0,14"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Left"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="UpcomingMovies"
-                                Tapped="ScrollBackward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="4,0,0,14"
+                            Padding="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Left"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="UpcomingMovies"
+                            Tapped="ScrollBackward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;" />
                         </Button>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="0,0,8,14"
-                                Padding="0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Right"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="UpcomingMovies"
-                                Tapped="ScrollForward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="0,0,8,14"
+                            Padding="0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Right"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="UpcomingMovies"
+                            Tapped="ScrollForward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;" />
                         </Button>
 
-                        <controls:AdaptiveGridView Name="UpcomingMoviesGrid"
-                                                   Margin="{StaticResource OneRowGridMargin}"
-                                                   animations:Connected.ListItemElementName="itemThumbnail"
-                                                   animations:Connected.ListItemKey="animationKeyContentGrid"
-                                                   IsItemClickEnabled="True"
-                                                   ItemClickCommand="{x:Bind ViewModel.MovieClickCommand}"
-                                                   ItemHeight="0"
-                                                   ItemsSource="{x:Bind ViewModel.UpcomingMovies, Mode=OneWay}"
-                                                   OneRowModeEnabled="True"
-                                                   SelectionMode="None"
-                                                   StretchContentForSingleRow="True">
+                        <controls:AdaptiveGridView
+                            Name="UpcomingMoviesGrid"
+                            Margin="{StaticResource OneRowGridMargin}"
+                            animations:Connected.ListItemElementName="itemThumbnail"
+                            animations:Connected.ListItemKey="animationKeyContentGrid"
+                            IsItemClickEnabled="True"
+                            ItemClickCommand="{x:Bind ViewModel.MovieClickCommand}"
+                            ItemHeight="0"
+                            ItemsSource="{x:Bind ViewModel.UpcomingMovies, Mode=OneWay}"
+                            OneRowModeEnabled="True"
+                            SelectionMode="None"
+                            StretchContentForSingleRow="True">
                             <controls:AdaptiveGridView.ItemTemplate>
                                 <DataTemplate x:DataType="models:Movie">
 
-                                    <Grid x:Name="itemThumbnail"
-                                          Margin="8"
-                                          Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <Grid
+                                        x:Name="itemThumbnail"
+                                        Margin="8"
+                                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                                             <Grid Height="250">
-                                                <Image HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"
-                                                       ImageFailed="Image_ImageFailed"
-                                                       Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
-                                                       Stretch="UniformToFill" />
+                                                <Image
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    ImageFailed="Image_ImageFailed"
+                                                    Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                                    Stretch="UniformToFill" />
                                             </Grid>
-                                            <TextBlock Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource TitleStyle}"
-                                                       Text="{Binding title}"
-                                                       ToolTipService.ToolTip="{Binding title}" />
-                                            <TextBlock Margin="{StaticResource XXSmallLeftRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource YearStyle}"
-                                                       Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource TitleStyle}"
+                                                Text="{Binding title}"
+                                                ToolTipService.ToolTip="{Binding title}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource YearStyle}"
+                                                Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}" />
                                         </StackPanel>
                                     </Grid>
 
@@ -273,77 +299,85 @@
                 </StackPanel>
 
                 <StackPanel x:Name="PopularMovies">
-                    <HyperlinkButton x:Name="PopularMoviesBtn"
-                                     Margin="22,-4,0,12"
-                                     Padding="4"
-                                     Background="{StaticResource SystemControlTransparentBrush}"
-                                     Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
-                                     Tapped="PopularMoviesBtn_Tapped">
+                    <HyperlinkButton
+                        x:Name="PopularMoviesBtn"
+                        Margin="22,-4,0,12"
+                        Padding="4"
+                        Background="{StaticResource SystemControlTransparentBrush}"
+                        Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
+                        Tapped="PopularMoviesBtn_Tapped">
                         <TextBlock x:Uid="PopularMovies" Style="{ThemeResource CategoryStyle}" />
                     </HyperlinkButton>
 
                     <Grid>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="4,0,0,14"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Left"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="PopularMovies"
-                                Tapped="ScrollBackward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="4,0,0,14"
+                            Padding="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Left"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="PopularMovies"
+                            Tapped="ScrollBackward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;" />
                         </Button>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="0,0,8,14"
-                                Padding="0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Right"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="PopularMovies"
-                                Tapped="ScrollForward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="0,0,8,14"
+                            Padding="0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Right"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="PopularMovies"
+                            Tapped="ScrollForward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;" />
                         </Button>
 
-                        <controls:AdaptiveGridView Name="PopularMoviesGrid"
-                                                   Margin="{StaticResource OneRowGridMargin}"
-                                                   animations:Connected.ListItemElementName="itemThumbnail"
-                                                   animations:Connected.ListItemKey="animationKeyContentGrid"
-                                                   IsItemClickEnabled="True"
-                                                   ItemClickCommand="{x:Bind ViewModel.MovieClickCommand}"
-                                                   ItemHeight="0"
-                                                   ItemsSource="{x:Bind ViewModel.PopularMovies, Mode=OneWay}"
-                                                   OneRowModeEnabled="True"
-                                                   SelectionMode="None"
-                                                   StretchContentForSingleRow="True">
+                        <controls:AdaptiveGridView
+                            Name="PopularMoviesGrid"
+                            Margin="{StaticResource OneRowGridMargin}"
+                            animations:Connected.ListItemElementName="itemThumbnail"
+                            animations:Connected.ListItemKey="animationKeyContentGrid"
+                            IsItemClickEnabled="True"
+                            ItemClickCommand="{x:Bind ViewModel.MovieClickCommand}"
+                            ItemHeight="0"
+                            ItemsSource="{x:Bind ViewModel.PopularMovies, Mode=OneWay}"
+                            OneRowModeEnabled="True"
+                            SelectionMode="None"
+                            StretchContentForSingleRow="True">
                             <controls:AdaptiveGridView.ItemTemplate>
                                 <DataTemplate x:DataType="models:Movie">
 
-                                    <Grid x:Name="itemThumbnail"
-                                          Margin="8"
-                                          Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <Grid
+                                        x:Name="itemThumbnail"
+                                        Margin="8"
+                                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                                             <Grid Height="250">
-                                                <Image HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"
-                                                       ImageFailed="Image_ImageFailed"
-                                                       Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
-                                                       Stretch="UniformToFill" />
+                                                <Image
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    ImageFailed="Image_ImageFailed"
+                                                    Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                                    Stretch="UniformToFill" />
                                             </Grid>
-                                            <TextBlock Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource TitleStyle}"
-                                                       Text="{Binding title}"
-                                                       ToolTipService.ToolTip="{Binding title}" />
-                                            <TextBlock Margin="{StaticResource XXSmallLeftRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource YearStyle}"
-                                                       Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource TitleStyle}"
+                                                Text="{Binding title}"
+                                                ToolTipService.ToolTip="{Binding title}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource YearStyle}"
+                                                Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}" />
                                         </StackPanel>
                                     </Grid>
 
@@ -354,77 +388,85 @@
                 </StackPanel>
 
                 <StackPanel x:Name="HighRatedMovies">
-                    <HyperlinkButton x:Name="HighRatedMoviesBtn"
-                                     Margin="22,-4,0,12"
-                                     Padding="4"
-                                     Background="{StaticResource SystemControlTransparentBrush}"
-                                     Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
-                                     Tapped="HighRatedMoviesBtn_Tapped">
+                    <HyperlinkButton
+                        x:Name="HighRatedMoviesBtn"
+                        Margin="22,-4,0,12"
+                        Padding="4"
+                        Background="{StaticResource SystemControlTransparentBrush}"
+                        Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
+                        Tapped="HighRatedMoviesBtn_Tapped">
                         <TextBlock x:Uid="HighRatedMovies" Style="{ThemeResource CategoryStyle}" />
                     </HyperlinkButton>
 
                     <Grid>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="4,0,0,14"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Left"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="HighRatedMovies"
-                                Tapped="ScrollBackward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="4,0,0,14"
+                            Padding="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Left"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="HighRatedMovies"
+                            Tapped="ScrollBackward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;" />
                         </Button>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="0,0,8,14"
-                                Padding="0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Right"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="HighRatedMovies"
-                                Tapped="ScrollForward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="0,0,8,14"
+                            Padding="0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Right"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="HighRatedMovies"
+                            Tapped="ScrollForward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;" />
                         </Button>
 
-                        <controls:AdaptiveGridView Name="HighRatedMoviesGrid"
-                                                   Margin="{StaticResource OneRowGridMargin}"
-                                                   animations:Connected.ListItemElementName="itemThumbnail"
-                                                   animations:Connected.ListItemKey="animationKeyContentGrid"
-                                                   IsItemClickEnabled="True"
-                                                   ItemClickCommand="{x:Bind ViewModel.MovieClickCommand}"
-                                                   ItemHeight="0"
-                                                   ItemsSource="{x:Bind ViewModel.HighRatedMovies, Mode=OneWay}"
-                                                   OneRowModeEnabled="True"
-                                                   SelectionMode="None"
-                                                   StretchContentForSingleRow="True">
+                        <controls:AdaptiveGridView
+                            Name="HighRatedMoviesGrid"
+                            Margin="{StaticResource OneRowGridMargin}"
+                            animations:Connected.ListItemElementName="itemThumbnail"
+                            animations:Connected.ListItemKey="animationKeyContentGrid"
+                            IsItemClickEnabled="True"
+                            ItemClickCommand="{x:Bind ViewModel.MovieClickCommand}"
+                            ItemHeight="0"
+                            ItemsSource="{x:Bind ViewModel.HighRatedMovies, Mode=OneWay}"
+                            OneRowModeEnabled="True"
+                            SelectionMode="None"
+                            StretchContentForSingleRow="True">
                             <controls:AdaptiveGridView.ItemTemplate>
                                 <DataTemplate x:DataType="models:Movie">
 
-                                    <Grid x:Name="itemThumbnail"
-                                          Margin="8"
-                                          Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <Grid
+                                        x:Name="itemThumbnail"
+                                        Margin="8"
+                                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                                             <Grid Height="250">
-                                                <Image HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"
-                                                       ImageFailed="Image_ImageFailed"
-                                                       Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
-                                                       Stretch="UniformToFill" />
+                                                <Image
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    ImageFailed="Image_ImageFailed"
+                                                    Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                                    Stretch="UniformToFill" />
                                             </Grid>
-                                            <TextBlock Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource TitleStyle}"
-                                                       Text="{Binding title}"
-                                                       ToolTipService.ToolTip="{Binding title}" />
-                                            <TextBlock Margin="{StaticResource XXSmallLeftRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource YearStyle}"
-                                                       Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource TitleStyle}"
+                                                Text="{Binding title}"
+                                                ToolTipService.ToolTip="{Binding title}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource YearStyle}"
+                                                Text="{Binding release_date, Converter={StaticResource ReleaseYearConverter}}" />
                                         </StackPanel>
                                     </Grid>
 
@@ -435,77 +477,85 @@
                 </StackPanel>
 
                 <StackPanel x:Name="OnTvShows">
-                    <HyperlinkButton x:Name="OnTvShowsBtn"
-                                     Margin="22,-4,0,12"
-                                     Padding="4"
-                                     Background="{StaticResource SystemControlTransparentBrush}"
-                                     Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
-                                     Tapped="OnTvShowsBtn_Tapped">
+                    <HyperlinkButton
+                        x:Name="OnTvShowsBtn"
+                        Margin="22,-4,0,12"
+                        Padding="4"
+                        Background="{StaticResource SystemControlTransparentBrush}"
+                        Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
+                        Tapped="OnTvShowsBtn_Tapped">
                         <TextBlock x:Uid="OnTvShows" Style="{ThemeResource CategoryStyle}" />
                     </HyperlinkButton>
 
                     <Grid>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="4,0,0,14"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Left"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="OnTvShows"
-                                Tapped="ScrollBackward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="4,0,0,14"
+                            Padding="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Left"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="OnTvShows"
+                            Tapped="ScrollBackward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;" />
                         </Button>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="0,0,8,14"
-                                Padding="0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Right"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="OnTvShows"
-                                Tapped="ScrollForward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="0,0,8,14"
+                            Padding="0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Right"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="OnTvShows"
+                            Tapped="ScrollForward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;" />
                         </Button>
 
-                        <controls:AdaptiveGridView Name="OnTvShowsGrid"
-                                                   Margin="{StaticResource OneRowGridMargin}"
-                                                   animations:Connected.ListItemElementName="itemThumbnail"
-                                                   animations:Connected.ListItemKey="animationKeyContentGrid"
-                                                   IsItemClickEnabled="True"
-                                                   ItemClickCommand="{x:Bind ViewModel.ShowClickCommand}"
-                                                   ItemHeight="0"
-                                                   ItemsSource="{x:Bind ViewModel.OnTvShows, Mode=OneWay}"
-                                                   OneRowModeEnabled="True"
-                                                   SelectionMode="None"
-                                                   StretchContentForSingleRow="True">
+                        <controls:AdaptiveGridView
+                            Name="OnTvShowsGrid"
+                            Margin="{StaticResource OneRowGridMargin}"
+                            animations:Connected.ListItemElementName="itemThumbnail"
+                            animations:Connected.ListItemKey="animationKeyContentGrid"
+                            IsItemClickEnabled="True"
+                            ItemClickCommand="{x:Bind ViewModel.ShowClickCommand}"
+                            ItemHeight="0"
+                            ItemsSource="{x:Bind ViewModel.OnTvShows, Mode=OneWay}"
+                            OneRowModeEnabled="True"
+                            SelectionMode="None"
+                            StretchContentForSingleRow="True">
                             <controls:AdaptiveGridView.ItemTemplate>
                                 <DataTemplate x:DataType="models:Show">
 
-                                    <Grid x:Name="itemThumbnail"
-                                          Margin="8"
-                                          Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <Grid
+                                        x:Name="itemThumbnail"
+                                        Margin="8"
+                                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                                             <Grid Height="250">
-                                                <Image HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"
-                                                       ImageFailed="Image_ImageFailed"
-                                                       Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
-                                                       Stretch="UniformToFill" />
+                                                <Image
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    ImageFailed="Image_ImageFailed"
+                                                    Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                                    Stretch="UniformToFill" />
                                             </Grid>
-                                            <TextBlock Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource TitleStyle}"
-                                                       Text="{Binding name}"
-                                                       ToolTipService.ToolTip="{Binding name}" />
-                                            <TextBlock Margin="{StaticResource XXSmallLeftRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource YearStyle}"
-                                                       Text="{Binding first_air_date, Converter={StaticResource ReleaseYearConverter}}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource TitleStyle}"
+                                                Text="{Binding name}"
+                                                ToolTipService.ToolTip="{Binding name}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource YearStyle}"
+                                                Text="{Binding first_air_date, Converter={StaticResource ReleaseYearConverter}}" />
                                         </StackPanel>
                                     </Grid>
 
@@ -516,77 +566,85 @@
                 </StackPanel>
 
                 <StackPanel x:Name="AiringTodayShows">
-                    <HyperlinkButton x:Name="AiringTodayShowsBtn"
-                                     Margin="22,-4,0,12"
-                                     Padding="4"
-                                     Background="{StaticResource SystemControlTransparentBrush}"
-                                     Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
-                                     Tapped="AiringTodayShowsBtn_Tapped">
+                    <HyperlinkButton
+                        x:Name="AiringTodayShowsBtn"
+                        Margin="22,-4,0,12"
+                        Padding="4"
+                        Background="{StaticResource SystemControlTransparentBrush}"
+                        Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
+                        Tapped="AiringTodayShowsBtn_Tapped">
                         <TextBlock x:Uid="AiringTodayShows" Style="{ThemeResource CategoryStyle}" />
                     </HyperlinkButton>
 
                     <Grid>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="4,0,0,14"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Left"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="AiringTodayShows"
-                                Tapped="ScrollBackward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="4,0,0,14"
+                            Padding="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Left"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="AiringTodayShows"
+                            Tapped="ScrollBackward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;" />
                         </Button>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="0,0,8,14"
-                                Padding="0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Right"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="AiringTodayShows"
-                                Tapped="ScrollForward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="0,0,8,14"
+                            Padding="0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Right"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="AiringTodayShows"
+                            Tapped="ScrollForward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;" />
                         </Button>
 
-                        <controls:AdaptiveGridView Name="AiringTodayShowsGrid"
-                                                   Margin="{StaticResource OneRowGridMargin}"
-                                                   animations:Connected.ListItemElementName="itemThumbnail"
-                                                   animations:Connected.ListItemKey="animationKeyContentGrid"
-                                                   IsItemClickEnabled="True"
-                                                   ItemClickCommand="{x:Bind ViewModel.ShowClickCommand}"
-                                                   ItemHeight="0"
-                                                   ItemsSource="{x:Bind ViewModel.AiringTodayShows, Mode=OneWay}"
-                                                   OneRowModeEnabled="True"
-                                                   SelectionMode="None"
-                                                   StretchContentForSingleRow="True">
+                        <controls:AdaptiveGridView
+                            Name="AiringTodayShowsGrid"
+                            Margin="{StaticResource OneRowGridMargin}"
+                            animations:Connected.ListItemElementName="itemThumbnail"
+                            animations:Connected.ListItemKey="animationKeyContentGrid"
+                            IsItemClickEnabled="True"
+                            ItemClickCommand="{x:Bind ViewModel.ShowClickCommand}"
+                            ItemHeight="0"
+                            ItemsSource="{x:Bind ViewModel.AiringTodayShows, Mode=OneWay}"
+                            OneRowModeEnabled="True"
+                            SelectionMode="None"
+                            StretchContentForSingleRow="True">
                             <controls:AdaptiveGridView.ItemTemplate>
                                 <DataTemplate x:DataType="models:Show">
 
-                                    <Grid x:Name="itemThumbnail"
-                                          Margin="8"
-                                          Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <Grid
+                                        x:Name="itemThumbnail"
+                                        Margin="8"
+                                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                                             <Grid Height="250">
-                                                <Image HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"
-                                                       ImageFailed="Image_ImageFailed"
-                                                       Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
-                                                       Stretch="UniformToFill" />
+                                                <Image
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    ImageFailed="Image_ImageFailed"
+                                                    Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                                    Stretch="UniformToFill" />
                                             </Grid>
-                                            <TextBlock Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource TitleStyle}"
-                                                       Text="{Binding name}"
-                                                       ToolTipService.ToolTip="{Binding name}" />
-                                            <TextBlock Margin="{StaticResource XXSmallLeftRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource YearStyle}"
-                                                       Text="{Binding first_air_date, Converter={StaticResource ReleaseYearConverter}}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource TitleStyle}"
+                                                Text="{Binding name}"
+                                                ToolTipService.ToolTip="{Binding name}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource YearStyle}"
+                                                Text="{Binding first_air_date, Converter={StaticResource ReleaseYearConverter}}" />
                                         </StackPanel>
                                     </Grid>
 
@@ -597,77 +655,85 @@
                 </StackPanel>
 
                 <StackPanel x:Name="PopularShows">
-                    <HyperlinkButton x:Name="PopularShowsBtn"
-                                     Margin="22,-4,0,12"
-                                     Padding="4"
-                                     Background="{StaticResource SystemControlTransparentBrush}"
-                                     Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
-                                     Tapped="PopularShowsBtn_Tapped">
+                    <HyperlinkButton
+                        x:Name="PopularShowsBtn"
+                        Margin="22,-4,0,12"
+                        Padding="4"
+                        Background="{StaticResource SystemControlTransparentBrush}"
+                        Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
+                        Tapped="PopularShowsBtn_Tapped">
                         <TextBlock x:Uid="PopularShows" Style="{ThemeResource CategoryStyle}" />
                     </HyperlinkButton>
 
                     <Grid>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="4,0,0,14"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Left"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="PopularShows"
-                                Tapped="ScrollBackward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="4,0,0,14"
+                            Padding="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Left"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="PopularShows"
+                            Tapped="ScrollBackward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;" />
                         </Button>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="0,0,8,14"
-                                Padding="0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Right"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="PopularShows"
-                                Tapped="ScrollForward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="0,0,8,14"
+                            Padding="0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Right"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="PopularShows"
+                            Tapped="ScrollForward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;" />
                         </Button>
 
-                        <controls:AdaptiveGridView Name="PopularShowsGrid"
-                                                   Margin="{StaticResource OneRowGridMargin}"
-                                                   animations:Connected.ListItemElementName="itemThumbnail"
-                                                   animations:Connected.ListItemKey="animationKeyContentGrid"
-                                                   IsItemClickEnabled="True"
-                                                   ItemClickCommand="{x:Bind ViewModel.ShowClickCommand}"
-                                                   ItemHeight="0"
-                                                   ItemsSource="{x:Bind ViewModel.PopularShows, Mode=OneWay}"
-                                                   OneRowModeEnabled="True"
-                                                   SelectionMode="None"
-                                                   StretchContentForSingleRow="True">
+                        <controls:AdaptiveGridView
+                            Name="PopularShowsGrid"
+                            Margin="{StaticResource OneRowGridMargin}"
+                            animations:Connected.ListItemElementName="itemThumbnail"
+                            animations:Connected.ListItemKey="animationKeyContentGrid"
+                            IsItemClickEnabled="True"
+                            ItemClickCommand="{x:Bind ViewModel.ShowClickCommand}"
+                            ItemHeight="0"
+                            ItemsSource="{x:Bind ViewModel.PopularShows, Mode=OneWay}"
+                            OneRowModeEnabled="True"
+                            SelectionMode="None"
+                            StretchContentForSingleRow="True">
                             <controls:AdaptiveGridView.ItemTemplate>
                                 <DataTemplate x:DataType="models:Show">
 
-                                    <Grid x:Name="itemThumbnail"
-                                          Margin="8"
-                                          Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <Grid
+                                        x:Name="itemThumbnail"
+                                        Margin="8"
+                                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                                             <Grid Height="250">
-                                                <Image HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"
-                                                       ImageFailed="Image_ImageFailed"
-                                                       Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
-                                                       Stretch="UniformToFill" />
+                                                <Image
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    ImageFailed="Image_ImageFailed"
+                                                    Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                                    Stretch="UniformToFill" />
                                             </Grid>
-                                            <TextBlock Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource TitleStyle}"
-                                                       Text="{Binding name}"
-                                                       ToolTipService.ToolTip="{Binding name}" />
-                                            <TextBlock Margin="{StaticResource XXSmallLeftRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource YearStyle}"
-                                                       Text="{Binding first_air_date, Converter={StaticResource ReleaseYearConverter}}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource TitleStyle}"
+                                                Text="{Binding name}"
+                                                ToolTipService.ToolTip="{Binding name}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource YearStyle}"
+                                                Text="{Binding first_air_date, Converter={StaticResource ReleaseYearConverter}}" />
                                         </StackPanel>
                                     </Grid>
 
@@ -678,77 +744,85 @@
                 </StackPanel>
 
                 <StackPanel x:Name="HighRatedShows">
-                    <HyperlinkButton x:Name="HighRatedShowsBtn"
-                                     Margin="22,-4,0,12"
-                                     Padding="4"
-                                     Background="{StaticResource SystemControlTransparentBrush}"
-                                     Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
-                                     Tapped="HighRatedShowsBtn_Tapped">
+                    <HyperlinkButton
+                        x:Name="HighRatedShowsBtn"
+                        Margin="22,-4,0,12"
+                        Padding="4"
+                        Background="{StaticResource SystemControlTransparentBrush}"
+                        Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
+                        Tapped="HighRatedShowsBtn_Tapped">
                         <TextBlock x:Uid="HighRatedShows" Style="{ThemeResource CategoryStyle}" />
                     </HyperlinkButton>
 
                     <Grid>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="4,0,0,14"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Left"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="HighRatedShows"
-                                Tapped="ScrollBackward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="4,0,0,14"
+                            Padding="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Left"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="HighRatedShows"
+                            Tapped="ScrollBackward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;" />
                         </Button>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="0,0,8,14"
-                                Padding="0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Right"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="HighRatedShows"
-                                Tapped="ScrollForward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="0,0,8,14"
+                            Padding="0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Right"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="HighRatedShows"
+                            Tapped="ScrollForward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;" />
                         </Button>
 
-                        <controls:AdaptiveGridView Name="HighRatedShowsGrid"
-                                                   Margin="{StaticResource OneRowGridMargin}"
-                                                   animations:Connected.ListItemElementName="itemThumbnail"
-                                                   animations:Connected.ListItemKey="animationKeyContentGrid"
-                                                   IsItemClickEnabled="True"
-                                                   ItemClickCommand="{x:Bind ViewModel.ShowClickCommand}"
-                                                   ItemHeight="0"
-                                                   ItemsSource="{x:Bind ViewModel.HighRatedShows, Mode=OneWay}"
-                                                   OneRowModeEnabled="True"
-                                                   SelectionMode="None"
-                                                   StretchContentForSingleRow="True">
+                        <controls:AdaptiveGridView
+                            Name="HighRatedShowsGrid"
+                            Margin="{StaticResource OneRowGridMargin}"
+                            animations:Connected.ListItemElementName="itemThumbnail"
+                            animations:Connected.ListItemKey="animationKeyContentGrid"
+                            IsItemClickEnabled="True"
+                            ItemClickCommand="{x:Bind ViewModel.ShowClickCommand}"
+                            ItemHeight="0"
+                            ItemsSource="{x:Bind ViewModel.HighRatedShows, Mode=OneWay}"
+                            OneRowModeEnabled="True"
+                            SelectionMode="None"
+                            StretchContentForSingleRow="True">
                             <controls:AdaptiveGridView.ItemTemplate>
                                 <DataTemplate x:DataType="models:Show">
 
-                                    <Grid x:Name="itemThumbnail"
-                                          Margin="8"
-                                          Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <Grid
+                                        x:Name="itemThumbnail"
+                                        Margin="8"
+                                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                                             <Grid Height="250">
-                                                <Image HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"
-                                                       ImageFailed="Image_ImageFailed"
-                                                       Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
-                                                       Stretch="UniformToFill" />
+                                                <Image
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    ImageFailed="Image_ImageFailed"
+                                                    Source="{Binding poster_path, Converter={StaticResource ImageUrlConverter}}"
+                                                    Stretch="UniformToFill" />
                                             </Grid>
-                                            <TextBlock Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource TitleStyle}"
-                                                       Text="{Binding name}"
-                                                       ToolTipService.ToolTip="{Binding name}" />
-                                            <TextBlock Margin="{StaticResource XXSmallLeftRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource YearStyle}"
-                                                       Text="{Binding first_air_date, Converter={StaticResource ReleaseYearConverter}}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource TitleStyle}"
+                                                Text="{Binding name}"
+                                                ToolTipService.ToolTip="{Binding name}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource YearStyle}"
+                                                Text="{Binding first_air_date, Converter={StaticResource ReleaseYearConverter}}" />
                                         </StackPanel>
                                     </Grid>
 
@@ -759,78 +833,86 @@
                 </StackPanel>
 
                 <StackPanel x:Name="PopularPeople">
-                    <HyperlinkButton x:Name="PopularPeopleBtn"
-                                     Margin="22,-4,0,12"
-                                     Padding="4"
-                                     Background="{StaticResource SystemControlTransparentBrush}"
-                                     Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
-                                     Tapped="PopularPeopleBtn_Tapped">
+                    <HyperlinkButton
+                        x:Name="PopularPeopleBtn"
+                        Margin="22,-4,0,12"
+                        Padding="4"
+                        Background="{StaticResource SystemControlTransparentBrush}"
+                        Foreground="{StaticResource ThemeControlForegroundBaseHighBrush}"
+                        Tapped="PopularPeopleBtn_Tapped">
                         <TextBlock x:Uid="PopularPeople" Style="{ThemeResource CategoryStyle}" />
                     </HyperlinkButton>
 
                     <Grid>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="4,0,0,14"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Left"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="PopularPeople"
-                                Tapped="ScrollBackward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="4,0,0,14"
+                            Padding="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Left"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="PopularPeople"
+                            Tapped="ScrollBackward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE973;" />
                         </Button>
-                        <Button Width="48"
-                                Height="96"
-                                Margin="0,0,8,14"
-                                Padding="0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Right"
-                                Background="{StaticResource SystemControlTransparentBrush}"
-                                Canvas.ZIndex="1"
-                                Tag="PopularPeople"
-                                Tapped="ScrollForward">
+                        <Button
+                            Width="48"
+                            Height="96"
+                            Margin="0,0,8,14"
+                            Padding="0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Right"
+                            Background="{StaticResource SystemControlTransparentBrush}"
+                            Canvas.ZIndex="1"
+                            Tag="PopularPeople"
+                            Tapped="ScrollForward">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE974;" />
                         </Button>
 
-                        <controls:AdaptiveGridView Name="PopularPeopleGrid"
-                                                   Margin="{StaticResource OneRowGridMargin}"
-                                                   animations:Connected.ListItemElementName="itemThumbnail"
-                                                   animations:Connected.ListItemKey="animationKeyContentGrid"
-                                                   IsItemClickEnabled="True"
-                                                   ItemClickCommand="{x:Bind ViewModel.PersonClickCommand}"
-                                                   ItemHeight="0"
-                                                   ItemsSource="{x:Bind ViewModel.PopularPeople, Mode=OneWay}"
-                                                   OneRowModeEnabled="True"
-                                                   SelectionMode="None"
-                                                   StretchContentForSingleRow="True">
+                        <controls:AdaptiveGridView
+                            Name="PopularPeopleGrid"
+                            Margin="{StaticResource OneRowGridMargin}"
+                            animations:Connected.ListItemElementName="itemThumbnail"
+                            animations:Connected.ListItemKey="animationKeyContentGrid"
+                            IsItemClickEnabled="True"
+                            ItemClickCommand="{x:Bind ViewModel.PersonClickCommand}"
+                            ItemHeight="0"
+                            ItemsSource="{x:Bind ViewModel.PopularPeople, Mode=OneWay}"
+                            OneRowModeEnabled="True"
+                            SelectionMode="None"
+                            StretchContentForSingleRow="True">
                             <controls:AdaptiveGridView.ItemTemplate>
                                 <DataTemplate x:DataType="models:Person">
 
-                                    <Grid x:Name="itemThumbnail"
-                                          Margin="8"
-                                          Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                                    <Grid
+                                        x:Name="itemThumbnail"
+                                        Margin="8"
+                                        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                                             <Grid Height="250">
-                                                <Image HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"
-                                                       ImageFailed="Image_ImageFailed"
-                                                       Source="{Binding profile_path, Converter={StaticResource ImageUrlConverter}}"
-                                                       Stretch="UniformToFill" />
+                                                <Image
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    ImageFailed="Image_ImageFailed"
+                                                    Source="{Binding profile_path, Converter={StaticResource ImageUrlConverter}}"
+                                                    Stretch="UniformToFill" />
                                             </Grid>
-                                            <TextBlock Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource TitleStyle}"
-                                                       Text="{Binding name}"
-                                                       ToolTipService.ToolTip="{Binding name}" />
-                                            <TextBlock Margin="{StaticResource XXSmallLeftRightBottomMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       Style="{ThemeResource YearStyle}"
-                                                       Text="{Binding known_for, Converter={StaticResource KnownForConverter}}"
-                                                       ToolTipService.ToolTip="{Binding known_for, Converter={StaticResource KnownForConverter}}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftTopRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource TitleStyle}"
+                                                Text="{Binding name}"
+                                                ToolTipService.ToolTip="{Binding name}" />
+                                            <TextBlock
+                                                Margin="{StaticResource XXSmallLeftRightBottomMargin}"
+                                                HorizontalAlignment="Left"
+                                                Style="{ThemeResource YearStyle}"
+                                                Text="{Binding known_for, Converter={StaticResource KnownForConverter}}"
+                                                ToolTipService.ToolTip="{Binding known_for, Converter={StaticResource KnownForConverter}}" />
                                         </StackPanel>
                                     </Grid>
 
