@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMDBFlix", "TMDBFlix\TMDBFlix.csproj", "{73CD538B-187F-40AD-9A4F-625E48DD3D2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMDBFlix.Desktop", "TMDBFlix.Test\TMDBFlix.Desktop.csproj", "{9554E34B-7F50-402F-ABE0-840CAFEEA7A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMDBFlix.Desktop", "TMDBFlix.Desktop\TMDBFlix.Desktop.csproj", "{9554E34B-7F50-402F-ABE0-840CAFEEA7A7}"
 EndProject
-Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "Package", "Package\Package.wapproj", "{7D934D4F-C36D-46E1-BD50-8DFACAEBF926}"
+Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "TMDBFlix.Packaging", "TMDBFlix.Packaging\TMDBFlix.Packaging.wapproj", "{7D934D4F-C36D-46E1-BD50-8DFACAEBF926}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
