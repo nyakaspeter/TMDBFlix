@@ -73,4 +73,9 @@ namespace TMDBFlix.Models
     {
         public List<ContentRating> results { get; set; }
     }
+
+    public class GenresResponse
+    {
+        public List<Genre> genres { get; set; }
+    }
 }

@@ -680,6 +680,46 @@ namespace TMDBFlix.Services
             else return new List<string>();
         }
 
+        public static List<Genre> GetMovieGenres()
+        {
+            var request = new RestRequest("/genre/movie/list");
+            request.AddParameter("api_key", key);
+            request.AddParameter("language", language);
+
+            var response = client.Execute<GenresResponse>(request);
+            if (response.IsSuccessful) return response.Data.genres;
+            else if ((int)response.StatusCode == 429)
+            {
+                while ((int)response.StatusCode == 429)
+                {
+                    Thread.Sleep(1000);
+                    response = client.Execute<GenresResponse>(request);
+                }
+                return response.Data.genres;
+            }
+            else return new List<Genre>();
+        }
+
+        public static List<Genre> GetShowGenres()
+        {
+            var request = new RestRequest("/genre/tv/list");
+            request.AddParameter("api_key", key);
+            request.AddParameter("language", language);
+
+            var response = client.Execute<GenresResponse>(request);
+            if (response.IsSuccessful) return response.Data.genres;
+            else if ((int)response.StatusCode == 429)
+            {
+                while ((int)response.StatusCode == 429)
+                {
+                    Thread.Sleep(1000);
+                    response = client.Execute<GenresResponse>(request);
+                }
+                return response.Data.genres;
+            }
+            else return new List<Genre>();
+        }
+
         public static void Init()
         {
             config = GetConfigurations();

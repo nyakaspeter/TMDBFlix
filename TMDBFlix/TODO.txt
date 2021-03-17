@@ -1,18 +1,14 @@
 ﻿Funkcionalitás:
-	Epizód részletek nézet
-	Szűrők/rendezés mindenhova
-	Kép nagyítás görgővel
+- Szűrők/rendezés
+- Epizód részletek nézet
+- Kép nagyítás görgővel
 
 Beállítások:
-	Kezelőfelület nyelve (magyar/angol)
+- Kezelőfelület nyelve (magyar/angol)
 
-UI:
-	Pivot header maradjon fent görgetéskor
-
-
+API:
 /tv/{tv_id}/season/{season_number}/episode/{episode_number}
 /tv/{tv_id}/season/{season_number}/episode/{episode_number}/external_ids
-
 /tv/{tv_id}/season/{season_number}/episode/{episode_number}/images
 /tv/{tv_id}/season/{season_number}/episode/{episode_number}/videos
 /tv/{tv_id}/season/{season_number}/episode/{episode_number}/credits
