@@ -20,12 +20,13 @@ TMDBFlix is a simple TMDb database browser for Universal Windows Platform with s
 ## How to build
 
 1. Download and install [Windows 10 SDK 10.0.17763](https://developer.microsoft.com/hu-hu/windows/downloads/sdk-archive/). Other SDK versions may or may not work.
-2. You'll have to manually add references for these two files for the `TMDBFlix.Desktop` project:
+2. Open `TMDBFlix.sln` in Visual Studio
+3. You'll have to manually add references for these two files for the `TMDBFlix.Desktop` project:
 ```
 C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.FoundationContract\3.0.0.0\Windows.Foundation.FoundationContract.winmd
 C:\Program Files (x86)\Windows Kits\10\References\10.0.17763.0\Windows.Foundation.UniversalApiContract\7.0.0.0\Windows.Foundation.UniversalApiContract.winmd
 ```
-3. Open `TMDBFlix.sln`, set `TMDBFlix.Packaging` as startup project, then build\deploy.
+4. Set `TMDBFlix.Packaging` as startup project, then build\deploy.
 
 ## How to stream torrents
 
