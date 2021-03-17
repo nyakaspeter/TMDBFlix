@@ -11,7 +11,7 @@ namespace TMDBFlix
 {
     public sealed partial class App : Application
     {
-        public static bool DesktopBridgePresent { get; } = Package.Current.DisplayName.Contains("Packaging");
+        public static bool DesktopBridgePresent { get; } = Package.Current.Id.FullName.Contains("Packaging");
 
         private Lazy<ActivationService> _activationService;
 
