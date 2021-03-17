@@ -1,6 +1,6 @@
 ﻿using System;
 using TMDBFlix.Services;
-
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
@@ -11,6 +11,8 @@ namespace TMDBFlix
 {
     public sealed partial class App : Application
     {
+        public static bool DesktopBridgePresent { get; } = Package.Current.DisplayName.Contains("Packaging");
+
         private Lazy<ActivationService> _activationService;
 
         private ActivationService ActivationService

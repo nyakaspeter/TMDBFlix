@@ -10,6 +10,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:TMDBFlix.Models"
     xmlns:mux="using:Microsoft.UI.Xaml.Controls"
+    xmlns:tmdbflix="using:TMDBFlix"
     x:Name="CustomPage"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
@@ -974,7 +975,8 @@
                                                     Margin="8,0"
                                                     Command="{Binding ElementName=CustomPage, Path=ViewModel.TorrentStreamClickCommand}"
                                                     CommandParameter="{Binding}"
-                                                    Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}">
+                                                    Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}"
+                                                    Visibility="{x:Bind tmdbflix:App.DesktopBridgePresent}">
                                                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE768;" />
                                                 </HyperlinkButton>
                                             </StackPanel>

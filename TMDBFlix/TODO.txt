@@ -16,5 +16,3 @@ UI:
 /tv/{tv_id}/season/{season_number}/episode/{episode_number}/images
 /tv/{tv_id}/season/{season_number}/episode/{episode_number}/videos
 /tv/{tv_id}/season/{season_number}/episode/{episode_number}/credits
-
-castnál van order!!!

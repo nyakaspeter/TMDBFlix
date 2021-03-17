@@ -85,7 +85,11 @@ namespace TMDBFlix.Services
         {
             try
             {
-                var client = new RestClient($"http://{url}/torznab/{indexer}");
+                var normalizedUrl = url;
+                if (!normalizedUrl.StartsWith("http")) normalizedUrl = "http://" + normalizedUrl;
+                if (normalizedUrl.EndsWith('/')) normalizedUrl = normalizedUrl.Trim('/');
+
+                var client = new RestClient($"{normalizedUrl}/torznab/{indexer}");
                 var request = new RestRequest();
                 request.XmlSerializer = new RestSharp.Serializers.DotNetXmlSerializer();
                 request.RequestFormat = DataFormat.Xml;
@@ -109,7 +113,11 @@ namespace TMDBFlix.Services
         {
             try
             {
-                var client = new RestClient($"http://{url}/torznab/all");
+                var normalizedUrl = url;
+                if (!normalizedUrl.StartsWith("http")) normalizedUrl = "http://" + normalizedUrl;
+                if (normalizedUrl.EndsWith('/')) normalizedUrl = normalizedUrl.Trim('/');
+
+                var client = new RestClient($"{normalizedUrl}/torznab/all");
                 var request = new RestRequest();
                 request.XmlSerializer = new RestSharp.Serializers.DotNetXmlSerializer();
                 request.RequestFormat = DataFormat.Xml;

@@ -137,6 +137,33 @@ namespace TMDBFlix.ViewModels
             LoadCompleted();
         }
 
+        public async void ReloadIndexers()
+        {
+            Indexers.Clear();
+
+            var tasks = new List<Task>()
+            {
+                LoadIndexers()
+            };
+
+            await Task.WhenAll(tasks);
+
+            foreach (var i in Indexers)
+            {
+                if (JackettService.Indexers.Contains(i.Id)) i.Enabled = true;
+            }
+
+            foreach (var c in MovieCategories)
+            {
+                if (JackettService.MovieCategories.Contains(c.Id)) c.Enabled = true;
+            }
+
+            foreach (var c in TVCategories)
+            {
+                if (JackettService.TVCategories.Contains(c.Id)) c.Enabled = true;
+            }
+        }
+
         public async Task InitializeAsync()
         {
             VersionDescription = GetVersionDescription();

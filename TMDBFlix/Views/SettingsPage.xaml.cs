@@ -147,5 +147,10 @@ namespace TMDBFlix.Views
         {
             Windows.Storage.ApplicationData.Current.LocalSettings.Values["keepfiles"] = false;
         }
+
+        private void ReloadIndexers(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            ViewModel.ReloadIndexers();
+        }
     }
 }

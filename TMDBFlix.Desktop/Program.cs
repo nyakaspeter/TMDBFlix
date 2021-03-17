@@ -121,7 +121,7 @@ namespace TMDBFlix.Desktop
             link = ApplicationData.Current.LocalSettings.Values["link"] as string;
 
             if (folderpath != null && !folderpath.Equals("")) folder = Directory.CreateDirectory(folderpath);
-            else folder = Directory.CreateDirectory(Path.GetTempPath() + "\\TMDBFlix");
+            else folder = Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) + "\\TMDBFlix");
             
             var p = new ProcessStartInfo
             {
@@ -145,19 +145,19 @@ namespace TMDBFlix.Desktop
             switch (autoplay)
             {
                 case "-":
-                    cmd.StandardInput.WriteLine($"cls & peerflix \"{link}\" {filenumber} -f {folder.FullName}");
+                    cmd.StandardInput.WriteLine($"cls & peerflix \"{link}\" {filenumber} -f \"{folder.FullName}\"");
                     break;
                 case "vlc":
-                    cmd.StandardInput.WriteLine($"cls & peerflix \"{link}\" {filenumber} -f {folder.FullName} --vlc");
+                    cmd.StandardInput.WriteLine($"cls & peerflix \"{link}\" {filenumber} -f \"{folder.FullName}\" --vlc");
                     break;
                 case "mpc-hc":
-                    cmd.StandardInput.WriteLine($"cls & peerflix \"{link}\" {filenumber} -f {folder.FullName} --mpchc");
+                    cmd.StandardInput.WriteLine($"cls & peerflix \"{link}\" {filenumber} -f \"{folder.FullName}\" --mpchc");
                     break;
                 case "potplayer":
-                    cmd.StandardInput.WriteLine($"cls & peerflix \"{link}\" {filenumber} -f {folder.FullName} --potplayer");
+                    cmd.StandardInput.WriteLine($"cls & peerflix \"{link}\" {filenumber} -f \"{folder.FullName}\" --potplayer");
                     break;
                 default:
-                    cmd.StandardInput.WriteLine($"cls & peerflix \"{link}\" {filenumber} -f {folder.FullName}");
+                    cmd.StandardInput.WriteLine($"cls & peerflix \"{link}\" {filenumber} -f \"{folder.FullName}\"");
                     break;
             }
 

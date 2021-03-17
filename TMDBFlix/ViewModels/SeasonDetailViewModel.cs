@@ -59,7 +59,8 @@ namespace TMDBFlix.ViewModels
             }
             foreach (var v in Season.credits.crew.ImagesFirst())
             {
-                Crew.Add(v);
+                if (!Crew.Any(x => x.id == v.id)) Crew.Add(v);
+                else Crew.Single(x => x.id == v.id).job += $", {v.job}";
             }
             foreach(var v in Season.episodes)
             {

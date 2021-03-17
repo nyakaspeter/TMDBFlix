@@ -399,7 +399,7 @@
     <value>Type</value>
   </data>
   <data name="NoResults.Text" xml:space="preserve">
-    <value>No results</value>
+    <value>No results. Did you set up Jackett properly?</value>
   </data>
   <data name="All.Header" xml:space="preserve">
     <value>All</value>

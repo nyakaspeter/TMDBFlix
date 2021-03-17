@@ -49,7 +49,8 @@ namespace TMDBFlix.ViewModels
             }
             foreach (var v in Movie.credits.crew.ImagesFirst())
             {
-                Crew.Add(v);
+                if (!Crew.Any(x => x.id == v.id)) Crew.Add(v);
+                else Crew.Single(x => x.id == v.id).job += $", {v.job}";
                 if (v.job.Equals("Director")) Directors.Add(v);
             }
 
